@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React PAULSIN
+          Learn React PAULSIN polachan puliparamban
         </a>
       </header>
     </div>
