@@ -10,12 +10,14 @@ import {
 } from 'react-router-dom';
  import Test from './components/accounts/Test';
  import Test2 from './components/accounts/Test2';
+ import Home from './components/accounts/Home';
 
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
         <Route path="/test2" element={<Test2 />} />
       </Routes>
