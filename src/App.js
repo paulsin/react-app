@@ -11,6 +11,7 @@ import {
  import Test from './components/accounts/Test';
  import Test2 from './components/accounts/Test2';
  import Home from './components/accounts/Home';
+ import SignUp from './components/accounts/SignUp';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
         <Route path="/test2" element={<Test2 />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );

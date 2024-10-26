@@ -22,7 +22,7 @@ function Navbar() {
               <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/test">Test1</a>
+              <a class="nav-link" href="/signup">Sign Up</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/test2">Test2</a>
