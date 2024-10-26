@@ -99,3 +99,8 @@ body {
     background-color: #333;
     border: 1px solid #333;
 }
+
+.w-100 {
+    border-top-left-radius: .3rem; 
+    border-top-right-radius: .3rem;
+}
