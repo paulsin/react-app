@@ -27,6 +27,9 @@ function Navbar() {
             <li class="nav-item">
               <a class="nav-link" href="/test2">Test2</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/backend/hello">Backend</a>
+            </li>
           </ul>
         </div>
       </nav>
