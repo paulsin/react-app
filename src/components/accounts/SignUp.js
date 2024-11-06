@@ -2,6 +2,9 @@
 import React from "react";
 import background from "../../images/background.jpg";
 import Navbar from "../common/Navbar";
+import { Url } from "../../constants/global";
+
+var newUrl = Url + 'backend/person/';
 
 function SignUp() {
     return(
@@ -13,7 +16,7 @@ function SignUp() {
 
         <div class="container mt-3">
           <h2>Stacked form</h2>
-          <form action="/action_page.php">
+          <form method ="post" action={newUrl}>
 
             <div class="mb-3 mt-3">
               <label for="name">Name:</label>
