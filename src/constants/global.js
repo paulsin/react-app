@@ -1,4 +1,4 @@
 //const Url = 'http://localhost:3000/' // For localhost
-const Url = 'https://www.haberoceanstock.com/' // For website
+const Url = 'https://haberoceanstock.com/backend/accounts/person' // For website
 
 export {Url}
