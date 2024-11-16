@@ -4,7 +4,7 @@ import background from "../../images/background.jpg";
 import Navbar from "../common/Navbar";
 import { Url } from "../../constants/global";
 
-var newUrl = Url + 'backend/person/';
+var newUrl = Url + 'accounts/person';
 
 function SignUp() {
     return(
@@ -28,7 +28,7 @@ function SignUp() {
               <input type="number" pattern="[0-9]*" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" required/>
             </div>
 
-            <div class="mb-3 mt-3">
+            <div class="mb-3 mt-3"> 
               <label for="email">Email:</label>
               <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required/>
             </div>
