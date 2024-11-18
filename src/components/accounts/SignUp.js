@@ -13,20 +13,48 @@ var newUrl = Url + 'accounts/person';
 
 const SignUp = () => {
 
-    const [name, setName] = useState("test");
-    const [email, setEmail] = useState("test");
-    const [mobile, setMobile] = useState("test");
-    const [password, setPassword] = useState("test");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [mobile, setMobile] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [alertClass, setAlertClass] = useState("alert alert-secondary");
+    const [alertContent, setAlertContent] = useState("Enter the following details for registration");
 
     ///   For navigate function
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-      alert("Paulsin");
+      //alert("Paulsin");
       
       e.preventDefault(); 
 
       console.log("Clicked");
+
+      if(name == "") {
+        setAlertContent("Enter the name");
+        setAlertClass("alert alert-danger");
+      }
+      else if(mobile == "") {
+        setAlertContent("Enter the mobile number");
+        setAlertClass("alert alert-danger");
+      }
+      else if(email == "") {
+        setAlertContent("Enter the email ID");
+        setAlertClass("alert alert-danger");
+      }
+      else if(password == "") {
+        setAlertContent("Enter the password");
+        setAlertClass("alert alert-danger");
+      }
+      else if(confirmPassword == "") {
+        setAlertContent("Retype password");
+        setAlertClass("alert alert-danger");
+      }
+      else {
+        setAlertContent("Registration in progress");
+        setAlertClass("alert alert-warning");
+      }
 
       try {
         const response = await axios.post(
@@ -39,7 +67,13 @@ const SignUp = () => {
             "confirmPassword": password
           }
         );
-        console.log(response.data);
+        //console.log(response.data);
+        //alert(response.data);
+        if(response.data == "OK") {
+          setAlertContent("Registration completed");
+          setAlertClass("alert alert-success");
+          //alert("Paulsin");
+        }
       } catch(error) {
         console.error("Error posting data:", error);
       }
@@ -69,8 +103,11 @@ const SignUp = () => {
 
 
         <div class="container mt-3">
-          <h2>Stacked form</h2>
+          <h2>Registration form</h2>
           
+            <div class={alertClass} role="alert">
+              {alertContent}
+            </div>
 
             <div class="mb-3 mt-3">
               <label for="name">Name:</label>
@@ -94,7 +131,7 @@ const SignUp = () => {
 
             <div class="mb-3">
               <label for="confirmPassword">Confirm password:</label>
-              <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" required/>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" required onChange={(e) => setConfirmPassword(e.target.value)}/>
             </div>
 
             <div class="form-check mb-3">
