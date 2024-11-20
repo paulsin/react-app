@@ -54,28 +54,29 @@ const SignUp = () => {
       else {
         setAlertContent("Registration in progress");
         setAlertClass("alert alert-warning");
-      }
-
-      try {
-        const response = await axios.post(
-          newUrl,
-          {
-            "name": name,    
-            "email": email, 
-            "mobile" : mobile, 
-            "password": password,
-            "confirmPassword": password
+      
+        try {
+          const response = await axios.post(
+            newUrl,
+            {
+              "name": name,    
+              "email": email, 
+              "mobile" : mobile, 
+              "password": password,
+              "confirmPassword": password
+            }
+          );
+          //console.log(response.data);
+          //alert(response.data);
+          if(response.data == "OK") {
+            setAlertContent("Registration completed");
+            setAlertClass("alert alert-success");
+            //alert("Paulsin");
           }
-        );
-        //console.log(response.data);
-        //alert(response.data);
-        if(response.data == "OK") {
-          setAlertContent("Registration completed");
-          setAlertClass("alert alert-success");
-          //alert("Paulsin");
+        } catch(error) {
+          console.error("Error posting data:", error);
         }
-      } catch(error) {
-        console.error("Error posting data:", error);
+
       }
 
       /*

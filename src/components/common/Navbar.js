@@ -25,7 +25,7 @@ function Navbar() {
               <a class="nav-link" href="/signup">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/test2">Test2</a>
+              <a class="nav-link" href="/listusers">Users</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/backend/hello">Backend</a>

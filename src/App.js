@@ -12,18 +12,23 @@ import {
  import Test2 from './components/accounts/Test2';
  import Home from './components/accounts/Home';
  import SignUp from './components/accounts/SignUp';
+ import ListUsers from './components/accounts/ListUsers';
+ import { ConfirmProvider } from "material-ui-confirm";
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/test2" element={<Test2 />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
-    </BrowserRouter>
+    <ConfirmProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/test2" element={<Test2 />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path='/listusers' element={<ListUsers />} />
+        </Routes>
+      </BrowserRouter>
+    </ConfirmProvider>
   );
 }
 
