@@ -12,7 +12,8 @@ import {
  import Test2 from './components/accounts/Test2';
  import Home from './components/accounts/Home';
  import SignUp from './components/accounts/SignUp';
- import ListUsers from './components/accounts/ListUsers';
+ import ListUsersDataGrid from './components/accounts/ListUsersDataGrid';
+ import ListUsersCustomTable from './components/accounts/ListUsersCustomTable';
  import { ConfirmProvider } from "material-ui-confirm";
 
 
@@ -25,7 +26,8 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path='/listusers' element={<ListUsers />} />
+          <Route path='/listusers' element={<ListUsersDataGrid />} />
+          <Route path='/listusersowntable' element={<ListUsersCustomTable />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>

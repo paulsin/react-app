@@ -28,6 +28,9 @@ function Navbar() {
               <a class="nav-link" href="/listusers">Users</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/listusersowntable">Users new</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/backend/hello">Backend</a>
             </li>
           </ul>

@@ -16,7 +16,7 @@ var newUrl = Url + 'accounts/person';
 var deleteUrl = Url + 'accounts/person/delete/';
 
 
-const ListUsers = () => {
+const ListUsersDataGrid = () => {
 
 
     const [data, setData] = useState([]);
@@ -85,6 +85,7 @@ const ListUsers = () => {
             //setData(response.data);
             //alert("Deletion successful");
             window.location.reload();
+            //DataGrid.refresh();
 
         })
         .catch(() => {
@@ -171,4 +172,4 @@ const ListUsers = () => {
     )
 };
 
-export default ListUsers;
+export default ListUsersDataGrid;
