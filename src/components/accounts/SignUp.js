@@ -21,6 +21,8 @@ const SignUp = () => {
     const [alertContent, setAlertContent] = useState("Enter the following details for registration");
     const [userRole, setUserRole] = useState("");
 
+    const [data, setData] = useState([]);
+
     ///   For navigate function
     const navigate = useNavigate();
 
@@ -65,6 +67,11 @@ const SignUp = () => {
       
         //alert(userRole);
 
+        if(newID) {
+          //alert("Paulsin");
+          newUrl = newUrl + "/update/" + newID;
+        }
+
         try {
           const response = await axios.post(
             newUrl,
@@ -73,12 +80,14 @@ const SignUp = () => {
               "email": email, 
               "mobile" : mobile, 
               "password": password,
-              "userRole": userRole,
+              "userRole": userRole
             }
           );
+
           //console.log(response.data);
           //alert(response.data);
-          if(response.data == "OK") {
+          //alert(response.status);
+          if(response.data === "OK" || response.status === 200) {
             setAlertContent("Registration completed");
             setAlertClass("alert alert-success");
             //alert("Paulsin");
@@ -92,10 +101,22 @@ const SignUp = () => {
 
     const fetchDataByID = async () => {
       try {
-        const response = await axios.get(newUrl);
-        //setData(response.data);
+        var individualURL = newUrl + '/' + newID;
+        
+        //alert(individualURL);
+        
+        const response = await axios.get(individualURL);
+        setData(response.data[0].confirmPassword);
         //setOriginalData(response.data);
-        //alert(response.data[10].email  );
+        //alert(response.data[0].email);
+
+        setName(response.data[0].name);
+        setEmail(response.data[0].email);
+        setMobile(response.data[0].mobile);
+        setPassword(response.data[0].password);
+        setConfirmPassword(response.data[0].password);
+        setUserRole(response.data[0].userRole);
+
       } catch (error) {
         if (!error.response) {
           // Network error occurred
@@ -108,12 +129,11 @@ const SignUp = () => {
     };
 
     var userRoleWidget =           
-      <select value={userRole} class="form-control"  aria-label="Default select example" onChange={(e) => setUserRole(e.target.value)}>
+      <select value={userRole} class="form-control" id="userRole" aria-label="Default select example" name="userRole" onChange={(e) => setUserRole(e.target.value)}>
         <option value="">Select</option>
         <option value="developer">Developer</option>
         <option value="admin">Admin</option>
         <option value="owner">Owner</option>
-
       </select>
 
 
@@ -121,7 +141,7 @@ const SignUp = () => {
       //console.log('i fire once');
       //fetchData();
       if(newID) {
-        alert(newID);
+        //alert(newID);
         fetchDataByID();
       }
     }, []);
@@ -144,31 +164,36 @@ const SignUp = () => {
 
             <div class="mb-3 mt-3">
               <label for="name">Name:</label>
-              <input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required onChange={(e) => setName(e.target.value)}/>
+              <input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required onChange={(e) => setName(e.target.value)}
+              value={name}/>
             </div>
 
             <div class="mb-3 mt-3">
               <label for="mobile">Mobile:</label>
-              <input type="number" pattern="[0-9]*" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" required onChange={(e) => setMobile(e.target.value)}/>
+              <input type="number" pattern="[0-9]*" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" 
+              required onChange={(e) => setMobile(e.target.value)} value={mobile}/>
             </div>
 
             <div class="mb-3 mt-3"> 
               <label for="email">Email:</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required onChange={(e) => setEmail(e.target.value)}/>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required onChange={(e) => setEmail(e.target.value)}
+              value={email}/>
             </div>
 
             <div class="mb-3 mt-3">
               <label for="password">Password:</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required onChange={(e) => setPassword(e.target.value)}/>
+              <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" 
+              required onChange={(e) => setPassword(e.target.value)} value={password}/>
             </div>
 
             <div class="mb-3 mt-3">
               <label for="confirmPassword">Confirm password:</label>
-              <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" required onChange={(e) => setConfirmPassword(e.target.value)}/>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" 
+              required onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
             </div>
 
             <div class="mb-3 mt-3"> 
-              <label class="form-check-label">Select user role</label>
+              <label for="userRole" class="form-check-label">Select user role</label>
               {userRoleWidget}
             </div>
 
