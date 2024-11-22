@@ -4,11 +4,10 @@ import background from "../../images/background.jpg";
 import Navbar from "../common/Navbar";
 import { Url } from "../../constants/global";
 import axios from "axios";
-import { useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { json, useNavigate, useParams } from "react-router-dom";
 
 var newUrl = Url + 'accounts/person';
-
 
 
 const SignUp = () => {
@@ -20,9 +19,14 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [alertClass, setAlertClass] = useState("alert alert-secondary");
     const [alertContent, setAlertContent] = useState("Enter the following details for registration");
+    const [userRole, setUserRole] = useState("");
 
     ///   For navigate function
     const navigate = useNavigate();
+
+    const {newID} = useParams();
+
+    //alert(newID);
 
     const handleSubmit = async (e) => {
       //alert("Paulsin");
@@ -51,10 +55,16 @@ const SignUp = () => {
         setAlertContent("Retype password");
         setAlertClass("alert alert-danger");
       }
+      else if(userRole == "") {
+        setAlertContent("Select user role");
+        setAlertClass("alert alert-danger");
+      }
       else {
         setAlertContent("Registration in progress");
         setAlertClass("alert alert-warning");
       
+        //alert(userRole);
+
         try {
           const response = await axios.post(
             newUrl,
@@ -63,7 +73,7 @@ const SignUp = () => {
               "email": email, 
               "mobile" : mobile, 
               "password": password,
-              "confirmPassword": password
+              "userRole": userRole,
             }
           );
           //console.log(response.data);
@@ -78,23 +88,45 @@ const SignUp = () => {
         }
 
       }
-
-      /*
-      axios
-      .post('http://localhost:3000/accounts/person', {
-        "name": "test",    
-        "email": "test", 
-        "mobile" : "test", 
-        "password": "test"  
-      }, {headers: { 'Content-Type': 'application/json'}})
-      .then((res) => {
-        navigate("/account/read");
-      }).catch(err => { 
-        // what now? 
-        console.log(err); 
-      });
- */ 
     };
+
+    const fetchDataByID = async () => {
+      try {
+        const response = await axios.get(newUrl);
+        //setData(response.data);
+        //setOriginalData(response.data);
+        //alert(response.data[10].email  );
+      } catch (error) {
+        if (!error.response) {
+          // Network error occurred
+          console.error('Network error:', error);
+        } else {
+          // The server responded with a status other than 200 range
+          console.error('Error response:', error.response);
+        }
+      }
+    };
+
+    var userRoleWidget =           
+      <select value={userRole} class="form-control"  aria-label="Default select example" onChange={(e) => setUserRole(e.target.value)}>
+        <option value="">Select</option>
+        <option value="developer">Developer</option>
+        <option value="admin">Admin</option>
+        <option value="owner">Owner</option>
+
+      </select>
+
+
+    useEffect(() => {
+      //console.log('i fire once');
+      //fetchData();
+      if(newID) {
+        alert(newID);
+        fetchDataByID();
+      }
+    }, []);
+
+
 
     return(
 
@@ -130,9 +162,14 @@ const SignUp = () => {
               <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required onChange={(e) => setPassword(e.target.value)}/>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
               <label for="confirmPassword">Confirm password:</label>
               <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" required onChange={(e) => setConfirmPassword(e.target.value)}/>
+            </div>
+
+            <div class="mb-3 mt-3"> 
+              <label class="form-check-label">Select user role</label>
+              {userRoleWidget}
             </div>
 
             <div class="form-check mb-3">

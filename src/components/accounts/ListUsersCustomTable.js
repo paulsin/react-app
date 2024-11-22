@@ -5,7 +5,7 @@ import Navbar from "../common/Navbar";
 import { Url } from "../../constants/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { json, Navigate, useNavigate } from "react-router-dom";
 import { Component } from "react";
 
 import { useConfirm } from "material-ui-confirm";
@@ -23,6 +23,7 @@ const ListUsersCustomTable = () => {
   const [searchText, setSearchText] = useState("");
 
   const confirm = useConfirm();
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -41,18 +42,29 @@ const ListUsersCustomTable = () => {
     }
   };
 
-
   const handleDelete = async (_id) => {
+    var dataTemp = [];
     confirm({ description: "This action is permanent!" })
       .then(() => {
         var deleteUrlTemp = deleteUrl + _id;
         //alert(link);
         
         const response = axios.get(deleteUrlTemp);
-          //setData(response.data);
-          //alert("Deletion successful");
-        window.location.reload();
-          //DataGrid.refresh();
+
+        originalData.map(key => {
+          if (key._id != _id) {
+            //alert("Paulsi");
+            dataTemp.push(key);            
+          }
+        });
+
+        setOriginalData(dataTemp);
+        setData(dataTemp);
+        setSearchText("");
+        //setData(response.data);
+        //alert("Deletion successful");
+        //window.location.reload();
+        //DataGrid.refresh();
 
       })
       .catch(() => {
@@ -60,9 +72,8 @@ const ListUsersCustomTable = () => {
       });
   };
 
-
-  const testClick = () => {
-
+  const handleEdit = (_id) => {
+    navigate("/SignUp/"+_id);
   } 
 
   const handleSearchBoxChange = (event) => {
@@ -77,8 +88,6 @@ const ListUsersCustomTable = () => {
       var searchBoxValueUpperCase = searchBoxValue.toUpperCase();
 
       var searchInText = key.name.toUpperCase() + key.email.toUpperCase() + key.mobile;
-
-
 
       if (searchInText.includes(searchBoxValueUpperCase)) {
         tempArray.push(key);
@@ -114,7 +123,6 @@ const ListUsersCustomTable = () => {
     //alert("Paulsin");
   }, []);
 
-    
   var slno =1;
 
   return(
@@ -146,6 +154,12 @@ const ListUsersCustomTable = () => {
               Mobile
             </th>
             <th>
+              User role
+            </th>
+            <th>
+              Edit
+            </th>
+            <th>
               Delete
             </th>
           </tr>
@@ -169,6 +183,12 @@ const ListUsersCustomTable = () => {
                 {key.mobile}
               </td> 
               <td>
+                {key.userRole}
+              </td> 
+              <td>
+                <button className="btn btn-danger" onClick={()=>handleEdit(key._id)}>Edit</button>
+              </td>
+              <td>
                 <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
               </td> 
             </tr>
@@ -179,8 +199,6 @@ const ListUsersCustomTable = () => {
           </td>
         </tbody>
       </table>
-      
-      <button className="btn btn-danger" onClick={testClick}>Delete</button>
 
     </div>
 

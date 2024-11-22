@@ -26,6 +26,7 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/:newID" element={<SignUp />} />
           <Route path='/listusers' element={<ListUsersDataGrid />} />
           <Route path='/listusersowntable' element={<ListUsersCustomTable />} />
         </Routes>
