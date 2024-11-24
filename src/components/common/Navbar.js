@@ -19,16 +19,16 @@ function Navbar() {
               <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="/frontend/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signup">Sign Up</a>
+              <a class="nav-link" href="/frontend/signup">Sign Up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/listusers">Users</a>
+              <a class="nav-link" href="/frontend/listusers">Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/listusersowntable">Users new</a>
+              <a class="nav-link" href="/frontend/listusersowntable">Users new</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/backend/hello">Backend</a>

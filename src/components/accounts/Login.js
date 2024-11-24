@@ -10,7 +10,7 @@ import { json, useNavigate, useParams } from "react-router-dom";
 var newUrl = Url + 'accounts/person';
 
 
-const SignUp = () => {
+const Login = () => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -269,38 +269,9 @@ const SignUp = () => {
             </div>
 
             <div class="mb-3 mt-3">
-              <label for="mobile">Mobile:</label>
-              <input type="number" pattern="[0-9]*" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" 
-              required onChange={(e) => setMobile(e.target.value)} value={mobile}/>
-            </div>
-
-            <div class="mb-3 mt-3"> 
-              <label for="email">Email:</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required onChange={(e) => setEmail(e.target.value)}
-              value={email}/>
-            </div>
-
-            <div class="mb-3 mt-3">
               <label for="password">Password:</label>
               <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" 
               required onChange={(e) => setPassword(e.target.value)} value={password}/>
-            </div>
-
-            <div class="mb-3 mt-3">
-              <label for="confirmPassword">Confirm password:</label>
-              <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat password" name="confirmPassword" 
-              required onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
-            </div>
-
-            <div class="mb-3 mt-3"> 
-              <label for="userRole" class="form-check-label">Select user role</label>
-              {userRoleWidget}
-            </div>
-
-            <div class="form-check mb-3">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="remember" /> Remember me
-              </label>
             </div>
             
             <button type="submit" class="btn btn-primary" onClick={buttonClickFunction}>{buttonLabel}</button>
@@ -315,4 +286,4 @@ const SignUp = () => {
     )
 };
 
-export default SignUp;
+export default Login;
