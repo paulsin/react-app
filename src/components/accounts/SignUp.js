@@ -20,8 +20,9 @@ const SignUp = () => {
     const [alertClass, setAlertClass] = useState("alert alert-secondary");
     const [alertContent, setAlertContent] = useState("Enter the following details for registration");
     const [userRole, setUserRole] = useState("");
-
     const [data, setData] = useState([]);
+    const [buttonLabel, setButtonLabel] = useState("Submit");
+//    const [dataCheckFlag, setDataCheckFlag] = useState(0);
 
     ///   For navigate function
     const navigate = useNavigate();
@@ -30,12 +31,8 @@ const SignUp = () => {
 
     //alert(newID);
 
-    const handleSubmit = async (e) => {
-      //alert("Paulsin");
-      
-      e.preventDefault(); 
 
-      console.log("Clicked");
+    const dataCheckFunction = (e) => {
 
       if(name == "") {
         setAlertContent("Enter the name");
@@ -62,17 +59,59 @@ const SignUp = () => {
         setAlertClass("alert alert-danger");
       }
       else {
+        //alert("setting here");
+        return(1);
+      }
+
+      return 0;
+    }
+
+
+    const handleSubmit = async (e) => {
+      //alert("Paulsin");
+      
+      //e.preventDefault(); 
+
+      console.log("Clicked");
+
+      let dataCheckFlag = await dataCheckFunction(); 
+
+/*
+      if(name == "") {
+        setAlertContent("Enter the name");
+        setAlertClass("alert alert-danger");
+      }
+      else if(mobile == "") {
+        setAlertContent("Enter the mobile number");
+        setAlertClass("alert alert-danger");
+      }
+      else if(email == "") {
+        setAlertContent("Enter the email ID");
+        setAlertClass("alert alert-danger");
+      }
+      else if(password == "") {
+        setAlertContent("Enter the password");
+        setAlertClass("alert alert-danger");
+      }
+      else if(confirmPassword == "") {
+        setAlertContent("Retype password");
+        setAlertClass("alert alert-danger");
+      }
+      else if(userRole == "") {
+        setAlertContent("Select user role");
+        setAlertClass("alert alert-danger");
+      }
+*/
+      //alert(dataCheckFlag);
+
+      if(dataCheckFlag == 1) {
         setAlertContent("Registration in progress");
         setAlertClass("alert alert-warning");
       
         //alert(userRole);
 
-        if(newID) {
-          //alert("Paulsin");
-          newUrl = newUrl + "/update/" + newID;
-        }
-
         try {
+          //alert("Paulsin");
           const response = await axios.post(
             newUrl,
             {
@@ -81,11 +120,11 @@ const SignUp = () => {
               "mobile" : mobile, 
               "password": password,
               "userRole": userRole
-            }
-          );
+            }     
+          );  
 
           //console.log(response.data);
-          //alert(response.data);
+          //alert(response.status);
           //alert(response.status);
           if(response.data === "OK" || response.status === 200) {
             setAlertContent("Registration completed");
@@ -95,8 +134,8 @@ const SignUp = () => {
         } catch(error) {
           console.error("Error posting data:", error);
         }
-
       }
+      //setDataCheckFlag(0);
     };
 
     const fetchDataByID = async () => {
@@ -143,9 +182,58 @@ const SignUp = () => {
       if(newID) {
         //alert(newID);
         fetchDataByID();
+        setButtonLabel("Update");
+      }
+      else {
+        setButtonLabel("Submit");
       }
     }, []);
 
+
+    const handleUpdate = async (e) => {
+      //e.preventDefault(); 
+      //alert("nshgsf");
+      var updateURL = newUrl + "/update/";
+      
+      //alert(updateURL);
+
+      let dataCheckFlag = await dataCheckFunction(); 
+
+      if(dataCheckFlag == 1) {
+        try {
+          var response = await axios.post(
+            updateURL,
+            {
+              "id" : newID,
+              "name": name,    
+              "email": email, 
+              "mobile" : mobile, 
+              "password": password,
+              "userRole": userRole
+            }     
+          );  
+
+          if(response.data === "OK" || response.status === 200) {
+            setAlertContent("Updation completed");
+            setAlertClass("alert alert-success");
+            //alert("Paulsin");
+          }
+
+        } catch(error) {
+          console.error("Error posting data:", error);
+        }
+      }
+    }
+
+    const buttonClickFunction = async (e) => {
+      e.preventDefault(); 
+      if(newID) {
+        handleUpdate();
+      }
+      else {
+        handleSubmit();
+      }
+    }
 
 
     return(
@@ -202,10 +290,12 @@ const SignUp = () => {
                 <input class="form-check-input" type="checkbox" name="remember" /> Remember me
               </label>
             </div>
-
-            <button type="submit" class="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            
+            <button type="submit" class="btn btn-primary" onClick={buttonClickFunction}>{buttonLabel}</button>
           
         </div>
+
+        
 
 
     </div>
