@@ -7,14 +7,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { json, useNavigate, useParams } from "react-router-dom";
 
-var newUrl = Url + 'accounts/person';
+var newUrl = Url + 'accounts/person/login';
 
 
 const Login = () => {
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [mobile, setMobile] = useState("");
+    const [mailOrMobile, setMailOrMobile] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [alertClass, setAlertClass] = useState("alert alert-secondary");
@@ -34,36 +32,12 @@ const Login = () => {
 
     const dataCheckFunction = (e) => {
 
-      if(name == "") {
-        setAlertContent("Enter the name");
-        setAlertClass("alert alert-danger");
-      }
-      else if(mobile == "") {
-        setAlertContent("Enter the mobile number");
-        setAlertClass("alert alert-danger");
-      }
-      else if(email == "") {
-        setAlertContent("Enter the email ID");
+      if(mailOrMobile == "") {
+        setAlertContent("Enter the Email ID or Mobile number");
         setAlertClass("alert alert-danger");
       }
       else if(password == "") {
         setAlertContent("Enter the password");
-        setAlertClass("alert alert-danger");
-      }
-      else if(password.length < 8) {
-        setAlertContent("Password should have 8 letters");
-        setAlertClass("alert alert-danger");
-      }
-      else if(confirmPassword == "") {
-        setAlertContent("Retype password");
-        setAlertClass("alert alert-danger");
-      }
-      else if(userRole == "") {
-        setAlertContent("Select user role");
-        setAlertClass("alert alert-danger");
-      }
-      else if(password != confirmPassword) {
-        setAlertContent("Password does not match");
         setAlertClass("alert alert-danger");
       }
       else {
@@ -84,50 +58,21 @@ const Login = () => {
 
       let dataCheckFlag = await dataCheckFunction(); 
 
-/*
-      if(name == "") {
-        setAlertContent("Enter the name");
-        setAlertClass("alert alert-danger");
-      }
-      else if(mobile == "") {
-        setAlertContent("Enter the mobile number");
-        setAlertClass("alert alert-danger");
-      }
-      else if(email == "") {
-        setAlertContent("Enter the email ID");
-        setAlertClass("alert alert-danger");
-      }
-      else if(password == "") {
-        setAlertContent("Enter the password");
-        setAlertClass("alert alert-danger");
-      }
-      else if(confirmPassword == "") {
-        setAlertContent("Retype password");
-        setAlertClass("alert alert-danger");
-      }
-      else if(userRole == "") {
-        setAlertContent("Select user role");
-        setAlertClass("alert alert-danger");
-      }
-*/
       //alert(dataCheckFlag);
 
       if(dataCheckFlag == 1) {
-        setAlertContent("Registration in progress");
+        setAlertContent("Logging in");
         setAlertClass("alert alert-warning");
       
         //alert(userRole);
 
         try {
-          //alert("Paulsin");
+          alert(newUrl);
           const response = await axios.post(
             newUrl,
             {
-              "name": name,    
-              "email": email, 
-              "mobile" : mobile, 
-              "password": password,
-              "userRole": userRole
+              "mailOrMobile": mailOrMobile,    
+              "password": password
             }     
           );  
 
@@ -142,109 +87,23 @@ const Login = () => {
         } catch(error) {
           console.error("Error posting data:", error);
         }
+          
       }
+
       //setDataCheckFlag(0);
     };
 
-    const fetchDataByID = async () => {
-      try {
-        var individualURL = newUrl + '/' + newID;
-        
-        //alert(individualURL);
-        
-        const response = await axios.get(individualURL);
-        setData(response.data[0].confirmPassword);
-        //setOriginalData(response.data);
-        //alert(response.data[0].email);
 
-        setName(response.data[0].name);
-        setEmail(response.data[0].email);
-        setMobile(response.data[0].mobile);
-        setPassword(response.data[0].password);
-        setConfirmPassword(response.data[0].password);
-        setUserRole(response.data[0].userRole);
-
-      } catch (error) {
-        if (!error.response) {
-          // Network error occurred
-          console.error('Network error:', error);
-        } else {
-          // The server responded with a status other than 200 range
-          console.error('Error response:', error.response);
-        }
-      }
-    };
-
-    var userRoleWidget =           
-      <select value={userRole} class="form-control" id="userRole" aria-label="Default select example" name="userRole" onChange={(e) => setUserRole(e.target.value)}>
-        <option value="">Select</option>
-        <option value="developer">Developer</option>
-        <option value="admin">Admin</option>
-        <option value="owner">Owner</option>
-      </select>
 
 
     useEffect(() => {
-      //console.log('i fire once');
-      //fetchData();
-      if(newID) {
-        //alert(newID);
-        fetchDataByID();
-        setButtonLabel("Update");
-      }
-      else {
-        setButtonLabel("Submit");
-      }
+      //fetchDataByID();
     }, []);
 
 
-    const handleUpdate = async (e) => {
-      //e.preventDefault(); 
-      //alert("nshgsf");
-      var updateURL = newUrl + "/update/";
-      
-      //alert(updateURL);
-
-      let dataCheckFlag = await dataCheckFunction(); 
-
-      if(dataCheckFlag == 1) {
-
-        setAlertContent("Updation in progress");
-        setAlertClass("alert alert-warning");
-
-        try {
-          var response = await axios.post(
-            updateURL,
-            {
-              "id" : newID,
-              "name": name,    
-              "email": email, 
-              "mobile" : mobile, 
-              "password": password,
-              "userRole": userRole
-            }     
-          );  
-
-          if(response.data === "OK" || response.status === 200) {
-            setAlertContent("Updation completed");
-            setAlertClass("alert alert-success");
-            //alert("Paulsin");
-          }
-
-        } catch(error) {
-          console.error("Error posting data:", error);
-        }
-      }
-    }
-
     const buttonClickFunction = async (e) => {
       e.preventDefault(); 
-      if(newID) {
-        handleUpdate();
-      }
-      else {
-        handleSubmit();
-      }
+      handleSubmit();
     }
 
 
@@ -263,9 +122,9 @@ const Login = () => {
             </div>
 
             <div class="mb-3 mt-3">
-              <label for="name">Name:</label>
-              <input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required onChange={(e) => setName(e.target.value)}
-              value={name}/>
+              <label for="mailOrMobile">Mail / Mobile:</label>
+              <input type="mailOrMobile" class="form-control" id="mailOrMobile" placeholder="Enter mobile number" name="name" required onChange={(e) => setMailOrMobile(e.target.value)}
+              value={mailOrMobile}/>
             </div>
 
             <div class="mb-3 mt-3">

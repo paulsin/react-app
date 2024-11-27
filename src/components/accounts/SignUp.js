@@ -134,11 +134,17 @@ const SignUp = () => {
           //console.log(response.data);
           //alert(response.status);
           //alert(response.status);
-          if(response.data === "OK" || response.status === 200) {
+          //alert(response.data);
+          if(response.data == "user exists") {
+            setAlertContent("Email ID already registered");
+            setAlertClass("alert alert-danger");
+          }
+          else if(response.data === "OK" || response.status === 200) {
             setAlertContent("Registration completed");
             setAlertClass("alert alert-success");
             //alert("Paulsin");
           }
+          
         } catch(error) {
           console.error("Error posting data:", error);
         }
