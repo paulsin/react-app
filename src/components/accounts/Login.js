@@ -6,9 +6,12 @@ import { Url } from "../../constants/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { json, useNavigate, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import Loading from "../common/Loading";
+import LoginDIV from "./LoginDIV";
 
-var newUrl = Url + 'accounts/person/login';
-
+var newUrl = Url + 'accounts/logInFunction';
+var loggedCheckUrl = Url + 'accounts/loggedInUser';
 
 const Login = () => {
 
@@ -21,6 +24,7 @@ const Login = () => {
     const [data, setData] = useState([]);
     const [buttonLabel, setButtonLabel] = useState("Submit");
 //    const [dataCheckFlag, setDataCheckFlag] = useState(0);
+    const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
 
     ///   For navigate function
     const navigate = useNavigate();
@@ -30,6 +34,9 @@ const Login = () => {
     //alert(newID);
 
 
+
+    
+    
     const dataCheckFunction = (e) => {
 
       if(mailOrMobile == "") {
@@ -64,40 +71,89 @@ const Login = () => {
         setAlertContent("Logging in");
         setAlertClass("alert alert-warning");
       
-        //alert(userRole);
+        newUrl = newUrl + "?username="+mailOrMobile+"&password="+password;
+        //alert(newUrl);
+        const response = axios.get( newUrl,   
+          { withCredentials: true }
+        )
+        .then(function (response) {
+          //console.log(response);
+          alert(response.data);
 
-        try {
-          alert(newUrl);
-          const response = await axios.post(
-            newUrl,
-            {
-              "mailOrMobile": mailOrMobile,    
-              "password": password
-            }     
-          );  
-
-          //console.log(response.data);
-          //alert(response.status);
-          //alert(response.status);
-          if(response.data === "OK" || response.status === 200) {
-            setAlertContent("Registration completed");
-            setAlertClass("alert alert-success");
-            //alert("Paulsin");
+          if(response.data == 'bad_credentials') {
+            setAlertContent("Invalid credentials");
+            setAlertClass("alert alert-danger");
           }
-        } catch(error) {
-          console.error("Error posting data:", error);
-        }
-          
+          else if (response.data == 'logged_in') {
+            //alert("Logged In");
+            navigate('/frontend/profile');
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); 
       }
-
       //setDataCheckFlag(0);
     };
 
+    /*
+    function logInDIV() {   
 
+      return (
+        <>                
+        <div class="container mt-3">
+                              <h2>Log in</h2>
+                              
+                                <div class={alertClass} role="alert">
+                                  {alertContent}
+                                </div>
 
+                                <div class="mb-3 mt-3">
+                                  <label for="mailOrMobile">Mail / Mobile:</label>
+                                  <input type="mailOrMobile" class="form-control" id="mailOrMobile" placeholder="Enter mobile number" name="name" required onChange={(e) => setMailOrMobile(e.target.value)}
+                                  value={mailOrMobile}/>
+                                </div>
+
+                                <div class="mb-3 mt-3">
+                                  <label for="password">Password:</label>
+                                  <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" 
+                                  required onChange={(e) => setPassword(e.target.value)} value={password}/>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" onClick={buttonClickFunction}>{buttonLabel}</button>
+                              
+                              </div>
+        </>
+      );
+    }
+*/
+    const fetchLoggedData = (e) => {
+
+      const response = axios.get(loggedCheckUrl,   
+        { withCredentials: true }
+      )
+      .then(function (response) {
+        //console.log(response);
+        //alert(response.data);
+        if(response.data.username && response.data.password) {
+          //alert("Logged In");
+          navigate('/frontend/profile');
+          //setSelectedDIV(loginDIV);
+        }
+        else {
+          setSelectedDIV(<LoginDIV />);
+        }
+        //setUsername(response.data.username);
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+
+    }
 
     useEffect(() => {
       //fetchDataByID();
+      fetchLoggedData();
     }, []);
 
 
@@ -107,6 +163,8 @@ const Login = () => {
     }
 
 
+
+
     return(
 
     <div>
@@ -114,32 +172,11 @@ const Login = () => {
       <Navbar />
 
 
-        <div class="container mt-3">
-          <h2>Registration form</h2>
-          
-            <div class={alertClass} role="alert">
-              {alertContent}
-            </div>
+      {selectedDIV}
 
-            <div class="mb-3 mt-3">
-              <label for="mailOrMobile">Mail / Mobile:</label>
-              <input type="mailOrMobile" class="form-control" id="mailOrMobile" placeholder="Enter mobile number" name="name" required onChange={(e) => setMailOrMobile(e.target.value)}
-              value={mailOrMobile}/>
-            </div>
 
-            <div class="mb-3 mt-3">
-              <label for="password">Password:</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" 
-              required onChange={(e) => setPassword(e.target.value)} value={password}/>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" onClick={buttonClickFunction}>{buttonLabel}</button>
-          
-        </div>
 
         
-
-
     </div>
 
     )

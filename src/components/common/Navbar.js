@@ -2,7 +2,7 @@
 import React from "react";
 import background from "../../images/background.jpg";
 
-function Navbar() {
+function Navbar(props) {
     return(
 
       <nav class="navbar navbar-expand-md">
@@ -31,7 +31,23 @@ function Navbar() {
               <a class="nav-link" href="/frontend/listusersowntable">Users new</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/backend/hello">Backend</a>
+              <a class="nav-link" href="/frontend/profile">Profile</a>
+            </li>
+
+            <li>
+            <div class="dropdown">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+      {props.loggedBy}
+    </button>
+    <ul class="dropdown-menu">
+      <li><h5 class="dropdown-header">Dropdown header 1</h5></li>
+      <li><a class="dropdown-item" href="#">Link 1</a></li>
+      <li><a class="dropdown-item" href="#">Link 2</a></li>
+      <li><a class="dropdown-item" href="#">Link 3</a></li>
+      <li><h5 class="dropdown-header">Dropdown header 2</h5></li>
+      <li><a class="dropdown-item" href="#">Another link</a></li>
+    </ul>
+  </div>
             </li>
           </ul>
         </div>

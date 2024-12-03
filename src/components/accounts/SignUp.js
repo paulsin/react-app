@@ -22,6 +22,7 @@ const SignUp = () => {
     const [userRole, setUserRole] = useState("");
     const [data, setData] = useState([]);
     const [buttonLabel, setButtonLabel] = useState("Submit");
+    const [emailBoxStatus, setEmailBoxStatus] = useState(false);
 //    const [dataCheckFlag, setDataCheckFlag] = useState(0);
 
     ///   For navigate function
@@ -197,9 +198,11 @@ const SignUp = () => {
         //alert(newID);
         fetchDataByID();
         setButtonLabel("Update");
+        setEmailBoxStatus(true);
       }
       else {
         setButtonLabel("Submit");
+        setEmailBoxStatus(false);
       }
     }, []);
 
@@ -283,7 +286,7 @@ const SignUp = () => {
             <div class="mb-3 mt-3"> 
               <label for="email">Email:</label>
               <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required onChange={(e) => setEmail(e.target.value)}
-              value={email}/>
+              value={email} disabled={emailBoxStatus}/>
             </div>
 
             <div class="mb-3 mt-3">

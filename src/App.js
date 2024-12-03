@@ -16,6 +16,7 @@ import {
  import ListUsersCustomTable from './components/accounts/ListUsersCustomTable';
  import Login from './components/accounts/Login';
  import { ConfirmProvider } from "material-ui-confirm";
+ import Profile from './components/accounts/Profile';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/frontend/login" element={<Login />} />
           <Route path='/frontend/listusers' element={<ListUsersDataGrid />} />
           <Route path='/frontend/listusersowntable' element={<ListUsersCustomTable />} />
+          <Route path='/frontend/profile' element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>
