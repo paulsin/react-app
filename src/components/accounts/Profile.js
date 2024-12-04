@@ -32,9 +32,13 @@ const Profile = () => {
       )
       .then(function (response) {
         //console.log(response);
-        //alert(response.data.username);
-
-        setUsername(response.data.username);
+        //alert(response.data);
+        if(response.data.username && response.data.password) {
+          setUsername(response.data.username);
+        }
+        else {
+          navigate('/frontend/login');
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -53,7 +57,7 @@ const Profile = () => {
 
       <div>
 
-        <Navbar loggedBy={username}/>
+        <Navbar/>
 
       </div>
 
