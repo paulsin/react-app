@@ -78,7 +78,7 @@ const Login = () => {
         )
         .then(function (response) {
           //console.log(response);
-          alert(response.data);
+          //alert(response.data);
 
           if(response.data == 'bad_credentials') {
             setAlertContent("Invalid credentials");
@@ -159,7 +159,7 @@ const Login = () => {
 
     const buttonClickFunction = async (e) => {
       e.preventDefault(); 
-      handleSubmit();
+      handleSubmit(); 
     }
 
 
@@ -171,12 +171,8 @@ const Login = () => {
 
       <Navbar />
 
-
       {selectedDIV}
 
-
-
-        
     </div>
 
     )

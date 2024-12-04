@@ -51,15 +51,11 @@ const Profile = () => {
 
     return(
 
-    <div>
+      <div>
 
-      <Navbar loggedBy={username}/>
+        <Navbar loggedBy={username}/>
 
-
-        
-
-
-    </div>
+      </div>
 
     )
 };

@@ -1,9 +1,40 @@
 
 import React from "react";
 import background from "../../images/background.jpg";
+import axios from "axios";
+import { Url } from "../../constants/global";
+import { json, useNavigate, useParams } from "react-router-dom";
+
+var newUrl = Url + 'accounts/logInFunction';
+var logoutUrl = Url + 'accounts/logoutUser';
 
 function Navbar(props) {
-    return(
+
+  ///   For navigate function
+  const navigate = useNavigate();
+
+  function logOut() {
+    //alert("Paulsin");
+
+
+      const response = axios.get(logoutUrl,   
+        { withCredentials: true }
+      )
+      .then(function (response) {
+        //console.log(response);
+        //alert(response.data);
+        if(response.data == "session_destroyed") {
+          navigate('/frontend/login');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+
+    
+  }
+
+  return(
 
       <nav class="navbar navbar-expand-md">
         <a class="navbar-brand" href="#">Logo</a>
@@ -36,18 +67,18 @@ function Navbar(props) {
 
             <li>
             <div class="dropdown">
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-      {props.loggedBy}
-    </button>
-    <ul class="dropdown-menu">
-      <li><h5 class="dropdown-header">Dropdown header 1</h5></li>
-      <li><a class="dropdown-item" href="#">Link 1</a></li>
-      <li><a class="dropdown-item" href="#">Link 2</a></li>
-      <li><a class="dropdown-item" href="#">Link 3</a></li>
-      <li><h5 class="dropdown-header">Dropdown header 2</h5></li>
-      <li><a class="dropdown-item" href="#">Another link</a></li>
-    </ul>
-  </div>
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                {props.loggedBy}
+              </button>
+              <ul class="dropdown-menu">
+                <li><h5 class="dropdown-header">Dropdown header 1</h5></li>
+                <li><a class="dropdown-item" href="#">Link 1</a></li>
+                <li><a class="dropdown-item" href="#">Link 2</a></li>
+                <li><a class="dropdown-item" href="#">Link 3</a></li>
+                <li><h5 class="dropdown-header">Dropdown header 2</h5></li>
+                <li><a class="dropdown-item" href="#" onClick={logOut}>Log out</a></li>
+              </ul>
+            </div>
             </li>
           </ul>
         </div>
