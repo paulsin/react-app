@@ -25,30 +25,9 @@ const Profile = () => {
     //alert(newID);
 
 
-    const fetchLoggedData = (e) => {
-
-      const response = axios.get( newUrl,   
-        { withCredentials: true }
-      )
-      .then(function (response) {
-        //console.log(response);
-        //alert(response.data);
-        if(response.data.username && response.data.password) {
-          setUsername(response.data.username);
-        }
-        else {
-          navigate('/frontend/login');
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      }); 
-
-    }
-
 
     useEffect(() => {
-      fetchLoggedData();
+      
     }, []);
 
 
@@ -58,6 +37,8 @@ const Profile = () => {
       <div>
 
         <Navbar/>
+
+        <h1>Hello man</h1>
 
       </div>
 

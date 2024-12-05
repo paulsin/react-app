@@ -73,7 +73,7 @@ const ListUsersCustomTable = () => {
   };
 
   const handleEdit = (_id) => {
-    navigate("/frontend/SignUp/"+_id);
+    navigate("/frontend/SignUpCheck/"+_id);
   } 
 
   const handleSearchBoxChange = (event) => {

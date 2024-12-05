@@ -9,13 +9,14 @@ import { json, useNavigate, useParams } from "react-router-dom";
 import Loading from "../common/Loading";
 import SignUp from "./SignUp";
 import { Login } from "react-admin";
+import ListUsersCustomTable from "./ListUsersCustomTable";
 import NotAuthorized from "../common/NotAuthorized";
 
 var newUrl = Url + 'accounts/person';
 
 var loggedCheckUrl = Url + 'accounts/loggedInUser';
 
-const SignUpCheck = () => {
+const ListUsersCustomTableCheck = () => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -50,17 +51,12 @@ const SignUpCheck = () => {
         )
         .then(function (response) {
           //console.log(response);
-          //alert(response.data);
+          //alert(response.data.userRole);
           if(response.data.username && response.data.password) {
               //alert("Logged In");
-              //navigate('/frontend/profile');
+              //navigate('/frontend/profile');  
             if(response.data.userRole == "owner") {
-              if(newID) {
-                setSelectedDIV(<SignUp newID={newID}/>);
-              }
-              else {
-                setSelectedDIV(<SignUp newID=""/>);
-              }
+              setSelectedDIV(<ListUsersCustomTable/>);
             }
             else {
               setSelectedDIV(<NotAuthorized />);
@@ -72,7 +68,7 @@ const SignUpCheck = () => {
           //setUsername(response.data.username);
         })
         .catch(function (error) {
-        console.log(error);
+          console.log(error);
         }); 
 
     }
@@ -101,4 +97,4 @@ const SignUpCheck = () => {
     )
 };
 
-export default SignUpCheck;
+export default ListUsersCustomTableCheck;

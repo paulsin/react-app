@@ -12,6 +12,8 @@ var loggedCheckUrl = Url + 'accounts/loggedInUser';
 
 function Navbar(props) {
   const [loggedUserMenu, setLoggedUserMenu] = useState();
+  const [loggedUserRole, setLoggedUserRole] = useState();
+
   ///   For navigate function
   const navigate = useNavigate();
 
@@ -50,6 +52,7 @@ function Navbar(props) {
         //navigate('/frontend/profile');
         //setSelectedDIV(loginDIV);
         setLoggedUserMenu(response.data.username);
+        setLoggedUserRole(response.data.userRole);
       }
       else {
         //setSelectedDIV(<LoginDIV />);
@@ -88,13 +91,23 @@ function Navbar(props) {
             <li class="nav-item">
               <a class="nav-link" href="/frontend/login">Login</a>
             </li>
+
+            { loggedUserRole == "owner" ?
+
             <li class="nav-item">
-              <a class="nav-link" href="/frontend/signupCheck">Sign Up</a>
-            </li>
+              <a class="nav-link" href="/frontend/signupCheck">Register</a>
+            </li> : ""
+
+            }
+
+            { loggedUserRole == "owner" ?
 
             <li class="nav-item">
               <a class="nav-link" href="/frontend/listusersowntable">Users</a>
-            </li>
+            </li> : ""
+
+            }
+
 
             {
               loggedUserMenu ? 

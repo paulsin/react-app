@@ -10,7 +10,7 @@ import { json, useNavigate, useParams } from "react-router-dom";
 var newUrl = Url + 'accounts/person';
 
 
-const SignUp = () => {
+const SignUp = (props) => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -23,15 +23,15 @@ const SignUp = () => {
     const [data, setData] = useState([]);
     const [buttonLabel, setButtonLabel] = useState("Submit");
     const [emailBoxStatus, setEmailBoxStatus] = useState(false);
+    const [newID, setNewID] = useState(props.newID);
 //    const [dataCheckFlag, setDataCheckFlag] = useState(0);
 
     ///   For navigate function
     const navigate = useNavigate();
 
-    const {newID} = useParams();
+    //const {newID} = useParams();
 
     //alert(newID);
-
 
     const dataCheckFunction = (e) => {
 
@@ -194,7 +194,8 @@ const SignUp = () => {
     useEffect(() => {
       //console.log('i fire once');
       //fetchData();
-      if(newID) {
+      //alert(props.newID);
+      if(props.newID) {
         //alert(newID);
         fetchDataByID();
         setButtonLabel("Update");

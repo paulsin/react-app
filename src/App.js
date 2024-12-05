@@ -16,9 +16,9 @@ import {
  import ListUsersCustomTable from './components/accounts/ListUsersCustomTable';
  import Login from './components/accounts/Login';
  import { ConfirmProvider } from "material-ui-confirm";
- import Profile from './components/accounts/Profile';
+ import ProfileCheck from './components/accounts/ProfileCheck';
 import SignUpCheck from './components/accounts/SignUpCheck';
-
+  import ListUsersCustomTableCheck from './components/accounts/ListUsersCustomTableCheck';
 
 function App() {
   return (
@@ -28,12 +28,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
-          <Route path="/frontend/signup/:newID" element={<SignUp />} />
           <Route path="/frontend/signupCheck" element={<SignUpCheck />} />
+          <Route path="/frontend/signupCheck/:newID" element={<SignUpCheck />} />
           <Route path="/frontend/login" element={<Login />} />
           <Route path='/frontend/listusers' element={<ListUsersDataGrid />} />
-          <Route path='/frontend/listusersowntable' element={<ListUsersCustomTable />} />
-          <Route path='/frontend/profile' element={<Profile />} />
+          <Route path='/frontend/listusersowntable' element={<ListUsersCustomTableCheck />} />
+          <Route path='/frontend/profile' element={<ProfileCheck />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>
