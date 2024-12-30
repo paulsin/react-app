@@ -19,6 +19,9 @@ import {
  import ProfileCheck from './components/accounts/ProfileCheck';
 import SignUpCheck from './components/accounts/SignUpCheck';
   import ListUsersCustomTableCheck from './components/accounts/ListUsersCustomTableCheck';
+  import AddPropertyCheck from './components/property/AddPropertyCheck';
+  import Location from './components/property/Location';
+import LocationCheck from './components/property/LocationCheck';
 
 function App() {
   return (
@@ -34,6 +37,10 @@ function App() {
           <Route path='/frontend/listusers' element={<ListUsersDataGrid />} />
           <Route path='/frontend/listusersowntable' element={<ListUsersCustomTableCheck />} />
           <Route path='/frontend/profile' element={<ProfileCheck />} />
+          <Route path='/frontend/addProperty' element={<AddPropertyCheck />} />
+          <Route path='/frontend/location/:locationType/:countryName' element={<LocationCheck />} />
+          <Route path='/frontend/location/:locationType/:countryName/:stateID' element={<LocationCheck />} />
+          <Route path='/frontend/location/:locationType/:countryName/:stateID/:districtID' element={<LocationCheck />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>

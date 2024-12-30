@@ -92,6 +92,15 @@ function Navbar(props) {
               <a class="nav-link" href="/frontend/login">Login</a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/addProperty">Add property</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/location/statesList/india">Location</a>
+            </li>
+            
             { loggedUserRole == "owner" ?
 
             <li class="nav-item">
