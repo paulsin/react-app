@@ -26,6 +26,7 @@ const AddProperty = (props) => {
 
     const [stateNameSelectedID, setStateNameSelectedID] = useState("");
     const [districtNameSelectedID, setDistrictNameSelectedID] = useState("");
+    const [townNameSelectedID, setTownNameSelectedID] = useState("");
 
     const [districtName, setDistrictName] = useState("");
     const [districtCode, setDistrictCode] = useState("");
@@ -35,9 +36,11 @@ const AddProperty = (props) => {
 
     const [localityName, setLocalityName] = useState("");
 
-    const [stateOptions, setStateOptions] = useState();
-    const [districtOptions, setDistrictOptions] = useState();
-    const [townOptions, setTownOptions] = useState();
+    const [stateOptions, setStateOptions] = useState([]);
+    const [districtOptions, setDistrictOptions] = useState([]);
+    const [districtOptionsOriginal, setDistrictOptionsOriginal] = useState([]);
+    const [townOptions, setTownOptions] = useState([]);
+    const [townOptionsOriginal, setTownOptionsOriginal] = useState([]);
 
     const [addStateButtonStatus, setAddStateButtonStatus] = useState("Add state");
     const [addDistrictButtonStatus, setAddDistrictButtonStatus] = useState("Add district");
@@ -135,15 +138,44 @@ const AddProperty = (props) => {
 
 
     const handleStateSelection = (e) => {
-      //alert("Paulsin");
-      //alert(e.value);
+
       setStateNameSelectedID(e.value);
+      
+      var districtOptionsArrayTemp = [];
+
+      //alert(stateNameSelectedID);
+
+      districtOptionsOriginal.map(key => {
+        if(key.stateID == e.value) {
+          //alert(key.label);
+          districtOptionsArrayTemp.push({ value: key.value, label: key.label });
+        }
+        //stateOptionsArray.push({ value: key._id, label: key.stateName });           
+      });
+
+      setDistrictOptions(districtOptionsArrayTemp);
+
     }
 
     const handleDistrictSelection = (e) => {
-      //alert("Paulsin");
-      //alert(e.value);
+
+      var townOptionsArrayTemp = [];
+
       setDistrictNameSelectedID(e.value);
+
+      townOptionsOriginal.map(key => {
+        if(key.stateID == stateNameSelectedID && key.districtID == e.value) {
+          //alert(key.label);
+          townOptionsArrayTemp.push({ value: key.value, label: key.label });
+        }
+        //stateOptionsArray.push({ value: key._id, label: key.stateName });           
+      });
+
+      setTownOptions(townOptionsArrayTemp);
+    }
+
+    const handleTownSelection = (e) => {
+      setTownNameSelectedID(e.value);
     }
 
     const addDistrict = async (e) => {
@@ -271,7 +303,6 @@ const AddProperty = (props) => {
       }
     };
 
-
     const fetchDistricts =  async (e) => {
       try {
         const response = await axios.get(getDistrictUrl,   
@@ -281,10 +312,11 @@ const AddProperty = (props) => {
             //alert(response.data[1].districtName);
 
             response.data.map(key => {
-                districtOptionsArray.push({ value: key._id, label: key.districtName });           
+                districtOptionsArray.push({ value: key._id, label: key.districtName, stateID : key.stateID });           
             });
             
             setDistrictOptions(districtOptionsArray);
+            setDistrictOptionsOriginal(districtOptionsArray);
           })
           .catch(function (error) {
             console.log(error);
@@ -305,10 +337,11 @@ const AddProperty = (props) => {
             //alert(response.data[1].districtName);
 
             response.data.map(key => {
-                townOptionsArray.push({ value: key._id, label: key.townName });           
+                townOptionsArray.push({ value: key._id, label: key.townName, stateID : key.stateID, districtID : key.districtID });           
             });
             
             setTownOptions(townOptionsArray);
+            setTownOptionsOriginal(townOptionsArray);
           })
           .catch(function (error) {
             console.log(error);
@@ -317,6 +350,27 @@ const AddProperty = (props) => {
         
       } catch(error) {
         console.error("Error posting data:", error);
+      }
+    };
+
+    const submitProperty = async (e) => {
+      //alert("Paulsin");
+      //alert(stateNameSelectedID);
+      //alert(districtNameSelectedID);
+      //alert(townNameSelectedID);
+      //alert();
+
+      if(!stateNameSelectedID) {
+        setAlertContent("Select state");
+        setAlertClass("alert alert-danger");
+      }
+      else if(!districtNameSelectedID) {
+        setAlertContent("Select district");
+        setAlertClass("alert alert-danger");
+      }
+      else if(!townNameSelectedID) {
+        setAlertContent("Select town");
+        setAlertClass("alert alert-danger");
       }
     };
 
@@ -435,6 +489,7 @@ const AddProperty = (props) => {
                   <Select
                     //defaultValue={{ value: 'Rent', label: 'Rent' }}
                     //onChange={handleSubmit}
+                    onChange={handleTownSelection}
                     options={townOptions}
                   />
                 </div>
@@ -465,7 +520,7 @@ const AddProperty = (props) => {
 
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" onClick={submitProperty}>Save</button>
           
         </div>
 

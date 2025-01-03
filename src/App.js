@@ -22,6 +22,7 @@ import SignUpCheck from './components/accounts/SignUpCheck';
   import AddPropertyCheck from './components/property/AddPropertyCheck';
   import Location from './components/property/Location';
 import LocationCheck from './components/property/LocationCheck';
+import Test3 from './components/accounts/Test3';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
+          <Route path="/test3" element={<Test3 />} />
           <Route path="/frontend/signupCheck" element={<SignUpCheck />} />
           <Route path="/frontend/signupCheck/:newID" element={<SignUpCheck />} />
           <Route path="/frontend/login" element={<Login />} />
