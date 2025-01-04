@@ -65,6 +65,24 @@ const Login = () => {
     }
 
 
+    const test =  async (e) => {
+      try {
+        const response = await axios.get('https://haberoceanstock.com/backend/accounts',   
+            { withCredentials: true }
+          )
+          .then(function (response) {
+            alert(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          }); 
+        
+      } catch(error) {
+        console.error("Error posting data:", error);
+      }
+    };
+
+
     useEffect(() => {
       //fetchDataByID();
       fetchLoggedData();
@@ -72,6 +90,8 @@ const Login = () => {
       //awaitFetchLoggedData();
       //const response = Functions();
       //alert(response);
+
+      //test();
     }, []);
 
 

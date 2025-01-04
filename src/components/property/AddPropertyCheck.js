@@ -43,6 +43,8 @@ const AddPropertyCheck = () => {
 
       //Functions();
 
+      //alert(loggedCheckUrl);
+
       const response = axios.get(loggedCheckUrl,   
         { withCredentials: true }
       )

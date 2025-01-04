@@ -111,6 +111,7 @@ const AddProperty = (props) => {
     };
 
     const fetchStates =  async (e) => {
+      //alert(getStateUrl);
       try {
         const response = await axios.get(getStateUrl,   
             { withCredentials: true }
@@ -374,12 +375,31 @@ const AddProperty = (props) => {
       }
     };
 
+    const test =  async (e) => {
+      try {
+        const response = await axios.get('https://haberoceanstock.com/backend/location',   
+            { withCredentials: true }
+          )
+          .then(function (response) {
+            alert(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          }); 
+        
+      } catch(error) {
+        console.error("Error posting data:", error);
+      }
+    };
+
     useEffect(() => {
       //console.log('i fire once');
       //setItems(data);
       fetchStates();
       fetchDistricts();
       fetchTowns();
+
+      //test();
 
     }, []);
 
