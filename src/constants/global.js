@@ -1,5 +1,5 @@
-//const Url = 'http://localhost:3000/backend/' // For localhost
-const Url = 'https://haberoceanstock.com/backend/' // For website
+const Url = 'http://localhost:3000/backend/' // For localhost
+//const Url = 'https://haberoceanstock.com/backend/' // For website
 
 const propertyTypes = [
     { value: 'House', label: 'House' },
