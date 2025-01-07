@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
  import Test from './components/accounts/Test';
  import Test2 from './components/accounts/Test2';
- import Home from './components/accounts/Home';
+ import Home from './components/public/Home';
  import SignUp from './components/accounts/SignUp';
  import ListUsersDataGrid from './components/accounts/ListUsersDataGrid';
  import ListUsersCustomTable from './components/accounts/ListUsersCustomTable';
