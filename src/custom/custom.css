@@ -6,6 +6,11 @@ body {
 .navbar {
     background:#f91251;
 }
+
+#navbarPublic {
+    background:#b712f9;
+}
+
 .nav-link,
 .navbar-brand {
     color: #fff;
