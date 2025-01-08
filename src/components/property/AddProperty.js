@@ -19,6 +19,8 @@ var getStateUrl = Url + 'location/states';
 var getDistrictUrl = Url + 'location/districts';
 var getTownUrl = Url + 'location/towns';
 
+var addPropertyURL = Url + 'property/addProperty';
+
 const AddProperty = (props) => {
 
     const [stateName, setStateName] = useState("");
@@ -394,43 +396,25 @@ const AddProperty = (props) => {
         setAlertClass("alert alert-danger");
       }
       
-
-      try {
-        //alert("Paulsin");
-        const response = await axios.post(
-          newUrl,
-          {
-            "stateName": stateName,    
-            "stateCode": stateCode
-          }     
-        );  
-
-        //alert(response.data);
-
-        if(response.data == "both_exists") {
-          setAlertContent("State name and code exist");
-          setAlertClass("alert alert-danger");
-        }
-        else if(response.data == "name_exists") {
-          setAlertContent("State name exists");
-          setAlertClass("alert alert-danger");
-        }
-        else if(response.data == "code_exists") {
-          setAlertContent("State code exists");
-          setAlertClass("alert alert-danger");
-        }
-        else if(response.status == 200) {
-          setAddStateButtonStatus("Add state");
-          setStateName("");
-          setStateCode("");
-        }
-
-        fetchStates();
+      else {
+        try {
+          //alert("Paulsin");
+          const response = await axios.post(
+            addPropertyURL,
+            {
+              "propertyType": propertyTypeSelected,    
+              "transactionType": transactionTypeSelected,
+              "stateID": stateNameSelectedID,
+              "districtID": districtNameSelectedID,
+              "townID": townNameSelectedID
+            }     
+          );  
         
-      } catch(error) {
-        console.error("Error posting data:", error);
-      }
+        } catch(error) {
+          console.error("Error posting data:", error);
+        }
 
+      }
 
 
     };
