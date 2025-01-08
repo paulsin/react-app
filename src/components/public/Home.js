@@ -93,22 +93,22 @@ function Home() {
                   </div>  
                   <br/>
                   <div className="row" >
-                    <div className="col-3"> 
+                    <div className="col"> 
                       <label htmlFor="">Property Price</label>
                     </div>
-                    <div className="col-2">
+                    <div className="col">
                     <label htmlFor=""> Price From</label>
                     </div>
-                    <div className="col-2">
+                    <div className="col">
                     <select className="form-control">
                         <option>40 lakhs</option>
                         <option>20 lakhs</option>
                       </select> 
                     </div>
-                    <div className="col-2">
+                    <div className="col">
                     <label htmlFor="">Price To</label>
                     </div>
-                    <div className="col-2">
+                    <div className="col">
                     <select className="form-control">
                         <option>1 crore</option>
                         <option>1 crore 10 lakhs</option>
