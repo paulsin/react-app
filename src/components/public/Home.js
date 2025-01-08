@@ -16,13 +16,16 @@ function Home() {
         <br/>
         {/* <div class="overlay">
           <div class="description"> */}
-            <div className='d-flex vh-60 justify-content-center '>
-              <div className='w-50 bg-white rounded p-3'>
+
+
+
+            <div className='container text-center' id="searchpropclass" >
+              {/* <div className='w-50 bg-white rounded p-3'> */}
                 <form>
                   <div className="row" id="searchpropclass">
-                    <div className="col-4">  <h5>Search Property By ID</h5></div>
-                    <div className="col-4"> <input type="text" placeholder="Search.."/></div>
-                    <div className="col-4"></div>
+                    <div className="col-sm-4">  <h5>Search Property By ID</h5></div>
+                    <div className="col-sm-4"> <input type="text" placeholder="Search.." className="form-control"/></div>
+                    <div className="col-sm-4"></div>
                   </div>
                   <br/>
 
@@ -45,6 +48,7 @@ function Home() {
                         <option>Rent</option></select> 
                     </div>
                   </div> 
+            
                   <br/>
                    <div className="row" >
                     <div className="col-3"> 
@@ -129,6 +133,7 @@ function Home() {
                       
                     </div>
                   </div> 
+               
                   <br/>
                   <div className="row" >
                     <div className="col-4"> 
@@ -141,7 +146,7 @@ function Home() {
                   </div>
                     
                 </form>
-              </div>
+              {/* </div> */}
             </div>
 
      
