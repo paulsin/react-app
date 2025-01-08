@@ -8,7 +8,7 @@ body {
 }
 
 #navbarPublic {
-    background:#b712f9;
+    background:#640505;
 }
 
 .nav-link,
@@ -27,11 +27,11 @@ body {
 }
 
 .header {
-    background-image: url('/public/background.jpg');
+    background-image: url('/public/housebackground.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
-    height: 800px;
+    height: 630px;
 }
 
 .overlay {

@@ -1,6 +1,11 @@
 #searchpropclass{
-    background-color:rgb(161, 57, 161);
-    color:white
+    background-color:		white;
+    color:rgb(77, 4, 4)
   
   }
-  
+#searchbuttoninhome{
+    background-color: rgb(77, 4, 4);
+    color:white;
+    font-weight: bold;
+    
+}
