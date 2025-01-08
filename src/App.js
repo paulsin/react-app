@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 import './App.css';
 import './custom/custom.css';
+import './custom/anju.css';
 import background from './images/background.jpg';
 import React from 'react';
 import {
