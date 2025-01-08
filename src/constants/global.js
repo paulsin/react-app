@@ -1,12 +1,14 @@
-const Url = 'http://localhost:3000/backend/' // For localhost
+ const Url = 'http://localhost:3000/backend/' // For localhost
 //const Url = 'https://haberoceanstock.com/backend/' // For website
 
 const propertyTypes = [
+    { value: '', label: 'Property type' },
     { value: 'House', label: 'House' },
     { value: 'Villa', label: 'Villa' },
   ];
 
   const transactionType = [
+    { value: '', label: 'Sale / rent' },
     { value: 'Rent', label: 'Rent' },
     { value: 'Sale', label: 'Sale' },
   ];

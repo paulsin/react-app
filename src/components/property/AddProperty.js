@@ -24,6 +24,9 @@ const AddProperty = (props) => {
     const [stateName, setStateName] = useState("");
     const [stateCode, setStateCode] = useState("");
 
+    const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
+    const [transactionTypeSelected, setTransactionTypeSelected] = useState("");
+
     const [stateNameSelectedID, setStateNameSelectedID] = useState("");
     const [districtNameSelectedID, setDistrictNameSelectedID] = useState("");
     const [townNameSelectedID, setTownNameSelectedID] = useState("");
@@ -322,7 +325,6 @@ const AddProperty = (props) => {
           .catch(function (error) {
             console.log(error);
           }); 
-
         
       } catch(error) {
         console.error("Error posting data:", error);
@@ -354,6 +356,14 @@ const AddProperty = (props) => {
       }
     };
 
+    const handlePropertySelection = (e) => {
+      setPropertyTypeSelected(e.value);
+    }
+
+    const handleTransactionTypeSelection = (e) => {
+      setTransactionTypeSelected(e.value);
+    }
+
     const submitProperty = async (e) => {
       //alert("Paulsin");
       //alert(stateNameSelectedID);
@@ -361,7 +371,17 @@ const AddProperty = (props) => {
       //alert(townNameSelectedID);
       //alert();
 
-      if(!stateNameSelectedID) {
+      if(!propertyTypeSelected) {
+        setAlertContent("Select property type");
+        setAlertClass("alert alert-danger");
+      }
+
+      else if(!transactionTypeSelected) {
+        setAlertContent("Select transaction type");
+        setAlertClass("alert alert-danger");
+      }
+
+      else if(!stateNameSelectedID) {
         setAlertContent("Select state");
         setAlertClass("alert alert-danger");
       }
@@ -373,6 +393,46 @@ const AddProperty = (props) => {
         setAlertContent("Select town");
         setAlertClass("alert alert-danger");
       }
+      
+
+      try {
+        //alert("Paulsin");
+        const response = await axios.post(
+          newUrl,
+          {
+            "stateName": stateName,    
+            "stateCode": stateCode
+          }     
+        );  
+
+        //alert(response.data);
+
+        if(response.data == "both_exists") {
+          setAlertContent("State name and code exist");
+          setAlertClass("alert alert-danger");
+        }
+        else if(response.data == "name_exists") {
+          setAlertContent("State name exists");
+          setAlertClass("alert alert-danger");
+        }
+        else if(response.data == "code_exists") {
+          setAlertContent("State code exists");
+          setAlertClass("alert alert-danger");
+        }
+        else if(response.status == 200) {
+          setAddStateButtonStatus("Add state");
+          setStateName("");
+          setStateCode("");
+        }
+
+        fetchStates();
+        
+      } catch(error) {
+        console.error("Error posting data:", error);
+      }
+
+
+
     };
 
     const test =  async (e) => {
@@ -425,8 +485,8 @@ const AddProperty = (props) => {
 
                 <div class="col-sm-5">
                   <Select
-                    defaultValue={{ value: 'Villa', label: 'Villa' }}
                     options={propertyTypes}
+                    onChange={handlePropertySelection}
                   />
                 </div>
 
@@ -438,8 +498,8 @@ const AddProperty = (props) => {
 
                 <div class="col-sm-5">
                   <Select
-                    defaultValue={{ value: 'Rent', label: 'Rent' }}
                     options={transactionType}
+                    onChange={handleTransactionTypeSelection}
                   />
                 </div>
             </div>
@@ -540,7 +600,7 @@ const AddProperty = (props) => {
 
             </div>
 
-            <button type="submit" class="btn btn-primary" onClick={submitProperty}>Save</button>
+            <button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
           
         </div>
 
