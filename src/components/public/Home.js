@@ -5,6 +5,7 @@ import NavbarPublic from "../common/NavbarPublic";
 import { FaSearch } from "react-icons/fa";
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
+import { Url } from "../../constants/global";
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -23,17 +24,28 @@ function Home() {
   let district_options = []
   let town_options = []
 
+  const StateType=(e) =>{
+    var options = e.target.options;
+    //alert(options)
+    var value = [];
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
 
+  }
   function getStates() {
-    //alert("anu");
+    // alert("anu");
     axios
-      .get("http://localhost:3000/backend/location/states",
+      .get(Url+"location/states",
     )
     .then((res) => {
-      res.data.map(data => {
-          // alert(data.stateName);
-          // alert(data._id)
-          state_options.push({ value: data._id, label: data.stateName });
+      // alert("haiii")
+      res.data.map(data1 => {
+          // alert(data1.stateName);
+          // alert(data._id)    
+          state_options.push({ value: data1._id, label: data1.stateName });
       });
       setSelectedStateType(state_options);
     })
@@ -43,10 +55,10 @@ function Home() {
     axios
       .get("http://localhost:3000/backend/location/districts",
     )
-    .then((res) => {
-      res.data.map(data => {
+    .then((res1) => {
+      res1.data.map(data2 => {
           // alert(data.stateID);
-        district_options.push({ value: data._id, label: data.districtName });
+        district_options.push({ value: data2._id, label: data2.districtName });
       });
       setSelectedDistrictType(district_options);
     })
@@ -56,9 +68,9 @@ function Home() {
     axios
       .get("http://localhost:3000/backend/location/towns",
     )
-    .then((res) => {
-      res.data.map(data => {
-        town_options.push({ value: data._id, label: data.townName });
+    .then((res2) => {
+      res2.data.map(data3 => {
+        town_options.push({ value: data3._id, label: data3.townName });
       });
       setSelectedTownType(town_options);
     })
@@ -73,7 +85,7 @@ function Home() {
     <div>
       <NavbarPublic />
         <header class="page-header header container-fluid-full mx-auto p-3">
-          <br/>
+        
           <div className='container .d-block' id="searchpropclass" >
                 {/* <div className='w-50 bg-white rounded p-3'> */}
             <form>
@@ -123,7 +135,7 @@ function Home() {
                   <MultiSelect
                     options={selectedstatetype}
                     // value={selectedstatetype}
-                    onChange={setSelectedStateType}
+                    onChange={StateType}
                     labelledBy="Select"
                   />
                     {/* <select className="form-control">

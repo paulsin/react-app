@@ -431,7 +431,7 @@ const AddProperty = (props) => {
     const handleImageChange = (e) => {
       //alert("Paulsin");
       const file = e.target.files[0];
-      //alert(file);
+      alert(file);
       const formData = new FormData();
       formData.append('file', file);
       formData.append("upload_preset", presetKey);
@@ -630,6 +630,12 @@ const AddProperty = (props) => {
 
 
         </div>
+
+
+        <form action={addPropertyImagesURL} method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" />
+    <button type="submit">Upload</button>
+</form>
 
     </div>
 
