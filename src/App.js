@@ -2,6 +2,7 @@
 import './App.css';
 import './custom/custom.css';
 import './custom/anju.css';
+import './custom/paulsin.css';
 import background from './images/background.jpg';
 import React from 'react';
 import {
