@@ -1,4 +1,9 @@
 8-1-2025 changes
 ---------------
 * home page
-*anju.css
+* anju.css
+
+9-1-25
+-------
+* home page
+* anju.css
