@@ -10,6 +10,7 @@ import Select from "react-select";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import data from "../../json/places.json"
+import { ProgressBar } from "react-bootstrap";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -20,6 +21,7 @@ var getDistrictUrl = Url + 'location/districts';
 var getTownUrl = Url + 'location/towns';
 
 var addPropertyURL = Url + 'property/addProperty';
+var addPropertyImagesURL = Url + 'property/addPropertyImages';
 
 const AddProperty = (props) => {
 
@@ -54,11 +56,18 @@ const AddProperty = (props) => {
     const [alertClass, setAlertClass] = useState("alert alert-info");
     const [alertContent, setAlertContent] = useState("Enter the property details");
 
+    const [uploadProgressValue, setUploadProgressValue] = useState(0);
+    const [imageUrl, setImageUrl] = useState();
+    const [progressBar, setProgressBar] = useState(0);
+    const presetKey = "";
+
     const stateOptionsArray = [];
     const districtOptionsArray = [];
     const townOptionsArray = [];
 
     const navigate = useNavigate();
+
+    //const now = 80;
 
     //const data = JSON.parse(fs.readFileSync("../../json/places.json"));
 
@@ -419,6 +428,28 @@ const AddProperty = (props) => {
 
     };
 
+    const handleImageChange = (e) => {
+      //alert("Paulsin");
+      const file = e.target.files[0];
+      //alert(file);
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append("upload_preset", presetKey);
+      axios.post(addPropertyImagesURL,
+        formData, {
+        headers : {
+          "Content-Type": "multipart/form-data"
+        },
+        onUploadProgress: e => {
+          alert(Math.round((e.loaded/e.total)*100));
+          setUploadProgressValue(Math.round((e.loaded/e.total)*100));
+        }
+      }
+      ).then(res => setImageUrl(res.data.secure_url))
+      .catch(err => console.log(err));
+    }
+
+
     const test =  async (e) => {
       try {
         const response = await axios.get('https://haberoceanstock.com/backend/location',   
@@ -456,9 +487,9 @@ const AddProperty = (props) => {
 
 
         <div class="container mt-3">
-            <h2>Add property</h2>
-            <br/>
 
+            <h3>Property details</h3>
+            <br/>
 
             <div class={alertClass} role="alert">
               {alertContent}
@@ -589,6 +620,16 @@ const AddProperty = (props) => {
         </div>
 
 
+        <div>
+          <input type="file" name="image" onChange={handleImageChange} />
+          <br />
+
+          <br/>
+
+          <ProgressBar now={uploadProgressValue} label={`${uploadProgressValue}%`} />;
+
+
+        </div>
 
     </div>
 
