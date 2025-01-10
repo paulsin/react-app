@@ -30,15 +30,21 @@ function Home() {
   const StateType = (event) => {
    
     // var optionss = event.target.options;
-    alert(event)
-    let statevalues=[]
+    //alert(event[0].value);
+
+    event.map((key) => {
+      //alert("Paulsin");
+      alert(key.value);
+    });
+
+    let statevalues=[];
     // alert(event._id)
   
-    statevalues.push(event)
+    statevalues.push(event);
     // alert(statevalues)
     setSelectedstateOnchangevalue(event)
     statevalues.map(state=>{
-       alert(state._id)
+       //alert(state._id)
     })
 
 
