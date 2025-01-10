@@ -4,15 +4,18 @@ import Navbar from "../common/NavbarPublic";
 import NavbarPublic from "../common/NavbarPublic";
 import { FaSearch } from "react-icons/fa";
 import { MultiSelect } from "react-multi-select-component";
+import Multiselect from 'multiselect-react-dropdown';
 import axios from "axios";
 import { Url } from "../../constants/global";
+import Select from 'react-select';
+
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
   const [selectedstatetype, setSelectedStateType] = useState([]);
   const [selecteddistricttype, setSelectedDistrictType] = useState([]);
   const [selectedtowntype, setSelectedTownType] = useState([]);
-  // const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState([]);
+  const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState();
 
   const propertytype_options = [
     { label: "Flat", value: "flat" },
@@ -24,17 +27,24 @@ function Home() {
   let district_options = []
   let town_options = []
 
-  const StateType=(e) =>{
-    var options = e.target.options;
-    //alert(options)
-    var value = [];
-    for (var i = 0, l = options.length; i < l; i++) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
+  const StateType = (event) => {
+   
+    // var optionss = event.target.options;
+    alert(event)
+    let statevalues=[]
+    // alert(event._id)
+  
+    statevalues.push(event)
+    // alert(statevalues)
+    setSelectedstateOnchangevalue(event)
+    statevalues.map(state=>{
+       alert(state._id)
+    })
+
 
   }
+
+
   function getStates() {
     // alert("anu");
     axios
@@ -44,9 +54,10 @@ function Home() {
       // alert("haiii")
       res.data.map(data1 => {
           // alert(data1.stateName);
-          // alert(data._id)    
+          // alert(data1._id)    
           state_options.push({ value: data1._id, label: data1.stateName });
       });
+      // alert(state_options)
       setSelectedStateType(state_options);
     })
   }
@@ -131,17 +142,17 @@ function Home() {
                 <div className="col-md-3"> 
                   <label htmlFor=""><b>State</b></label>
                 </div>
-                <div className="col-md-3">
-                  <MultiSelect
+                <div className="col-md-3 app-select">
+                  {/* <MultiSelect
                     options={selectedstatetype}
                     // value={selectedstatetype}
                     onChange={StateType}
                     labelledBy="Select"
-                  />
-                    {/* <select className="form-control">
-                      <option>Kerala</option>
-                      <option>Tamilnadu</option>
-                    </select>  */}
+                  /> */}
+                 
+                    <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  value={selectedstateonchangevalue} onChange={StateType}> 
+                    </Select>   
+                    
                 </div>
                 <div className="col-md-3">
                   <label htmlFor=""><b>Sort By</b></label>
