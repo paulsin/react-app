@@ -4,7 +4,7 @@ import Navbar from "../common/NavbarPublic";
 import NavbarPublic from "../common/NavbarPublic";
 import { FaSearch } from "react-icons/fa";
 import { MultiSelect } from "react-multi-select-component";
-import Multiselect from 'multiselect-react-dropdown';
+// import Multiselect from 'multiselect-react-dropdown';
 import axios from "axios";
 import { Url } from "../../constants/global";
 import Select from 'react-select';
