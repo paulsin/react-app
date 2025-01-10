@@ -27,12 +27,14 @@ function Home() {
   const StateType=(e) =>{
     var options = e.target.options;
     //alert(options)
+    /*
     var value = [];
     for (var i = 0, l = options.length; i < l; i++) {
       if (options[i].selected) {
         value.push(options[i].value);
       }
     }
+      */
 
   }
   function getStates() {

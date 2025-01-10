@@ -21,7 +21,7 @@ var getDistrictUrl = Url + 'location/districts';
 var getTownUrl = Url + 'location/towns';
 
 var addPropertyURL = Url + 'property/addProperty';
-var addPropertyImagesURL = Url + 'property/addPropertyImages';
+var addPropertyImagesURL = Url + 'addPropertyImages';
 
 const AddProperty = (props) => {
 
@@ -60,6 +60,7 @@ const AddProperty = (props) => {
     const [imageUrl, setImageUrl] = useState();
     const [progressBar, setProgressBar] = useState(0);
     const presetKey = "";
+    const [files, setFiles] = useState();
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
@@ -428,8 +429,31 @@ const AddProperty = (props) => {
 
     };
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (event) => {
       //alert("Paulsin");
+
+      const file = event.target.files[0];
+      alert(file);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await axios
+      .post(addPropertyImagesURL, formData, {
+        headers: {
+          "enctype": "multipart/form-data"
+        },
+      })
+      .then((response) => {
+		// handle the response
+        console.log(response);
+      })
+      .catch((error) => {
+        // handle errors
+        console.log(error);
+      });
+
+      /*
+
       const file = e.target.files[0];
       alert(file);
       const formData = new FormData();
@@ -438,7 +462,7 @@ const AddProperty = (props) => {
       axios.post(addPropertyImagesURL,
         formData, {
         headers : {
-          "Content-Type": "multipart/form-data"
+          "enctype":"multipart/form-data"
         },
         onUploadProgress: e => {
           alert(Math.round((e.loaded/e.total)*100));
@@ -447,6 +471,7 @@ const AddProperty = (props) => {
       }
       ).then(res => setImageUrl(res.data.secure_url))
       .catch(err => console.log(err));
+*/
     }
 
 
@@ -627,8 +652,6 @@ const AddProperty = (props) => {
           <br/>
 
           <ProgressBar now={uploadProgressValue} label={`${uploadProgressValue}%`} />;
-
-
         </div>
 
 
