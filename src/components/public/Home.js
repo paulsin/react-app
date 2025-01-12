@@ -86,7 +86,7 @@ function Home() {
   function getDistricts() {
     //alert("anu");
     axios
-      .get("http://localhost:3000/backend/location/districts",
+      .get(Url+"location/districts",
     )
     .then((res1) => {
       res1.data.map(data2 => {
@@ -99,7 +99,7 @@ function Home() {
   function getTowns() {
     //alert("anu");
     axios
-      .get("http://localhost:3000/backend/location/towns",
+      .get(Url+"location/towns",
     )
     .then((res2) => {
       res2.data.map(data3 => {
