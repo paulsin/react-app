@@ -431,16 +431,16 @@ const AddProperty = (props) => {
 
     const handleImageChange = async (event) => {
       //alert("Paulsin");
-
-      const file = event.target.files[0];
-      alert(file);
+      alert(event.target.files);
+      setFiles(event.target.files[0]);
+      /*
       const formData = new FormData();
       formData.append("file", file);
 
       await axios
       .post(addPropertyImagesURL, formData, {
         headers: {
-          "enctype": "multipart/form-data"
+          "Content-Type": "multipart/form-data"
         },
       })
       .then((response) => {
@@ -451,7 +451,7 @@ const AddProperty = (props) => {
         // handle errors
         console.log(error);
       });
-
+*/
       /*
 
       const file = e.target.files[0];
@@ -474,6 +474,23 @@ const AddProperty = (props) => {
 */
     }
 
+    const uploadImageSubmit =  async (e) => {
+      const formData = new FormData();
+      formData.append('files', files);
+
+      axios.post(addPropertyImagesURL,
+        formData, {
+        headers : {
+          "Content-Type":"multipart/form-data"
+        },
+        onUploadProgress: e => {
+          alert(Math.round((e.loaded/e.total)*100));
+          setUploadProgressValue(Math.round((e.loaded/e.total)*100));
+        }
+      }
+      ).then(res => setImageUrl(res.data.secure_url))
+      .catch(err => console.log(err));
+    }
 
     const test =  async (e) => {
       try {
@@ -648,6 +665,8 @@ const AddProperty = (props) => {
         <div>
           <input type="file" name="image" onChange={handleImageChange} />
           <br />
+
+          <button onClick={uploadImageSubmit} >handleButton</button>
 
           <br/>
 
