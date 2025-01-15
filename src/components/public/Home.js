@@ -16,6 +16,7 @@ import { CgMail } from "react-icons/cg";
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
   const [selectedstatetype, setSelectedStateType] = useState([]);
+  const [selecteddistricts, setSelectedDistricts] = useState([]);
   const [selecteddistricttype, setSelectedDistrictType] = useState([]);
   const [selectedtowntype, setSelectedTownType] = useState([]);
   const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState([]);
@@ -32,8 +33,10 @@ function Home() {
   let town_options = []
   let district_values=[]
   let town_values=[]
+  let selecteddistrict=[]
+  let districttemp=[]
   const StateType = (event) => {
-    alert(event)
+    // alert(event)
     selecteddistricttype.map(key1=>{
       // alert(key1.value);
       // alert(key1.label)
@@ -46,8 +49,23 @@ function Home() {
         }
       })
     })
+
     // alert(district_values)
     setSelectedstateOnchangevalue(district_values);
+    district_values.map(districtkey=>{
+      alert(districtkey.label)
+      selecteddistricts.map(selecteddiskey=>{
+        alert(selecteddiskey.label)
+        if(districtkey.value===selecteddiskey.value){
+          // alert("ghngnj")
+           districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label });
+        }
+      })
+    })
+    // alert(districttemp)
+    setSelectedDistricts(districttemp)
+
+
   }
 
   const DistrictType = (event1) => {
@@ -55,12 +73,15 @@ function Home() {
       // alert(key2.value);
       // alert(key2.label)
       event1.map(key3=>{
-        //  alert(key3.value)
+        // alert(key3.value)
         if(key2.districtID===key3.value)
         {
           // alert("haiiii")
           town_values.push({ value: key2.value, label: key2.label });
+          selecteddistrict.push({value:key3.value,label: key3.label })
         }
+        setSelectedDistricts(selecteddistrict)
+
       })
     })
     // alert(district_values)
@@ -111,7 +132,7 @@ function Home() {
   useEffect(() => {
     getStates();
     getDistricts();
-    getTowns()   
+    getTowns();   
   }, []);
   
   return(
