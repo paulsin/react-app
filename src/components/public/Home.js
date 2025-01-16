@@ -28,6 +28,11 @@ function Home() {
     { label: "House Plot", value: "houseplot"},
     { label: "Villa", value: "villa" },
   ];
+//   let array1 = [
+//     { label: "John", value: 0 },
+//     { label: "Indiana", value: 1 },
+//     { label: "Stark", value: 2 },
+// ];
   let state_options = []
   let district_options = []
   let town_options = []
@@ -36,7 +41,7 @@ function Home() {
   let selecteddistrict=[]
   let districttemp=[]
   const StateType = (event) => {
-    // alert(event)
+    alert(event)
     selecteddistricttype.map(key1=>{
       // alert(key1.value);
       // alert(key1.label)
@@ -50,19 +55,19 @@ function Home() {
       })
     })
 
-    // alert(district_values)
+    // // alert(district_values)
     setSelectedstateOnchangevalue(district_values);
     district_values.map(districtkey=>{
-      alert(districtkey.label)
+      // alert(districtkey.label)
       selecteddistricts.map(selecteddiskey=>{
-        alert(selecteddiskey.label)
+        // alert(selecteddiskey.label)
         if(districtkey.value===selecteddiskey.value){
           // alert("ghngnj")
            districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label });
         }
       })
     })
-    // alert(districttemp)
+    alert(districttemp)
     setSelectedDistricts(districttemp)
 
 
@@ -193,7 +198,7 @@ function Home() {
                     labelledBy="Select"
                   /> */}
                  
-                    <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  onChange={StateType}> 
+                    <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  onChange={StateType} > 
                     </Select>   
                     
                 </div>
@@ -215,7 +220,7 @@ function Home() {
                 </div>
                 <div className="col-md-3">
 
-                  <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType} > 
+                  <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType}  value={selecteddistricts}> 
                   </Select>  
                   {/* <MultiSelect
                     options={selectedstateonchangevalue}
