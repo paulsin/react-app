@@ -96,6 +96,9 @@ function Navbar(props) {
               <a class="nav-link" href="/frontend/addProperty">Add property</a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link" href="/frontend/properties">Properties</a>
+            </li>
 
             <li class="nav-item">
               <a class="nav-link" href="/frontend/location/statesList/india">Location</a>

@@ -42,6 +42,7 @@ const AddProperty = (props) => {
     const [townCode, setTownCode] = useState("");
 
     const [localityName, setLocalityName] = useState("");
+    const [cost, setCost] = useState("");
 
     const [stateOptions, setStateOptions] = useState([]);
     const [districtOptions, setDistrictOptions] = useState([]);
@@ -60,7 +61,7 @@ const AddProperty = (props) => {
     const [imageUrl, setImageUrl] = useState();
     const [progressBar, setProgressBar] = useState(0);
     const presetKey = "";
-    const [files, setFiles] = useState();
+    const [files, setFiles] = useState([]);
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
@@ -431,8 +432,9 @@ const AddProperty = (props) => {
 
     const handleImageChange = async (event) => {
       //alert("Paulsin");
-      alert(event.target.files);
-      setFiles(event.target.files[0]);
+      //alert(event.target.files);
+      setFiles(event.target.files);
+
       /*
       const formData = new FormData();
       formData.append("file", file);
@@ -476,15 +478,21 @@ const AddProperty = (props) => {
 
     const uploadImageSubmit =  async (e) => {
       const formData = new FormData();
-      formData.append('files', files);
 
-      axios.post(addPropertyImagesURL,
+      //alert(files.length);
+      for (let i = 0; i < files.length; i++) {
+        formData.append('image', files[i]);
+      }
+      
+      //formData.append('image', files);
+
+      await axios.post(addPropertyImagesURL,
         formData, {
         headers : {
           "Content-Type":"multipart/form-data"
         },
         onUploadProgress: e => {
-          alert(Math.round((e.loaded/e.total)*100));
+          //alert(Math.round((e.loaded/e.total)*100));
           setUploadProgressValue(Math.round((e.loaded/e.total)*100));
         }
       }
@@ -654,7 +662,14 @@ const AddProperty = (props) => {
                 <div class="col-sm-5">
                   <input type="text" class="form-control" placeholder="Enter locality name" value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
                 </div>
+            </div>
 
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
+
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" placeholder="Enter cost" value={cost} required onChange={(e) => setCost(e.target.value)}/>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
@@ -663,7 +678,7 @@ const AddProperty = (props) => {
 
 
         <div>
-          <input type="file" name="image" onChange={handleImageChange} />
+          <input type="file" name="image" onChange={handleImageChange} multiple/>
           <br />
 
           <button onClick={uploadImageSubmit} >handleButton</button>

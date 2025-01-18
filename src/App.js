@@ -25,6 +25,7 @@ import SignUpCheck from './components/accounts/SignUpCheck';
   import Location from './components/property/Location';
 import LocationCheck from './components/property/LocationCheck';
 import Test3 from './components/accounts/Test3';
+import Properties from './components/property/Properties';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/frontend/location/:locationType/:countryName' element={<LocationCheck />} />
           <Route path='/frontend/location/:locationType/:countryName/:stateID' element={<LocationCheck />} />
           <Route path='/frontend/location/:locationType/:countryName/:stateID/:districtID' element={<LocationCheck />} />
+          <Route path='/frontend/properties' element={<Properties />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>
