@@ -41,7 +41,7 @@ function Home() {
   let selecteddistrict=[]
   let districttemp=[]
   const StateType = (event) => {
-    alert(event)
+    // alert(event)
     selecteddistricttype.map(key1=>{
       // alert(key1.value);
       // alert(key1.label)
@@ -67,7 +67,7 @@ function Home() {
         }
       })
     })
-    alert(districttemp)
+    //  alert(districttemp)
     setSelectedDistricts(districttemp)
 
 
@@ -83,7 +83,7 @@ function Home() {
         {
           // alert("haiiii")
           town_values.push({ value: key2.value, label: key2.label });
-          selecteddistrict.push({value:key3.value,label: key3.label })
+          selecteddistrict.push({value:key3.value,label: key3.label });
         }
         setSelectedDistricts(selecteddistrict)
 
@@ -198,7 +198,7 @@ function Home() {
                     labelledBy="Select"
                   /> */}
                  
-                    <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  onChange={StateType} > 
+                    <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  onChange={StateType}> 
                     </Select>   
                     
                 </div>
@@ -220,7 +220,10 @@ function Home() {
                 </div>
                 <div className="col-md-3">
 
-                  <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType}  value={selecteddistricts}> 
+                  <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType}  
+                   value={selecteddistricts} 
+           
+                  > 
                   </Select>  
                   {/* <MultiSelect
                     options={selectedstateonchangevalue}
