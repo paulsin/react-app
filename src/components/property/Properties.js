@@ -28,127 +28,160 @@ const Properties = (props) => {
 
     const [propertiesTable, setPropertiesTable] = useState([]);
 
-    const fetchProperties =  async (e) => {
-        try {
-          const response = await axios.get(getPropertiesUrl,   
-              { withCredentials: true }
+    function createrows(row,statedata,districtdata,towndata){
+      let temparrayfornames=[]
+      row.map(row => {
+        statedata.map(statetemp=>{
+          if(statetemp['_id']===row.stateID){
+            districtdata.map(districttemp=>{
+              if(districttemp['_id']===row.districtID){
+                towndata.map(towntemp=>{
+                  if(towntemp['_id']===row.townID){
+                    temparrayfornames.push({
+                      'slno':slno++,
+                      '_id':row._id,
+                      'propertyType':row.propertyType,
+                      'state':statetemp['stateName'],
+                      'district':districttemp['districtName'],
+                      'town':towntemp['townName']
+                    })
+                  }
+                })
+              }
+            }) 
+          }
+        });
+      });
+      setPropertiesTable(temparrayfornames);
+    }
+    function fetchProperties () {
+      //alert("anu");
+      axios
+        .get(Url+"property/properties",
+      )
+      .then((res) => {
+        axios
+          .get(Url+"location/states",
+        )
+        .then((res2) => {
+          axios
+            .get(Url+"location/districts",
+          )
+          .then((res3) => {
+            axios
+            .get(Url+"location/towns",
             )
-            .then(function (response) {
-              //alert(response.data[0].stateName);
-  
-                setPropertiesTable(response.data);
+            .then((res4) => {
+              createrows(res.data,res2.data,res3.data,res4.data);
             })
-            .catch(function (error) {
-              console.log(error);
-            }); 
+          })
+       
+        })
+      })
+    }
+
+    // const fetchProperties =  async (e) => {
+
+    //     try {
+    //       const response = await axios.get(getPropertiesUrl,   
+    //           { withCredentials: true }
+    //         )
+    //         .then(function (response) {
+    //           //alert(response.data[0].stateName);
+  
+    //             setPropertiesTable(response.data);
+    //         })
+    //         .catch(function (error) {
+    //           console.log(error);
+    //         }); 
   
           
-        } catch(error) {
-          console.error("Error posting data:", error);
-        }
-      };
+    //     } catch(error) {
+    //       console.error("Error posting data:", error);
+    //     }
+    //   };
 
     useEffect(() => {
-
         fetchProperties();
-
     }, []);
 
     var slno =1;
-
     return(
-
-    <div>
-
+      <div>
         <Navbar />
-
-
-        <div>
+          <div>
             <h2>Properties</h2>
             <br/>
-
-            
-
             <table className="table table-striped" id="selectedTable">
-        <thead>
-          <tr>
-            <th>
-              Index
-            </th>
-            <th>
-              ID
-            </th>
-            <th>
-              Property type
-            </th>
-            <th>
-              state
-            </th>
+              <thead>
+                <tr>
+                  <th>
+                  Index
+                  </th>
+                  <th>
+                  ID
+                  </th>
+                  <th>
+                  Property type
+                  </th>
+                  <th>
+                    state
+                  </th>
 
-            <th>
-              District
-            </th>
+                  <th>
+                    District
+                  </th>
 
-            <th>
-              Town
-            </th>
+                  <th>
+                    Town
+                  </th>
 
-            <th>
-              Delete
-            </th>
-            <th>
-              Show districts
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {propertiesTable.map(key =>  (
-            <tr>
-              <td>
-                {slno++}
-              </td>
-              <td>
-                {key._id}
-              </td>
-              <td>
-                {key.propertyType}
-              </td>
-              <td>
-                {key.stateID}
-              </td>
-              <td>
-                {key.districtID}
-              </td>
-              <td>
-                {key.townID}
-              </td>
-              <td>
-                <button className="btn btn-danger"  data-toggle="modal" data-target="#myModal">kdghd</button>
-              </td>
-              <td>
-                <button className="btn btn-secondary" >Delete</button>
-              </td> 
-              <td>
-               
-              </td> 
-            </tr>
-          ))} 
-
-          <td>
-
-
-          </td>
-        </tbody>
-      </table>
-
-
-          
-        </div>
-
-
-
-    </div>
-
+                  <th>
+                    Delete
+                  </th>
+                  <th>
+                    Show districts
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {propertiesTable.map(key =>  (
+                  <tr>
+                    <td>
+                      {slno++}
+                    </td>
+                    <td>
+                      {key._id}
+                    </td>
+                    <td>
+                      {key.propertyType}
+                    </td>
+                    <td>
+                      {key.state}
+                    </td>
+                    <td>
+                      {key.district}
+                    </td>
+                    <td>
+                      {key.town}
+                    </td>
+                    <td>
+                      <button className="btn btn-danger"  data-toggle="modal" data-target="#myModal">kdghd</button>
+                    </td>
+                    <td>
+                      <button className="btn btn-secondary" >Delete</button>
+                    </td> 
+                    <td>
+                    
+                    </td> 
+                  </tr>
+                ))} 
+                <td>
+                </td>
+              </tbody>
+            </table>   
+          </div>
+      </div>
     )
 };
 
