@@ -17,16 +17,16 @@
   border-radius: 10px;
 }
 #properties1{
-  background-color: rgb(187, 141, 141);
-  border: 1px solid rgb(124, 26, 26);
-  color:black;
+  background-color:  rgb(85, 63, 63);
+  border: 1px solid rgb(54, 7, 7);
+  color:white;
   padding: 8px;
   font-size: 15px;
   text-align: center;
 }
 #properties2{
-  background-color:rgb(153, 67, 67);
-  color:white;
+  background-color:white;
+  color:black;
   border: 1px solid rgb(24, 6, 6);
   padding: 8px;
   font-size: 15px;
