@@ -16,11 +16,11 @@ import { CgMail } from "react-icons/cg";
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
   const [selectedstatetype, setSelectedStateType] = useState([]);
-  const [selecteddistricts, setSelectedDistricts] = useState([]);
   const [selecteddistricttype, setSelectedDistrictType] = useState([]);
   const [selectedtowntype, setSelectedTownType] = useState([]);
   const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState([]);
   const [selecteddistrictonchangevalue, setSelecteddistrictOnchangevalue] = useState([]);
+  const [selectedDistrictsDisplayed, setSelectedDistrictsDisplayed] = useState([]);
 
   const propertytype_options = [
     { label: "Flat", value: "flat" },
@@ -59,21 +59,22 @@ function Home() {
     setSelectedstateOnchangevalue(district_values);
     district_values.map(districtkey=>{
       // alert(districtkey.label)
-      selecteddistricts.map(selecteddiskey=>{
+      selectedDistrictsDisplayed.map(selecteddiskey=>{
         // alert(selecteddiskey.label)
         if(districtkey.value===selecteddiskey.value){
-          // alert("ghngnj")
+           //alert("ghngnj")
            districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label });
         }
       })
     })
     //  alert(districttemp)
-    setSelectedDistricts(districttemp)
-
+    setSelectedDistrictsDisplayed(districttemp);
 
   }
 
   const DistrictType = (event1) => {
+    //alert(event1[0].value);
+    let selecteddistrictTemp = [];
     selectedtowntype.map(key2=>{
       // alert(key2.value);
       // alert(key2.label)
@@ -83,13 +84,17 @@ function Home() {
         {
           // alert("haiiii")
           town_values.push({ value: key2.value, label: key2.label });
-          selecteddistrict.push({value:key3.value,label: key3.label });
+          //selecteddistrictTemp.push({value:key3.value,label: key3.label });
         }
-        setSelectedDistricts(selecteddistrict)
-
       })
-    })
+    });
+
+    event1.map(key=> {
+      selecteddistrictTemp.push({value:key.value,label: key.label });
+    });
+
     // alert(district_values)
+    setSelectedDistrictsDisplayed(selecteddistrictTemp);
     setSelecteddistrictOnchangevalue(town_values);
   }
 
@@ -221,7 +226,7 @@ function Home() {
                 <div className="col-md-3">
 
                   <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType}  
-                   value={selecteddistricts} 
+                   value={selectedDistrictsDisplayed} 
            
                   > 
                   </Select>  
@@ -241,7 +246,7 @@ function Home() {
                   <label htmlFor=""><b>Town</b></label>
                 </div>
                 <div className="col-md-3">
-                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} onChange={DistrictType} > 
+                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} > 
                 </Select>
                   {/* <MultiSelect
                     options={selecteddistrictonchangevalue}
@@ -313,13 +318,13 @@ function Home() {
         </header>
 
       
-        <div class="container features" >
+        <div class="container pt-4 pb-4" >
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
                 <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2" >
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
@@ -329,133 +334,158 @@ function Home() {
                     </div>
                 
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>
               
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
-                <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                  </div>
-                </div>
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
-                <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                  </div>
-                </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
-              </div>   
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
-                <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                  </div>
-                
-                </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
                 <div class="container  text-center" id="properties_container">
-                  <div class="row row-cols-2" >
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
                       <div class="col" id="properties1">Column4</div>
                       <div class="col" id="properties1">Column5</div>
                       <div class="col" id="properties2">Column6</div>
-                  </div>
+                    </div>
+                
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
                       <div class="col" id="properties1">Column4</div>
                       <div class="col" id="properties1">Column5</div>
                       <div class="col" id="properties2">Column6</div>
-                  </div>
+                    </div>
+                
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>   
             </div>
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
                       <div class="col" id="properties1">Column4</div>
                       <div class="col" id="properties1">Column5</div>
                       <div class="col" id="properties2">Column6</div>
-                  </div>
+                    </div>
+                
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
                       <div class="col" id="properties1">Column4</div>
                       <div class="col" id="properties1">Column5</div>
                       <div class="col" id="properties2">Column6</div>
-                  </div>
+                    </div>
+                
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-3">
-                <h3 class="feature-title">Lorem ipsum</h3>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
                 <img src={background} class="img-fluid" />
-                <div class="container text-center" id="properties_container">
-                  <div class="row row-cols-2" >
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
                       <div class="col" id="properties1">Column1</div>
                       <div class="col" id="properties2">Column2</div>
                       <div class="col" id="properties2">Column3</div>
                       <div class="col" id="properties1">Column4</div>
                       <div class="col" id="properties1">Column5</div>
                       <div class="col" id="properties2">Column6</div>
-                  </div>
+                    </div>
+                
                 </div>
-                <button className='btn' id="searchbuttoninhome">More Details</button>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
+              </div>   
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
+                <img src={background} class="img-fluid" />
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
+                      <div class="col" id="properties1">Column1</div>
+                      <div class="col" id="properties2">Column2</div>
+                      <div class="col" id="properties2">Column3</div>
+                      <div class="col" id="properties1">Column4</div>
+                      <div class="col" id="properties1">Column5</div>
+                      <div class="col" id="properties2">Column6</div>
+                    </div>
+                
+                </div>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
+                <img src={background} class="img-fluid" />
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
+                      <div class="col" id="properties1">Column1</div>
+                      <div class="col" id="properties2">Column2</div>
+                      <div class="col" id="properties2">Column3</div>
+                      <div class="col" id="properties1">Column4</div>
+                      <div class="col" id="properties1">Column5</div>
+                      <div class="col" id="properties2">Column6</div>
+                    </div>
+                
+                </div>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
+                <img src={background} class="img-fluid" />
+                <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
+                      <div class="col" id="properties1">Column1</div>
+                      <div class="col" id="properties2">Column2</div>
+                      <div class="col" id="properties2">Column3</div>
+                      <div class="col" id="properties1">Column4</div>
+                      <div class="col" id="properties1">Column5</div>
+                      <div class="col" id="properties2">Column6</div>
+                    </div>
+                
+                </div>
+                <div class ="pt-2">
+                  <button className='btn' id="searchbuttoninhome">More Details</button>
+                </div>
               </div>   
             </div>
         </div>

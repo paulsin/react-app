@@ -11,6 +11,7 @@ import Loading from "../common/Loading";
 //import Functions from "../common/Functions";
 import { fetchLoggedDataCommon } from "../common/Functions";
 import AddProperty from "./AddProperty";
+import Properties from "./Properties";
 
 
 var newUrl = Url + 'accounts/logInFunction';
@@ -54,7 +55,7 @@ const PropertiesCheck = () => {
         if(response.data.username && response.data.password) {
           //alert("Logged In");
           //navigate('/frontend/profile');
-          setSelectedDIV(<AddProperty />);
+          setSelectedDIV(<Properties />);
         }
         else {
           navigate('/frontend/login');
