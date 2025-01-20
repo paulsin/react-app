@@ -68,22 +68,26 @@ function Home() {
         // alert(selecteddiskey.label)
         if(districtkey.value===selecteddiskey.value){
            //alert("ghngnj")
-           districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label});
+           districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label, stateID : selecteddiskey.stateID});
         }
       })
     })
     //  alert(districttemp)
     setSelectedDistrictsDisplayed(districttemp);
 
+    //alert(districttemp.length);
+    //alert(selectedTownsDisplayed.length);
 
-    selectedDistrictsDisplayed.map(keys=>{
-// alert(keys.stateID)
+    districttemp.map(keys=>{
+     //alert(keys.stateID)
       selectedTownsDisplayed.map(key4=>{
-        alert("dfjdesgj",key4.stateID)
-        if(keys.stateID===key4.stateID)
+        //alert("dfjdesgj",key4.stateID)
+        //alert(key4.districtID);
+        //alert(keys.value);
+        if(keys.value === key4.districtID)
         {
           // alert("haiii")
-          townarray.push({value:key4.value,label:key4.label})
+          townarray.push({value:key4.value,label:key4.label, districtID : keys.value, stateID : keys.stateID})
         }
 
       })
@@ -105,7 +109,7 @@ function Home() {
         if(key2.districtID===key3.value)
         {
           // alert("haiiii")
-          town_values.push({ value: key2.value, label: key2.label,stateID:key2.stateID });
+          town_values.push({ value: key2.value, label: key2.label,stateID:key2.stateID, districtID: key2.districtID });
           //selecteddistrictTemp.push({value:key3.value,label: key3.label });
         }
       })
@@ -123,11 +127,11 @@ function Home() {
 
     town_values.map(townkey=>{
       // alert(townkey.label)
-    selectedTownsDisplayed.map(selectedtownkey=>{
+      selectedTownsDisplayed.map(selectedtownkey=>{
        //alert(selectedtownkey.label)
         if(townkey.value===selectedtownkey.value){
           //  alert("ghngnj")
-           towntemp.push({ value: selectedtownkey.value, label: selectedtownkey.label });
+           towntemp.push({ value: selectedtownkey.value, label: selectedtownkey.label , districtID : selectedtownkey.districtID, stateID : selectedtownkey.stateID });
         }
        })
     })
@@ -142,8 +146,8 @@ function Home() {
     let selectedtowntemp=[];
 
     event1.map(key=> {
-      // alert(key.stateID)
-      selectedtowntemp.push({value:key.value,label: key.label ,stateID:key.stateID});
+      //alert(key.districtID);
+      selectedtowntemp.push({value:key.value,label: key.label, districtID : key.districtID ,stateID:key.stateID});
     });
 
     // alert(district_values)
