@@ -20,7 +20,9 @@ function Home() {
   const [selectedtowntype, setSelectedTownType] = useState([]);
   const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState([]);
   const [selecteddistrictonchangevalue, setSelecteddistrictOnchangevalue] = useState([]);
+
   const [selectedDistrictsDisplayed, setSelectedDistrictsDisplayed] = useState([]);
+  const [selectedTownsDisplayed, setSelectedTownsDisplayed] = useState([]);
 
   const propertytype_options = [
     { label: "Flat", value: "flat" },
@@ -39,7 +41,9 @@ function Home() {
   let district_values=[]
   let town_values=[]
   let selecteddistrict=[]
+  let townarray=[]
   let districttemp=[]
+
   const StateType = (event) => {
     // alert(event)
     selecteddistricttype.map(key1=>{
@@ -50,31 +54,49 @@ function Home() {
         if(key1.stateID===key.value)
         {
           //alert("haiiii")
-          district_values.push({ value: key1.value, label: key1.label });
+          district_values.push({ value: key1.value, label: key1.label, stateID: key1.stateID });
         }
       })
     })
 
     // // alert(district_values)
     setSelectedstateOnchangevalue(district_values);
+
     district_values.map(districtkey=>{
       // alert(districtkey.label)
       selectedDistrictsDisplayed.map(selecteddiskey=>{
         // alert(selecteddiskey.label)
         if(districtkey.value===selecteddiskey.value){
            //alert("ghngnj")
-           districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label });
+           districttemp.push({ value: selecteddiskey.value, label: selecteddiskey.label});
         }
       })
     })
     //  alert(districttemp)
     setSelectedDistrictsDisplayed(districttemp);
 
+
+    selectedDistrictsDisplayed.map(keys=>{
+// alert(keys.stateID)
+      selectedTownsDisplayed.map(key4=>{
+        alert("dfjdesgj",key4.stateID)
+        if(keys.stateID===key4.stateID)
+        {
+          // alert("haiii")
+          townarray.push({value:key4.value,label:key4.label})
+        }
+
+      })
+    })
+
+    setSelectedTownsDisplayed(townarray);
   }
 
   const DistrictType = (event1) => {
     //alert(event1[0].value);
     let selecteddistrictTemp = [];
+    let towntemp=[];
+  
     selectedtowntype.map(key2=>{
       // alert(key2.value);
       // alert(key2.label)
@@ -83,19 +105,55 @@ function Home() {
         if(key2.districtID===key3.value)
         {
           // alert("haiiii")
-          town_values.push({ value: key2.value, label: key2.label });
+          town_values.push({ value: key2.value, label: key2.label,stateID:key2.stateID });
           //selecteddistrictTemp.push({value:key3.value,label: key3.label });
         }
       })
     });
 
     event1.map(key=> {
-      selecteddistrictTemp.push({value:key.value,label: key.label });
+      // alert(key.stateID)
+      selecteddistrictTemp.push({value:key.value,label: key.label,stateID:key.stateID });
     });
 
     // alert(district_values)
     setSelectedDistrictsDisplayed(selecteddistrictTemp);
     setSelecteddistrictOnchangevalue(town_values);
+
+
+    town_values.map(townkey=>{
+      // alert(townkey.label)
+    selectedTownsDisplayed.map(selectedtownkey=>{
+       //alert(selectedtownkey.label)
+        if(townkey.value===selectedtownkey.value){
+          //  alert("ghngnj")
+           towntemp.push({ value: selectedtownkey.value, label: selectedtownkey.label });
+        }
+       })
+    })
+    //  alert(districttemp)
+    setSelectedTownsDisplayed(towntemp);
+
+  }
+
+
+  
+  const TownType = (event1) => {
+    let selectedtowntemp=[];
+
+    event1.map(key=> {
+      // alert(key.stateID)
+      selectedtowntemp.push({value:key.value,label: key.label ,stateID:key.stateID});
+    });
+
+    // alert(district_values)
+    setSelectedTownsDisplayed(selectedtowntemp);
+
+
+
+    
+
+
   }
 
   function getStates() {
@@ -133,8 +191,10 @@ function Home() {
       .get(Url+"location/towns",
     )
     .then((res2) => {
+     
       res2.data.map(data3 => {
-        town_options.push({ value: data3._id, label: data3.townName, districtID: data3.districtID });
+        // alert(data3.stateID)
+        town_options.push({ value: data3._id, label: data3.townName, districtID: data3.districtID,stateID: data3.stateID });
       });
       setSelectedTownType(town_options);
     })
@@ -246,7 +306,7 @@ function Home() {
                   <label htmlFor=""><b>Town</b></label>
                 </div>
                 <div className="col-md-3">
-                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} > 
+                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} onChange={TownType} value={selectedTownsDisplayed}  > 
                 </Select>
                   {/* <MultiSelect
                     options={selecteddistrictonchangevalue}
