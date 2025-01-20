@@ -11,6 +11,7 @@ import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
+import Compressor from 'compressorjs';
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -56,6 +57,7 @@ const AddProperty = (props) => {
 
     const [alertClass, setAlertClass] = useState("alert alert-info");
     const [alertContent, setAlertContent] = useState("Enter the property details");
+    const [compressedFile, setCompressedFile] = useState(null);
 
     const [uploadProgressValue, setUploadProgressValue] = useState(0);
     const [imageUrl, setImageUrl] = useState();
@@ -433,7 +435,28 @@ const AddProperty = (props) => {
     const handleImageChange = async (event) => {
       //alert("Paulsin");
       //alert(event.target.files);
-      setFiles(event.target.files);
+      //setFiles(event.target.files);
+
+      let fileTemp = [];
+
+      alert(event.target.files.length);
+
+      for(let i=0;i<event.target.files.length;i++) {
+
+        new Compressor(event.target.files[i], {
+          quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+          width: 640,
+          success: (compressedResult) => {
+            // compressedResult has the compressed file.
+            // Use the compressed file to upload the images to your server.        
+            //setCompressedFile(compressedResult);
+            //alert(compressedResult);
+            fileTemp.push(compressedResult);
+          },
+        });
+
+        setFiles(fileTemp);
+      }
 
       /*
       const formData = new FormData();
@@ -481,9 +504,11 @@ const AddProperty = (props) => {
 
       //alert(files.length);
       for (let i = 0; i < files.length; i++) {
-        formData.append('image', files[i]);
+        formData.append('image', files[i], files[i].name);
       }
       
+      //formData.append('image', compressedFile , compressedFile.name);
+
       //formData.append('image', files);
 
       await axios.post(addPropertyImagesURL,
