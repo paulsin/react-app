@@ -32,6 +32,8 @@ function Home() {
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const[propertydetails,setProperrtydetails]=useState("")
 
+  const [propertyWidget, setPropertyWidget] = useState("");
+
   // const totalPages = Math.ceil(data.length / itemsPerPage);
   // const startIndex = (currentPage - 1) * itemsPerPage;
   // const endIndex = startIndex + itemsPerPage;
@@ -217,10 +219,46 @@ function Home() {
       setSelectedTownType(town_options);
     })
   }
+
+
+  let propertyTilesUnit =         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+
+        <img src={background} class="img-fluid" />
+        <div class="container  text-center" id="properties_container">
+            <div class="row row-cols-2 pt-2" >
+              <div class="col" id="properties1">Column1</div>
+              <div class="col" id="properties2">Column2</div>
+              <div class="col" id="properties2">Column3</div>
+              <div class="col" id="properties1">Column4</div>
+              <div class="col" id="properties1">Column5</div>
+              <div class="col" id="properties2">Column6</div>
+            </div>
+        
+        </div>
+        <div class ="pt-2">
+          <button className='btn' id="searchbuttoninhome">More Details</button>
+        </div>
+      </div>
+
+
+  let propertyTilesRow =                <div class="row">
+        {propertyTilesUnit}
+        {propertyTilesUnit}
+        {propertyTilesUnit}
+      </div>
+
+  let propertyTilesRowsMerged = <div>
+        {propertyTilesRow}
+        {propertyTilesRow}
+        {propertyTilesRow}
+      </div>
+
   useEffect(() => {
     getStates();
     getDistricts();
-    getTowns();   
+    getTowns();  
+    
+    setPropertyWidget(propertyTilesRowsMerged);
   }, []);
   
 
@@ -430,119 +468,10 @@ function Home() {
               </ul>
             </nav>
            
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>   
+            <div>
+                      {propertyWidget}
             </div>
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>   
-            </div>
+
             
         </div>
     
