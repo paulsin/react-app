@@ -20,10 +20,22 @@ function Home() {
   const [selectedtowntype, setSelectedTownType] = useState([]);
   const [selectedstateonchangevalue, setSelectedstateOnchangevalue] = useState([]);
   const [selecteddistrictonchangevalue, setSelecteddistrictOnchangevalue] = useState([]);
-
+  const [selectedStatesDisplayed, setSelectedStatesDisplayed] = useState([]);
   const [selectedDistrictsDisplayed, setSelectedDistrictsDisplayed] = useState([]);
   const [selectedTownsDisplayed, setSelectedTownsDisplayed] = useState([]);
+  const [saleorrent, setSaleorrent] = useState("");
+  const [pricerange, setPricerange] = useState("");
+  const [newold, setNewold] = useState("");
+  const [pricefrom, setPricefrom] = useState("");
+  const [priceto, setPriceto] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const[propertydetails,setProperrtydetails]=useState("")
 
+  // const totalPages = Math.ceil(data.length / itemsPerPage);
+  // const startIndex = (currentPage - 1) * itemsPerPage;
+  // const endIndex = startIndex + itemsPerPage;
+  // const currentItems = data.slice(startIndex, endIndex);
   const propertytype_options = [
     { label: "Flat", value: "flat" },
     { label: "House", value: "house" },
@@ -36,6 +48,7 @@ function Home() {
 //     { label: "Stark", value: 2 },
 // ];
   let state_options = []
+  let state_selected=[]
   let district_options = []
   let town_options = []
   let district_values=[]
@@ -58,9 +71,15 @@ function Home() {
         }
       })
     })
-
-    // // alert(district_values)
     setSelectedstateOnchangevalue(district_values);
+
+
+    event.map(key=> {
+      // alert(key.stateID)
+      state_selected.push({value:key.value,label: key.label,stateID:key.stateID });
+    });
+    setSelectedStatesDisplayed(state_selected);
+
 
     district_values.map(districtkey=>{
       // alert(districtkey.label)
@@ -153,11 +172,6 @@ function Home() {
     // alert(district_values)
     setSelectedTownsDisplayed(selectedtowntemp);
 
-
-
-    
-
-
   }
 
   function getStates() {
@@ -209,6 +223,21 @@ function Home() {
     getTowns();   
   }, []);
   
+
+
+  const searchfunction = (e) => {
+    e.preventDefault();
+    // alert(saleorrent)
+    // alert(pricerange)
+    // alert(pricefrom)
+    // alert(priceto)
+    // alert(newold)
+    //alert(selectedStatesDisplayed)
+    //alert(selectedpropertytype)
+    // alert(selectedDistrictsDisplayed)
+    //  alert(selectedTownsDisplayed)
+   
+  }
   return(
       <div>
         <NavbarPublic />
@@ -222,7 +251,7 @@ function Home() {
                   <h5><b>Search Property By ID</b></h5>
                 </div>
                 <div className="col-sm-4"> 
-                  <input type="text" placeholder="Search.." className="form-control"/>
+                  <input type="text" placeholder="Search.." className="form-control" id="selectboxcolor"/>
                 </div>
                 <div className="col-sm-4"></div>
               </div>
@@ -233,24 +262,23 @@ function Home() {
                   <label htmlFor=""><b>Property Type</b></label>
                 </div>
                 <div className="col-md-3">
-                  <MultiSelect
+                  {/* <MultiSelect
                     options={propertytype_options}
                     value={ selectedpropertytype}
                     onChange={setSelectedPropertyType}
                     labelledBy="Select"
-                  /> 
-                    {/* <select className="form-control">
-                      <option>Villa</option>
-                      <option>House</option>
-                    </select>  */}
+                  />  */}
+                    <Select  id="selectboxcolor" isMulti={true} options={propertytype_options} onChange={setSelectedPropertyType}  value={selectedpropertytype}> 
+                    </Select>
                 </div>
                 <div className="col-md-3">
                   <label htmlFor=""><b>Sale/rent</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control">
-                    <option>Sale</option>
-                    <option>Rent</option>
+                  <select className="form-control" onChange={(e) => setSaleorrent(e.target.value)} id="selectboxcolor">
+                    <option value="">Select</option>
+                    <option value="sale">Sale</option>
+                    <option value="rent">Rent</option>
                   </select> 
                 </div>
               </div> 
@@ -266,19 +294,18 @@ function Home() {
                     onChange={StateType}
                     labelledBy="Select"
                   /> */}
-                 
                     <Select  id="selectboxcolor" isMulti={true} options={selectedstatetype}  onChange={StateType}> 
-                    </Select>   
-                    
+                    </Select>       
                 </div>
                 <div className="col-md-3">
                   <label htmlFor=""><b>Sort By</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control">
-                    <option>Latest</option>
-                    <option>Price Low to High</option>
-                    <option>Price High to Low</option>
+                  <select className="form-control" onChange={(e) => setPricerange(e.target.value)} id="selectboxcolor">
+                    <option value="">Select</option>
+                    <option value="latest">Latest</option>
+                    <option value="price_lowtohigh">Price Low to High</option>
+                    <option value="price_hightolow">Price High to Low</option>
                   </select> 
                 </div>
               </div> 
@@ -291,7 +318,6 @@ function Home() {
 
                   <Select  id="selectboxcolor" isMulti={true} options={selectedstateonchangevalue} onChange={DistrictType}  
                    value={selectedDistrictsDisplayed} 
-           
                   > 
                   </Select>  
                   {/* <MultiSelect
@@ -310,7 +336,7 @@ function Home() {
                   <label htmlFor=""><b>Town</b></label>
                 </div>
                 <div className="col-md-3">
-                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} onChange={TownType} value={selectedTownsDisplayed}  > 
+                <Select  id="selectboxcolor" isMulti={true} options={selecteddistrictonchangevalue} onChange={TownType} value={selectedTownsDisplayed}> 
                 </Select>
                   {/* <MultiSelect
                     options={selecteddistrictonchangevalue}
@@ -334,18 +360,20 @@ function Home() {
                   <label htmlFor=""> <b>Price From</b></label>
                 </div>
                 <div className="col-md">
-                  <select className="form-control">
-                    <option>40 lakhs</option>
-                    <option>20 lakhs</option>
+                  <select className="form-control" onChange={(e) => setPricefrom(e.target.value)} id="selectboxcolor">
+                    <option value="">Select</option>
+                    <option value="40lakhs">40 lakhs</option>
+                    <option value="20lakhs">20 lakhs</option>
                   </select> 
                 </div>
                 <div className="col-md">
                   <label htmlFor=""><b>Price To</b></label>
                 </div>
                 <div className="col-md">
-                  <select className="form-control">
-                    <option>1 crore</option>
-                    <option>1 crore 10 lakhs</option>
+                  <select className="form-control" onChange={(e) => setPriceto(e.target.value)} id="selectboxcolor">
+                    <option value="">Select</option>
+                    <option value="1crore">1 crore</option>
+                    <option value="1crore_10lakhs">1 crore 10 lakhs</option>
                   </select> 
                 </div>
               </div>
@@ -355,9 +383,10 @@ function Home() {
                   <label htmlFor=""><b>New/Old</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control">
-                    <option>New</option>
-                    <option>Old</option>
+                  <select className="form-control" onChange={(e) => setNewold(e.target.value)} id="selectboxcolor">
+                    <option value="">Select</option>
+                    <option value="new">New</option>
+                    <option value="old">Old</option>
                   </select> 
                 </div>
                 <div className="col-md-3">    
@@ -371,7 +400,7 @@ function Home() {
                 <div className="col-md"> 
                 </div>
                 <div className="col-md"> 
-                  <button className='btn' id="searchbuttoninhome" >Search properties</button>   
+                  <button className='btn' id="searchbuttoninhome" onClick={searchfunction}>Search properties</button>   
                 </div>
                 <div className="col-md"> 
                 </div>
@@ -381,8 +410,26 @@ function Home() {
           </div>
         </header>
 
-      
         <div class="container pt-4 pb-4" >
+          
+            <nav aria-label="..."  >
+              <ul class="pagination" >
+               
+                <li class="page-item" >
+                  <a class="page-link" href="#" tabindex="-1" >Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" >
+                  <a class="page-link" href="#" id="searchbuttoninhome" >2 <span class="sr-only" >(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              
+              </ul>
+            </nav>
+           
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                 {/* <h3 class="feature-title">Lorem ipsum</h3> */}
@@ -496,62 +543,7 @@ function Home() {
                 </div>
               </div>   
             </div>
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                {/* <h3 class="feature-title">Lorem ipsum</h3> */}
-                <img src={background} class="img-fluid" />
-                <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                      <div class="col" id="properties1">Column1</div>
-                      <div class="col" id="properties2">Column2</div>
-                      <div class="col" id="properties2">Column3</div>
-                      <div class="col" id="properties1">Column4</div>
-                      <div class="col" id="properties1">Column5</div>
-                      <div class="col" id="properties2">Column6</div>
-                    </div>
-                
-                </div>
-                <div class ="pt-2">
-                  <button className='btn' id="searchbuttoninhome">More Details</button>
-                </div>
-              </div>   
-            </div>
+            
         </div>
     
         <div class="footer mx-auto p-2">  
