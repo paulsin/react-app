@@ -702,23 +702,6 @@ const AddProperty = (props) => {
         </div>
 
 
-        <div>
-          <input type="file" name="image" onChange={handleImageChange} multiple/>
-          <br />
-
-          <button onClick={uploadImageSubmit} >handleButton</button>
-
-          <br/>
-
-          <ProgressBar now={uploadProgressValue} label={`${uploadProgressValue}%`} />;
-        </div>
-
-
-        <form action={addPropertyImagesURL} method="POST" enctype="multipart/form-data">
-    <input type="file" name="image" />
-    <button type="submit">Upload</button>
-</form>
-
     </div>
 
     )
