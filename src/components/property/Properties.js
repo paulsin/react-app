@@ -28,6 +28,8 @@ const Properties = (props) => {
 
     const [propertiesTable, setPropertiesTable] = useState([]);
 
+        const navigate = useNavigate();
+
     function createrows(row,statedata,districtdata,towndata){
       let temparrayfornames=[]
       row.map(row => {
@@ -80,26 +82,9 @@ const Properties = (props) => {
       })
     }
 
-    // const fetchProperties =  async (e) => {
-
-    //     try {
-    //       const response = await axios.get(getPropertiesUrl,   
-    //           { withCredentials: true }
-    //         )
-    //         .then(function (response) {
-    //           //alert(response.data[0].stateName);
-  
-    //             setPropertiesTable(response.data);
-    //         })
-    //         .catch(function (error) {
-    //           console.log(error);
-    //         }); 
-  
-          
-    //     } catch(error) {
-    //       console.error("Error posting data:", error);
-    //     }
-    //   };
+    function addImagesFunction(propertyID) {
+      navigate('/frontend/addimages/'+propertyID);
+    }
 
     useEffect(() => {
         fetchProperties();
@@ -140,7 +125,10 @@ const Properties = (props) => {
                     Delete
                   </th>
                   <th>
-                    Show districts
+                    Edit
+                  </th>
+                  <th>
+                    Add images
                   </th>
                 </tr>
               </thead>
@@ -166,13 +154,13 @@ const Properties = (props) => {
                       {key.town}
                     </td>
                     <td>
-                      <button className="btn btn-danger"  data-toggle="modal" data-target="#myModal">kdghd</button>
+                      <button className="btn btn-danger"  data-toggle="modal" data-target="#myModal">Delete</button>
                     </td>
                     <td>
-                      <button className="btn btn-secondary" >Delete</button>
+                      <button className="btn btn-secondary" >Edit</button>
                     </td> 
                     <td>
-                    
+                      <button className="btn btn-primary" onClick={()=>addImagesFunction(key._id)}>Add images</button>
                     </td> 
                   </tr>
                 ))} 
