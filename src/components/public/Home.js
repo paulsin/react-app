@@ -484,7 +484,7 @@ function Home() {
               </ul>
             </nav>
             <div>
-              {temparray.map(key =>  (
+              {Array.from({ length:  3 }, (_, key) => (
                 <div class="row">
                   {propertydetails.map(key1 =>  (
                     <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
