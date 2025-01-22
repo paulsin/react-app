@@ -88,7 +88,7 @@ const AddImages = (props) => {
 
       let fileTemp = [];
 
-      alert(event.target.files.length);
+      //alert(event.target.files.length);
 
       for(let i=0;i<event.target.files.length;i++) {
 
@@ -156,7 +156,7 @@ const AddImages = (props) => {
         formData.append('image', files[i], files[i].name);
       }
 
-      //formData.append('propertyID', propertyID);
+      formData.append('propertyID', propertyID);
 
       //formData.append('image', compressedFile, compressedFile.name);
       //formData.append('image', files);
