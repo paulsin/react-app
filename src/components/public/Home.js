@@ -538,6 +538,7 @@ function Home() {
             <>
 
               {index2 %3 == 0 && propertydetails.length - index2 >= 3 ? 
+                <>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                     <img src={background} class="img-fluid" />
@@ -594,7 +595,8 @@ function Home() {
                     </div>
                   </div> 
 
-                </div> :                
+                </div> 
+                </> :                
                 
                   <>
                       { index2 %3 == 0 && propertydetails.length - index2 == 1 ?
