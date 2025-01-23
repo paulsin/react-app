@@ -59,11 +59,25 @@ function Home() {
   let temparray=[1,2,3]
   let temparray1=[1,2,3]
   let temparray2=[]
+  let rowlength
     // const totalPages = Math.ceil(data.length / itemsPerPage);
   // const startIndex = (currentPage - 1) * itemsPerPage;
   // const endIndex = startIndex + itemsPerPage;
   // const currentItems = data.slice(startIndex, endIndex);
+//   let proplength=propertydetails.length
+//   //alert(proplength)
+//   rowlength=proplength/3
+// //alert(rowlength)
 
+//   if(proplength%3!=0){
+//     rowlength=Math.floor(rowlength+1)
+//   }
+//   else if(proplength%3==0){
+//     rowlength=rowlength
+//   }
+
+//alert(rowlength)
+  
   const StateType = (event) => {
     // alert(event)
     selecteddistricttype.map(key1=>{
@@ -221,12 +235,14 @@ function Home() {
     })
   }
   function createdata(data,data1){
-   
+    let index=0
     let temparrayfornames=[]
       data.map(row => {
         data1.map(proptemp=>{
           if(proptemp['_id']===row.townID){
             temparrayfornames.push({
+              'index':index++,
+
               'propertyType':row.propertyType,
               'transactiontype':row.transactionType,
               'town':proptemp['townName']
@@ -484,7 +500,41 @@ function Home() {
               </ul>
             </nav>
             <div>
-              {Array.from({ length:  3 }, (_, key) => (
+    
+            
+         
+
+            {/* {Array.from({ rowlength}, (key,index1) => (  */}
+            <div class="row">
+              {propertydetails.map((key,index2) =>  (
+                // {index2 % 3 == index1 ? (<div></div>):(<div></div>)}
+                <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                  <img src={background} class="img-fluid" />
+                  <div class="container  text-center" id="properties_container">
+                    <div class="row row-cols-2 pt-2" >
+                  
+                        <div class="col" id="properties1">column2</div>
+                        <div class="col" id="properties2">{key.propertyType}</div>
+                        <div class="col" id="properties2">{key.town}</div>
+                        <div class="col" id="properties1">Column4</div>
+                        <div class="col" id="properties1">Column5</div>
+                        <div class="col" id="properties2">Column6</div>
+                    </div>
+                  </div>
+                  <div class ="pt-2">
+                    <button className='btn' id="searchbuttoninhome">More Details</button>
+                  </div>
+                </div>
+            
+              ))}
+            </div>
+           {/* ))}  */}
+    
+
+             
+           
+        
+              {/* {Array.from({ length:  3 }, (_, key) => (
                 <div class="row">
                   {propertydetails.map(key1 =>  (
                     <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
@@ -505,7 +555,7 @@ function Home() {
                     </div>
                   ))}
                 </div>
-              ))}
+              ))} */}
             </div>    
         </div>
         <Footer/>
