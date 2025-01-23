@@ -504,7 +504,7 @@ function Home() {
             
          
 
-            {/* {Array.from({ rowlength}, (key,index1) => (  */}
+            {/* {Array.from({ rowlength}, (key,index1) => (  
             <div class="row">
               {propertydetails.map((key,index2) =>  (
                 // {index2 % 3 == index1 ? (<div></div>):(<div></div>)}
@@ -530,6 +530,156 @@ function Home() {
             </div>
            {/* ))}  */}
     
+
+           
+
+
+           {propertydetails.map((key, index2) =>  (
+            <>
+
+              {index2 %3 == 0 && propertydetails.length - index2 >= 3 ? 
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                    <img src={background} class="img-fluid" />
+                    <div class="container  text-center" id="properties_container">
+                      <div class="row row-cols-2 pt-2" >
+                    
+                          <div class="col" id="properties1">column2</div>
+                          <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
+                          <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                          <div class="col" id="properties1">Column4</div>
+                          <div class="col" id="properties1">Column5</div>
+                          <div class="col" id="properties2">Column6</div>
+                      </div>
+                    </div>
+                    <div class ="pt-2">
+                      <button className='btn' id="searchbuttoninhome">More Details</button>
+                    </div>
+                  </div> 
+
+
+                  <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                    <img src={background} class="img-fluid" />
+                    <div class="container  text-center" id="properties_container">
+                      <div class="row row-cols-2 pt-2" >
+                    
+                          <div class="col" id="properties1">column2</div>
+                          <div class="col" id="properties2">{propertydetails[index2 + 1].propertyType}</div>
+                          <div class="col" id="properties2">{propertydetails[index2 + 1].town}</div>
+                          <div class="col" id="properties1">Column4</div>
+                          <div class="col" id="properties1">Column5</div>
+                          <div class="col" id="properties2">Column6</div>
+                      </div>
+                    </div>
+                    <div class ="pt-2">
+                      <button className='btn' id="searchbuttoninhome">More Details</button>
+                    </div>
+                  </div> 
+
+                  <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                    <img src={background} class="img-fluid" />
+                    <div class="container  text-center" id="properties_container">
+                      <div class="row row-cols-2 pt-2" >
+                    
+                          <div class="col" id="properties1">column2</div>
+                          <div class="col" id="properties2">{propertydetails[index2 + 2].propertyType}</div>
+                          <div class="col" id="properties2">{propertydetails[index2 + 2].town}</div>
+                          <div class="col" id="properties1">Column4</div>
+                          <div class="col" id="properties1">Column5</div>
+                          <div class="col" id="properties2">Column6</div>
+                      </div>
+                    </div>
+                    <div class ="pt-2">
+                      <button className='btn' id="searchbuttoninhome">More Details</button>
+                    </div>
+                  </div> 
+
+                </div> :                
+                
+                  <>
+                      { index2 %3 == 0 && propertydetails.length - index2 == 1 ?
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                            <img src={background} class="img-fluid" />
+                            <div class="container  text-center" id="properties_container">
+                              <div class="row row-cols-2 pt-2" >
+                            
+                                  <div class="col" id="properties1">column2</div>
+                                  <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
+                                  <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                  <div class="col" id="properties1">Column4</div>
+                                  <div class="col" id="properties1">Column5</div>
+                                  <div class="col" id="properties2">Column6</div>
+                              </div>
+                            </div>
+                            <div class ="pt-2">
+                              <button className='btn' id="searchbuttoninhome">More Details</button>
+                            </div>
+                          </div> 
+        
+        
+                          <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                          </div> 
+
+                          <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                          </div>
+            
+                        </div>
+                      :
+                        <>
+                          { index2 %3 == 0 && propertydetails.length - index2 == 2 ?
+                                                    <div class="row">
+                                                      <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                                                        <img src={background} class="img-fluid" />
+                                                        <div class="container  text-center" id="properties_container">
+                                                          <div class="row row-cols-2 pt-2" >
+                                                        
+                                                              <div class="col" id="properties1">column2</div>
+                                                              <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
+                                                              <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                                              <div class="col" id="properties1">Column4</div>
+                                                              <div class="col" id="properties1">Column5</div>
+                                                              <div class="col" id="properties2">Column6</div>
+                                                          </div>
+                                                        </div>
+                                                        <div class ="pt-2">
+                                                          <button className='btn' id="searchbuttoninhome">More Details</button>
+                                                        </div>
+                                                      </div> 
+                                    
+                                    
+                                                      <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                                                        <img src={background} class="img-fluid" />
+                                                          <div class="container  text-center" id="properties_container">
+                                                            <div class="row row-cols-2 pt-2" >
+                                                          
+                                                                <div class="col" id="properties1">column2</div>
+                                                                <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
+                                                                <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                                                <div class="col" id="properties1">Column4</div>
+                                                                <div class="col" id="properties1">Column5</div>
+                                                                <div class="col" id="properties2">Column6</div>
+                                                            </div>
+                                                          </div>
+                                                          <div class ="pt-2">
+                                                            <button className='btn' id="searchbuttoninhome">More Details</button>
+                                                          </div>
+                                                      </div> 
+                            
+                                                      <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
+                                                      </div>
+                                        
+                                                    </div>
+                            :
+                              <></>
+                          }
+                        </>
+                      } 
+                    
+                  </> }
+
+              </>
+              ))}
 
              
            
