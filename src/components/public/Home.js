@@ -13,6 +13,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
 import { CgMail } from "react-icons/cg";
+import Pagination from "./Pagination";
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -30,11 +31,18 @@ function Home() {
   const [pricefrom, setPricefrom] = useState("");
   const [priceto, setPriceto] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [recordsPerPage,setRecordsperpage]=useState(9)
+
   const[propertydetails,setPropertydetails]=useState([])
   const [propertyWidget, setPropertyWidget] = useState("");
 
-
+  // const[propertypages,setPropertypages]=useState("")
+//https://youtu.be/wAGIOCqS8tk?si=f-i1ayZt50pg0u04
+  const lastpostIndex=currentPage*recordsPerPage;
+  const firstpostIndex=lastpostIndex-recordsPerPage;
+  const currentposts=propertydetails.slice(firstpostIndex,lastpostIndex)
+  // const npage=Math.ceil(propertydetails.length/recordsPerPage);
+  // const numbers=[...Array(npage+1).keys()].slice(1);
 
   const propertytype_options = [
     { label: "Flat", value: "flat" },
@@ -270,25 +278,6 @@ function Home() {
   }
 
 
-  // let propertyTilesUnit =         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-
-  //       <img src={background} class="img-fluid" />
-  //       <div class="container  text-center" id="properties_container">
-  //           <div class="row row-cols-2 pt-2" >
-  //             <div class="col" id="properties1">Column1</div>
-  //             <div class="col" id="properties2">Column2</div>
-  //             <div class="col" id="properties2">Column3</div>
-  //             <div class="col" id="properties1">Column4</div>
-  //             <div class="col" id="properties1">Column5</div>
-  //             <div class="col" id="properties2">Column6</div>
-  //           </div>
-        
-  //       </div>
-  //       <div class ="pt-2">
-  //         <button className='btn' id="searchbuttoninhome">More Details</button>
-  //       </div>
-  //     </div>
-
 
   useEffect(() => {
     getStates();
@@ -297,7 +286,19 @@ function Home() {
     getProperties();  
   }, []);
   
-
+// function prePage(){
+//  if(currentPage!==firstpostIndex){
+//   setCurrentPage(currentPage-1)
+//  }
+// }
+// function changePage(id){
+//   setCurrentPage(id)
+// }
+// function nextPage(){
+//   if(currentPage!==lastpostIndex){
+//     setCurrentPage(currentPage+1)
+//    }
+// }
 
   const searchfunction = (e) => {
     e.preventDefault();
@@ -484,57 +485,31 @@ function Home() {
         </header>
 
         <div class="container pt-4 pb-4" >
-            <nav aria-label="..."  >
+          <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+            {/* <nav aria-label="..."  >
               <ul class="pagination" >
                 <li class="page-item" >
-                  <a class="page-link" href="#" tabindex="-1" >Previous</a>
+                  <a class="page-link" href="#" tabindex="-1" onClick={prePage}>Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" >
-                  <a class="page-link" href="#" id="searchbuttoninhome" >2 <span class="sr-only" >(current)</span></a>
-                </li>
+                {
+                numbers.map((n,i)=>{
+              <li class={`page-item ${currentPage=== n ? 'active' : '' }`} key={i}>
+                  <a href="#" className="page-link" onClick={()=>changePage(n)}>{n}</a>
+              </li>
+                })
+
+                }
+              
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
+                  <a class="page-link" href="#" onClick={nextPage}>Next</a>
                 </li> 
               </ul>
-            </nav>
-            <div>
-    
-            
-         
-
-            {/* {Array.from({ rowlength}, (key,index1) => (  
-            <div class="row">
-              {propertydetails.map((key,index2) =>  (
-                // {index2 % 3 == index1 ? (<div></div>):(<div></div>)}
-                <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                  <img src={background} class="img-fluid" />
-                  <div class="container  text-center" id="properties_container">
-                    <div class="row row-cols-2 pt-2" >
-                  
-                        <div class="col" id="properties1">column2</div>
-                        <div class="col" id="properties2">{key.propertyType}</div>
-                        <div class="col" id="properties2">{key.town}</div>
-                        <div class="col" id="properties1">Column4</div>
-                        <div class="col" id="properties1">Column5</div>
-                        <div class="col" id="properties2">Column6</div>
-                    </div>
-                  </div>
-                  <div class ="pt-2">
-                    <button className='btn' id="searchbuttoninhome">More Details</button>
-                  </div>
-                </div>
-            
-              ))}
-            </div>
-           {/* ))}  */}
-    
-
+            </nav> */}
            
-
-
-           {propertydetails.map((key, index2) =>  (
+            <div>
+  
+           {currentposts.map((key, index2) =>  (
             <>
 
               {index2 %3 == 0 && propertydetails.length - index2 >= 3 ? 
@@ -683,32 +658,9 @@ function Home() {
               </>
               ))}
 
-             
-           
-        
-              {/* {Array.from({ length:  3 }, (_, key) => (
-                <div class="row">
-                  {propertydetails.map(key1 =>  (
-                    <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                      <img src={background} class="img-fluid" />
-                      <div class="container  text-center" id="properties_container">
-                        <div class="row row-cols-2 pt-2" >
-                            <div class="col" id="properties1">{key1.propertyType}</div>
-                            <div class="col" id="properties2">Column2</div>
-                            <div class="col" id="properties2">{key1.town}</div>
-                            <div class="col" id="properties1">Column4</div>
-                            <div class="col" id="properties1">Column5</div>
-                            <div class="col" id="properties2">Column6</div>
-                        </div>
-                      </div>
-                      <div class ="pt-2">
-                        <button className='btn' id="searchbuttoninhome">More Details</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))} */}
-            </div>    
+            
+            </div> 
+               
         </div>
         <Footer/>
       </div>
