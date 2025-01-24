@@ -37,10 +37,16 @@ function Home() {
   const [propertyWidget, setPropertyWidget] = useState("");
 
   // const[propertypages,setPropertypages]=useState("")
-//https://youtu.be/wAGIOCqS8tk?si=f-i1ayZt50pg0u04
-  const lastpostIndex=currentPage*recordsPerPage;
+  // https://youtu.be/wAGIOCqS8tk?si=f-i1ayZt50pg0u04
+
+  //alert(currentPage);
+
+  const lastpostIndex=currentPage*recordsPerPage; 
+  //const lastpostIndex=currentPage * recordsPerPage > propertydetails.length ? propertydetails.length + 1 : currentPage * recordsPerPage; 
   const firstpostIndex=lastpostIndex-recordsPerPage;
-  const currentposts=propertydetails.slice(firstpostIndex,lastpostIndex)
+  //alert(firstpostIndex);
+  //alert(lastpostIndex);
+  const currentposts=propertydetails.slice(firstpostIndex,lastpostIndex);
   // const npage=Math.ceil(propertydetails.length/recordsPerPage);
   // const numbers=[...Array(npage+1).keys()].slice(1);
 
@@ -512,7 +518,7 @@ function Home() {
            {currentposts.map((key, index2) =>  (
             <>
 
-              {index2 %3 == 0 && propertydetails.length - index2 >= 3 ? 
+              {index2 %3 == 0 && currentposts.length - index2 >= 3 ? 
                 <>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
@@ -521,8 +527,8 @@ function Home() {
                       <div class="row row-cols-2 pt-2" >
                     
                           <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
-                          <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                          <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2].town}</div>
                           <div class="col" id="properties1">Column4</div>
                           <div class="col" id="properties1">Column5</div>
                           <div class="col" id="properties2">Column6</div>
@@ -540,8 +546,8 @@ function Home() {
                       <div class="row row-cols-2 pt-2" >
                     
                           <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{propertydetails[index2 + 1].propertyType}</div>
-                          <div class="col" id="properties2">{propertydetails[index2 + 1].town}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                           <div class="col" id="properties1">Column4</div>
                           <div class="col" id="properties1">Column5</div>
                           <div class="col" id="properties2">Column6</div>
@@ -558,8 +564,8 @@ function Home() {
                       <div class="row row-cols-2 pt-2" >
                     
                           <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{propertydetails[index2 + 2].propertyType}</div>
-                          <div class="col" id="properties2">{propertydetails[index2 + 2].town}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
                           <div class="col" id="properties1">Column4</div>
                           <div class="col" id="properties1">Column5</div>
                           <div class="col" id="properties2">Column6</div>
@@ -574,7 +580,7 @@ function Home() {
                 </> :                
                 
                   <>
-                      { index2 %3 == 0 && propertydetails.length - index2 == 1 ?
+                      { index2 %3 == 0 && currentposts.length - index2 == 1 ?
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                             <img src={background} class="img-fluid" />
@@ -582,8 +588,8 @@ function Home() {
                               <div class="row row-cols-2 pt-2" >
                             
                                   <div class="col" id="properties1">column2</div>
-                                  <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
-                                  <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                  <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                                  <div class="col" id="properties2">{currentposts[index2].town}</div>
                                   <div class="col" id="properties1">Column4</div>
                                   <div class="col" id="properties1">Column5</div>
                                   <div class="col" id="properties2">Column6</div>
@@ -604,7 +610,7 @@ function Home() {
                         </div>
                       :
                         <>
-                          { index2 %3 == 0 && propertydetails.length - index2 == 2 ?
+                          { index2 %3 == 0 && currentposts.length - index2 == 2 ?
                                                     <div class="row">
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                                                         <img src={background} class="img-fluid" />
@@ -612,8 +618,8 @@ function Home() {
                                                           <div class="row row-cols-2 pt-2" >
                                                         
                                                               <div class="col" id="properties1">column2</div>
-                                                              <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
-                                                              <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                               <div class="col" id="properties1">Column4</div>
                                                               <div class="col" id="properties1">Column5</div>
                                                               <div class="col" id="properties2">Column6</div>
@@ -631,8 +637,8 @@ function Home() {
                                                             <div class="row row-cols-2 pt-2" >
                                                           
                                                                 <div class="col" id="properties1">column2</div>
-                                                                <div class="col" id="properties2">{propertydetails[index2].propertyType}</div>
-                                                                <div class="col" id="properties2">{propertydetails[index2].town}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                                 <div class="col" id="properties1">Column4</div>
                                                                 <div class="col" id="properties1">Column5</div>
                                                                 <div class="col" id="properties2">Column6</div>
