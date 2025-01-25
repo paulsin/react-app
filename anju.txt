@@ -12,3 +12,14 @@
 -------
 * home page
 * anju.css
+
+24-1
+----
+Pagination.js
+Home.js
+25-1
+--------
+anju.css
+Properties.js
+pagination.js
+Home.js

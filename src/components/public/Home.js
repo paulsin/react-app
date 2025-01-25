@@ -491,7 +491,8 @@ function Home() {
         </header>
 
         <div class="container pt-4 pb-4" >
-          <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+          <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
+          currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>
             {/* <nav aria-label="..."  >
               <ul class="pagination" >
                 <li class="page-item" >

@@ -24,10 +24,12 @@ var getDistrictUrl = Url + 'location/districts';
 var deleteStateUrl = Url + 'location/deleteState/';
 var updateStateUrl = Url + 'location/updateState/';
 
+var  deletePropertyUrl = Url + 'property/deleteProperty/';
+
 const Properties = (props) => {
 
     const [propertiesTable, setPropertiesTable] = useState([]);
-
+    const [originalData, setOriginalData] = useState([]);
         const navigate = useNavigate();
 
     function createrows(row,statedata,districtdata,towndata){
@@ -55,6 +57,7 @@ const Properties = (props) => {
         });
       });
       setPropertiesTable(temparrayfornames);
+      setOriginalData(temparrayfornames);
     }
     function fetchProperties () {
       //alert("anu");
@@ -85,7 +88,25 @@ const Properties = (props) => {
     function addImagesFunction(propertyID) {
       navigate('/frontend/addimages/'+propertyID);
     }
-
+    const handleDelete =(_id)=>{
+      var dataafterdeletetemp=[];
+      if (window.confirm('Do you want to delete this Property?')) {
+      var deletetempurl=deletePropertyUrl+_id; 
+      // alert(deletetempurl)
+      const response=axios.get(deletetempurl);
+      originalData.map(key=>{
+        // alert(key._id)
+        // alert("id",_id)
+        if(key._id!=_id){
+          // alert("hhjj")
+          dataafterdeletetemp.push(key);
+        }
+      });
+      setOriginalData(dataafterdeletetemp)
+      setPropertiesTable(dataafterdeletetemp)
+      
+      }
+    }
     useEffect(() => {
         fetchProperties();
     }, []);
@@ -154,7 +175,7 @@ const Properties = (props) => {
                       {key.town}
                     </td>
                     <td>
-                      <button className="btn btn-danger"  data-toggle="modal" data-target="#myModal">Delete</button>
+                    <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
                     </td>
                     <td>
                       <button className="btn btn-secondary" >Edit</button>
