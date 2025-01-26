@@ -12,6 +12,7 @@ import { transactionType } from "../../constants/global";
 import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
 import Compressor from 'compressorjs';
+import { Alert } from "bootstrap";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -26,48 +27,15 @@ var addPropertyImagesURL = Url + 'addPropertyImages';
 
 const AddImages = (props) => {
 
-    const [stateName, setStateName] = useState("");
-    const [stateCode, setStateCode] = useState("");
-
-    const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
-    const [transactionTypeSelected, setTransactionTypeSelected] = useState("");
-
-    const [stateNameSelectedID, setStateNameSelectedID] = useState("");
-    const [districtNameSelectedID, setDistrictNameSelectedID] = useState("");
-    const [townNameSelectedID, setTownNameSelectedID] = useState("");
-
-    const [districtName, setDistrictName] = useState("");
-    const [districtCode, setDistrictCode] = useState("");
-
-    const [townName, setTownName] = useState("");
-    const [townCode, setTownCode] = useState("");
-
-    const [localityName, setLocalityName] = useState("");
-    const [cost, setCost] = useState("");
-
-    const [stateOptions, setStateOptions] = useState([]);
-    const [districtOptions, setDistrictOptions] = useState([]);
-    const [districtOptionsOriginal, setDistrictOptionsOriginal] = useState([]);
-    const [townOptions, setTownOptions] = useState([]);
-    const [townOptionsOriginal, setTownOptionsOriginal] = useState([]);
-
-    const [addStateButtonStatus, setAddStateButtonStatus] = useState("Add state");
-    const [addDistrictButtonStatus, setAddDistrictButtonStatus] = useState("Add district");
-    const [addTownButtonStatus, setAddTownButtonStatus] = useState("Add town");
-
-    const [alertClass, setAlertClass] = useState("alert alert-info");
-    const [alertContent, setAlertContent] = useState("Enter the property details");
-    const [compressedFile, setCompressedFile] = useState(null);
-
     const [uploadProgressValue, setUploadProgressValue] = useState(0);
     const [imageUrl, setImageUrl] = useState();
     const [progressBar, setProgressBar] = useState(0);
     const presetKey = "";
     const [files, setFiles] = useState([]);
 
+    const [propertyImagesArray, setPropertyImagesArray] = useState([]);
+
     const stateOptionsArray = [];
-    const districtOptionsArray = [];
-    const townOptionsArray = [];
 
     const navigate = useNavigate();
 
@@ -176,10 +144,30 @@ const AddImages = (props) => {
     }
 
 
+    const fetchImages = async (e) => {
+      //alert(propertyID);
+      var tempArray = [];
+      await axios
+        .get(Url+"propertyImages/"+propertyID,
+      )
+      .then((res) => {
+        //alert(res.data[0].imageName);
+        //tempArray.push("dfdf");
+        setPropertyImagesArray(tempArray);
+
+        res.data.map(key => {
+          //alert("Paulsin");
+          tempArray.push({"imageName" : key.imageName});
+        });
+      })
+
+      setPropertyImagesArray(tempArray);
+    }
 
     useEffect(() => {
 
       //test();
+      fetchImages();
 
     }, []);
 
@@ -197,13 +185,31 @@ const AddImages = (props) => {
           <br />
           <button onClick={uploadImageSubmit} >handleButton</button>
           <br/>
-          <ProgressBar now={uploadProgressValue} label={`${uploadProgressValue}%`} />;
+          <ProgressBar now={uploadProgressValue} label={`${uploadProgressValue}%`} />
         </div>
 
+
+        <div>
+          {propertyImagesArray.map(key => {
+            <div>
+              
+              <br />
+              hgh
+            </div>
+          })}
+        </div>
+
+        
+
+{/*
         <form action={addPropertyImagesURL} method="POST" enctype="multipart/form-data">
             <input type="file" name="image" />
             <button type="submit">Upload</button>
         </form>
+*/}
+
+
+        
 
     </div>
 
