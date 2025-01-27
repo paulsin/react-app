@@ -30,8 +30,10 @@ function Home() {
   const [newold, setNewold] = useState("");
   const [pricefrom, setPricefrom] = useState("");
   const [priceto, setPriceto] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage,setRecordsperpage]=useState(9)
+  let currentpageno=1;
+  let recordperpageno=9;
+  const [currentPage, setCurrentPage] = useState(currentpageno);
+  const [recordsPerPage,setRecordsperpage]=useState(recordperpageno)
 
   const[propertydetails,setPropertydetails]=useState([])
   const [propertyWidget, setPropertyWidget] = useState("");
@@ -493,26 +495,7 @@ function Home() {
         <div class="container pt-4 pb-4" >
           <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
           currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>
-            {/* <nav aria-label="..."  >
-              <ul class="pagination" >
-                <li class="page-item" >
-                  <a class="page-link" href="#" tabindex="-1" onClick={prePage}>Previous</a>
-                </li>
-                {
-                numbers.map((n,i)=>{
-              <li class={`page-item ${currentPage=== n ? 'active' : '' }`} key={i}>
-                  <a href="#" className="page-link" onClick={()=>changePage(n)}>{n}</a>
-              </li>
-                })
-
-                }
-              
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" onClick={nextPage}>Next</a>
-                </li> 
-              </ul>
-            </nav> */}
+        
            
             <div>
   
@@ -667,9 +650,13 @@ function Home() {
 
             
             </div> 
-               
+            <div class ="pt-3 p-0">
+            <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
+          currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>  </div>
         </div>
+   
         <Footer/>
+    
       </div>
     )
 }
