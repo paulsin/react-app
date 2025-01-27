@@ -131,14 +131,14 @@ const AddImages = (props) => {
 
       await axios.post(addPropertyImagesURL,
         formData, {
-        headers : {
-          "Content-Type":"multipart/form-data"
-        },
-        onUploadProgress: e => {
-          //alert(Math.round((e.loaded/e.total)*100));
-          setUploadProgressValue(Math.round((e.loaded/e.total)*100));
+          headers : {
+            "Content-Type":"multipart/form-data"
+          },
+          onUploadProgress: e => {
+            //alert(Math.round((e.loaded/e.total)*100));
+            setUploadProgressValue(Math.round((e.loaded/e.total)*100));
+          }
         }
-      }
       ).then(res => setImageUrl(res.data.secure_url))
       .catch(err => console.log(err));
     }
@@ -151,8 +151,9 @@ const AddImages = (props) => {
           'slno':slno++,
           '_id':row._id,
           'imageName':row.imageName,
-          "updateTime" :row.updateTime
-     
+          "updateTime" :row.updateTime,
+          "index" : row.index,
+          "imageUrl" : Url+"assets/"+ propertyID + "/" + row.imageName
         })
 
       })
@@ -214,6 +215,9 @@ const AddImages = (props) => {
                     Updated Time
                   </th>
 
+                  <th>
+                    Index
+                  </th>
                   
                 </tr>
               </thead>
@@ -228,12 +232,14 @@ const AddImages = (props) => {
                       {key._id}
                     </td>
                     <td>
-                      {key.imageName}
+                      <img src={key.imageUrl} />
                     </td>
                     <td>
-                    {key.updateTime}
+                      {key.updateTime}
                     </td>
-                    
+                    <td>
+                      {key.index}
+                    </td>
                   </tr>
                 ))} 
                 <td>
