@@ -151,21 +151,23 @@ const AddImages = (props) => {
         .get(Url+"propertyImages/"+propertyID,
       )
       .then((res) => {
-        //alert(res.data[0].imageName);
+        // alert(res.data[0].imageName);
         //tempArray.push("dfdf");
         setPropertyImagesArray(tempArray);
 
         res.data.map(key => {
           //alert("Paulsin");
-          tempArray.push({"imageName" : key.imageName, "updateTime" : key.updateTime});
+       
+          // alert(key._id)
+          tempArray.push({"id":key._id,"imageName" : key.imageName, "updateTime" : key.updateTime});
         });
 
-        setPropertyImagesArray(tempArray);
+       
       });
 
       //setPropertyImagesArray(tempArray);
-      //alert(tempArray.length);
-
+      // alert(tempArray.length);
+      setPropertyImagesArray(tempArray);
       
     }
 
@@ -213,14 +215,14 @@ const AddImages = (props) => {
             <tbody>
               
                 {propertyImagesArray.map(key => {
-              
+          
                   <tr>
                     <td>
                       {slno++}
                     </td>
                     
                     <td>
-                      {key.updateTime}
+                      {key.imageName}
                     </td>
                   </tr>
                 })}
