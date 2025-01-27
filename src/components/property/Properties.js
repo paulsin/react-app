@@ -13,6 +13,7 @@ import data from "../../json/places.json"
 import { useConfirm } from "material-ui-confirm";
 import StatesList from "./StatesList";
 import DistrictsList from "./DistrictsList";
+import PaginationforProperties from "./PaginationforProperties";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -30,9 +31,21 @@ const Properties = (props) => {
 
     const [propertiesTable, setPropertiesTable] = useState([]);
     const [originalData, setOriginalData] = useState([]);
-        const navigate = useNavigate();
-
+    let currentpageno=1;
+    let recordsperpageno=20;
+    const [currentPage, setCurrentPage] = useState(currentpageno);
+    const [recordsPerPage,setRecordsperpage]=useState(recordsperpageno);
+    const navigate = useNavigate();
+    
+    const lastpostIndex=currentPage*recordsPerPage; 
+  //const lastpostIndex=currentPage * recordsPerPage > propertydetails.length ? propertydetails.length + 1 : currentPage * recordsPerPage; 
+    const firstpostIndex=lastpostIndex-recordsPerPage;
+  //alert(firstpostIndex);
+  //alert(lastpostIndex);
+    const currentposts=propertiesTable.slice(firstpostIndex,lastpostIndex);
+  // const npage=Math.ceil(propertydetails.length/recordsPerPage);
     function createrows(row,statedata,districtdata,towndata){
+      var slno =1;
       let temparrayfornames=[]
       row.map(row => {
         statedata.map(statetemp=>{
@@ -110,10 +123,11 @@ const Properties = (props) => {
     useEffect(() => {
         fetchProperties();
     }, []);
-
-    var slno =1;
+   
+    
     return(
       <div>
+
         <Navbar />
           <div>
             <h2>Properties</h2>
@@ -154,10 +168,11 @@ const Properties = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {propertiesTable.map(key =>  (
+              
+                {currentposts.map(key =>  (
                   <tr>
                     <td>
-                      {slno++}
+                      {key.slno}
                     </td>
                     <td>
                       {key._id}
@@ -188,7 +203,9 @@ const Properties = (props) => {
                 <td>
                 </td>
               </tbody>
-            </table>   
+            </table>  
+            <PaginationforProperties totalPosts={propertiesTable.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
+          currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/> 
           </div>
       </div>
     )

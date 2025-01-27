@@ -51,12 +51,18 @@
   color: rgb(101, 31, 110);
  
 }
-.page-link{
+#palink{
   color:rgb(77, 4, 4);
   background-color:white;
   font-weight: bold;
-  border-radius: 20px;
-    
-  
+  border-radius: 20px; 
 }
-.active .page-link{ background: rgb(77, 4, 4) !important }
+/* .active .page-link{ background: rgb(77, 4, 4) !important } */
+
+#pagination-link{
+  color:rgb(77, 4, 4) ;
+  background-color:white;
+  font-weight: bold;
+} 
+.active .page-link{ background: rgb(77, 4, 4) !important }  
+.active .page-link{ color:white  !important }  
