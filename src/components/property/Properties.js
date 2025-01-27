@@ -117,7 +117,7 @@ const Properties = (props) => {
       });
       setOriginalData(dataafterdeletetemp)
       setPropertiesTable(dataafterdeletetemp)
-      
+      fetchProperties();
       }
     }
     useEffect(() => {

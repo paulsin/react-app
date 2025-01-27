@@ -142,30 +142,33 @@ const AddImages = (props) => {
       ).then(res => setImageUrl(res.data.secure_url))
       .catch(err => console.log(err));
     }
+    function createrows(row){
+      var tempArray = [];
+      let slno=1;
+      row.map(row => {
+        // alert(row.imageName)
+        tempArray.push({
+          'slno':slno++,
+          '_id':row._id,
+          'imageName':row.imageName,
+          "updateTime" :row.updateTime
+     
+        })
 
+      })
+      setPropertyImagesArray(tempArray);
+    }
 
     const fetchImages = async (e) => {
       //alert(propertyID);
-      var tempArray = [];
+    
       await axios
         .get(Url+"propertyImages/"+propertyID,
       )
       .then((res) => {
-        //alert(res.data[0].imageName);
-        //tempArray.push("dfdf");
-        setPropertyImagesArray(tempArray);
-
-        res.data.map(key => {
-          //alert("Paulsin");
-          tempArray.push({"imageName" : key.imageName, "updateTime" : key.updateTime});
-        });
-
-        setPropertyImagesArray(tempArray);
+         createrows(res.data)
+       
       });
-
-      //setPropertyImagesArray(tempArray);
-      //alert(tempArray.length);
-
       
     }
 
@@ -184,9 +187,6 @@ const AddImages = (props) => {
     <div>
 
         <Navbar />
-
-
-
         <div>
           <input type="file" name="image" onChange={handleImageChange} multiple/>
           <br />
@@ -198,35 +198,48 @@ const AddImages = (props) => {
 
         <div>
 
-          <table className="table table-striped" id="selectedTable">
+        <table className="table table-striped" id="selectedTable">
               <thead>
                 <tr>
                   <th>
-                    slno
+                  Index
                   </th>
                   <th>
-                    Image
+                  ID
                   </th>
+                  <th>
+                  Image
+                  </th>
+                  <th>
+                    Updated Time
+                  </th>
+
+                  
                 </tr>
               </thead>
-
-            <tbody>
+              <tbody>
               
-                {propertyImagesArray.map(key => {
-              
+                {propertyImagesArray.map(key =>  (
                   <tr>
                     <td>
-                      {slno++}
+                      {key.slno}
+                    </td>
+                    <td>
+                      {key._id}
+                    </td>
+                    <td>
+                      {key.imageName}
+                    </td>
+                    <td>
+                    {key.updateTime}
                     </td>
                     
-                    <td>
-                      {key.updateTime}
-                    </td>
                   </tr>
-                })}
-              
-            </tbody>
-          </table>
+                ))} 
+                <td>
+                </td>
+              </tbody>
+            </table>  
         </div>
 
         
