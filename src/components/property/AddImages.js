@@ -157,11 +157,16 @@ const AddImages = (props) => {
 
         res.data.map(key => {
           //alert("Paulsin");
-          tempArray.push({"imageName" : key.imageName});
+          tempArray.push({"imageName" : key.imageName, "updateTime" : key.updateTime});
         });
-      })
 
-      setPropertyImagesArray(tempArray);
+        setPropertyImagesArray(tempArray);
+      });
+
+      //setPropertyImagesArray(tempArray);
+      //alert(tempArray.length);
+
+      
     }
 
     useEffect(() => {
@@ -171,6 +176,8 @@ const AddImages = (props) => {
 
     }, []);
 
+
+    var slno = 0;
 
     return(
 
@@ -190,17 +197,39 @@ const AddImages = (props) => {
 
 
         <div>
-          {propertyImagesArray.map(key => {
-            <div>
+
+          <table className="table table-striped" id="selectedTable">
+              <thead>
+                <tr>
+                  <th>
+                    slno
+                  </th>
+                  <th>
+                    Image
+                  </th>
+                </tr>
+              </thead>
+
+            <tbody>
               
-              <br />
-              hgh
-            </div>
-          })}
+                {propertyImagesArray.map(key => {
+              
+                  <tr>
+                    <td>
+                      {slno++}
+                    </td>
+                    
+                    <td>
+                      {key.updateTime}
+                    </td>
+                  </tr>
+                })}
+              
+            </tbody>
+          </table>
         </div>
 
         
-
 {/*
         <form action={addPropertyImagesURL} method="POST" enctype="multipart/form-data">
             <input type="file" name="image" />
