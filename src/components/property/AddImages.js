@@ -60,6 +60,8 @@ const AddImages = (props) => {
 
       //alert(event.target.files.length);
 
+      setUploadProgressValue(0);
+
       for(let i=0;i<event.target.files.length;i++) {
 
         new Compressor(event.target.files[i], {
@@ -121,6 +123,8 @@ const AddImages = (props) => {
     const uploadImageSubmit =  async (e) => {
       const formData = new FormData();
 
+      
+
       //alert(files.length);
       for (let i = 0; i < files.length; i++) {
         formData.append('image', files[i], files[i].name);
@@ -141,9 +145,13 @@ const AddImages = (props) => {
             setUploadProgressValue(Math.round((e.loaded/e.total)*100));
           }
         }
-      ).then(res => setImageUrl(res.data.secure_url))
+      ).then(res => {
+        fetchImages();
+        
+    })
       .catch(err => console.log(err));
     }
+
     function createrows(row){
       var tempArray = [];
       let slno=1;
@@ -179,7 +187,7 @@ const AddImages = (props) => {
       var dataimgaesafterdeleting=[];
       if(window.confirm("Do you want to delete this image?")){
         var deletetempurl=deletePropertyImagesURL+_id+"/"+propertyID+"/"+imageName;
-        alert(deletetempurl)
+        //alert(deletetempurl)
         const response=axios.get(deletetempurl);
         originalData.map(key=>{
           if(key._id!=_id){
@@ -213,7 +221,7 @@ const AddImages = (props) => {
           <div class="col"> </div>
           <div class="col"> <input type="file" name="image" onChange={handleImageChange} multiple/></div>
        
-          <button onClick={uploadImageSubmit} class="btn btn-primary mr-2">handleButton</button>
+          <button onClick={uploadImageSubmit} class="btn btn-primary mr-2">Upload image</button>
         
           <div class="col"></div>
   
@@ -237,26 +245,26 @@ const AddImages = (props) => {
                     <div class="row">
 
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                          <img src={key.imageUrl} class="img-fluid" />                        
+                          <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />                        
                           <div class ="pt-2">
                             <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                            <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                            <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
 
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                          <img src={key.imageUrl} class="img-fluid" />               
+                          <img src={propertyImagesArray[index2+1].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
                             <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                            <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                            <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+1]._id, propertyImagesArray[index2+1].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
 
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                          <img src={key.imageUrl} class="img-fluid" />               
+                          <img src={propertyImagesArray[index2+2].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
                             <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                            <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                            <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+2]._id, propertyImagesArray[index2+2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
 
@@ -266,11 +274,11 @@ const AddImages = (props) => {
                     {index2 %3 == 0 && propertyImagesArray.length - index2 == 1 ?
                       <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                            <img src={key.imageUrl} class="img-fluid" />
+                            <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />
                                           
                             <div class ="pt-2">
                               <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                              <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                              <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                             </div>
                           </div> 
     
@@ -286,19 +294,19 @@ const AddImages = (props) => {
                         { index2 %3 == 0 && propertyImagesArray.length - index2 == 2 ?
                           <div class="row">
                               <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                <img src={key.imageUrl} class="img-fluid" />          
+                                <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />          
                                 <div class ="pt-2">
                                   <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                                  <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                                  <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                                 </div>
                               </div> 
                                         
                                         
                               <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                <img src={key.imageUrl} class="img-fluid" />               
+                                <img src={propertyImagesArray[index2+1].imageUrl} class="img-fluid" />               
                                 <div class ="pt-2">
                                   <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
-                                  <button className="btn" onClick={()=>handleDelete(key._id,key.imageName)} id="deletebuttoninimage">Delete</button>
+                                  <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+1]._id, propertyImagesArray[index2+1].imageName)} id="deletebuttoninimage">Delete</button>
                                 </div>
                               </div> 
                                 
