@@ -146,6 +146,7 @@ const AddImages = (props) => {
           }
         }
       ).then(res => {
+        
         fetchImages();
         
     })
