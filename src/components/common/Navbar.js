@@ -5,6 +5,7 @@ import axios from "axios";
 import { Url } from "../../constants/global";
 import { json, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 var newUrl = Url + 'accounts/logInFunction';
 var logoutUrl = Url + 'accounts/logoutUser';
@@ -124,6 +125,21 @@ function Navbar(props) {
             {
               loggedUserMenu ? 
               <li>
+
+                <Dropdown>
+                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                    {loggedUserMenu}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Home</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Profile</Dropdown.Item>
+                    <Dropdown.Item onClick={logOut}>Log out</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+{/*
+
                 <div class="dropdown">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
                     {loggedUserMenu}
@@ -137,6 +153,7 @@ function Navbar(props) {
                     <li><a class="dropdown-item" href="#" onClick={logOut}>Log out</a></li>
                   </ul>
                 </div>
+*/}
               </li> : ""
             }
 
