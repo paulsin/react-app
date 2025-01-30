@@ -155,7 +155,6 @@ const AddProperty = (props) => {
       }
     };
 
-
     const handleStateSelection = (e) => {
 
       setStateNameSelectedID(e.value);
@@ -254,9 +253,7 @@ const AddProperty = (props) => {
         setAlertContent("Select state");
         setAlertClass("alert alert-danger");
       }
-      
     };
-
 
     const addTown = async (e) => {
       alert(districtNameSelectedID);

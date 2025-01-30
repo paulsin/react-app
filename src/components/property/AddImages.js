@@ -163,11 +163,11 @@ const AddImages = (props) => {
       row.map(row => {
         // alert(row._id)
         if(row._id===thumbnailid){
-         var thumbnail=true
+         var thumbnail=true;
 
         }
         else{
-          thumbnail=false
+          var thumbnail=false;
         }
         tempArray.push({
           'slno':slno++,
@@ -287,7 +287,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />                        
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton"  onClick={()=>setThumbnailfunction(propertyImagesArray[index2]._id,propertyImagesArray[index2].imageName)}> {propertyImagesArray[index2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
+                            <button className='btn mr-2' id="thumbnailbutton"  onClick={()=>setThumbnailfunction(propertyImagesArray[index2]._id,propertyImagesArray[index2].imageName)}> {propertyImagesArray[index2].thumbnail?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
@@ -295,7 +295,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2+1].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+1]._id,propertyImagesArray[index2+1].imageName)}> {propertyImagesArray[index2+1].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
+                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+1]._id,propertyImagesArray[index2+1].imageName)}> {propertyImagesArray[index2+1].thumbnail?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+1]._id, propertyImagesArray[index2+1].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
@@ -303,7 +303,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2+2].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+2]._id,propertyImagesArray[index2+2].imageName)}> {propertyImagesArray[index2+2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
+                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+2]._id,propertyImagesArray[index2+2].imageName)}> {propertyImagesArray[index2+2].thumbnail?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+2]._id, propertyImagesArray[index2+2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
