@@ -35,7 +35,7 @@ function Home() {
   let recordperpageno=9;
   const [currentPage, setCurrentPage] = useState(currentpageno);
   const [recordsPerPage,setRecordsperpage]=useState(recordperpageno)
-  const Noimage="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+  const Noimage= Url + "assets/no_image.jpg";
   const[propertydetails,setPropertydetails]=useState([])
   const [propertyWidget, setPropertyWidget] = useState("");
   const [propertyimagename, setPropertyimagename] = useState("");
@@ -267,7 +267,7 @@ function Home() {
               'thumbnailimagename':row.thumbnailImageName,
               // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
               // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
-              'imageurl':row.thumbnailImageName!==""? Url+"assets/"+ row._id + "/" + row.thumbnailImageName :Noimage 
+              'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : Noimage 
             })
       
           }
