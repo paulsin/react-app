@@ -26,6 +26,7 @@ var addPropertyURL = Url + 'property/addProperty';
 var addPropertyImagesURL = Url + 'addPropertyImages';
 var deletePropertyImagesURL = Url + 'deletePropertyImages/';
 
+
 const AddImages = (props) => {
 
     const [uploadProgressValue, setUploadProgressValue] = useState(0);
@@ -36,7 +37,10 @@ const AddImages = (props) => {
     const [originalData, setOriginalData] = useState([]);
 
     const [propertyImagesArray, setPropertyImagesArray] = useState([]);
-
+    const [thumbnailid, setThumbnailId] = useState([]);
+    const [saveButtonText_state, setSaveButtonText_state] = useState("Set Image As Thumbnail");
+    // const [saveButtonMode_state, setSaveButtonMode_state] = useState(false);
+    const [saveButtonThumbnail_state, setSaveButtonThumbnail_state] = useState("Thumbnail");
     const stateOptionsArray = [];
 
     const navigate = useNavigate();
@@ -157,14 +161,22 @@ const AddImages = (props) => {
       var tempArray = [];
       let slno=1;
       row.map(row => {
-        // alert(row.imageName)
+        // alert(row._id)
+        if(row._id===thumbnailid){
+         var thumbnail=true
+
+        }
+        else{
+          thumbnail=false
+        }
         tempArray.push({
           'slno':slno++,
           '_id':row._id,
           'imageName':row.imageName,
           "updateTime" :row.updateTime,
           "index" : row.index,
-          "imageUrl" : Url+"assets/"+ propertyID + "/" + row.imageName
+          "imageUrl" : Url+"assets/"+ propertyID + "/" + row.imageName,
+          "thumbnail":thumbnail
         })
 
       })
@@ -185,18 +197,18 @@ const AddImages = (props) => {
       
     }
     const handleDelete=(_id,imageName)=>{
-      var dataimgaesafterdeleting=[];
+      var dataimgagesafterdeleting=[];
       if(window.confirm("Do you want to delete this image?")){
         var deletetempurl=deletePropertyImagesURL+_id+"/"+propertyID+"/"+imageName;
         //alert(deletetempurl)
         const response=axios.get(deletetempurl);
         originalData.map(key=>{
           if(key._id!=_id){
-            dataimgaesafterdeleting.push(key)
+            dataimgagesafterdeleting.push(key)
           }
         })
-        setOriginalData(dataimgaesafterdeleting);
-        setPropertyImagesArray(dataimgaesafterdeleting);
+        setOriginalData(dataimgagesafterdeleting);
+        setPropertyImagesArray(dataimgagesafterdeleting);
         fetchImages();
       }
     }
@@ -208,9 +220,35 @@ const AddImages = (props) => {
 
     }, []);
 
-
-    var slno = 0;
-
+    
+  const setThumbnailfunction = (_id,imageName) => {
+    // e.preventDefault();
+    // alert(_id)
+    // alert(propertyID)
+    axios
+    .get(Url+"setThumbnailPropertyImages/"+_id+"/"+propertyID+"/"+imageName,
+  )
+  .then((res) => {
+     if(res.data==="OK"){
+      // setSaveButtonText_state("Thumbnail")
+      // setSaveButtonMode_state(true)
+      axios
+      .get(Url+"property/individualProperty/"+propertyID,
+    )
+    .then((res1) => {
+      // alert(res1.data.thumbnailImage)
+      setThumbnailId(res1.data.thumbnailImage)
+    })
+  //   alert(res1.data[0].thumbnailImage)
+  //     if(res1.data[0].thumbnailImage!=" ")
+  //     {
+    
+  //     }
+  //   })
+   }
+   });
+  }
+  var slno = 0;
     return(
 
     <div>
@@ -240,6 +278,7 @@ const AddImages = (props) => {
         <div class="container pt-4 pb-4" >
           <div>
             {propertyImagesArray.map((key, index2) =>  (
+            
               <>
                 {index2 %3 == 0 && propertyImagesArray.length - index2 >= 3 ? 
                   <>
@@ -248,7 +287,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />                        
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                            <button className='btn mr-2' id="thumbnailbutton"  onClick={()=>setThumbnailfunction(propertyImagesArray[index2]._id,propertyImagesArray[index2].imageName)}> {propertyImagesArray[index2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
@@ -256,7 +295,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2+1].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+1]._id,propertyImagesArray[index2+1].imageName)}> {propertyImagesArray[index2+1].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+1]._id, propertyImagesArray[index2+1].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
@@ -264,7 +303,7 @@ const AddImages = (props) => {
                         <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                           <img src={propertyImagesArray[index2+2].imageUrl} class="img-fluid" />               
                           <div class ="pt-2">
-                            <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                            <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+2]._id,propertyImagesArray[index2+2].imageName)}> {propertyImagesArray[index2+2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                             <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+2]._id, propertyImagesArray[index2+2].imageName)} id="deletebuttoninimage">Delete</button>
                           </div>
                         </div> 
@@ -278,7 +317,7 @@ const AddImages = (props) => {
                             <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />
                                           
                             <div class ="pt-2">
-                              <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                              <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2]._id,propertyImagesArray[index2].imageName)}> {propertyImagesArray[index2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                               <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                             </div>
                           </div> 
@@ -297,7 +336,7 @@ const AddImages = (props) => {
                               <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                                 <img src={propertyImagesArray[index2].imageUrl} class="img-fluid" />          
                                 <div class ="pt-2">
-                                  <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                                  <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2]._id,propertyImagesArray[index2].imageName)}> {propertyImagesArray[index2].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                                   <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2]._id, propertyImagesArray[index2].imageName)} id="deletebuttoninimage">Delete</button>
                                 </div>
                               </div> 
@@ -306,7 +345,7 @@ const AddImages = (props) => {
                               <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
                                 <img src={propertyImagesArray[index2+1].imageUrl} class="img-fluid" />               
                                 <div class ="pt-2">
-                                  <button className='btn mr-2' id="thumbnailbutton">Set Image As Thumbnail</button>
+                                  <button className='btn mr-2' id="thumbnailbutton" onClick={()=>setThumbnailfunction(propertyImagesArray[index2+1]._id,propertyImagesArray[index2+1].imageName)}> {propertyImagesArray[index2+1].thumbnail===true?saveButtonThumbnail_state:saveButtonText_state}</button>
                                   <button className="btn" onClick={()=>handleDelete(propertyImagesArray[index2+1]._id, propertyImagesArray[index2+1].imageName)} id="deletebuttoninimage">Delete</button>
                                 </div>
                               </div> 

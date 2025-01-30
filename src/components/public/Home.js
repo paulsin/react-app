@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import background from "../../images/background.jpg";
+
 import Navbar from "../common/NavbarPublic";
 import Footer from "../common/Footer"
 import NavbarPublic from "../common/NavbarPublic";
@@ -34,11 +35,11 @@ function Home() {
   let recordperpageno=9;
   const [currentPage, setCurrentPage] = useState(currentpageno);
   const [recordsPerPage,setRecordsperpage]=useState(recordperpageno)
-
+  const Noimage="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
   const[propertydetails,setPropertydetails]=useState([])
   const [propertyWidget, setPropertyWidget] = useState("");
-
-  // const[propertypages,setPropertypages]=useState("")
+  const [propertyimagename, setPropertyimagename] = useState("");
+ 
   // https://youtu.be/wAGIOCqS8tk?si=f-i1ayZt50pg0u04
 
   //alert(currentPage);
@@ -261,10 +262,18 @@ function Home() {
 
               'propertyType':row.propertyType,
               'transactiontype':row.transactionType,
-              'town':proptemp['townName']
+              'town':proptemp['townName'],
+              'thumbnailimage':row.thumbnailImage,
+              'thumbnailimagename':row.thumbnailImageName,
+              // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
+              // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
+              'imageurl':row.thumbnailImageName!==""? Url+"assets/"+ row._id + "/" + row.thumbnailImageName :Noimage 
             })
+      
           }
           })
+   
+         
       })
       setPropertydetails(temparrayfornames)
   }
@@ -506,7 +515,7 @@ function Home() {
                 <>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={background} class="img-fluid" />
+                    <img src={currentposts[index2].imageurl} class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -525,7 +534,7 @@ function Home() {
 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={background} class="img-fluid" />
+                    <img src={currentposts[index2 + 1].imageurl}  class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -543,7 +552,7 @@ function Home() {
                   </div> 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={background} class="img-fluid" />
+                    <img src={currentposts[index2 + 2].imageurl} class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -567,7 +576,7 @@ function Home() {
                       { index2 %3 == 0 && currentposts.length - index2 == 1 ?
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                            <img src={background} class="img-fluid" />
+                            <img src={currentposts[index2].imageurl}  class="img-fluid" />
                             <div class="container  text-center" id="properties_container">
                               <div class="row row-cols-2 pt-2" >
                             
@@ -597,7 +606,7 @@ function Home() {
                           { index2 %3 == 0 && currentposts.length - index2 == 2 ?
                                                     <div class="row">
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={background} class="img-fluid" />
+                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
                                                         <div class="container  text-center" id="properties_container">
                                                           <div class="row row-cols-2 pt-2" >
                                                         
@@ -616,7 +625,7 @@ function Home() {
                                     
                                     
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={background} class="img-fluid" />
+                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
                                                           <div class="container  text-center" id="properties_container">
                                                             <div class="row row-cols-2 pt-2" >
                                                           
