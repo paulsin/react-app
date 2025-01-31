@@ -625,13 +625,13 @@ function Home() {
                                     
                                     
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
+                                                        <img src={currentposts[index2+1].imageurl}  class="img-fluid" />
                                                           <div class="container  text-center" id="properties_container">
                                                             <div class="row row-cols-2 pt-2" >
                                                           
                                                                 <div class="col" id="properties1">column2</div>
-                                                                <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
-                                                                <div class="col" id="properties2">{currentposts[index2].town}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2+1].propertyType}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2+1].town}</div>
                                                                 <div class="col" id="properties1">Column4</div>
                                                                 <div class="col" id="properties1">Column5</div>
                                                                 <div class="col" id="properties2">Column6</div>
