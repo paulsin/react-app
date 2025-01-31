@@ -9,12 +9,12 @@
     font-weight: bold;
     
 }
-#thumbnailbutton{
+/* #thumbnailbutton{
   background-color: rgb(46, 13, 61);
   color:white;
-  /* font-weight: bold; */
+
   
-}
+} */
 #deletebuttoninimage{
   background-color: rgb(204, 24, 24);
   color:white;
@@ -81,3 +81,8 @@
 } 
 .active .page-link{ background: rgb(77, 4, 4) !important }  
 .active .page-link{ color:white  !important }  
+
+#borderimage{
+  border: 1px solid rgb(77, 4, 4) ; /* Gray border */
+  border-radius: 4px;
+}

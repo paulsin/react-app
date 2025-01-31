@@ -515,7 +515,7 @@ function Home() {
                 <>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2].imageurl} class="img-fluid" />
+                    <img src={currentposts[index2].imageurl} class="img-fluid" id="borderimage"/>
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -534,7 +534,7 @@ function Home() {
 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2 + 1].imageurl}  class="img-fluid" />
+                    <img src={currentposts[index2 + 1].imageurl}  class="img-fluid" id="borderimage" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -552,7 +552,7 @@ function Home() {
                   </div> 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2 + 2].imageurl} class="img-fluid" />
+                    <img src={currentposts[index2 + 2].imageurl} class="img-fluid" id="borderimage"/>
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -576,7 +576,7 @@ function Home() {
                       { index2 %3 == 0 && currentposts.length - index2 == 1 ?
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                            <img src={currentposts[index2].imageurl}  class="img-fluid" />
+                            <img src={currentposts[index2].imageurl}  class="img-fluid" id="borderimage" />
                             <div class="container  text-center" id="properties_container">
                               <div class="row row-cols-2 pt-2" >
                             
@@ -606,7 +606,7 @@ function Home() {
                           { index2 %3 == 0 && currentposts.length - index2 == 2 ?
                                                     <div class="row">
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
+                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" id="borderimage"/>
                                                         <div class="container  text-center" id="properties_container">
                                                           <div class="row row-cols-2 pt-2" >
                                                         
@@ -625,7 +625,7 @@ function Home() {
                                     
                                     
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={currentposts[index2+1].imageurl}  class="img-fluid" />
+                                                        <img src={currentposts[index2+1].imageurl}  class="img-fluid" id="borderimage"/>
                                                           <div class="container  text-center" id="properties_container">
                                                             <div class="row row-cols-2 pt-2" >
                                                           
