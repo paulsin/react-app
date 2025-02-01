@@ -15,6 +15,8 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
 import { CgMail } from "react-icons/cg";
 import Pagination from "./Pagination";
+import { propertyTypes } from "../../constants/global";
+import { transactionType } from "../../constants/global";
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -39,6 +41,7 @@ function Home() {
   const[propertydetails,setPropertydetails]=useState([])
   const [propertyWidget, setPropertyWidget] = useState("");
   const [propertyimagename, setPropertyimagename] = useState("");
+
  
   // https://youtu.be/wAGIOCqS8tk?si=f-i1ayZt50pg0u04
 
@@ -53,12 +56,12 @@ function Home() {
   // const npage=Math.ceil(propertydetails.length/recordsPerPage);
   // const numbers=[...Array(npage+1).keys()].slice(1);
 
-  const propertytype_options = [
-    { label: "Flat", value: "flat" },
-    { label: "House", value: "house" },
-    { label: "House Plot", value: "houseplot"},
-    { label: "Villa", value: "villa" },
-  ];
+  // const propertytype_options = [
+  //   { label: "Flat", value: "flat" },
+  //   { label: "House", value: "house" },
+  //   { label: "House Plot", value: "houseplot"},
+  //   { label: "Villa", value: "villa" },
+  // ];
 //   let array1 = [
 //     { label: "John", value: 0 },
 //     { label: "Indiana", value: 1 },
@@ -359,18 +362,16 @@ function Home() {
                     onChange={setSelectedPropertyType}
                     labelledBy="Select"
                   />  */}
-                    <Select  id="selectboxcolor" isMulti={true} options={propertytype_options} onChange={setSelectedPropertyType}  value={selectedpropertytype}> 
+                    <Select  id="selectboxcolor" isMulti={true} options={propertyTypes} onChange={setSelectedPropertyType}  value={selectedpropertytype}> 
                     </Select>
                 </div>
                 <div className="col-md-3">
                   <label htmlFor=""><b>Sale/rent</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control" onChange={(e) => setSaleorrent(e.target.value)} id="selectboxcolor">
-                    <option value="">Select</option>
-                    <option value="sale">Sale</option>
-                    <option value="rent">Rent</option>
-                  </select> 
+                  <Select  onChange={setSaleorrent} id="selectboxcolor" options={transactionType}>
+                    
+                  </Select> 
                 </div>
               </div> 
               <br/>
@@ -515,7 +516,7 @@ function Home() {
                 <>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2].imageurl} class="img-fluid" id="borderimage"/>
+                    <img src={currentposts[index2].imageurl} class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -534,7 +535,7 @@ function Home() {
 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2 + 1].imageurl}  class="img-fluid" id="borderimage" />
+                    <img src={currentposts[index2 + 1].imageurl}  class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -552,7 +553,7 @@ function Home() {
                   </div> 
 
                   <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                    <img src={currentposts[index2 + 2].imageurl} class="img-fluid" id="borderimage"/>
+                    <img src={currentposts[index2 + 2].imageurl} class="img-fluid" />
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
@@ -576,7 +577,7 @@ function Home() {
                       { index2 %3 == 0 && currentposts.length - index2 == 1 ?
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                            <img src={currentposts[index2].imageurl}  class="img-fluid" id="borderimage" />
+                            <img src={currentposts[index2].imageurl}  class="img-fluid" />
                             <div class="container  text-center" id="properties_container">
                               <div class="row row-cols-2 pt-2" >
                             
@@ -606,7 +607,7 @@ function Home() {
                           { index2 %3 == 0 && currentposts.length - index2 == 2 ?
                                                     <div class="row">
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" id="borderimage"/>
+                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
                                                         <div class="container  text-center" id="properties_container">
                                                           <div class="row row-cols-2 pt-2" >
                                                         
@@ -625,13 +626,13 @@ function Home() {
                                     
                                     
                                                       <div class="col-lg-4 col-md-4 col-sm-12 mx-auto p-2">
-                                                        <img src={currentposts[index2+1].imageurl}  class="img-fluid" id="borderimage"/>
+                                                        <img src={currentposts[index2].imageurl}  class="img-fluid" />
                                                           <div class="container  text-center" id="properties_container">
                                                             <div class="row row-cols-2 pt-2" >
                                                           
                                                                 <div class="col" id="properties1">column2</div>
-                                                                <div class="col" id="properties2">{currentposts[index2+1].propertyType}</div>
-                                                                <div class="col" id="properties2">{currentposts[index2+1].town}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                                                                <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                                 <div class="col" id="properties1">Column4</div>
                                                                 <div class="col" id="properties1">Column5</div>
                                                                 <div class="col" id="properties2">Column6</div>

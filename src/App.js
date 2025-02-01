@@ -46,7 +46,7 @@ function App() {
           <Route path='/frontend/listusers' element={<ListUsersDataGrid />} />
           <Route path='/frontend/listusersowntable' element={<ListUsersCustomTableCheck />} />
           <Route path='/frontend/profile' element={<ProfileCheck />} />
-          <Route path='/frontend/addProperty' element={<AddPropertyCheck />} />
+          <Route path='/frontend/addProperty/:operation/:uniqueID' element={<AddPropertyCheck />} />
           <Route path='/frontend/location/:locationType/:countryName' element={<LocationCheck />} />
           <Route path='/frontend/location/:locationType/:countryName/:stateID' element={<LocationCheck />} />
           <Route path='/frontend/location/:locationType/:countryName/:stateID/:districtID' element={<LocationCheck />} />

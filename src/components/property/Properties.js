@@ -123,7 +123,9 @@ const Properties = (props) => {
     useEffect(() => {
         fetchProperties();
     }, []);
-   
+    const navigateToEditPage = (uniqueID) => {
+      navigate("/frontend/addProperty/edit/"+uniqueID);
+    };
     
     return(
       <div>
@@ -193,7 +195,7 @@ const Properties = (props) => {
                     <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
                     </td>
                     <td>
-                      <button className="btn btn-secondary" >Edit</button>
+                    <button className="btn btn-secondary" onClick={()=>navigateToEditPage(key._id)}>Edit</button> 
                     </td> 
                     <td>
                       <button className="btn btn-primary" onClick={()=>addImagesFunction(key._id)}>Add images</button>
