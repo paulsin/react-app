@@ -11,6 +11,9 @@ import Loading from "../common/Loading";
 //import Functions from "../common/Functions";
 import { fetchLoggedDataCommon } from "../common/Functions";
 import AddProperty from "./AddProperty";
+import EditProperty from "./EditProperty";
+
+
 
 
 var newUrl = Url + 'accounts/logInFunction';
@@ -33,15 +36,16 @@ const AddPropertyCheck = () => {
     const navigate = useNavigate();
 
     const {newID} = useParams();
-
+    const {operation} =useParams();
     //const functionObj = Functions();
 
     //alert(newID);
 
-
+    // alert(operation)
     const fetchLoggedData = (e) => {
 
       //Functions();
+      // alert(operation)
 
       //alert(loggedCheckUrl);
 
@@ -52,9 +56,17 @@ const AddPropertyCheck = () => {
         //console.log(response);
         //alert(response.data);
         if(response.data.username && response.data.password) {
-          //alert("Logged In");
+          // alert("Logged In");
           //navigate('/frontend/profile');
-          setSelectedDIV(<AddProperty />);
+          //  alert(operation)
+            if(operation=="new"){
+              setSelectedDIV(<AddProperty/>);
+            }
+            else{
+              setSelectedDIV(<EditProperty/>)
+            }
+              
+           
         }
         else {
           navigate('/frontend/login');

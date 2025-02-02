@@ -94,7 +94,7 @@ function Navbar(props) {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/frontend/addProperty">Add property</a>
+              <a class="nav-link" href="/frontend/addProperty/new/new">Add property</a>
             </li>
 
             <li class="nav-item">
