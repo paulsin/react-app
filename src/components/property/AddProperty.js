@@ -64,18 +64,36 @@ const AddProperty = (props) => {
     const [progressBar, setProgressBar] = useState(0);
     const presetKey = "";
     const [files, setFiles] = useState([]);
+   
+
+     const [stateOptionsNew,setStateoptionsnew]=useState("");            //state
+        const [stateSelectedLabel,setStateSelectedLabel]=useState("");
+        const [stateSelectedValue,setStateSelectedValue]=useState("");
+        
+        const [districtOptionsNew,setDistrictoptionsnew]=useState("");            //district
+        const [districtSelectedLabel,setDistrictSelectedLabel]=useState("");
+        const [districtSelectedValue,setDistrictSelectedValue]=useState(""); 
+    
+        const [townOptionsNew,setTownoptionsnew]=useState("");            //town
+        const [townSelectedLabel,setTownSelectedLabel]=useState("");
+        const [townSelectedValue,setTownSelectedValue]=useState(""); 
+    
+    
+        const [property_Type, setPropertyType] = useState("");
+        const [transactiontype, setTransactionType] = useState("");
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
     const townOptionsArray = [];
-
+   const {operation} =useParams();
+     const {uniqueID} = useParams();
     const navigate = useNavigate();
 
     //const now = 80;
 
     //const data = JSON.parse(fs.readFileSync("../../json/places.json"));
 
-
+// alert(uniqueID)
     const addState = async (e) => {
       //ssalert("Paulsin");
 
@@ -158,7 +176,8 @@ const AddProperty = (props) => {
     const handleStateSelection = (e) => {
 
       setStateNameSelectedID(e.value);
-      
+      setStateSelectedLabel(e.label)
+      setStateSelectedValue(e.value)
       var districtOptionsArrayTemp = [];
 
       //alert(stateNameSelectedID);
@@ -178,6 +197,8 @@ const AddProperty = (props) => {
     const handleDistrictSelection = (e) => {
 
       var townOptionsArrayTemp = [];
+      setDistrictSelectedLabel(e.label)
+      setDistrictSelectedValue(e.value)
 
       setDistrictNameSelectedID(e.value);
 
@@ -194,6 +215,8 @@ const AddProperty = (props) => {
 
     const handleTownSelection = (e) => {
       setTownNameSelectedID(e.value);
+      setTownSelectedLabel(e.label)
+      setTownSelectedValue(e.value)
     }
 
     const addDistrict = async (e) => {
@@ -539,18 +562,197 @@ const AddProperty = (props) => {
       }
     };
 
+
+    function getPropertyData(){
+      //  alert(uniqueID)
+      axios.get(Url+"property/individualProperty/"+uniqueID)
+      .then((res)=>{
+          setTransactionTypeSelected(res.data.transactionType)
+          setPropertyTypeSelected(res.data.propertyType)
+          setSelectedStateFunction(res.data.stateID)
+          setSelectedDistrictFunction(res.data.districtID)
+          setSelectedTownFunction(res.data.townID)
+      })
+  }
+  function setSelectedStateFunction(selectedStateFunParam) {
+    //  alert(selectedStateFunParam);
+    axios
+      .get(Url+"location/states",
+    )
+      .then((res) => {
+        // let batchNumberOptionsInitial = "";
+        // alert("anu")
+        res.data.map(data => {
+            if(data._id === selectedStateFunParam) {
+                // alert("hjjj")
+            setStateSelectedLabel(data.stateName);
+            setStateSelectedValue(data._id);
+            }
+      });
+  
+    });
+}
+
+function  setSelectedDistrictFunction(selectedDistrictFunParam){
+    axios
+    .get(Url+"location/districts",
+    )
+    .then((res) => {
+      // let batchNumberOptionsInitial = "";
+      // alert("anu")
+      res.data.map(data => {
+          if(data._id === selectedDistrictFunParam) {
+              // alert("hjjj")
+          setDistrictSelectedLabel(data.districtName);
+          setDistrictSelectedValue(data._id);
+          }
+    });
+
+  });
+}
+
+function  setSelectedTownFunction(selectedTownFunParam){
+    // alert(selectedTownFunParam)
+    axios
+    .get(Url+"location/towns",
+    )
+    .then((res) => {
+      // let batchNumberOptionsInitial = "";
+      // alert("anu")
+      res.data.map(data => {
+          if(data._id === selectedTownFunParam) {
+              // alert("hjjj")
+          setTownSelectedLabel(data.townName);
+          setTownSelectedValue(data._id);
+          }
+    });
+
+  });
+}
+
+const editProperty= async (e) => {
+  // alert(uniqueID)
+  // alert(propertyTypeSelected)
+  // alert(transactionTypeSelected)
+  // alert(stateSelectedValue)
+  // alert(districtSelectedValue)
+  // alert(townSelectedValue)
+   axios.post(Url+"property/editproperty",
+       {
+           "propertyID":uniqueID,
+           "propertyType":propertyTypeSelected,
+           "transactionType":transactionTypeSelected,
+           "stateID":stateSelectedValue,
+           "districtID":districtSelectedValue,
+           "townID":townSelectedValue
+
+
+       }
+   )
+   .then((res)=>{
+       alert('haiiii')
+   })
+}
     useEffect(() => {
       //console.log('i fire once');
       //setItems(data);
-      fetchStates();
-      fetchDistricts();
-      fetchTowns();
 
+        fetchStates();
+        fetchDistricts();
+        fetchTowns();
+     
+    
+      if(operation=="edit"){
+        getPropertyData();
+      }
       //test();
 
     }, []);
 
 
+    if(operation=="new"){
+      var propertywidget=<Select
+        options={propertyTypes}
+        onChange={handlePropertySelection}
+      />
+      var transactiontypewidget= <Select
+        options={transactionType}
+        onChange={handleTransactionTypeSelection}
+      />
+      var statewidget= <Select
+      //defaultValue={{ value: 'Rent', label: 'Rent' }}
+        onChange={handleStateSelection}
+        options={stateOptions}
+      />
+      var addstatelabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a state</label>
+      var addstatenamewidget= <input type="name" class="form-control" id="name" placeholder="Enter state name" name="name" value={stateName} required onChange={(e) => setStateName(e.target.value)}/>
+      var addstatecodewidget=<input type="name" class="form-control" id="name" placeholder="Enter state code" name="name" value={stateCode} required onChange={(e) => setStateCode(e.target.value)}/>
+      var addstatebuttonwidget=<button type="submit" class="btn btn-primary" onClick={addState}>{addStateButtonStatus}</button>
+
+      var districtwidget=  <Select
+      //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      //onChange={handleSubmit}
+        onChange={handleDistrictSelection}
+        options={districtOptions}
+      />
+      var adddistrictlabelwidget=  <label for="inputPassword3" class="col-sm-2 col-form-label">Add a district</label>
+      var adddistrictnamewidget=  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
+      var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
+      var adddistrictbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addDistrict}>{addDistrictButtonStatus}</button>
+
+      var townwidget=  <Select
+      //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      //onChange={handleSubmit}
+        onChange={handleTownSelection}
+        options={townOptions}
+      />
+
+      var addtownlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a town</label>
+      var addtownnamewidget= <input type="text" class="form-control" value={townName} placeholder="Enter town name" required onChange={(e) => setTownName(e.target.value)}/>
+      var addtowncodewidget=<input type="text" class="form-control" value={townCode} placeholder="Enter town code" required onChange={(e) => setTownCode(e.target.value)}/>
+      var addtownbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addTown}>{addTownButtonStatus}</button>
+
+      var localitywidget= <input type="text" class="form-control" placeholder="Enter locality name" value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
+      var costwidget=<input type="text" class="form-control" placeholder="Enter cost" required onChange={(e) => setCost(e.target.value)}/>
+      var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
+
+    }
+
+    else if(operation=="edit"){
+      var propertywidget= <Select
+        options={propertyTypes}
+        onChange={handlePropertySelection}
+        value={{ value: propertyTypeSelected, label: propertyTypeSelected}}
+      />
+
+      var transactiontypewidget= <Select
+        options={transactionType}
+        onChange={handleTransactionTypeSelection}
+        value={{ value: transactionTypeSelected, label: transactionTypeSelected }}
+      />
+      var statewidget=  <Select
+              //defaultValue={{ value: 'Rent', label: 'Rent' }}
+        onChange={handleStateSelection}
+        options={stateOptions} value={{label:stateSelectedLabel, value:stateSelectedValue}}
+      />
+      var districtwidget= <Select
+      //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      //onChange={handleSubmit}
+        value={{label:districtSelectedLabel, value:districtSelectedValue}}
+        onChange={handleDistrictSelection}
+        options={districtOptions}
+      />
+      var townwidget= <Select
+      //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      //onChange={handleSubmit}
+        onChange={handleTownSelection}
+        value={{label:townSelectedLabel, value:townSelectedValue}}
+        options={townOptions}
+      />
+      var localitywidget= <input type="text" class="form-control"  value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
+      var costwidget=<input type="text" class="form-control"  value={cost} required onChange={(e) => setCost(e.target.value)}/>
+      var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
+    }
     return(
 
     <div>
@@ -571,10 +773,8 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Property type</label>
 
                 <div class="col-sm-5">
-                  <Select
-                    options={propertyTypes}
-                    onChange={handlePropertySelection}
-                  />
+                  {propertywidget}
+
                 </div>
 
             </div>
@@ -584,10 +784,8 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Sale / Rent</label>
 
                 <div class="col-sm-5">
-                  <Select
-                    options={transactionType}
-                    onChange={handleTransactionTypeSelection}
-                  />
+                 
+                  {transactiontypewidget}
                 </div>
             </div>
 
@@ -595,27 +793,24 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">State</label>
 
                 <div class="col-sm-5">
-                  <Select
-                    //defaultValue={{ value: 'Rent', label: 'Rent' }}
-                    onChange={handleStateSelection}
-                    options={stateOptions}
-                  />
+                  {statewidget}
+
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Add a state</label>
+               {addstatelabelwidget}
 
                 <div class="col-sm-5">
-                  <input type="name" class="form-control" id="name" placeholder="Enter state name" name="name" value={stateName} required onChange={(e) => setStateName(e.target.value)}/>
+                 {addstatenamewidget}
                 </div>
 
                 <div class="col-sm-3">
-                  <input type="name" class="form-control" id="name" placeholder="Enter state code" name="name" value={stateCode} required onChange={(e) => setStateCode(e.target.value)}/>
+                  {addstatecodewidget}
                 </div>
 
                 <div class="col-sm-2">
-                  <button type="submit" class="btn btn-primary" onClick={addState}>{addStateButtonStatus}</button>
+                  {addstatebuttonwidget}
                 </div>
             </div>
 
@@ -624,28 +819,24 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">District</label>
 
                 <div class="col-sm-5">
-                  <Select
-                    //defaultValue={{ value: 'Rent', label: 'Rent' }}
-                    //onChange={handleSubmit}
-                    onChange={handleDistrictSelection}
-                    options={districtOptions}
-                  />
+                
+                  {districtwidget}
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Add a district</label>
+              {adddistrictlabelwidget}
 
                 <div class="col-sm-5">
-                  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
+                  {adddistrictnamewidget}
                 </div>
 
                 <div class="col-sm-3">
-                  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
+                  {adddistrictcodewidget}
                 </div>
 
                 <div class="col-sm-2">
-                  <button type="submit" class="btn btn-primary" onClick={addDistrict}>{addDistrictButtonStatus}</button>
+                  {adddistrictbuttonwidget}
                 </div>
             </div>
 
@@ -653,36 +844,33 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Town</label>
 
                 <div class="col-sm-5">
-                  <Select
-                    //defaultValue={{ value: 'Rent', label: 'Rent' }}
-                    //onChange={handleSubmit}
-                    onChange={handleTownSelection}
-                    options={townOptions}
-                  />
+                  {townwidget}
+
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Add a town</label>
+                {addtownlabelwidget}
 
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" value={townName} placeholder="Enter town name" required onChange={(e) => setTownName(e.target.value)}/>
+                  {addtownnamewidget}
                 </div>
 
                 <div class="col-sm-3">
-                  <input type="text" class="form-control" value={townCode} placeholder="Enter town code" required onChange={(e) => setTownCode(e.target.value)}/>
+                  {addtowncodewidget}
                 </div>
 
                 <div class="col-sm-2">
-                  <button type="submit" class="btn btn-primary" onClick={addTown}>{addTownButtonStatus}</button>
+                  {addtownbuttonwidget}
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Add a locality</label>
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Locality</label>
 
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" placeholder="Enter locality name" value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
+                 
+                  {localitywidget}
                 </div>
             </div>
 
@@ -690,11 +878,12 @@ const AddProperty = (props) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
 
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" placeholder="Enter cost" value={cost} required onChange={(e) => setCost(e.target.value)}/>
+                  {costwidget}
+
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
+            {savebuttonwidget}
           
         </div>
 

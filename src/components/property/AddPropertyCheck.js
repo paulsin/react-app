@@ -11,7 +11,7 @@ import Loading from "../common/Loading";
 //import Functions from "../common/Functions";
 import { fetchLoggedDataCommon } from "../common/Functions";
 import AddProperty from "./AddProperty";
-import EditProperty from "./EditProperty";
+
 
 
 
@@ -35,7 +35,7 @@ const AddPropertyCheck = () => {
     ///   For navigate function
     const navigate = useNavigate();
 
-    const {newID} = useParams();
+    const {uniqueID} = useParams();
     const {operation} =useParams();
     //const functionObj = Functions();
 
@@ -59,12 +59,10 @@ const AddPropertyCheck = () => {
           // alert("Logged In");
           //navigate('/frontend/profile');
           //  alert(operation)
-            if(operation=="new"){
+         
               setSelectedDIV(<AddProperty/>);
-            }
-            else{
-              setSelectedDIV(<EditProperty/>)
-            }
+     
+         
               
            
         }
