@@ -11,7 +11,7 @@ import Loading from "../common/Loading";
 //import Functions from "../common/Functions";
 import { fetchLoggedDataCommon } from "../common/Functions";
 import AddProperty from "./AddProperty";
-import EditProperty from "./EditProperty";
+
 
 
 
