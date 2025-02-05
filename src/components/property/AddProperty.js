@@ -66,7 +66,8 @@ const AddProperty = (props) => {
     const [files, setFiles] = useState([]);
    
 
-     const [stateOptionsNew,setStateoptionsnew]=useState("");            //state
+     const [stateOptionsNew,setStateoptionsnew]=useState("");   
+     const [stateid,setStateid]=useState("");           //state
         const [stateSelectedLabel,setStateSelectedLabel]=useState("");
         const [stateSelectedValue,setStateSelectedValue]=useState("");
         
@@ -565,16 +566,46 @@ const AddProperty = (props) => {
 
     function getPropertyData(){
       //  alert(uniqueID)
+      let districtOptionsload=[];
+      let townOptionsload=[];
       axios.get(Url+"property/individualProperty/"+uniqueID)
       .then((res)=>{
           setTransactionTypeSelected(res.data.transactionType)
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
+          // setStateid(res.data.stateID);
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
+          districtOptionsOriginal.map(key => {
+            // alert(stateid)
+            //alert(key.stateID)
+              if(key.stateID ===res.data.stateID) {
+              //  alert(key.label);
+                districtOptionsload.push({ value: key.value, label: key.label });
+              }
+              //stateOptionsArray.push({ value: key._id, label: key.stateName });           
+            });
+          
+            setDistrictOptions(districtOptionsload); 
+
+            townOptionsOriginal.map(key => {
+              //alert(key.stateID)
+              if(key.stateID == res.data.stateID && key.districtID === res.data.districtID) {
+                //alert(key.label);
+                townOptionsload.push({ value: key.value, label: key.label });
+              }
+              //stateOptionsArray.push({ value: key._id, label: key.stateName });           
+            });
+      
+            setTownOptions(townOptionsload);  
+       
       })
+          
+
+
   }
   function setSelectedStateFunction(selectedStateFunParam) {
+    var districtOptionsArrayTemp=[];
     //  alert(selectedStateFunParam);
     axios
       .get(Url+"location/states",
@@ -589,8 +620,11 @@ const AddProperty = (props) => {
             setStateSelectedValue(data._id);
             }
       });
+      
   
     });
+
+
 }
 
 function  setSelectedDistrictFunction(selectedDistrictFunParam){
@@ -629,7 +663,10 @@ function  setSelectedTownFunction(selectedTownFunParam){
 
   });
 }
-
+// function getDistrictsonload(){
+//   const districtOptionsload=[]
+ 
+// }
 const editProperty= async (e) => {
   // alert(uniqueID)
   // alert(propertyTypeSelected)
@@ -664,6 +701,8 @@ const editProperty= async (e) => {
     
       if(operation=="edit"){
         getPropertyData();
+        
+      
       }
       //test();
 
@@ -735,6 +774,10 @@ const editProperty= async (e) => {
         onChange={handleStateSelection}
         options={stateOptions} value={{label:stateSelectedLabel, value:stateSelectedValue}}
       />
+      var addstatelabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a state</label>
+      var addstatenamewidget= <input type="name" class="form-control" id="name" placeholder="Enter state name" name="name" value={stateName} required onChange={(e) => setStateName(e.target.value)}/>
+      var addstatecodewidget=<input type="name" class="form-control" id="name" placeholder="Enter state code" name="name" value={stateCode} required onChange={(e) => setStateCode(e.target.value)}/>
+      var addstatebuttonwidget=<button type="submit" class="btn btn-primary" onClick={addState}>{addStateButtonStatus}</button>
       var districtwidget= <Select
       //defaultValue={{ value: 'Rent', label: 'Rent' }}
       //onChange={handleSubmit}
@@ -742,6 +785,10 @@ const editProperty= async (e) => {
         onChange={handleDistrictSelection}
         options={districtOptions}
       />
+      var adddistrictlabelwidget=  <label for="inputPassword3" class="col-sm-2 col-form-label">Add a district</label>
+      var adddistrictnamewidget=  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
+      var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
+      var adddistrictbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addDistrict}>{addDistrictButtonStatus}</button>
       var townwidget= <Select
       //defaultValue={{ value: 'Rent', label: 'Rent' }}
       //onChange={handleSubmit}
@@ -749,6 +796,11 @@ const editProperty= async (e) => {
         value={{label:townSelectedLabel, value:townSelectedValue}}
         options={townOptions}
       />
+      var addtownlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a town</label>
+      var addtownnamewidget= <input type="text" class="form-control" value={townName} placeholder="Enter town name" required onChange={(e) => setTownName(e.target.value)}/>
+      var addtowncodewidget=<input type="text" class="form-control" value={townCode} placeholder="Enter town code" required onChange={(e) => setTownCode(e.target.value)}/>
+      var addtownbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addTown}>{addTownButtonStatus}</button>
+
       var localitywidget= <input type="text" class="form-control"  value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
       var costwidget=<input type="text" class="form-control"  value={cost} required onChange={(e) => setCost(e.target.value)}/>
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
