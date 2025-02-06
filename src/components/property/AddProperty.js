@@ -12,6 +12,8 @@ import { transactionType } from "../../constants/global";
 import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
 import Compressor from 'compressorjs';
+import AddPropertyTypesAsComponent from "./AddPropertyTypesAsComponent";
+
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -29,7 +31,7 @@ const AddProperty = (props) => {
     const [stateName, setStateName] = useState("");
     const [stateCode, setStateCode] = useState("");
 
-    const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
+     const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
     const [transactionTypeSelected, setTransactionTypeSelected] = useState("");
 
     const [stateNameSelectedID, setStateNameSelectedID] = useState("");
@@ -576,34 +578,41 @@ const AddProperty = (props) => {
           // setStateid(res.data.stateID);
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
-          districtOptionsOriginal.map(key => {
+
+          axios
+          .get(Url+"location/districts",
+          )
+        .then((res1) => {
+          // alert(res1.data.districtID)
+          res1.data.map(key => {
             // alert(stateid)
             //alert(key.stateID)
               if(key.stateID ===res.data.stateID) {
-              //  alert(key.label);
-                districtOptionsload.push({ value: key.value, label: key.label });
+               //alert(key.label);
+                districtOptionsload.push({ value: key.districtID, label:key.districtName });
               }
               //stateOptionsArray.push({ value: key._id, label: key.stateName });           
             });
+        })
           
-            setDistrictOptions(districtOptionsload); 
-
-            townOptionsOriginal.map(key => {
+        setDistrictOptions(districtOptionsload); 
+        
+        axios
+        .get(Url+"location/towns",
+        )
+        .then((res2) => {
+          res2.data.map(key => {
               //alert(key.stateID)
-              if(key.stateID == res.data.stateID && key.districtID === res.data.districtID) {
+            if(key.stateID == res.data.stateID && key.districtID === res.data.districtID) {
                 //alert(key.label);
-                townOptionsload.push({ value: key.value, label: key.label });
-              }
+              townOptionsload.push({ value: key.townID, label: key.townName });
+            }
               //stateOptionsArray.push({ value: key._id, label: key.stateName });           
-            });
-      
-            setTownOptions(townOptionsload);  
-       
+          });
+        })
+        setTownOptions(townOptionsload);    
       })
-          
-
-
-  }
+    }
   function setSelectedStateFunction(selectedStateFunParam) {
     var districtOptionsArrayTemp=[];
     //  alert(selectedStateFunParam);
@@ -710,10 +719,11 @@ const editProperty= async (e) => {
 
 
     if(operation=="new"){
-      var propertywidget=<Select
-        options={propertyTypes}
-        onChange={handlePropertySelection}
-      />
+      var propertywidget=<AddPropertyTypesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} />
+      // <Select
+      //   options={propertyTypes}
+      //   onChange={handlePropertySelection}
+      // />
       var transactiontypewidget= <Select
         options={transactionType}
         onChange={handleTransactionTypeSelection}
@@ -758,11 +768,12 @@ const editProperty= async (e) => {
     }
 
     else if(operation=="edit"){
-      var propertywidget= <Select
-        options={propertyTypes}
-        onChange={handlePropertySelection}
-        value={{ value: propertyTypeSelected, label: propertyTypeSelected}}
-      />
+      var propertywidget= <AddPropertyTypesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} />
+      // <Select
+      //   options={propertyTypes}
+      //   onChange={handlePropertySelection}
+      //   value={{ value: propertyTypeSelected, label: propertyTypeSelected}}
+      // />
 
       var transactiontypewidget= <Select
         options={transactionType}
