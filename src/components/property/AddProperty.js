@@ -217,6 +217,7 @@ const AddProperty = (props) => {
     }
 
     const handleTownSelection = (e) => {
+      alert(e.value);
       setTownNameSelectedID(e.value);
       setTownSelectedLabel(e.label)
       setTownSelectedValue(e.value)
@@ -356,8 +357,11 @@ const AddProperty = (props) => {
             response.data.map(key => {
                 districtOptionsArray.push({ value: key._id, label: key.districtName, stateID : key.stateID });           
             });
+
+            if(operation === "new") {
+              setDistrictOptions(districtOptionsArray);
+            }
             
-            setDistrictOptions(districtOptionsArray);
             setDistrictOptionsOriginal(districtOptionsArray);
           })
           .catch(function (error) {
@@ -380,8 +384,9 @@ const AddProperty = (props) => {
             response.data.map(key => {
                 townOptionsArray.push({ value: key._id, label: key.townName, stateID : key.stateID, districtID : key.districtID });           
             });
-            
-            setTownOptions(townOptionsArray);
+            if(operation === "new") {
+              setTownOptions(townOptionsArray);
+            }
             setTownOptionsOriginal(townOptionsArray);
           })
           .catch(function (error) {
@@ -453,116 +458,6 @@ const AddProperty = (props) => {
       }
 
 
-    };
-
-    const handleImageChange = async (event) => {
-      //alert("Paulsin");
-      //alert(event.target.files);
-      //setFiles(event.target.files);
-
-      let fileTemp = [];
-
-      alert(event.target.files.length);
-
-      for(let i=0;i<event.target.files.length;i++) {
-
-        new Compressor(event.target.files[i], {
-          quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
-          width: 640,
-          success: (compressedResult) => {
-            // compressedResult has the compressed file.
-            // Use the compressed file to upload the images to your server.        
-            //setCompressedFile(compressedResult);
-            //alert(compressedResult);
-            fileTemp.push(compressedResult);
-          },
-        });
-
-        setFiles(fileTemp);
-      }
-
-      /*
-      const formData = new FormData();
-      formData.append("file", file);
-
-      await axios
-      .post(addPropertyImagesURL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-      })
-      .then((response) => {
-		// handle the response
-        console.log(response);
-      })
-      .catch((error) => {
-        // handle errors
-        console.log(error);
-      });
-*/
-      /*
-
-      const file = e.target.files[0];
-      alert(file);
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append("upload_preset", presetKey);
-      axios.post(addPropertyImagesURL,
-        formData, {
-        headers : {
-          "enctype":"multipart/form-data"
-        },
-        onUploadProgress: e => {
-          alert(Math.round((e.loaded/e.total)*100));
-          setUploadProgressValue(Math.round((e.loaded/e.total)*100));
-        }
-      }
-      ).then(res => setImageUrl(res.data.secure_url))
-      .catch(err => console.log(err));
-*/
-    }
-
-    const uploadImageSubmit =  async (e) => {
-      const formData = new FormData();
-
-      //alert(files.length);
-      for (let i = 0; i < files.length; i++) {
-        formData.append('image', files[i], files[i].name);
-      }
-      
-      //formData.append('image', compressedFile , compressedFile.name);
-
-      //formData.append('image', files);
-
-      await axios.post(addPropertyImagesURL,
-        formData, {
-        headers : {
-          "Content-Type":"multipart/form-data"
-        },
-        onUploadProgress: e => {
-          //alert(Math.round((e.loaded/e.total)*100));
-          setUploadProgressValue(Math.round((e.loaded/e.total)*100));
-        }
-      }
-      ).then(res => setImageUrl(res.data.secure_url))
-      .catch(err => console.log(err));
-    }
-
-    const test =  async (e) => {
-      try {
-        const response = await axios.get('https://haberoceanstock.com/backend/location',   
-            { withCredentials: true }
-          )
-          .then(function (response) {
-            alert(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          }); 
-        
-      } catch(error) {
-        console.error("Error posting data:", error);
-      }
     };
 
 
@@ -703,15 +598,14 @@ const editProperty= async (e) => {
       //console.log('i fire once');
       //setItems(data);
 
-        fetchStates();
-        fetchDistricts();
-        fetchTowns();
-     
+      fetchStates();
+
+      fetchDistricts();
+      fetchTowns(); 
+  
     
       if(operation=="edit"){
         getPropertyData();
-        
-      
       }
       //test();
 
