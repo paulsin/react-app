@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Select from 'react-select';
 // import AddStatesAsComponent from "./AddStatesAsComponent";
-const AddDistrictsAsComponent = ({districtOptions,setDistrictNameSelectedID,setDistrictSelectedLabel,setDistrictSelectedValue,
+const AddPropertyDistrictsAsComponent = ({districtOptions,setDistrictNameSelectedID,setDistrictSelectedLabel,setDistrictSelectedValue,
     townOptionsOriginal,setTownOptions,setStateNameSelectedID,stateNameSelectedID,operation,districtSelectedLabel,districtSelectedValue}) => {
         // alert(stateNameSelectedID)
     const handleDistrictSelection = (e) => {
@@ -16,8 +16,9 @@ const AddDistrictsAsComponent = ({districtOptions,setDistrictNameSelectedID,setD
         townOptionsOriginal.map(key => {
         //    alert(key.districtID)
         //    alert("evalue",e.value)
+          //alert(stateNameSelectedID); 
           if(key.stateID == stateNameSelectedID && key.districtID == e.value) {
-            alert(key.label);
+            //alert(key.label);
             townOptionsArrayTemp.push({ value: key.value, label: key.label });
           }
           //stateOptionsArray.push({ value: key._id, label: key.stateName });           
@@ -48,4 +49,4 @@ const AddDistrictsAsComponent = ({districtOptions,setDistrictNameSelectedID,setD
   )
 }
 
-export default AddDistrictsAsComponent
+export default AddPropertyDistrictsAsComponent

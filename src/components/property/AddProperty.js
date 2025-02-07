@@ -15,7 +15,7 @@ import Compressor from 'compressorjs';
 import AddPropertyTypesAsComponent from "./AddPropertyTypesAsComponent";
 import AddTransactionTypeAsComponent from "./AddTransactionTypeAsComponent";
 import AddStatesAsComponent from "./AddStatesAsComponent";
-import AddDistrictsAsComponent from "./AddDistrictsAsComponent";
+import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 
 
 var newUrl = Url + 'location/state';
@@ -180,11 +180,8 @@ const AddProperty = (props) => {
     };
 
 
-
-
-
     const handleTownSelection = (e) => {
-      alert(e.value);
+      //alert(e.value);
       setTownNameSelectedID(e.value);
       setTownSelectedLabel(e.label)
       setTownSelectedValue(e.value)
@@ -438,6 +435,7 @@ const AddProperty = (props) => {
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
           // setStateid(res.data.stateID);
+          setStateNameSelectedID(res.data.stateID);
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
 
@@ -559,7 +557,7 @@ const editProperty= async (e) => {
        }
    )
    .then((res)=>{
-       alert('haiiii')
+       //alert('haiiii')
    })
 }
     useEffect(() => {
@@ -718,7 +716,7 @@ const editProperty= async (e) => {
 
                 <div class="col-sm-5">
                 {/* {districtwidget} */}
-                  <AddDistrictsAsComponent districtOptions={districtOptions} setDistrictNameSelectedID={setDistrictNameSelectedID} setDistrictSelectedLabel={setDistrictSelectedLabel} setDistrictSelectedValue={setDistrictSelectedValue}
+                  <AddPropertyDistrictsAsComponent districtOptions={districtOptions} setDistrictNameSelectedID={setDistrictNameSelectedID} setDistrictSelectedLabel={setDistrictSelectedLabel} setDistrictSelectedValue={setDistrictSelectedValue}
                   townOptionsOriginal={townOptionsOriginal} setTownOptions={setTownOptions} setStateNameSelectedID={setStateNameSelectedID} stateNameSelectedID={stateNameSelectedID} operation={operation} districtSelectedLabel={districtSelectedLabel} districtSelectedValue={districtSelectedValue}/>
                 </div>
             </div>
