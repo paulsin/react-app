@@ -13,6 +13,9 @@ import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
 import Compressor from 'compressorjs';
 import AddPropertyTypesAsComponent from "./AddPropertyTypesAsComponent";
+import AddTransactionTypeAsComponent from "./AddTransactionTypeAsComponent";
+import AddStatesAsComponent from "./AddStatesAsComponent";
+import AddDistrictsAsComponent from "./AddDistrictsAsComponent";
 
 
 var newUrl = Url + 'location/state';
@@ -69,7 +72,7 @@ const AddProperty = (props) => {
    
 
      const [stateOptionsNew,setStateoptionsnew]=useState("");   
-     const [stateid,setStateid]=useState("");           //state
+            //state
         const [stateSelectedLabel,setStateSelectedLabel]=useState("");
         const [stateSelectedValue,setStateSelectedValue]=useState("");
         
@@ -176,45 +179,9 @@ const AddProperty = (props) => {
       }
     };
 
-    const handleStateSelection = (e) => {
 
-      setStateNameSelectedID(e.value);
-      setStateSelectedLabel(e.label)
-      setStateSelectedValue(e.value)
-      var districtOptionsArrayTemp = [];
 
-      //alert(stateNameSelectedID);
 
-      districtOptionsOriginal.map(key => {
-        if(key.stateID == e.value) {
-          //alert(key.label);
-          districtOptionsArrayTemp.push({ value: key.value, label: key.label });
-        }
-        //stateOptionsArray.push({ value: key._id, label: key.stateName });           
-      });
-
-      setDistrictOptions(districtOptionsArrayTemp);
-
-    }
-
-    const handleDistrictSelection = (e) => {
-
-      var townOptionsArrayTemp = [];
-      setDistrictSelectedLabel(e.label)
-      setDistrictSelectedValue(e.value)
-
-      setDistrictNameSelectedID(e.value);
-
-      townOptionsOriginal.map(key => {
-        if(key.stateID == stateNameSelectedID && key.districtID == e.value) {
-          //alert(key.label);
-          townOptionsArrayTemp.push({ value: key.value, label: key.label });
-        }
-        //stateOptionsArray.push({ value: key._id, label: key.stateName });           
-      });
-
-      setTownOptions(townOptionsArrayTemp);
-    }
 
     const handleTownSelection = (e) => {
       alert(e.value);
@@ -399,13 +366,13 @@ const AddProperty = (props) => {
       }
     };
 
-    const handlePropertySelection = (e) => {
-      setPropertyTypeSelected(e.value);
-    }
+    // const handlePropertySelection = (e) => {
+    //   setPropertyTypeSelected(e.value);
+    // }
 
-    const handleTransactionTypeSelection = (e) => {
-      setTransactionTypeSelected(e.value);
-    }
+    // const handleTransactionTypeSelection = (e) => {
+    //   setTransactionTypeSelected(e.value);
+    // }
 
     const submitProperty = async (e) => {
       //alert("Paulsin");
@@ -484,7 +451,7 @@ const AddProperty = (props) => {
             //alert(key.stateID)
               if(key.stateID ===res.data.stateID) {
                //alert(key.label);
-                districtOptionsload.push({ value: key.districtID, label:key.districtName });
+                districtOptionsload.push({ value: key._id, label:key.districtName,stateID:key.stateID });
               }
               //stateOptionsArray.push({ value: key._id, label: key.stateName });           
             });
@@ -500,7 +467,7 @@ const AddProperty = (props) => {
               //alert(key.stateID)
             if(key.stateID == res.data.stateID && key.districtID === res.data.districtID) {
                 //alert(key.label);
-              townOptionsload.push({ value: key.townID, label: key.townName });
+              townOptionsload.push({ value: key._id, label: key.townName, districtID:key.districtID,stateID:key.stateID });
             }
               //stateOptionsArray.push({ value: key._id, label: key.stateName });           
           });
@@ -532,6 +499,7 @@ const AddProperty = (props) => {
 }
 
 function  setSelectedDistrictFunction(selectedDistrictFunParam){
+  // alert(selectedDistrictFunParam)
     axios
     .get(Url+"location/districts",
     )
@@ -613,31 +581,18 @@ const editProperty= async (e) => {
 
 
     if(operation=="new"){
-      var propertywidget=<AddPropertyTypesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} />
-      // <Select
-      //   options={propertyTypes}
-      //   onChange={handlePropertySelection}
-      // />
-      var transactiontypewidget= <Select
-        options={transactionType}
-        onChange={handleTransactionTypeSelection}
-      />
-      var statewidget= <Select
-      //defaultValue={{ value: 'Rent', label: 'Rent' }}
-        onChange={handleStateSelection}
-        options={stateOptions}
-      />
+
+
       var addstatelabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a state</label>
       var addstatenamewidget= <input type="name" class="form-control" id="name" placeholder="Enter state name" name="name" value={stateName} required onChange={(e) => setStateName(e.target.value)}/>
       var addstatecodewidget=<input type="name" class="form-control" id="name" placeholder="Enter state code" name="name" value={stateCode} required onChange={(e) => setStateCode(e.target.value)}/>
       var addstatebuttonwidget=<button type="submit" class="btn btn-primary" onClick={addState}>{addStateButtonStatus}</button>
 
-      var districtwidget=  <Select
-      //defaultValue={{ value: 'Rent', label: 'Rent' }}
-      //onChange={handleSubmit}
-        onChange={handleDistrictSelection}
-        options={districtOptions}
-      />
+      // var districtwidget=  <Select
+
+      //   onChange={handleDistrictSelection}
+      //   options={districtOptions}
+      // />
       var adddistrictlabelwidget=  <label for="inputPassword3" class="col-sm-2 col-form-label">Add a district</label>
       var adddistrictnamewidget=  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
       var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
@@ -662,34 +617,19 @@ const editProperty= async (e) => {
     }
 
     else if(operation=="edit"){
-      var propertywidget= <AddPropertyTypesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} />
-      // <Select
-      //   options={propertyTypes}
-      //   onChange={handlePropertySelection}
-      //   value={{ value: propertyTypeSelected, label: propertyTypeSelected}}
-      // />
+     
 
-      var transactiontypewidget= <Select
-        options={transactionType}
-        onChange={handleTransactionTypeSelection}
-        value={{ value: transactionTypeSelected, label: transactionTypeSelected }}
-      />
-      var statewidget=  <Select
-              //defaultValue={{ value: 'Rent', label: 'Rent' }}
-        onChange={handleStateSelection}
-        options={stateOptions} value={{label:stateSelectedLabel, value:stateSelectedValue}}
-      />
+
       var addstatelabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a state</label>
       var addstatenamewidget= <input type="name" class="form-control" id="name" placeholder="Enter state name" name="name" value={stateName} required onChange={(e) => setStateName(e.target.value)}/>
       var addstatecodewidget=<input type="name" class="form-control" id="name" placeholder="Enter state code" name="name" value={stateCode} required onChange={(e) => setStateCode(e.target.value)}/>
       var addstatebuttonwidget=<button type="submit" class="btn btn-primary" onClick={addState}>{addStateButtonStatus}</button>
-      var districtwidget= <Select
-      //defaultValue={{ value: 'Rent', label: 'Rent' }}
-      //onChange={handleSubmit}
-        value={{label:districtSelectedLabel, value:districtSelectedValue}}
-        onChange={handleDistrictSelection}
-        options={districtOptions}
-      />
+      // var districtwidget= <Select
+
+      //   value={{label:districtSelectedLabel, value:districtSelectedValue}}
+      //   onChange={handleDistrictSelection}
+      //   options={districtOptions}
+      // />
       var adddistrictlabelwidget=  <label for="inputPassword3" class="col-sm-2 col-form-label">Add a district</label>
       var adddistrictnamewidget=  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
       var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
@@ -730,8 +670,7 @@ const editProperty= async (e) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Property type</label>
 
                 <div class="col-sm-5">
-                  {propertywidget}
-
+                  <AddPropertyTypesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} />
                 </div>
 
             </div>
@@ -742,7 +681,7 @@ const editProperty= async (e) => {
 
                 <div class="col-sm-5">
                  
-                  {transactiontypewidget}
+                  <AddTransactionTypeAsComponent setTransactionTypeSelected={setTransactionTypeSelected} transactionTypeSelected={transactionTypeSelected} operation={operation}/>
                 </div>
             </div>
 
@@ -750,7 +689,9 @@ const editProperty= async (e) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">State</label>
 
                 <div class="col-sm-5">
-                  {statewidget}
+                  <AddStatesAsComponent stateOptions={stateOptions} setStateNameSelectedID={setStateNameSelectedID} setStateSelectedLabel={setStateSelectedLabel} 
+                  setStateSelectedValue={setStateSelectedValue} stateSelectedLabel={stateSelectedLabel} stateSelectedValue={stateSelectedValue}
+                  districtOptionsOriginal={districtOptionsOriginal} setDistrictOptions={setDistrictOptions} operation={operation}/>
 
                 </div>
             </div>
@@ -776,8 +717,9 @@ const editProperty= async (e) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">District</label>
 
                 <div class="col-sm-5">
-                
-                  {districtwidget}
+                {/* {districtwidget} */}
+                  <AddDistrictsAsComponent districtOptions={districtOptions} setDistrictNameSelectedID={setDistrictNameSelectedID} setDistrictSelectedLabel={setDistrictSelectedLabel} setDistrictSelectedValue={setDistrictSelectedValue}
+                  townOptionsOriginal={townOptionsOriginal} setTownOptions={setTownOptions} setStateNameSelectedID={setStateNameSelectedID} stateNameSelectedID={stateNameSelectedID} operation={operation} districtSelectedLabel={districtSelectedLabel} districtSelectedValue={districtSelectedValue}/>
                 </div>
             </div>
 
