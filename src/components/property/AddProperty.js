@@ -13,9 +13,10 @@ import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
 import Compressor from 'compressorjs';
 import AddPropertyTypesAsComponent from "./AddPropertyTypesAsComponent";
-import AddTransactionTypeAsComponent from "./AddTransactionTypeAsComponent";
-import AddStatesAsComponent from "./AddStatesAsComponent";
+import AddPropertyTransactionTypeAsComponent from "./AddPropertyTransactionTypeAsComponent";
+import AddPropertyStatesAsComponent from "./AddPropertyStatesAsComponent";
 import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
+import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
 
 
 var newUrl = Url + 'location/state';
@@ -180,12 +181,12 @@ const AddProperty = (props) => {
     };
 
 
-    const handleTownSelection = (e) => {
-      //alert(e.value);
-      setTownNameSelectedID(e.value);
-      setTownSelectedLabel(e.label)
-      setTownSelectedValue(e.value)
-    }
+    // const handleTownSelection = (e) => {
+    //   //alert(e.value);
+    //   setTownNameSelectedID(e.value);
+    //   setTownSelectedLabel(e.label)
+    //   setTownSelectedValue(e.value)
+    // }
 
     const addDistrict = async (e) => {
       //alert("Paulsin");
@@ -438,6 +439,7 @@ const AddProperty = (props) => {
           setStateNameSelectedID(res.data.stateID);
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
+          setTownNameSelectedID(res.data.townID)
 
           axios
           .get(Url+"location/districts",
@@ -596,12 +598,12 @@ const editProperty= async (e) => {
       var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
       var adddistrictbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addDistrict}>{addDistrictButtonStatus}</button>
 
-      var townwidget=  <Select
-      //defaultValue={{ value: 'Rent', label: 'Rent' }}
-      //onChange={handleSubmit}
-        onChange={handleTownSelection}
-        options={townOptions}
-      />
+      // var townwidget=  <Select
+      // //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      // //onChange={handleSubmit}
+      //   onChange={handleTownSelection}
+      //   options={townOptions}
+      // />
 
       var addtownlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a town</label>
       var addtownnamewidget= <input type="text" class="form-control" value={townName} placeholder="Enter town name" required onChange={(e) => setTownName(e.target.value)}/>
@@ -632,13 +634,13 @@ const editProperty= async (e) => {
       var adddistrictnamewidget=  <input type="name" class="form-control" value={districtName} placeholder="Enter district name" name="name" required onChange={(e) => setDistrictName(e.target.value)}/>
       var adddistrictcodewidget=  <input type="name" class="form-control" value={districtCode} placeholder="Enter district code" name="name" required onChange={(e) => setDistrictCode(e.target.value)}/>
       var adddistrictbuttonwidget=<button type="submit" class="btn btn-primary" onClick={addDistrict}>{addDistrictButtonStatus}</button>
-      var townwidget= <Select
-      //defaultValue={{ value: 'Rent', label: 'Rent' }}
-      //onChange={handleSubmit}
-        onChange={handleTownSelection}
-        value={{label:townSelectedLabel, value:townSelectedValue}}
-        options={townOptions}
-      />
+      // var townwidget= <Select
+      // //defaultValue={{ value: 'Rent', label: 'Rent' }}
+      // //onChange={handleSubmit}
+      //   onChange={handleTownSelection}
+      //   value={{label:townSelectedLabel, value:townSelectedValue}}
+      //   options={townOptions}
+      // />
       var addtownlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Add a town</label>
       var addtownnamewidget= <input type="text" class="form-control" value={townName} placeholder="Enter town name" required onChange={(e) => setTownName(e.target.value)}/>
       var addtowncodewidget=<input type="text" class="form-control" value={townCode} placeholder="Enter town code" required onChange={(e) => setTownCode(e.target.value)}/>
@@ -679,7 +681,7 @@ const editProperty= async (e) => {
 
                 <div class="col-sm-5">
                  
-                  <AddTransactionTypeAsComponent setTransactionTypeSelected={setTransactionTypeSelected} transactionTypeSelected={transactionTypeSelected} operation={operation}/>
+                  <AddPropertyTransactionTypeAsComponent setTransactionTypeSelected={setTransactionTypeSelected} transactionTypeSelected={transactionTypeSelected} operation={operation}/>
                 </div>
             </div>
 
@@ -687,9 +689,10 @@ const editProperty= async (e) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">State</label>
 
                 <div class="col-sm-5">
-                  <AddStatesAsComponent stateOptions={stateOptions} setStateNameSelectedID={setStateNameSelectedID} setStateSelectedLabel={setStateSelectedLabel} 
+                  <AddPropertyStatesAsComponent stateOptions={stateOptions} setStateNameSelectedID={setStateNameSelectedID} setStateSelectedLabel={setStateSelectedLabel} 
                   setStateSelectedValue={setStateSelectedValue} stateSelectedLabel={stateSelectedLabel} stateSelectedValue={stateSelectedValue}
-                  districtOptionsOriginal={districtOptionsOriginal} setDistrictOptions={setDistrictOptions} operation={operation}/>
+                  districtOptionsOriginal={districtOptionsOriginal} setDistrictOptions={setDistrictOptions} operation={operation} setDistrictSelectedLabel={setDistrictSelectedLabel} 
+                  setDistrictSelectedValue={setDistrictSelectedValue} setTownSelectedLabel={setTownSelectedLabel} setTownSelectedValue={setTownSelectedValue} />
 
                 </div>
             </div>
@@ -717,7 +720,8 @@ const editProperty= async (e) => {
                 <div class="col-sm-5">
                 {/* {districtwidget} */}
                   <AddPropertyDistrictsAsComponent districtOptions={districtOptions} setDistrictNameSelectedID={setDistrictNameSelectedID} setDistrictSelectedLabel={setDistrictSelectedLabel} setDistrictSelectedValue={setDistrictSelectedValue}
-                  townOptionsOriginal={townOptionsOriginal} setTownOptions={setTownOptions} setStateNameSelectedID={setStateNameSelectedID} stateNameSelectedID={stateNameSelectedID} operation={operation} districtSelectedLabel={districtSelectedLabel} districtSelectedValue={districtSelectedValue}/>
+                  townOptionsOriginal={townOptionsOriginal} setTownOptions={setTownOptions} setStateNameSelectedID={setStateNameSelectedID} stateNameSelectedID={stateNameSelectedID} operation={operation} districtSelectedLabel={districtSelectedLabel}
+                   districtSelectedValue={districtSelectedValue} setTownSelectedLabel={setTownSelectedLabel} setTownSelectedValue={setTownSelectedValue}/>
                 </div>
             </div>
 
@@ -741,8 +745,9 @@ const editProperty= async (e) => {
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Town</label>
 
                 <div class="col-sm-5">
-                  {townwidget}
-
+                  {/* {townwidget} */}
+                  <AddPropertyTownsAsComponent townOptions={townOptions} setTownNameSelectedID={setTownNameSelectedID} setTownSelectedLabel={setTownSelectedLabel} setTownSelectedValue={setTownSelectedValue}
+                  operation={operation} townSelectedLabel={townSelectedLabel} townSelectedValue={townSelectedValue}/>
                 </div>
             </div>
 

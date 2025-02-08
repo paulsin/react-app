@@ -3,7 +3,7 @@ import { propertyTypes } from "../../constants/global";
 import Select from 'react-select';
 import { transactionType } from "../../constants/global";
 
-const AddTransactionTypeAsComponent = ({setTransactionTypeSelected,transactionTypeSelected,operation}) => {
+const AddPropertyTransactionTypeAsComponent = ({setTransactionTypeSelected,transactionTypeSelected,operation}) => {
     
     const handleTransactionTypeSelection = (e) => {
         setTransactionTypeSelected(e.value);
@@ -29,4 +29,4 @@ const AddTransactionTypeAsComponent = ({setTransactionTypeSelected,transactionTy
   )
 }
 
-export default AddTransactionTypeAsComponent
+export default AddPropertyTransactionTypeAsComponent

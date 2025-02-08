@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import Select from 'react-select';
 
-const AddStatesAsComponent = ({stateOptions,setStateNameSelectedID,setStateSelectedLabel,setStateSelectedValue,stateSelectedLabel,stateSelectedValue,
-    districtOptionsOriginal,setDistrictOptions,operation}) => {
+const AddPropertyStatesAsComponent = ({stateOptions,setStateNameSelectedID,setStateSelectedLabel,setStateSelectedValue,stateSelectedLabel,stateSelectedValue,
+    districtOptionsOriginal,setDistrictOptions,operation,setDistrictSelectedLabel, setDistrictSelectedValue,setTownSelectedLabel,setTownSelectedValue}) => {
 
     const handleStateSelection = (e) => {
+        // setDistrictOptions("")
+        setDistrictSelectedLabel("");
+        setDistrictSelectedValue("");
+        setTownSelectedLabel("");
+        setTownSelectedValue("");
 
         setStateNameSelectedID(e.value);
         setStateSelectedLabel(e.label)
@@ -46,4 +51,4 @@ const AddStatesAsComponent = ({stateOptions,setStateNameSelectedID,setStateSelec
   )
 }
 
-export default AddStatesAsComponent
+export default AddPropertyStatesAsComponent
