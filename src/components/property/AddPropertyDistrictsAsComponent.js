@@ -3,11 +3,14 @@ import React, { useState, useEffect } from "react";
 import Select from 'react-select';
 // import AddStatesAsComponent from "./AddStatesAsComponent";
 const AddPropertyDistrictsAsComponent = ({districtOptions,setDistrictNameSelectedID,setDistrictSelectedLabel,setDistrictSelectedValue,
-    townOptionsOriginal,setTownOptions,setStateNameSelectedID,stateNameSelectedID,operation,districtSelectedLabel,districtSelectedValue}) => {
+    townOptionsOriginal,setTownOptions,setStateNameSelectedID,stateNameSelectedID,operation,districtSelectedLabel,districtSelectedValue,setTownSelectedLabel,setTownSelectedValue}) => {
         // alert(stateNameSelectedID)
     const handleDistrictSelection = (e) => {
 // alert(e.value)
         var townOptionsArrayTemp = [];
+        setTownSelectedLabel("");
+        setTownSelectedValue("");
+       
         setDistrictSelectedLabel(e.label)
         setDistrictSelectedValue(e.value)
   
