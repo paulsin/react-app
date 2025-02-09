@@ -17,7 +17,7 @@ import AddPropertyTransactionTypeAsComponent from "./AddPropertyTransactionTypeA
 import AddPropertyStatesAsComponent from "./AddPropertyStatesAsComponent";
 import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
-
+import AddPropertyAttributesAsComponent from "./AddPropertyAttributesAsComponent";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -784,6 +784,8 @@ const editProperty= async (e) => {
 
                 </div>
             </div>
+
+            <AddPropertyAttributesAsComponent operation={operation}/>
 
             {savebuttonwidget}
           

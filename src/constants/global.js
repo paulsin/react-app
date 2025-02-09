@@ -13,6 +13,14 @@ const propertyTypes = [
     { value: 'Sale', label: 'Sale' },
   ];
 
+const facingPolarity = [
+    { value: 'North', label: 'North' },
+    { value: 'East', label: 'East' },
+    { value: 'West', label: 'West' },
+    { value: 'South', label: 'South' },
+  ];
+
 export {Url}        
 export {propertyTypes}
 export {transactionType}
+export {facingPolarity}
