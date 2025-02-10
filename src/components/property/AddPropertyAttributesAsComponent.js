@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { facingPolarity } from "../../constants/global";
 import Select from 'react-select';
 
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected, propertyTypeSelected, operation}) => {
    // const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
-   const [isDisabled, setIsDisabled] = useState(false);
+   const [isCarParkingDisabled, setIsCarParkingDisabled] = useState(false);
     const handlePropertySelection = (e) => {
       // alert(e.value)
         setPropertyTypeSelected(e.value);
@@ -13,14 +13,18 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected, propertyType
         //   setIsDisabled(!isDisabled)
         // }
     }
-    //disabled={isDisabled} 
-    // alert(propertyTypeSelected)
-    if(propertyTypeSelected==="Villa"){
-      // alert("haiii")
-      setIsDisabled(!isDisabled)
-      // return;
-      
-    }
+
+    useMemo(() => {
+      //lert("haiii")
+      if(propertyTypeSelected === "Villa") {
+        setIsCarParkingDisabled(true);
+      }
+      else if(propertyTypeSelected === "House") {
+        setIsCarParkingDisabled(false);
+      }
+    }, [propertyTypeSelected])
+
+
     if(operation==="new"){
    
         var facingPolarityWidget=<Select
@@ -38,7 +42,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected, propertyType
         var toiletsWidget=<input type="text" class="form-control" required />;
         
         var carPorchWidget=<input type="checkbox" class="form-check-input" />;
-        var carParkingWidget=<input type="text" class="form-control" disabled={isDisabled} />;
+        var carParkingWidget=<input type="text" class="form-control" disabled={isCarParkingDisabled} />;
         var sitOutWidget=<input type="checkbox" class="form-check-input" required  />;
         var livingAreaWidget=<input type="checkbox"class="form-check-input" required/>;
         var diningHallWidget=<input type="checkbox"class="form-check-input" required/>;
@@ -129,7 +133,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected, propertyType
       </div>
       <label for="inputPassword3" class="col-sm-2 col-form-label">Car Parking</label>
       <div class="col-sm-3">
-        {carParkingWidget}
+
+        <input type="text" class="form-control" disabled={isCarParkingDisabled} />;
       </div>  
     </div>
 
