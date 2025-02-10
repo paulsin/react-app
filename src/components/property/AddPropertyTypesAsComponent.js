@@ -5,9 +5,11 @@ import Select from 'react-select';
 
 const AddPropertyTypesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected,operation}) => {
    // const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
-
+//  const [isDisabled, setIsDisabled] = useState(false);
     const handlePropertySelection = (e) => {
         setPropertyTypeSelected(e.value);
+    
+       
     }
 if(operation==="new"){
     var propertywidget=<Select

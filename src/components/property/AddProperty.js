@@ -88,6 +88,7 @@ const AddProperty = (props) => {
     
         const [property_Type, setPropertyType] = useState("");
         const [transactiontype, setTransactionType] = useState("");
+     
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
@@ -785,7 +786,7 @@ const editProperty= async (e) => {
                 </div>
             </div>
 
-            <AddPropertyAttributesAsComponent operation={operation}/>
+            <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation}/>
 
             {savebuttonwidget}
           
