@@ -5,6 +5,10 @@ const propertyTypes = [
     { value: '', label: 'Property type' },
     { value: 'House', label: 'House' },
     { value: 'Villa', label: 'Villa' },
+    { value: 'Apartment', label: 'Apartment' },
+    { value: 'Flat', label: 'Flat' },
+    { value: 'Plot', label: 'Plot' },
+    { value: 'Land', label: 'Land' },
   ];
 
   const transactionType = [
