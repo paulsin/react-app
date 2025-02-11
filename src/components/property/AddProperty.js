@@ -88,6 +88,8 @@ const AddProperty = (props) => {
     
         const [property_Type, setPropertyType] = useState("");
         const [transactiontype, setTransactionType] = useState("");
+
+        const [selectedRadioCostOption, setSelectedRadioCostOption] = useState('default');
      
 
     const stateOptionsArray = [];
@@ -563,6 +565,11 @@ const editProperty= async (e) => {
        //alert('haiiii')
    })
 }
+
+function handleradioChange(event) {
+  //alert(event.target.value)
+  setSelectedRadioCostOption(event.target.value);
+}
     useEffect(() => {
       //console.log('i fire once');
       //setItems(data);
@@ -613,6 +620,9 @@ const editProperty= async (e) => {
 
       var localitywidget= <input type="text" class="form-control" placeholder="Enter locality name" value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
       var costwidget=<input type="text" class="form-control" placeholder="Enter cost" required onChange={(e) => setCost(e.target.value)}/>
+      var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
+      var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
+      var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
 
     }
@@ -649,6 +659,9 @@ const editProperty= async (e) => {
 
       var localitywidget= <input type="text" class="form-control"  value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
       var costwidget=<input type="text" class="form-control"  value={cost} required onChange={(e) => setCost(e.target.value)}/>
+      var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
+      var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
+      var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
     }
     return(
@@ -776,15 +789,25 @@ const editProperty= async (e) => {
                   {localitywidget}
                 </div>
             </div>
-
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
 
-                <div class="col-sm-5">
+                <div class="col-sm-3">
                   {costwidget}
+                </div>
 
+                <div class="col-sm-3">
+                  {costradio1}&nbsp;Default
+                </div>
+
+                <div class="col-sm-2">
+                  {costradio2}&nbsp;Percent
+                </div>
+                <div class="col-sm-2">
+                  {costradio3}&nbsp; Persquarefeet
                 </div>
             </div>
+            
 
             <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation}/>
 
