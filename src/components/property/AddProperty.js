@@ -375,59 +375,7 @@ const AddProperty = (props) => {
     //   setTransactionTypeSelected(e.value);
     // }
 
-    const submitProperty = async (e) => {
-      //alert("Paulsin");
-      //alert(stateNameSelectedID);
-      //alert(districtNameSelectedID);
-      //alert(townNameSelectedID);
-      //alert();
-
-      if(!propertyTypeSelected) {
-        setAlertContent("Select property type");
-        setAlertClass("alert alert-danger");
-      }
-
-      else if(!transactionTypeSelected) {
-        setAlertContent("Select transaction type");
-        setAlertClass("alert alert-danger");
-      }
-
-      else if(!stateNameSelectedID) {
-        setAlertContent("Select state");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!districtNameSelectedID) {
-        setAlertContent("Select district");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!townNameSelectedID) {
-        setAlertContent("Select town");
-        setAlertClass("alert alert-danger");
-      }
-      
-      else {
-        try {
-          //alert("Paulsin");
-          const response = await axios.post(
-            addPropertyURL,
-            {
-              "propertyType": propertyTypeSelected,    
-              "transactionType": transactionTypeSelected,
-              "stateID": stateNameSelectedID,
-              "districtID": districtNameSelectedID,
-              "townID": townNameSelectedID
-            }     
-          );  
-        
-        } catch(error) {
-          console.error("Error posting data:", error);
-        }
-
-      }
-
-
-    };
-
+   
 
     function getPropertyData(){
       //  alert(uniqueID)
@@ -542,29 +490,7 @@ function  setSelectedTownFunction(selectedTownFunParam){
 //   const districtOptionsload=[]
  
 // }
-const editProperty= async (e) => {
-  // alert(uniqueID)
-  // alert(propertyTypeSelected)
-  // alert(transactionTypeSelected)
-  // alert(stateSelectedValue)
-  // alert(districtSelectedValue)
-  // alert(townSelectedValue)
-   axios.post(Url+"property/editproperty",
-       {
-           "propertyID":uniqueID,
-           "propertyType":propertyTypeSelected,
-           "transactionType":transactionTypeSelected,
-           "stateID":stateSelectedValue,
-           "districtID":districtSelectedValue,
-           "townID":townSelectedValue
 
-
-       }
-   )
-   .then((res)=>{
-       //alert('haiiii')
-   })
-}
 
 function handleradioChange(event) {
   //alert(event.target.value)
@@ -623,7 +549,7 @@ function handleradioChange(event) {
       var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
       var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
       var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
-      var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
+    
 
     }
 
@@ -662,7 +588,7 @@ function handleradioChange(event) {
       var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
       var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
       var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
-      var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
+      
     }
     return(
 
@@ -801,17 +727,19 @@ function handleradioChange(event) {
                 </div>
 
                 <div class="col-sm-2">
-                  {costradio2}&nbsp;Percent
+                  {costradio2}&nbsp;Per Cent
                 </div>
                 <div class="col-sm-2">
-                  {costradio3}&nbsp; Persquarefeet
+                  {costradio3}&nbsp; Per Squarefeet
                 </div>
             </div>
             
 
-            <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation}/>
+            <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} 
+            setAlertContent={setAlertContent } setAlertClass={setAlertClass} transactionTypeSelected={transactionTypeSelected} stateNameSelectedID={stateNameSelectedID} districtNameSelectedID={districtNameSelectedID} 
+            townNameSelectedID={townNameSelectedID} localityName={localityName} cost={cost} stateSelectedValue={stateSelectedValue} districtSelectedValue={districtSelectedValue} townSelectedValue={townSelectedValue} uniqueID={uniqueID}/>
 
-            {savebuttonwidget}
+          
           
         </div>
 
