@@ -274,6 +274,18 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       //alert(townNameSelectedID);
       //alert();
       var postflag=false
+
+      var propertyAttrbutesFlag = true;
+      var propertyTypeSelectedFlag = true;
+      var stateNameSelectedIDFlag = true;
+      var districtNameSelectedIDFlag = true;
+      var townNameSelectedIDFlag = true;
+      var transactionTypeSelectedFlag = true;
+      var plotareaFlag = true;
+      var builtAreaFlag = true;
+      var totalNumberOfFloorsFlag = true;
+      var totalVillasFlag = true;
+
   //     if(postflag===true){
   //       if(carParking!==""){
   //         postflag=true;
@@ -483,6 +495,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   //       postflag=false;
   //   } 
     
+
+  /*
      let alertarray=[];
      var alertcontent;
       if(propertyTypeSelected!==""){
@@ -727,35 +741,122 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       
       }
    
-   
+   */
   
-    
+    if(propertyTypeSelected === "House") {
+
+      if(plotarea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter plot area");
+        plotareaFlag = false;
+      }
+
+      if(builtArea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter built area");
+        builtAreaFlag = false;
+      }
+
+      if(totalNumberOfFloors === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of floors");
+        totalNumberOfFloorsFlag = false;
+      }
+
+      if(!plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag) {
+        propertyAttrbutesFlag = false;
+      }
+
+    }
+    else if(propertyTypeSelected === "Villa") {
+      if(plotarea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter plot area");
+        plotareaFlag = false;
+      }
+
+      if(builtArea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter built area");
+        builtAreaFlag = false;
+      }
+
+      if(totalNumberOfFloors === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of floors");
+        totalNumberOfFloorsFlag = false;
+      }
+
+      if(totalVillas === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of villas");
+        totalVillasFlag = false;
+      }
+
+      if(!plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !totalVillasFlag) {
+        propertyAttrbutesFlag = false;
+      }
+    }
+
+    if(townNameSelectedID === "") {
+      //alert("Paulsi");
+      setAlertClass("alert alert-danger");
+      setAlertContent("Select town");
+      townNameSelectedIDFlag = false;
+    }
+
+    if(districtNameSelectedID === "") {
+        //alert("Paulsi");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select district");
+        districtNameSelectedIDFlag = false;
+    }
+
+    if(stateNameSelectedID === "") {
+        //alert("Paulsi");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select state");
+        stateNameSelectedIDFlag = false;
+    }
+
+    if(transactionTypeSelected === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select transaction type");
+        transactionTypeSelectedFlag = false;
+    }
+
+    if(propertyTypeSelected === "") {
+      //alert("Paulsin");
+      setAlertClass("alert alert-danger");
+      setAlertContent("Select property type");
+      propertyTypeSelectedFlag = false;
+    }
 
     
-    
   
    
-     if(postflag==="true"){
-      alertarray=[];
+     if(propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag){
+      // alertarray=[];
       // setAlertContent(alertarray)
         alert("haiii")
-        // try {
-        //   //alert("Paulsin");
-        //   const response = await axios.post(
-        //     addPropertyURL,
-        //     {
-        //       "propertyType": propertyTypeSelected,    
-        //       "transactionType": transactionTypeSelected,
-        //       "stateID": stateNameSelectedID,
-        //       "districtID": districtNameSelectedID,
-        //       "townID": townNameSelectedID
-        //     }     
-        //   );  
         
-        // } catch(error) {
-        //   console.error("Error posting data:", error);
-        // }
-
+         try {
+        //   //alert("Paulsin");
+           const response = await axios.post(
+             addPropertyURL,
+             {
+               "propertyType": propertyTypeSelected,    
+               "transactionType": transactionTypeSelected,
+               "stateID": stateNameSelectedID,
+               "districtID": districtNameSelectedID,
+               "townID": townNameSelectedID
+             }     
+           );  
+        
+         } catch(error) {
+           console.error("Error posting data:", error);
+         }
+        
       }
 
 
@@ -964,6 +1065,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     </div>
     {savebuttonwidget}
 
+
+    <br/><br/>
   </>
     
   )
