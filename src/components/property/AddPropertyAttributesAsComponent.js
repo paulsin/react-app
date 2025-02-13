@@ -273,92 +273,472 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       //alert(districtNameSelectedID);
       //alert(townNameSelectedID);
       //alert();
+      var postflag=false
+  //     if(postflag===true){
+  //       if(carParking!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         //alert("dfjdjg")
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+  //           setAlertContent("Enter CarParking");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false 
+  //         }
+         
+  //       }
+  //     }
+  //     //  alert(postflag)
+  //     if(postflag===true){
+  //       if(toilets!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+  //           setAlertContent("Enter ToiletNumber");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false;
+  //         }
+          
+  //       }
+  //     }
+  //     // alert(postflag)
+  //     if(postflag===true){
+  //       if(bedRoomsWithToilet!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+  //           setAlertContent("Enter Bedroom with ToiletNumber");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false;
+  //         }   
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(bedRooms!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+  //           setAlertContent("Enter Bedroom Number");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false;
+  //         }
 
-      if(!propertyTypeSelected) {
-        setAlertContent("Select property type");
-        setAlertClass("alert alert-danger");
-      }
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(floorNumber!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Apartment" || propertyTypeSelected==="Flat" ){
+  //           setAlertContent("Enter The Floor Number");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false;
+  //          }
 
-      else if(!transactionTypeSelected) {
-        setAlertContent("Select transaction type");
-        setAlertClass("alert alert-danger");
-      }
+  //       }
+  //     }
+   
+  //     if(postflag===true){
+  //       if(floorNumber!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa") {
+  //           setAlertContent("Enter Total Number of Villas");
+  //           setAlertClass("alert alert-danger")
+  //           postflag=false;
+  //         }
 
-      else if(!stateNameSelectedID) {
-        setAlertContent("Select state");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!districtNameSelectedID) {
-        setAlertContent("Select district");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!townNameSelectedID) {
-        setAlertContent("Select town");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!localityName) {
-        setAlertContent("Enter Locality");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!cost) {
-        setAlertContent("Enter Cost");
-        setAlertClass("alert alert-danger");
-      }
-      else if(!facing) {
-        setAlertContent("Enter Facing Polarity");
-        setAlertClass("alert alert-danger");
-      }
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(plotarea!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Plot"||propertyTypeSelected==="Land"||propertyTypeSelected==="House" )
+  //           {
+  //             setAlertContent("Enter Plot Area of Property");
+  //             setAlertClass("alert alert-danger")
+  //             postflag=false;
+  //           }
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(builtArea!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" )
+  //           {
+  //             setAlertContent("Enter Built Area of Property");
+  //             setAlertClass("alert alert-danger")
+  //             postflag=false;
+  //           }
+
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(totalNumberOfFloors!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House") 
+  //           {
+  //             setAlertContent("Enter Total Number Of Floors");
+  //             setAlertClass("alert alert-danger");
+  //             postflag=false;
+  //           }  
+
+  //       }
+  //     }
+
+  //    if(postflag===true){
+  //       if(facing!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Enter Facing Polarity");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+  //       }
+  //     }
      
-      else if(!totalNumberOfFloors){
+  //     if(postflag===true){
+  //       if(cost!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Enter Cost");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(localityName!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Enter Locality");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+
+  //       }
+  //     }
+  
+  //     if(postflag===true){
+  //       if(townNameSelectedID!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Select town");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(districtNameSelectedID!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Select district");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+  //       }
+  //     }
+  //     if(postflag===true){
+  //       if(stateNameSelectedID!==""){
+  //         postflag=true;
+  //       }
+  //       else{
+  //         setAlertContent("Select state");
+  //         setAlertClass("alert alert-danger");
+  //         postflag=false;
+
+  //       }
+  //     }
+
+  //   if(postflag===true){
+  //     alert("gjgkk")
+  //     if(transactionTypeSelected!==""){
+  //       postflag=true;
+  //     }
+  //     else{
+  //       setAlertContent("Select transaction type");
+  //       setAlertClass("alert alert-danger");
+  //       postflag=false;
+  //     }
+  //   }
+  //   if(propertyTypeSelected!==""){
+  //     // alert("dfgjdkjgkj")
+  //     postflag=true;
+  //  }
+  //   else{
+  //       setAlertContent("Select property type");
+  //       setAlertClass("alert alert-danger");
+  //       postflag=false;
+  //   } 
+    
+     let alertarray=[];
+     var alertcontent;
+      if(propertyTypeSelected!==""){
+          // alert("dfgjdkjgkj")
+          postflag=true;
+      }
+      else{
+        alertcontent="Select Property Type";
+        alertarray.push(alertcontent)
+        setAlertContent(alertarray)
+        setAlertClass("alert alert-danger");
+        postflag=false;
+      } 
+      if(postflag===true){
+        // alert("gjgkk")
+        if(transactionTypeSelected!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Select Transaction Type";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+        }
+      }
+      if(postflag===true){
+        if(stateNameSelectedID!==""){
+          postflag=true;
+        }
+        else{
+          
+          alertcontent="Select State";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+
+        }
+      }
+      if(postflag===true){
+        if(districtNameSelectedID!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Select District";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+        }
+      }
+      if(postflag===true){
+        if(townNameSelectedID!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Select Town";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+        }
+      }
+      if(postflag===true){
+        if(localityName!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Enter Locality";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+
+        }
+      }
+      if(postflag===true){
+        if(cost!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Enter Cost";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+        }
+      }
+      if(postflag===true){
+        if(facing!==""){
+          postflag=true;
+        }
+        else{
+          alertcontent="Select Facing Polarity";
+          alertarray.push(alertcontent)
+          setAlertContent(alertarray)
+          setAlertClass("alert alert-danger");
+          postflag=false;
+        }
+      }
+      if(postflag===true){
         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House") 
-        {
-          setAlertContent("Enter Total Number Of Floors");
-          setAlertClass("alert alert-danger")
-        }   
+          {
+            if(totalNumberOfFloors!==""){
+              postflag=true;
+            }
+            else{
+              alertcontent="Enter Total Number Of Floors";
+              alertarray.push(alertcontent)
+              setAlertContent(alertarray) 
+              setAlertClass("alert alert-danger");
+              postflag=false;
+            }
+            
+            
+          } 
+      }
+
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" )
+          {
+            if(builtArea!==""){
+              postflag=true;
+            }
+            else{
+              alertcontent="Enter Built Area Of Property";
+              alertarray.push(alertcontent)
+              setAlertContent(alertarray)
+              setAlertClass("alert alert-danger")
+              postflag=false;
+            }    
+          }
+      }
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Plot"||propertyTypeSelected==="Land"||propertyTypeSelected==="House" )
+          {
+            if(plotarea!==""){
+              postflag=true;
+            }
+            else{
+              alertcontent="Enter Plot Area Of Property";
+              alertarray.push(alertcontent)
+              setAlertContent(alertarray) 
+              setAlertClass("alert alert-danger")
+              postflag=false;
+            }
+            
+          }       
       
       }
-     
-      else if(!builtArea) {
-          if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" )
-          {
-            setAlertContent("Enter Built Area of Property");
-            setAlertClass("alert alert-danger")
-          }
-         
-        }
-
-     
-        // alert("hhhhhh")
-        // alert(propertyTypeSelected)
-      else if(!plotarea) {
-          // alert("hhhhhh")
-          if(propertyTypeSelected==="Villa"||propertyTypeSelected==="House"|| propertyTypeSelected==="Land"||propertyTypeSelected==="Plot")
-          {
-            setAlertContent("Enter Plot Area of Property");
-            setAlertClass("alert alert-danger")
-
-          }
-          
-        }
-    
-      else if(!totalVillas){
+      if(postflag===true){
         if(propertyTypeSelected==="Villa") {
-          setAlertContent("Enter Total Number of Villas");
-          setAlertClass("alert alert-danger")
+          if(totalVillas!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Total Number Of Villas";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)    
+            setAlertClass("alert alert-danger")
+            postflag=false;
+          }
         }
-
+                  
       }
-       
-     
-      else if(!floorNumber){
-       if(propertyTypeSelected==="Apartment" || propertyTypeSelected==="Flat" ){
-        setAlertContent("Enter The Floor Number");
-        setAlertClass("alert alert-danger")
-       }
-          
+
+      if(postflag===true){
+        if(propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat") {
+          if(floorNumber!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Floor Number Of Villa";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)   
+            setAlertClass("alert alert-danger")
+            postflag=false;
+          }
+        }
+                  
+      }
+
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+          if(bedRooms!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Bedroom Number";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)
+            setAlertClass("alert alert-danger")
+            postflag=false;
+            }
+        }    
+      
+      }
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+          if(bedRoomsWithToilet!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Bedroom With Toilet Number";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)  
+            setAlertClass("alert alert-danger")
+            postflag=false;
+            }
+        }    
+      
+      }
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+          if(toilets!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Toilet Number";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)   
+            setAlertClass("alert alert-danger")
+            postflag=false;
+            }
+        }    
+      
+      }
+      if(postflag===true){
+        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
+          if(carParking!==""){
+            postflag=true;
+          }
+          else{
+            alertcontent="Enter Carparking";
+            alertarray.push(alertcontent)
+            setAlertContent(alertarray)    
+            setAlertClass("alert alert-danger")
+            postflag=false;
+            }
+        }    
+      
       }
    
-      else {
+   
+  
+    
+
+    
+    
+  
+   
+     if(postflag==="true"){
+      alertarray=[];
+      // setAlertContent(alertarray)
+        alert("haiii")
         // try {
         //   //alert("Paulsin");
         //   const response = await axios.post(
