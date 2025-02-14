@@ -6,33 +6,14 @@ import axios from "axios";
 import { Url } from "../../constants/global";
 var addPropertyURL = Url + 'property/addProperty';
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected, operation,setAlertContent,setAlertClass,
-  transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID
-
+  transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
+  setFacingPolarity, setTotalNumberOfFloors,setPlotArea, setBuiltArea,setTotalVillas, setFloorNumber,setBedRooms, setBedRoomsWithToilet,
+  setToilets,setCarPorch,setCarParking,setSitOut,setLivingArea,setDiningHall,setKitchen,setWorkArea,setUpperLivingArea,setBalcony,setOpenTerrace,setWaterWell,
+  setWaterConnection,facing,totalNumberOfFloors,plotarea,builtArea,totalVillas,floorNumber,bedRooms,bedRoomsWithToilet,toilets,carPorch,carParking,
+  sitOut,livingArea,diningHall,kitchen,workArea, upperLivingArea,balcony,openTerrace, waterWell,waterConnection
 }) => {
  
-   // const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
-   const [facing, setFacingPolarity] = useState("");
-   const [totalNumberOfFloors, setTotalNumberOfFloors] = useState("");
-   const [plotarea, setPlotArea] = useState("");
-   const [builtArea, setBuiltArea] = useState("");
-   const [totalVillas, setTotalVillas] = useState("");
-   const [floorNumber, setFloorNumber] = useState("");
-   const [bedRooms, setBedRooms] = useState("");
-   const [bedRoomsWithToilet, setBedRoomsWithToilet] = useState("");
-   const [toilets, setToilets] = useState("");
 
-   const [carPorch, setCarPorch] = useState("");
-   const [carParking, setCarParking] = useState("");
-   const [sitOut, setSitOut] = useState("");
-   const [livingArea, setLivingArea] = useState("");
-   const [diningHall, setDiningHall] = useState("");
-   const [kitchen, setKitchen] = useState("");
-   const [workArea, setWorkArea] = useState("");
-   const [upperLivingArea, setUpperLivingArea] = useState("");
-   const [balcony, setBalcony] = useState("");
-   const [openTerrace, setOpenTerrace] = useState("");
-   const [waterWell, setWaterWell] = useState("");
-   const [waterConnection, setWaterConnection] = useState("");
    
    const [isFacingPolarityDisabled, setIsFacingPolarityDisabled] = useState(false);
    const [isTotalNumberOfFloorsDisabled, setIsTotalNumberOfFloorsDisabled] = useState(false);
@@ -75,7 +56,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       
     }
     const handleLivingareaChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setLivingArea(e.target.checked);
       
     }
@@ -86,6 +67,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     }
     const handleKitchenChange= (e) => {
       // alert(e.target.checked)
+      //setKitchen(!kitchen)
       setKitchen(e.target.checked);
       
     }
@@ -95,27 +77,27 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       
     }
     const handleUpperlivingAreaChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setUpperLivingArea(e.target.checked);
       
     }
     const handleBalconyChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setBalcony(e.target.checked);
       
     }
     const handleOpenterraceChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setOpenTerrace(e.target.checked);
       
     }
     const handleWaterwellChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setWaterWell(e.target.checked);
       
     }
     const handleWaterConnectionChange = (e) => {
-      // alert(e.target.checked)
+      //  alert(e.target.checked)
       setWaterConnection(e.target.checked);
       
     }
@@ -281,469 +263,49 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var districtNameSelectedIDFlag = true;
       var townNameSelectedIDFlag = true;
       var transactionTypeSelectedFlag = true;
+      var localityFlag =true;
+      var costFlag=true;
+      var facingPolarityFlag=true;
+
       var plotareaFlag = true;
       var builtAreaFlag = true;
       var totalNumberOfFloorsFlag = true;
       var totalVillasFlag = true;
-
-  //     if(postflag===true){
-  //       if(carParking!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         //alert("dfjdjg")
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-  //           setAlertContent("Enter CarParking");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false 
-  //         }
-         
-  //       }
-  //     }
-  //     //  alert(postflag)
-  //     if(postflag===true){
-  //       if(toilets!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-  //           setAlertContent("Enter ToiletNumber");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false;
-  //         }
-          
-  //       }
-  //     }
-  //     // alert(postflag)
-  //     if(postflag===true){
-  //       if(bedRoomsWithToilet!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-  //           setAlertContent("Enter Bedroom with ToiletNumber");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false;
-  //         }   
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(bedRooms!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-  //           setAlertContent("Enter Bedroom Number");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false;
-  //         }
-
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(floorNumber!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Apartment" || propertyTypeSelected==="Flat" ){
-  //           setAlertContent("Enter The Floor Number");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false;
-  //          }
-
-  //       }
-  //     }
-   
-  //     if(postflag===true){
-  //       if(floorNumber!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa") {
-  //           setAlertContent("Enter Total Number of Villas");
-  //           setAlertClass("alert alert-danger")
-  //           postflag=false;
-  //         }
-
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(plotarea!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Plot"||propertyTypeSelected==="Land"||propertyTypeSelected==="House" )
-  //           {
-  //             setAlertContent("Enter Plot Area of Property");
-  //             setAlertClass("alert alert-danger")
-  //             postflag=false;
-  //           }
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(builtArea!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" )
-  //           {
-  //             setAlertContent("Enter Built Area of Property");
-  //             setAlertClass("alert alert-danger")
-  //             postflag=false;
-  //           }
-
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(totalNumberOfFloors!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House") 
-  //           {
-  //             setAlertContent("Enter Total Number Of Floors");
-  //             setAlertClass("alert alert-danger");
-  //             postflag=false;
-  //           }  
-
-  //       }
-  //     }
-
-  //    if(postflag===true){
-  //       if(facing!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Enter Facing Polarity");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-  //       }
-  //     }
-     
-  //     if(postflag===true){
-  //       if(cost!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Enter Cost");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(localityName!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Enter Locality");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-
-  //       }
-  //     }
-  
-  //     if(postflag===true){
-  //       if(townNameSelectedID!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Select town");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(districtNameSelectedID!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Select district");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-  //       }
-  //     }
-  //     if(postflag===true){
-  //       if(stateNameSelectedID!==""){
-  //         postflag=true;
-  //       }
-  //       else{
-  //         setAlertContent("Select state");
-  //         setAlertClass("alert alert-danger");
-  //         postflag=false;
-
-  //       }
-  //     }
-
-  //   if(postflag===true){
-  //     alert("gjgkk")
-  //     if(transactionTypeSelected!==""){
-  //       postflag=true;
-  //     }
-  //     else{
-  //       setAlertContent("Select transaction type");
-  //       setAlertClass("alert alert-danger");
-  //       postflag=false;
-  //     }
-  //   }
-  //   if(propertyTypeSelected!==""){
-  //     // alert("dfgjdkjgkj")
-  //     postflag=true;
-  //  }
-  //   else{
-  //       setAlertContent("Select property type");
-  //       setAlertClass("alert alert-danger");
-  //       postflag=false;
-  //   } 
-    
-
-  /*
-     let alertarray=[];
-     var alertcontent;
-      if(propertyTypeSelected!==""){
-          // alert("dfgjdkjgkj")
-          postflag=true;
-      }
-      else{
-        alertcontent="Select Property Type";
-        alertarray.push(alertcontent)
-        setAlertContent(alertarray)
-        setAlertClass("alert alert-danger");
-        postflag=false;
-      } 
-      if(postflag===true){
-        // alert("gjgkk")
-        if(transactionTypeSelected!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Select Transaction Type";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-        }
-      }
-      if(postflag===true){
-        if(stateNameSelectedID!==""){
-          postflag=true;
-        }
-        else{
-          
-          alertcontent="Select State";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-
-        }
-      }
-      if(postflag===true){
-        if(districtNameSelectedID!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Select District";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-        }
-      }
-      if(postflag===true){
-        if(townNameSelectedID!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Select Town";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-        }
-      }
-      if(postflag===true){
-        if(localityName!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Enter Locality";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-
-        }
-      }
-      if(postflag===true){
-        if(cost!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Enter Cost";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-        }
-      }
-      if(postflag===true){
-        if(facing!==""){
-          postflag=true;
-        }
-        else{
-          alertcontent="Select Facing Polarity";
-          alertarray.push(alertcontent)
-          setAlertContent(alertarray)
-          setAlertClass("alert alert-danger");
-          postflag=false;
-        }
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House") 
-          {
-            if(totalNumberOfFloors!==""){
-              postflag=true;
-            }
-            else{
-              alertcontent="Enter Total Number Of Floors";
-              alertarray.push(alertcontent)
-              setAlertContent(alertarray) 
-              setAlertClass("alert alert-danger");
-              postflag=false;
-            }
-            
-            
-          } 
-      }
-
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" )
-          {
-            if(builtArea!==""){
-              postflag=true;
-            }
-            else{
-              alertcontent="Enter Built Area Of Property";
-              alertarray.push(alertcontent)
-              setAlertContent(alertarray)
-              setAlertClass("alert alert-danger")
-              postflag=false;
-            }    
-          }
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Plot"||propertyTypeSelected==="Land"||propertyTypeSelected==="House" )
-          {
-            if(plotarea!==""){
-              postflag=true;
-            }
-            else{
-              alertcontent="Enter Plot Area Of Property";
-              alertarray.push(alertcontent)
-              setAlertContent(alertarray) 
-              setAlertClass("alert alert-danger")
-              postflag=false;
-            }
-            
-          }       
+      var bedroomFlag =true;
+      var bedroomwithToiletFlag=true;
+      var toiletsFlag=true;
+      var carParkingFlag=true;
+      var floorNumberFlag=true;
       
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa") {
-          if(totalVillas!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Total Number Of Villas";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)    
-            setAlertClass("alert alert-danger")
-            postflag=false;
-          }
-        }
-                  
-      }
 
-      if(postflag===true){
-        if(propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat") {
-          if(floorNumber!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Floor Number Of Villa";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)   
-            setAlertClass("alert alert-danger")
-            postflag=false;
-          }
-        }
-                  
-      }
-
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-          if(bedRooms!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Bedroom Number";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)
-            setAlertClass("alert alert-danger")
-            postflag=false;
-            }
-        }    
-      
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-          if(bedRoomsWithToilet!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Bedroom With Toilet Number";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)  
-            setAlertClass("alert alert-danger")
-            postflag=false;
-            }
-        }    
-      
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-          if(toilets!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Toilet Number";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)   
-            setAlertClass("alert alert-danger")
-            postflag=false;
-            }
-        }    
-      
-      }
-      if(postflag===true){
-        if(propertyTypeSelected==="Villa"||propertyTypeSelected==="Apartment"||propertyTypeSelected==="Flat"||propertyTypeSelected==="House" ){
-          if(carParking!==""){
-            postflag=true;
-          }
-          else{
-            alertcontent="Enter Carparking";
-            alertarray.push(alertcontent)
-            setAlertContent(alertarray)    
-            setAlertClass("alert alert-danger")
-            postflag=false;
-            }
-        }    
-      
-      }
-   
-   */
   
     if(propertyTypeSelected === "House") {
+      if(carParking === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter CarParking");
+        carParkingFlag = false;
+      }
+
+
+      if(toilets === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Toilet Number");
+        toiletsFlag = false;
+      }
+
+      
+      if(bedRoomsWithToilet === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom With Toilet Number");
+        bedroomwithToiletFlag = false;
+      }
+
+      
+      if(bedRooms === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom Number");
+        bedroomFlag = false;
+      }
 
       if(plotarea === "") {
         setAlertClass("alert alert-danger");
@@ -763,28 +325,37 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         totalNumberOfFloorsFlag = false;
       }
 
-      if(!plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag) {
         propertyAttrbutesFlag = false;
       }
 
     }
     else if(propertyTypeSelected === "Villa") {
-      if(plotarea === "") {
+      if(carParking === "") {
         setAlertClass("alert alert-danger");
-        setAlertContent("Enter plot area");
-        plotareaFlag = false;
+        setAlertContent("Enter CarParking");
+        carParkingFlag = false;
       }
 
-      if(builtArea === "") {
+
+      if(toilets === "") {
         setAlertClass("alert alert-danger");
-        setAlertContent("Enter built area");
-        builtAreaFlag = false;
+        setAlertContent("Enter Toilet Number");
+        toiletsFlag = false;
       }
 
-      if(totalNumberOfFloors === "") {
+      
+      if(bedRoomsWithToilet === "") {
         setAlertClass("alert alert-danger");
-        setAlertContent("Enter number of floors");
-        totalNumberOfFloorsFlag = false;
+        setAlertContent("Enter Bedroom With Toilet Number");
+        bedroomwithToiletFlag = false;
+      }
+
+      
+      if(bedRooms === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom Number");
+        bedroomFlag = false;
       }
 
       if(totalVillas === "") {
@@ -792,12 +363,172 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Enter number of villas");
         totalVillasFlag = false;
       }
+      if(plotarea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter plot area");
+        plotareaFlag = false;
+      }
 
-      if(!plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !totalVillasFlag) {
+      if(builtArea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter built area");
+        builtAreaFlag = false;
+      }
+
+      if(totalNumberOfFloors === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of floors");
+        totalNumberOfFloorsFlag = false;
+      }
+
+      
+
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag ||!totalVillasFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag ) {
         propertyAttrbutesFlag = false;
       }
     }
+    else if(propertyTypeSelected === "Apartment") {
+      if(carParking === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter CarParking");
+        carParkingFlag = false;
+      }
 
+
+      if(toilets === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Toilet Number");
+        toiletsFlag = false;
+      }
+
+      
+      if(bedRoomsWithToilet === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom With Toilet Number");
+        bedroomwithToiletFlag = false;
+      }
+
+      
+      if(bedRooms === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom Number");
+        bedroomFlag = false;
+      }
+
+      if(floorNumber === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Floor Number");
+        floorNumberFlag = false;
+      }
+
+      
+      if(builtArea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter built area");
+        builtAreaFlag = false;
+      }
+
+      if(totalNumberOfFloors === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of floors");
+        totalNumberOfFloorsFlag = false;
+      }
+
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+        propertyAttrbutesFlag = false;
+      }
+    }
+    else if(propertyTypeSelected === "Flat") {
+      if(carParking === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter CarParking");
+        carParkingFlag = false;
+      }
+
+
+      if(toilets === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Toilet Number");
+        toiletsFlag = false;
+      }
+
+      
+      if(bedRoomsWithToilet === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom With Toilet Number");
+        bedroomwithToiletFlag = false;
+      }
+
+      
+      if(bedRooms === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Bedroom Number");
+        bedroomFlag = false;
+      }
+
+      if(floorNumber === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Floor Number");
+        floorNumberFlag = false;
+      }
+
+      
+      if(builtArea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter built area");
+        builtAreaFlag = false;
+      }
+
+      if(totalNumberOfFloors === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter number of floors");
+        totalNumberOfFloorsFlag = false;
+      }
+
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+        propertyAttrbutesFlag = false;
+      }
+    }
+    else if(propertyTypeSelected === "Plot") {
+      if(plotarea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter plot area");
+        plotareaFlag = false;
+      }
+      if(!plotareaFlag ) {
+        propertyAttrbutesFlag = false;
+      }
+
+    }
+    else if(propertyTypeSelected === "Land") {
+      if(plotarea === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter plot area");
+        plotareaFlag = false;
+      }
+      if(!plotareaFlag ) {
+        propertyAttrbutesFlag = false;
+      }
+
+    }
+    if(facing === "") {
+      //alert("Paulsi");
+      setAlertClass("alert alert-danger");
+      setAlertContent("Select Facing Polarity");
+      facingPolarityFlag = false;
+    }
+    if(cost === "") {
+      //alert("Paulsi");
+      setAlertClass("alert alert-danger");
+      setAlertContent("Enter Cost");
+      costFlag = false;
+    }
+    if(localityName === "") {
+      //alert("Paulsi");
+      setAlertClass("alert alert-danger");
+      setAlertContent("Enter Locality Name");
+      localityFlag = false;
+    }
     if(townNameSelectedID === "") {
       //alert("Paulsi");
       setAlertClass("alert alert-danger");
@@ -835,13 +566,15 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     
   
    
-     if(propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag){
+     if(propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
+      && costFlag && localityFlag && facingPolarityFlag
+     ){
       // alertarray=[];
       // setAlertContent(alertarray)
         alert("haiii")
-        
-         try {
-        //   //alert("Paulsin");
+      //  if(propertyTypeSelected=="Villa") {
+          try {
+        alert(bedRoomsWithToilet);
            const response = await axios.post(
              addPropertyURL,
              {
@@ -849,13 +582,45 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "transactionType": transactionTypeSelected,
                "stateID": stateNameSelectedID,
                "districtID": districtNameSelectedID,
-               "townID": townNameSelectedID
+               "townID": townNameSelectedID,
+               "locality":localityName,
+               "cost":cost,
+               "facing":facing,
+               "numberOfFloors":totalNumberOfFloors,
+               "builtArea":builtArea,
+               "plotArea":plotarea,
+               "totalVillas":totalVillas,
+                "floorNumber":floorNumber,
+              "bedrooms":bedRooms,
+               "bedroomsWithToilet":bedRoomsWithToilet,
+               "toilets":toilets,
+               "carPorch":carPorch,
+               "carParking":carParking,
+               "sitout":sitOut,
+               "livingArea":livingArea,
+               "diningHall":diningHall,
+               "kitchen":kitchen,
+               "workArea":workArea,
+               "upperLivingArea":upperLivingArea,
+               "balcony":balcony,
+               "openTerrace":openTerrace,
+               "waterWell":waterWell,
+               "waterConnection":waterConnection
+              
+
+
+
              }     
            );  
         
          } catch(error) {
            console.error("Error posting data:", error);
          }
+
+      //  }
+       
+         setAlertClass("alert alert-success");
+      setAlertContent("Data submitted Successfully");
         
       }
 
@@ -876,7 +641,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "transactionType":transactionTypeSelected,
                "stateID":stateSelectedValue,
                "districtID":districtSelectedValue,
-               "townID":townSelectedValue
+               "townID":townSelectedValue,
+               
     
     
            }
@@ -902,8 +668,38 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var bedRoomsWithToiletWidget=<input type="text" class="form-control" required onChange={(e) =>  setBedRoomsWithToilet(e.target.value)} disabled={isBedRoomsWithToiletDisabled}/>;
         var toiletsWidget=<input type="text" class="form-control" required onChange={(e) =>  setToilets(e.target.value)} disabled={isToiletsDisabled}/>;
         
-        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={handleCarporchChange}  />;
+        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={handleCarporchChange}    checked={carPorch} />;
         var carParkingWidget=<input type="text" class="form-control" onChange={(e) =>  setCarParking(e.target.value)} disabled={isCarParkingDisabled} />;
+        var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} onChange={handleSitoutChange}   />;
+        var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled} onChange={handleLivingareaChange}   />;
+        var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled} onChange={handleDininghallChange}/>;
+        var kitchenWidget=<input type="checkbox" class="form-check-input" required disabled={isKitchenDisabled} onChange={handleKitchenChange}    checked={ kitchen==true }/>;
+        var workAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isWorkAreaDisabled} onChange={handleWorkareaChange}/>;
+        var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isUpperLivingAreaDisabled} onChange={handleUpperlivingAreaChange}/>;
+        var balconyWidget=<input type="checkbox" class="form-check-input" required disabled={isBalconyDisabled} onChange={handleBalconyChange}/>;
+        var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={handleOpenterraceChange}/>;
+        var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={handleWaterwellChange}/>;
+        var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={handleWaterConnectionChange}   />;
+        var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
+    }
+    else if(operation==="edit"){
+        var facingPolarityWidget=<Select
+        options={facingPolarity}
+        onChange={handleFacingSelection}
+        value={{ value: facing, label: facing }}
+      />
+
+      var totalNumberOfFloorsWidget = <input type="text" class="form-control" required onChange={(e) =>  setTotalNumberOfFloors(e.target.value)} disabled={isTotalNumberOfFloorsDisabled} value={totalNumberOfFloors}/>;
+        var builtAreaWidget=<input type="text" class="form-control" required onChange={(e) =>  setBuiltArea(e.target.value)} disabled={isBuiltAreaDisabled} value={builtArea}/>;
+        var plotAreaWidget=<input type="text" class="form-control" required onChange={(e) =>  setPlotArea(e.target.value)} disabled={isPlotAreaDisabled} value={plotarea}/>;
+        var totalVillasWidget=<input type="text" class="form-control" required onChange={(e) =>  setTotalVillas(e.target.value)} disabled={isTotalVillasDisabled} value={totalVillas}/>;
+        var floorNumberWidget=<input type="text" class="form-control" required onChange={(e) =>  setFloorNumber(e.target.value)} disabled={isFloorNumberDisabled} value={floorNumber}/>;
+        var bedRoomsWidget=<input type="text" class="form-control" required onChange={(e) =>  setBedRooms(e.target.value)} disabled={isBedRoomsDisabled} value={bedRooms}/>;
+        var bedRoomsWithToiletWidget=<input type="text" class="form-control" required onChange={(e) =>  setBedRoomsWithToilet(e.target.value)} disabled={isBedRoomsWithToiletDisabled} value={bedRoomsWithToilet}/>;
+        var toiletsWidget=<input type="text" class="form-control" required onChange={(e) =>  setToilets(e.target.value)} disabled={isToiletsDisabled} value={toilets}/>;
+        
+        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={handleCarporchChange}  />;
+        var carParkingWidget=<input type="text" class="form-control" onChange={(e) =>  setCarParking(e.target.value)} disabled={isCarParkingDisabled}  />;
         var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} onChange={handleSitoutChange} />;
         var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled} onChange={handleLivingareaChange}/>;
         var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled} onChange={handleDininghallChange}/>;
@@ -914,36 +710,6 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={handleOpenterraceChange}/>;
         var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={handleWaterwellChange}/>;
         var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={handleWaterConnectionChange}/>;
-        var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
-    }
-    else if(operation==="edit"){
-        var facingPolarityWidget=<Select
-        options={facingPolarity}
-        onChange={handleFacingSelection}
-        value={{ value: facing, label: facing }}
-      />
-
-      var totalNumberOfFloorsWidget = <input type="text" class="form-control"  required />;
-      var builtAreaWidget=<input type="text" class="form-control" required />;
-      var plotAreaWidget=<input type="text" class="form-control" required />;
-      var totalVillasWidget=<input type="text" class="form-control" required />;
-      var floorNumberWidget=<input type="text" class="form-control" required />;
-      var bedRoomsWidget=<input type="text" class="form-control" required />;
-      var bedRoomsWithToiletWidget=<input type="text" class="form-control" required />;
-      var toiletsWidget=<input type="text" class="form-control" required />;
-      
-      var carPorchWidget=<input type="checkbox" class="form-check-input"required/>;
-      var carParkingWidget=<input type="text" class="form-control" required />;
-      var sitOutWidget=<input type="checkbox" class="form-check-input" required/>;
-      var livingAreaWidget=<input type="checkbox" class="form-check-input" required/>;
-      var diningHallWidget=<input type="checkbox" class="form-check-input" required/>;
-      var kitchenWidget=<input type="checkbox"class="form-check-input" required/>;
-      var workAreaWidget=<input type="checkbox" class="form-check-input" required/>;
-      var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required/>;
-      var balconyWidget=<input type="checkbox" class="form-check-input" required/>;
-      var openTerraceWidget=<input type="checkbox" class="form-check-input" required/>;
-      var waterWellWidget=<input type="checkbox" class="form-check-input" required/>;
-      var waterConnectionWidget=<input type="checkbox" class="form-check-input" required/>;
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
 
     }

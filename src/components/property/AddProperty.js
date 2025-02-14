@@ -90,6 +90,29 @@ const AddProperty = (props) => {
         const [transactiontype, setTransactionType] = useState("");
 
         const [selectedRadioCostOption, setSelectedRadioCostOption] = useState('default');
+
+           const [facing, setFacingPolarity] = useState("");
+           const [totalNumberOfFloors, setTotalNumberOfFloors] = useState("");
+           const [plotarea, setPlotArea] = useState("");
+           const [builtArea, setBuiltArea] = useState("");
+           const [totalVillas, setTotalVillas] = useState("");
+           const [floorNumber, setFloorNumber] = useState("");
+           const [bedRooms, setBedRooms] = useState("");
+           const [bedRoomsWithToilet, setBedRoomsWithToilet] = useState("");
+           const [toilets, setToilets] = useState("");
+        
+           const [carPorch, setCarPorch] = useState(false);
+           const [carParking, setCarParking] = useState("");
+           const [sitOut, setSitOut] = useState(false);
+           const [livingArea, setLivingArea] = useState(false);
+           const [diningHall, setDiningHall] = useState(false);
+           const [kitchen, setKitchen] = useState(false);
+           const [workArea, setWorkArea] = useState(false);
+           const [upperLivingArea, setUpperLivingArea] = useState(false);
+           const [balcony, setBalcony] = useState(false);
+           const [openTerrace, setOpenTerrace] = useState(false);
+           const [waterWell, setWaterWell] = useState(false);
+           const [waterConnection, setWaterConnection] = useState(false);
      
 
     const stateOptionsArray = [];
@@ -391,6 +414,29 @@ const AddProperty = (props) => {
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
           setTownNameSelectedID(res.data.townID)
+          setLocalityName(res.data.locality)
+          setCost(res.data.cost)
+          setFacingPolarity(res.data.facing)
+          setTotalNumberOfFloors(res.data.numberOfFloors)
+          setPlotArea(res.data.plotArea)
+          setBuiltArea(res.data.builtArea)
+          setTotalVillas(res.data.totalVillas)
+          setFloorNumber(res.data.floorNumber)
+          setBedRooms(res.data.bedrooms)
+          setBedRoomsWithToilet(res.data.bedroomsWithToilet)
+          setToilets(res.data.toilets)
+          setCarPorch(res.data.carPorch)
+          setCarParking(res.data.carParking)
+          setSitOut(res.data.sitOut)
+          setLivingArea(res.data.livingArea)
+          setDiningHall(res.data.diningHall)
+          setKitchen(res.data.kitchen)
+          setWorkArea(res.data.workArea)
+          setUpperLivingArea(res.data.upperLivingArea)
+          setBalcony(res.data.balcony)
+          setOpenTerrace(res.data.openTerrace)
+          setWaterWell(res.data.waterWell)
+          setWaterConnection(res.data.waterConnection)
 
           axios
           .get(Url+"location/districts",
@@ -491,27 +537,27 @@ function  setSelectedTownFunction(selectedTownFunParam){
  
 // }
 
+useEffect(() => {
+  //console.log('i fire once');
+  //setItems(data);
+
+  fetchStates();
+
+  fetchDistricts();
+  fetchTowns(); 
+
+
+  if(operation=="edit"){
+    getPropertyData();
+  }
+  //test();
+
+}, []);
 
 function handleradioChange(event) {
   //alert(event.target.value)
   setSelectedRadioCostOption(event.target.value);
 }
-    useEffect(() => {
-      //console.log('i fire once');
-      //setItems(data);
-
-      fetchStates();
-
-      fetchDistricts();
-      fetchTowns(); 
-  
-    
-      if(operation=="edit"){
-        getPropertyData();
-      }
-      //test();
-
-    }, []);
 
 
     if(operation=="new"){
@@ -656,12 +702,13 @@ function handleradioChange(event) {
 
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">District</label>
-
+             
                 <div class="col-sm-5">
                 {/* {districtwidget} */}
                   <AddPropertyDistrictsAsComponent districtOptions={districtOptions} setDistrictNameSelectedID={setDistrictNameSelectedID} setDistrictSelectedLabel={setDistrictSelectedLabel} setDistrictSelectedValue={setDistrictSelectedValue}
                   townOptionsOriginal={townOptionsOriginal} setTownOptions={setTownOptions} setStateNameSelectedID={setStateNameSelectedID} stateNameSelectedID={stateNameSelectedID} operation={operation} districtSelectedLabel={districtSelectedLabel}
-                   districtSelectedValue={districtSelectedValue} setTownSelectedLabel={setTownSelectedLabel} setTownSelectedValue={setTownSelectedValue}/>
+                   districtSelectedValue={districtSelectedValue} setTownSelectedLabel={setTownSelectedLabel} setTownSelectedValue={setTownSelectedValue}
+                   />
                 </div>
             </div>
 
@@ -733,11 +780,21 @@ function handleradioChange(event) {
                   {costradio3}&nbsp; Per Squarefeet
                 </div>
             </div>
-            
+   
+     
 
             <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} 
             setAlertContent={setAlertContent } setAlertClass={setAlertClass} transactionTypeSelected={transactionTypeSelected} stateNameSelectedID={stateNameSelectedID} districtNameSelectedID={districtNameSelectedID} 
-            townNameSelectedID={townNameSelectedID} localityName={localityName} cost={cost} stateSelectedValue={stateSelectedValue} districtSelectedValue={districtSelectedValue} townSelectedValue={townSelectedValue} uniqueID={uniqueID}/>
+            townNameSelectedID={townNameSelectedID} localityName={localityName} cost={cost} stateSelectedValue={stateSelectedValue} districtSelectedValue={districtSelectedValue} townSelectedValue={townSelectedValue} uniqueID={uniqueID}
+            setFacingPolarity={setFacingPolarity} setTotalNumberOfFloors={setTotalNumberOfFloors} setPlotArea={setPlotArea} setBuiltArea={setBuiltArea}
+            setTotalVillas={setTotalVillas} setFloorNumber={setFloorNumber} setBedRooms={setBedRooms} setBedRoomsWithToilet={setBedRoomsWithToilet}
+            setToilets={setToilets} setCarPorch={setCarPorch} setCarParking={setCarParking} setSitOut={setSitOut} setLivingArea={setLivingArea}
+            setDiningHall={setDiningHall} setKitchen={setKitchen} setWorkArea={setWorkArea} setUpperLivingArea={setUpperLivingArea} setBalcony={setBalcony}
+            setOpenTerrace={setOpenTerrace} setWaterWell={setWaterWell} setWaterConnection={setWaterConnection} facing={facing} totalNumberOfFloors={totalNumberOfFloors} plotarea={plotarea} builtArea={builtArea}
+            totalVillas={totalVillas} floorNumber={floorNumber} bedRooms={bedRooms} bedRoomsWithToilet={bedRoomsWithToilet} toilets={toilets} carPorch={carPorch} carParking={carParking}
+            sitOut={sitOut} livingArea={livingArea} diningHall={diningHall} kitchen={kitchen} workArea={workArea} upperLivingArea={upperLivingArea}
+            balcony={balcony} openTerrace={openTerrace} waterWell={waterWell} waterConnection={waterConnection}
+            />
 
           
           
