@@ -113,13 +113,25 @@ const AddProperty = (props) => {
            const [openTerrace, setOpenTerrace] = useState(false);
            const [waterWell, setWaterWell] = useState(false);
            const [waterConnection, setWaterConnection] = useState(false);
+
+           const[carporchStatusChecked,setCarporchStatusChecked]=useState(false);
+           const[sitoutStatusChecked,setSitoutStatusChecked]=useState(false);
+           const[livingareaStatusChecked,setLivingareaStatusChecked]=useState(false);
+           const[dininghallStatusChecked,setDininghallStatusChecked]=useState(false);
+           const[kitchenStatusChecked,setKitchenStatusChecked]=useState(false);
+           const[workareaStatusChecked,setWorkareaStatusChecked]=useState(false);
+           const[upperlivingareaStatusChecked,setUpperlivingareaStatusChecked]=useState(false);
+           const[balconyStatusChecked,setBalconyStatusChecked]=useState(false);
+           const[openterraceStatusChecked,setOpenterraceStatusChecked]=useState(false);
+           const[waterwellStatusChecked,setWaterwellStatusChecked]=useState(false);
+           const[waterconnectionStatusChecked,setWaterconnectionStatusChecked]=useState(false);
      
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
     const townOptionsArray = [];
-   const {operation} =useParams();
-     const {uniqueID} = useParams();
+    const {operation} =useParams();
+    const {uniqueID} = useParams();
     const navigate = useNavigate();
 
     //const now = 80;
@@ -406,6 +418,7 @@ const AddProperty = (props) => {
       let townOptionsload=[];
       axios.get(Url+"property/individualProperty/"+uniqueID)
       .then((res)=>{
+        // alert(res.data.sitout)
           setTransactionTypeSelected(res.data.transactionType)
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
@@ -427,7 +440,7 @@ const AddProperty = (props) => {
           setToilets(res.data.toilets)
           setCarPorch(res.data.carPorch)
           setCarParking(res.data.carParking)
-          setSitOut(res.data.sitOut)
+          setSitOut(res.data.sitout)
           setLivingArea(res.data.livingArea)
           setDiningHall(res.data.diningHall)
           setKitchen(res.data.kitchen)
@@ -438,6 +451,18 @@ const AddProperty = (props) => {
           setWaterWell(res.data.waterWell)
           setWaterConnection(res.data.waterConnection)
 
+  
+          res.data.carPorch===true?setCarporchStatusChecked(true):setCarporchStatusChecked(false)
+          res.data.sitout===true?setSitoutStatusChecked(true):setSitoutStatusChecked(false)
+          res.data.livingArea===true?setLivingareaStatusChecked(true):setLivingareaStatusChecked(false)
+          res.data.diningHall===true?setDininghallStatusChecked(true):setDininghallStatusChecked(false)
+          res.data.kitchen===true?setKitchenStatusChecked(true):setKitchenStatusChecked(false)
+          res.data.workArea===true?setWorkareaStatusChecked(true):setWorkareaStatusChecked(false)
+          res.data.upperLivingArea===true?setUpperlivingareaStatusChecked(true):setUpperlivingareaStatusChecked(false)
+          res.data.balcony===true?setBalconyStatusChecked(true):setBalconyStatusChecked(false)
+          res.data.openTerrace===true?setOpenterraceStatusChecked(true):setOpenterraceStatusChecked(false)
+          res.data.waterWell===true?setWaterwellStatusChecked(true):setWaterwellStatusChecked(false)
+          res.data.waterConnection===true?setWaterconnectionStatusChecked(true):setWaterconnectionStatusChecked(false)
           axios
           .get(Url+"location/districts",
           )
@@ -781,7 +806,7 @@ function handleradioChange(event) {
                 </div>
             </div>
    
-     
+      
 
             <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} 
             setAlertContent={setAlertContent } setAlertClass={setAlertClass} transactionTypeSelected={transactionTypeSelected} stateNameSelectedID={stateNameSelectedID} districtNameSelectedID={districtNameSelectedID} 
@@ -794,7 +819,13 @@ function handleradioChange(event) {
             totalVillas={totalVillas} floorNumber={floorNumber} bedRooms={bedRooms} bedRoomsWithToilet={bedRoomsWithToilet} toilets={toilets} carPorch={carPorch} carParking={carParking}
             sitOut={sitOut} livingArea={livingArea} diningHall={diningHall} kitchen={kitchen} workArea={workArea} upperLivingArea={upperLivingArea}
             balcony={balcony} openTerrace={openTerrace} waterWell={waterWell} waterConnection={waterConnection}
-            />
+            setCarporchStatusChecked={setCarporchStatusChecked}  setSitoutStatusChecked={setSitoutStatusChecked} setLivingareaStatusChecked={setLivingareaStatusChecked} setDininghallStatusChecked={setDininghallStatusChecked}
+            setKitchenStatusChecked={setKitchenStatusChecked} setWorkareaStatusChecked={setWorkareaStatusChecked} setUpperlivingareaStatusChecked={setUpperlivingareaStatusChecked} setBalconyStatusChecked={setBalconyStatusChecked}
+            setOpenterraceStatusChecked={setOpenterraceStatusChecked} setWaterwellStatusChecked={setWaterwellStatusChecked} setWaterconnectionStatusChecked={setWaterconnectionStatusChecked}
+            carporchStatusChecked={carporchStatusChecked} sitoutStatusChecked={sitoutStatusChecked} livingareaStatusChecked={livingareaStatusChecked} dininghallStatusChecked={dininghallStatusChecked}
+            kitchenStatusChecked={kitchenStatusChecked} workareaStatusChecked={workareaStatusChecked} upperlivingareaStatusChecked={upperlivingareaStatusChecked}
+            balconyStatusChecked={balconyStatusChecked} openterraceStatusChecked={openterraceStatusChecked} waterwellStatusChecked={waterwellStatusChecked} waterconnectionStatusChecked={waterconnectionStatusChecked}
+            /> 
 
           
           
