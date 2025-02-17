@@ -10,7 +10,10 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   setFacingPolarity, setTotalNumberOfFloors,setPlotArea, setBuiltArea,setTotalVillas, setFloorNumber,setBedRooms, setBedRoomsWithToilet,
   setToilets,setCarPorch,setCarParking,setSitOut,setLivingArea,setDiningHall,setKitchen,setWorkArea,setUpperLivingArea,setBalcony,setOpenTerrace,setWaterWell,
   setWaterConnection,facing,totalNumberOfFloors,plotarea,builtArea,totalVillas,floorNumber,bedRooms,bedRoomsWithToilet,toilets,carPorch,carParking,
-  sitOut,livingArea,diningHall,kitchen,workArea, upperLivingArea,balcony,openTerrace, waterWell,waterConnection
+  sitOut,livingArea,diningHall,kitchen,workArea, upperLivingArea,balcony,openTerrace, waterWell,waterConnection,setCarporchStatusChecked,setSitoutStatusChecked,setLivingareaStatusChecked,setDininghallStatusChecked,
+  setKitchenStatusChecked,setWorkareaStatusChecked,setUpperlivingareaStatusChecked,setBalconyStatusChecked,
+  setOpenterraceStatusChecked, setWaterwellStatusChecked,setWaterconnectionStatusChecked,carporchStatusChecked,sitoutStatusChecked,livingareaStatusChecked, dininghallStatusChecked,
+  kitchenStatusChecked,workareaStatusChecked,upperlivingareaStatusChecked,balconyStatusChecked,openterraceStatusChecked,waterwellStatusChecked,waterconnectionStatusChecked
 }) => {
  
 
@@ -45,63 +48,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       setFacingPolarity(e.value);
       
     }
-    const handleCarporchChange = (e) => {
-      // alert(e.target.checked)
-      setCarPorch(e.target.checked);
-      
-    }
-    const handleSitoutChange = (e) => {
-      // alert(e.target.checked)
-      setSitOut(e.target.checked);
-      
-    }
-    const handleLivingareaChange = (e) => {
-      //  alert(e.target.checked)
-      setLivingArea(e.target.checked);
-      
-    }
-    const handleDininghallChange= (e) => {
-      // alert(e.target.checked)
-      setDiningHall(e.target.checked);
-      
-    }
-    const handleKitchenChange= (e) => {
-      // alert(e.target.checked)
-      //setKitchen(!kitchen)
-      setKitchen(e.target.checked);
-      
-    }
-    const handleWorkareaChange = (e) => {
-      // alert(e.target.checked)
-      setWorkArea(e.target.checked);
-      
-    }
-    const handleUpperlivingAreaChange = (e) => {
-      //  alert(e.target.checked)
-      setUpperLivingArea(e.target.checked);
-      
-    }
-    const handleBalconyChange = (e) => {
-      //  alert(e.target.checked)
-      setBalcony(e.target.checked);
-      
-    }
-    const handleOpenterraceChange = (e) => {
-      //  alert(e.target.checked)
-      setOpenTerrace(e.target.checked);
-      
-    }
-    const handleWaterwellChange = (e) => {
-      //  alert(e.target.checked)
-      setWaterWell(e.target.checked);
-      
-    }
-    const handleWaterConnectionChange = (e) => {
-      //  alert(e.target.checked)
-      setWaterConnection(e.target.checked);
-      
-    }
-
+    
 
     useMemo(() => {
       // alert("haiii")
@@ -571,7 +518,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
      ){
       // alertarray=[];
       // setAlertContent(alertarray)
-        alert("haiii")
+        alert(carporchStatusChecked)
       //  if(propertyTypeSelected=="Villa") {
           try {
         alert(bedRoomsWithToilet);
@@ -594,18 +541,18 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
               "bedrooms":bedRooms,
                "bedroomsWithToilet":bedRoomsWithToilet,
                "toilets":toilets,
-               "carPorch":carPorch,
+               "carPorch":carporchStatusChecked,
                "carParking":carParking,
-               "sitout":sitOut,
-               "livingArea":livingArea,
-               "diningHall":diningHall,
-               "kitchen":kitchen,
-               "workArea":workArea,
-               "upperLivingArea":upperLivingArea,
-               "balcony":balcony,
-               "openTerrace":openTerrace,
-               "waterWell":waterWell,
-               "waterConnection":waterConnection
+               "sitout":sitoutStatusChecked,
+               "livingArea":livingareaStatusChecked,
+               "diningHall":dininghallStatusChecked,
+               "kitchen":kitchenStatusChecked,
+               "workArea":workareaStatusChecked,
+               "upperLivingArea":upperlivingareaStatusChecked,
+               "balcony":balconyStatusChecked,
+               "openTerrace":openterraceStatusChecked,
+               "waterWell":waterwellStatusChecked,
+               "waterConnection":waterconnectionStatusChecked,
               
 
 
@@ -642,6 +589,29 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "stateID":stateSelectedValue,
                "districtID":districtSelectedValue,
                "townID":townSelectedValue,
+               "locality":localityName,
+               "cost":cost,
+               "facing":facing,
+               "numberOfFloors":totalNumberOfFloors,
+               "builtArea":builtArea,
+               "plotArea":plotarea,
+               "totalVillas":totalVillas,
+               "floorNumber":floorNumber,
+               "bedrooms":bedRooms,
+               "bedroomsWithToilet":bedRoomsWithToilet,
+               "toilets":toilets,
+               "carPorch":carporchStatusChecked,
+               "carParking":carParking,
+               "sitout":sitoutStatusChecked,
+               "livingArea":livingareaStatusChecked,
+               "diningHall":dininghallStatusChecked,
+               "kitchen":kitchenStatusChecked,
+               "workArea":workareaStatusChecked,
+               "upperLivingArea":upperlivingareaStatusChecked,
+               "balcony":balconyStatusChecked,
+               "openTerrace":openterraceStatusChecked,
+               "waterWell":waterwellStatusChecked,
+               "waterConnection":waterconnectionStatusChecked,
                
     
     
@@ -668,21 +638,22 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var bedRoomsWithToiletWidget=<input type="text" class="form-control" required onChange={(e) =>  setBedRoomsWithToilet(e.target.value)} disabled={isBedRoomsWithToiletDisabled}/>;
         var toiletsWidget=<input type="text" class="form-control" required onChange={(e) =>  setToilets(e.target.value)} disabled={isToiletsDisabled}/>;
         
-        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={handleCarporchChange}    checked={carPorch} />;
+        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={() => setCarporchStatusChecked(!carporchStatusChecked)} />;
         var carParkingWidget=<input type="text" class="form-control" onChange={(e) =>  setCarParking(e.target.value)} disabled={isCarParkingDisabled} />;
-        var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} onChange={handleSitoutChange}   />;
-        var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled} onChange={handleLivingareaChange}   />;
-        var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled} onChange={handleDininghallChange}/>;
-        var kitchenWidget=<input type="checkbox" class="form-check-input" required disabled={isKitchenDisabled} onChange={handleKitchenChange}    checked={ kitchen==true }/>;
-        var workAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isWorkAreaDisabled} onChange={handleWorkareaChange}/>;
-        var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isUpperLivingAreaDisabled} onChange={handleUpperlivingAreaChange}/>;
-        var balconyWidget=<input type="checkbox" class="form-check-input" required disabled={isBalconyDisabled} onChange={handleBalconyChange}/>;
-        var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={handleOpenterraceChange}/>;
-        var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={handleWaterwellChange}/>;
-        var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={handleWaterConnectionChange}   />;
+        var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} onChange={() => setSitoutStatusChecked(!sitoutStatusChecked)}   />;
+        var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled} onChange={() => setLivingareaStatusChecked(!livingareaStatusChecked)}   />;
+        var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled} onChange={() => setDininghallStatusChecked(!dininghallStatusChecked)}/>;
+        var kitchenWidget=<input type="checkbox" class="form-check-input" required disabled={isKitchenDisabled}  onChange={() => setKitchenStatusChecked(!kitchenStatusChecked)}/>;
+        var workAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isWorkAreaDisabled} onChange={() => setWorkareaStatusChecked(!workareaStatusChecked)}/>;
+        var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isUpperLivingAreaDisabled} onChange={() => setUpperlivingareaStatusChecked(!upperlivingareaStatusChecked)}/>;
+        var balconyWidget=<input type="checkbox" class="form-check-input" required disabled={isBalconyDisabled} onChange={() => setBalconyStatusChecked(!balconyStatusChecked)}/>;
+        var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={() => setOpenterraceStatusChecked(!openterraceStatusChecked)} />;
+        var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={() => setWaterwellStatusChecked(!waterwellStatusChecked)}/>;
+        var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={() => setWaterconnectionStatusChecked(!waterconnectionStatusChecked)}   />;
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
     }
     else if(operation==="edit"){
+      // alert(carporchtrue)
         var facingPolarityWidget=<Select
         options={facingPolarity}
         onChange={handleFacingSelection}
@@ -698,18 +669,18 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var bedRoomsWithToiletWidget=<input type="text" class="form-control" required onChange={(e) =>  setBedRoomsWithToilet(e.target.value)} disabled={isBedRoomsWithToiletDisabled} value={bedRoomsWithToilet}/>;
         var toiletsWidget=<input type="text" class="form-control" required onChange={(e) =>  setToilets(e.target.value)} disabled={isToiletsDisabled} value={toilets}/>;
         
-        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  onChange={handleCarporchChange}  />;
-        var carParkingWidget=<input type="text" class="form-control" onChange={(e) =>  setCarParking(e.target.value)} disabled={isCarParkingDisabled}  />;
-        var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} onChange={handleSitoutChange} />;
-        var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled} onChange={handleLivingareaChange}/>;
-        var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled} onChange={handleDininghallChange}/>;
-        var kitchenWidget=<input type="checkbox" class="form-check-input" required disabled={isKitchenDisabled} onChange={handleKitchenChange}/>;
-        var workAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isWorkAreaDisabled} onChange={handleWorkareaChange}/>;
-        var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isUpperLivingAreaDisabled} onChange={handleUpperlivingAreaChange}/>;
-        var balconyWidget=<input type="checkbox" class="form-check-input" required disabled={isBalconyDisabled} onChange={handleBalconyChange}/>;
-        var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={handleOpenterraceChange}/>;
-        var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={handleWaterwellChange}/>;
-        var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={handleWaterConnectionChange}/>;
+        var carPorchWidget=<input type="checkbox" class="form-check-input" disabled={isCarPorchDisabled}  checked={carporchStatusChecked} onChange={() => setCarporchStatusChecked(!carporchStatusChecked)} />;
+        var carParkingWidget=<input type="text" class="form-control" onChange={(e) =>  setCarParking(e.target.value)} disabled={isCarParkingDisabled} value={carParking}  />;
+        var sitOutWidget=<input type="checkbox" class="form-check-input" required disabled={isSitOutDisabled} checked={sitoutStatusChecked}  onChange={() => setSitoutStatusChecked(!sitoutStatusChecked)}/>;
+        var livingAreaWidget=<input type="checkbox"class="form-check-input" required disabled={isLivingAreaDisabled}  onChange={() => setLivingareaStatusChecked(!livingareaStatusChecked)} checked={livingareaStatusChecked}/>;
+        var diningHallWidget=<input type="checkbox"class="form-check-input" required disabled={isDiningHallDisabled}  onChange={() => setDininghallStatusChecked(!dininghallStatusChecked)} checked={dininghallStatusChecked}/>;
+        var kitchenWidget=<input type="checkbox" class="form-check-input" required disabled={isKitchenDisabled}  onChange={() => setKitchenStatusChecked(!kitchenStatusChecked)} checked={kitchenStatusChecked}/>;
+        var workAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isWorkAreaDisabled}  onChange={() => setWorkareaStatusChecked(!workareaStatusChecked)} checked={workareaStatusChecked}/>;
+        var upperLivingAreaWidget=<input type="checkbox" class="form-check-input" required disabled={isUpperLivingAreaDisabled}  onChange={() => setUpperlivingareaStatusChecked(!upperlivingareaStatusChecked)} checked={upperlivingareaStatusChecked}/>;
+        var balconyWidget=<input type="checkbox" class="form-check-input" required disabled={isBalconyDisabled}  onChange={() => setBalconyStatusChecked(!balconyStatusChecked)} checked={balconyStatusChecked}/>;
+        var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled}  onChange={() => setOpenterraceStatusChecked(!openterraceStatusChecked)} checked={openterraceStatusChecked}/>;
+        var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled}  onChange={() => setWaterwellStatusChecked(!waterwellStatusChecked)} checked={waterwellStatusChecked}/>;
+        var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled}  onChange={() => setWaterconnectionStatusChecked(!waterconnectionStatusChecked)} checked={waterconnectionStatusChecked}/>;
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
 
     }
