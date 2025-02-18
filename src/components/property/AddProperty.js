@@ -50,6 +50,7 @@ const AddProperty = (props) => {
 
     const [localityName, setLocalityName] = useState("");
     const [cost, setCost] = useState("");
+    const [costtype, setCosttype] = useState("");
 
     const [stateOptions, setStateOptions] = useState([]);
     const [districtOptions, setDistrictOptions] = useState([]);
@@ -89,7 +90,10 @@ const AddProperty = (props) => {
         const [property_Type, setPropertyType] = useState("");
         const [transactiontype, setTransactionType] = useState("");
 
-        const [selectedRadioCostOption, setSelectedRadioCostOption] = useState('default');
+        const [selectedDefaultOption, setSelectedDefaultOption] = useState(false);
+        const [selectedpercentCostOption, setSelectedPercentOption] = useState(false);
+        const [selectedPersquarefeetCostOption, setSelectedPersquarefeetOption] = useState(false);
+        const[costtypeStatusChecked,setCosttypeStatusChecked]=useState("default");
 
            const [facing, setFacingPolarity] = useState("");
            const [totalNumberOfFloors, setTotalNumberOfFloors] = useState("");
@@ -113,6 +117,7 @@ const AddProperty = (props) => {
            const [openTerrace, setOpenTerrace] = useState(false);
            const [waterWell, setWaterWell] = useState(false);
            const [waterConnection, setWaterConnection] = useState(false);
+          
 
            const[carporchStatusChecked,setCarporchStatusChecked]=useState(false);
            const[sitoutStatusChecked,setSitoutStatusChecked]=useState(false);
@@ -418,17 +423,19 @@ const AddProperty = (props) => {
       let townOptionsload=[];
       axios.get(Url+"property/individualProperty/"+uniqueID)
       .then((res)=>{
-        // alert(res.data.sitout)
+        // alert(res.data.districtID)
           setTransactionTypeSelected(res.data.transactionType)
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
           // setStateid(res.data.stateID);
           setStateNameSelectedID(res.data.stateID);
+          setDistrictNameSelectedID(res.data.districtID);
           setSelectedDistrictFunction(res.data.districtID)
           setSelectedTownFunction(res.data.townID)
           setTownNameSelectedID(res.data.townID)
           setLocalityName(res.data.locality)
           setCost(res.data.cost)
+          setCosttype(res.data.costtype)
           setFacingPolarity(res.data.facing)
           setTotalNumberOfFloors(res.data.numberOfFloors)
           setPlotArea(res.data.plotArea)
@@ -451,7 +458,26 @@ const AddProperty = (props) => {
           setWaterWell(res.data.waterWell)
           setWaterConnection(res.data.waterConnection)
 
-  
+          if(res.data.costType==="persquarefeet")
+          {
+            // alert("hhhhh")
+            setCosttypeStatusChecked("persquarefeet")
+          }
+         
+          else if(res.data.costType==="percent")
+          {
+            // alert("1111")
+            setCosttypeStatusChecked("percent")
+
+          }
+          
+          else if(res.data.costType==="default")
+          {
+            setCosttypeStatusChecked("default")
+
+          }
+           
+            
           res.data.carPorch===true?setCarporchStatusChecked(true):setCarporchStatusChecked(false)
           res.data.sitout===true?setSitoutStatusChecked(true):setSitoutStatusChecked(false)
           res.data.livingArea===true?setLivingareaStatusChecked(true):setLivingareaStatusChecked(false)
@@ -579,10 +605,10 @@ useEffect(() => {
 
 }, []);
 
-function handleradioChange(event) {
-  //alert(event.target.value)
-  setSelectedRadioCostOption(event.target.value);
-}
+// function handleradioChange(event) {
+// //alert(event.target.value)
+//   setCosttypeStatusChecked(event.target.value);
+// }
 
 
     if(operation=="new"){
@@ -617,10 +643,10 @@ function handleradioChange(event) {
 
       var localitywidget= <input type="text" class="form-control" placeholder="Enter locality name" value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
       var costwidget=<input type="text" class="form-control" placeholder="Enter cost" required onChange={(e) => setCost(e.target.value)}/>
-      var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
-      var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
-      var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
-    
+      var costradio1=<input type="radio" value="default"    onChange={(e) =>setCosttypeStatusChecked(e.target.value)} checked={costtypeStatusChecked==="default"}/>
+      var costradio2=<input type="radio" value="percent"  onChange={(e) =>setCosttypeStatusChecked(e.target.value)} checked={costtypeStatusChecked==="percent"} />
+      var costradio3=<input type="radio" value="persquarefeet"   onChange={(e) =>setCosttypeStatusChecked(e.target.value)} checked={costtypeStatusChecked==="persquarefeet"} />
+    //selectedRadioCostOption === 'percent'
 
     }
 
@@ -656,9 +682,9 @@ function handleradioChange(event) {
 
       var localitywidget= <input type="text" class="form-control"  value={localityName} required onChange={(e) => setLocalityName(e.target.value)}/>
       var costwidget=<input type="text" class="form-control"  value={cost} required onChange={(e) => setCost(e.target.value)}/>
-      var costradio1=<input type="radio" value="default" checked={selectedRadioCostOption === 'default'} onChange={handleradioChange} />
-      var costradio2=<input type="radio" value="percent" checked={selectedRadioCostOption === 'percent'} onChange={handleradioChange} />
-      var costradio3=<input type="radio" value="persquarefeet" checked={selectedRadioCostOption === 'persquarefeet'} onChange={handleradioChange} />
+      var costradio1=<input type="radio" value="default"  onChange={(e) =>setCosttypeStatusChecked(e.target.value)}  checked={costtypeStatusChecked==="default"} />
+      var costradio2=<input type="radio" value="percent" onChange={(e) =>setCosttypeStatusChecked(e.target.value)} checked={costtypeStatusChecked==="percent"} />
+      var costradio3=<input type="radio" value="persquarefeet"  onChange={(e) =>setCosttypeStatusChecked(e.target.value)} checked={costtypeStatusChecked==="persquarefeet"} />
       
     }
     return(
@@ -825,7 +851,8 @@ function handleradioChange(event) {
             carporchStatusChecked={carporchStatusChecked} sitoutStatusChecked={sitoutStatusChecked} livingareaStatusChecked={livingareaStatusChecked} dininghallStatusChecked={dininghallStatusChecked}
             kitchenStatusChecked={kitchenStatusChecked} workareaStatusChecked={workareaStatusChecked} upperlivingareaStatusChecked={upperlivingareaStatusChecked}
             balconyStatusChecked={balconyStatusChecked} openterraceStatusChecked={openterraceStatusChecked} waterwellStatusChecked={waterwellStatusChecked} waterconnectionStatusChecked={waterconnectionStatusChecked}
-            /> 
+            costtypeStatusChecked={costtypeStatusChecked} setCosttypeStatusChecked={setCosttypeStatusChecked}
+            />  
 
           
           

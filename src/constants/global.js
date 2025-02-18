@@ -18,6 +18,7 @@ const propertyTypes = [
   ];
 
 const facingPolarity = [
+  { value: '', label: 'Facing Polarity' },
     { value: 'North', label: 'North' },
     { value: 'East', label: 'East' },
     { value: 'West', label: 'West' },
