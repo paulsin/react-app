@@ -17,6 +17,7 @@ import { CgMail } from "react-icons/cg";
 import Pagination from "./Pagination";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
+import { NoImage } from "../../constants/global";
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -270,7 +271,7 @@ function Home() {
               'thumbnailimagename':row.thumbnailImageName,
               // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
               // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
-              'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : Noimage 
+              'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
             })
       
           }

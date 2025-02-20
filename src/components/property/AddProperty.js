@@ -19,6 +19,7 @@ import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
 import AddPropertyAttributesAsComponent from "./AddPropertyAttributesAsComponent";
 
+
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
 var addTownUrl = Url + 'location/town';
@@ -130,6 +131,14 @@ const AddProperty = (props) => {
            const[openterraceStatusChecked,setOpenterraceStatusChecked]=useState(false);
            const[waterwellStatusChecked,setWaterwellStatusChecked]=useState(false);
            const[waterconnectionStatusChecked,setWaterconnectionStatusChecked]=useState(false);
+
+           const[googlemap,setGooglemap]=useState("");
+           const[videolink,setVideolink]=useState("");
+           const[propertyTitle,setPropertyTitle]=useState("");
+           const[propertyfeature1,setPropertyFeature1]=useState("");
+           const[propertyfeature2,setPropertyFeature2]=useState("");
+           const[propertyfeature3,setPropertyFeature3]=useState("");
+           const[propertyfeature4,setPropertyFeature4]=useState("");
      
 
     const stateOptionsArray = [];
@@ -445,6 +454,7 @@ const AddProperty = (props) => {
           setBedRooms(res.data.bedrooms)
           setBedRoomsWithToilet(res.data.bedroomsWithToilet)
           setToilets(res.data.toilets)
+          
           setCarPorch(res.data.carPorch)
           setCarParking(res.data.carParking)
           setSitOut(res.data.sitout)
@@ -457,6 +467,14 @@ const AddProperty = (props) => {
           setOpenTerrace(res.data.openTerrace)
           setWaterWell(res.data.waterWell)
           setWaterConnection(res.data.waterConnection)
+
+          setGooglemap(res.data.googleMap)
+          setVideolink(res.data.youtubeVideoLink)
+          setPropertyTitle(res.data.propertyTitle)
+          setPropertyFeature1(res.data.propertyFeature1)
+          setPropertyFeature2(res.data.propertyFeature2)
+          setPropertyFeature3(res.data.propertyFeature3)
+          setPropertyFeature4(res.data.propertyFeature4)
 
           if(res.data.costType==="persquarefeet")
           {
@@ -851,14 +869,15 @@ useEffect(() => {
             carporchStatusChecked={carporchStatusChecked} sitoutStatusChecked={sitoutStatusChecked} livingareaStatusChecked={livingareaStatusChecked} dininghallStatusChecked={dininghallStatusChecked}
             kitchenStatusChecked={kitchenStatusChecked} workareaStatusChecked={workareaStatusChecked} upperlivingareaStatusChecked={upperlivingareaStatusChecked}
             balconyStatusChecked={balconyStatusChecked} openterraceStatusChecked={openterraceStatusChecked} waterwellStatusChecked={waterwellStatusChecked} waterconnectionStatusChecked={waterconnectionStatusChecked}
-            costtypeStatusChecked={costtypeStatusChecked} setCosttypeStatusChecked={setCosttypeStatusChecked}
+            costtypeStatusChecked={costtypeStatusChecked} setCosttypeStatusChecked={setCosttypeStatusChecked} googlemap={googlemap} videolink={videolink} propertyTitle={propertyTitle} propertyfeature1={propertyfeature1} propertyfeature2={propertyfeature2}
+            propertyfeature3={propertyfeature3} propertyfeature4={propertyfeature4} setGooglemap={setGooglemap} setVideolink={setVideolink} setPropertyTitle={setPropertyTitle} setPropertyFeature1={setPropertyFeature1}
+            setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4}
             />  
 
           
-          
         </div>
 
-
+         
     </div>
 
     )
