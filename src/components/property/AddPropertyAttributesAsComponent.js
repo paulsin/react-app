@@ -14,7 +14,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   setKitchenStatusChecked,setWorkareaStatusChecked,setUpperlivingareaStatusChecked,setBalconyStatusChecked,
   setOpenterraceStatusChecked, setWaterwellStatusChecked,setWaterconnectionStatusChecked,carporchStatusChecked,sitoutStatusChecked,livingareaStatusChecked, dininghallStatusChecked,
   kitchenStatusChecked,workareaStatusChecked,upperlivingareaStatusChecked,balconyStatusChecked,openterraceStatusChecked,waterwellStatusChecked,waterconnectionStatusChecked,
-  costtypeStatusChecked,setCosttypeStatusChecked
+  costtypeStatusChecked,setCosttypeStatusChecked,googlemap,videolink,propertyTitle, propertyfeature1,propertyfeature2,propertyfeature3,propertyfeature4,setGooglemap,setVideolink,setPropertyTitle,
+  setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4
 }) => {
  
 
@@ -245,6 +246,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setIsOpenTerraceDisabled(true);
         setIsWaterWellDisabled(false);
         setIsWaterConnectionDisabled(false);
+
+       
       }
     }, [propertyTypeSelected])
 
@@ -275,8 +278,21 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var toiletsFlag=true;
       var carParkingFlag=true;
       var floorNumberFlag=true;
-      
+      var propertytitleflag=true;
+      var propertyfeature1flag=true;
 
+     if(propertyfeature1 === "") {
+        //alert("Paulsin");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Feature");
+        propertyfeature1flag = false;
+    }  
+    if(propertyTitle === "") {
+        //alert("Paulsin");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Title");
+        propertytitleflag = false;
+    }
   
     if(propertyTypeSelected === "House") {
       if(carParking === "") {
@@ -565,13 +581,20 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     
   
    
-     if(propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
+     if(propertyfeature1flag && propertytitleflag && propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
       // alertarray=[];
       // setAlertContent(alertarray)
         // alert(selectedRadioCostOption)
       //  if(propertyTypeSelected=="Villa") {
+         // googleMap : String,
+      // youtubeVideoLink : String,
+      // propertyTitle : String,
+      // propertyFeature1 : String,
+      // propertyFeature2 : String,
+      // propertyFeature3 : String,
+      // propertyFeature4 : String
           try {
         // alert(bedRoomsWithToilet);
            const response = await axios.post(
@@ -606,7 +629,15 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "openTerrace":openterraceStatusChecked,
                "waterWell":waterwellStatusChecked,
                "waterConnection":waterconnectionStatusChecked,
-              
+               "googleMap":googlemap,
+               "youtubeVideoLink":videolink,
+               "propertyTitle":propertyTitle,
+               "propertyFeature1":propertyfeature1,
+               "propertyFeature2":propertyfeature2,
+               "propertyFeature3":propertyfeature3,
+               "propertyFeature4":propertyfeature4
+
+
 
 
 
@@ -655,8 +686,21 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var toiletsFlag=true;
       var carParkingFlag=true;
       var floorNumberFlag=true;
-      
+      var propertytitleflag=true;
+      var propertyfeature1flag=true;
 
+     if(propertyfeature1 === "") {
+        //alert("Paulsin");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Feature");
+        propertyfeature1flag = false;
+    }  
+    if(propertyTitle === "") {
+        //alert("Paulsin");
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Title");
+        propertytitleflag = false;
+    }
   
     if(propertyTypeSelected === "House") {
       if(carParking === "") {
@@ -942,10 +986,11 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       setAlertContent("Select property type");
       propertyTypeSelectedFlag = false;
     }
-    if(propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
+    if(propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
       alert("haii")
+   
        axios.post(Url+"property/editproperty",
            {
                "propertyID":uniqueID,
@@ -978,6 +1023,13 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "openTerrace":openterraceStatusChecked,
                "waterWell":waterwellStatusChecked,
                "waterConnection":waterconnectionStatusChecked,
+               "googleMap":googlemap,
+               "youtubeVideoLink":videolink,
+               "propertyTitle":propertyTitle,
+               "propertyFeature1":propertyfeature1,
+               "propertyFeature2":propertyfeature2,
+               "propertyFeature3":propertyfeature3,
+               "propertyFeature4":propertyfeature4
                
     
     
@@ -1019,6 +1071,14 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled} onChange={() => setOpenterraceStatusChecked(!openterraceStatusChecked)} />;
         var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled} onChange={() => setWaterwellStatusChecked(!waterwellStatusChecked)}/>;
         var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled} onChange={() => setWaterconnectionStatusChecked(!waterconnectionStatusChecked)}   />;
+        
+        var googlemapwidget=<input type="text" class="form-control" onChange={(e) =>  setGooglemap(e.target.value)} />
+        var videolinkwidget=<input type="text" class="form-control" onChange={(e) =>  setVideolink(e.target.value)} />
+        var titlewidget=<input type="text" class="form-control" onChange={(e) =>  setPropertyTitle(e.target.value)} />
+        var feature1widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature1(e.target.value)} />
+        var feature2widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature2(e.target.value)} />
+        var feature3widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature3(e.target.value)} />
+        var feature4widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature4(e.target.value)} />
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
     }
     else if(operation==="edit"){
@@ -1050,6 +1110,13 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var openTerraceWidget=<input type="checkbox" class="form-check-input" required disabled={isOpenTerraceDisabled}  onChange={() => setOpenterraceStatusChecked(!openterraceStatusChecked)} checked={openterraceStatusChecked}/>;
         var waterWellWidget=<input type="checkbox"class="form-check-input" required disabled={isWaterWellDisabled}  onChange={() => setWaterwellStatusChecked(!waterwellStatusChecked)} checked={waterwellStatusChecked}/>;
         var waterConnectionWidget=<input type="checkbox" class="form-check-input" required disabled={isWaterConnectionDisabled}  onChange={() => setWaterconnectionStatusChecked(!waterconnectionStatusChecked)} checked={waterconnectionStatusChecked}/>;
+        var googlemapwidget=<input type="text" class="form-control" onChange={(e) =>  setGooglemap(e.target.value)} value={googlemap}/>
+        var videolinkwidget=<input type="text" class="form-control" onChange={(e) =>  setVideolink(e.target.value)} value={videolink}/>
+        var titlewidget=<input type="text" class="form-control" onChange={(e) =>  setPropertyTitle(e.target.value)} value={propertyTitle}/>
+        var feature1widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature1(e.target.value)} value={propertyfeature1} />
+        var feature2widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature2(e.target.value)} value={propertyfeature2}/>
+        var feature3widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature3(e.target.value)} value={propertyfeature3}/>
+        var feature4widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature4(e.target.value)} value={propertyfeature4}/>
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
 
     }
@@ -1167,6 +1234,42 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     
       <div class="col-sm-2">
     
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Google Map</label>
+      <div class="col-sm-3">
+        {googlemapwidget}
+      </div>
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Video Link</label>
+      <div class="col-sm-3">
+        {videolinkwidget}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-5">          
+        {titlewidget}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Feature1</label>
+      <div class="col-sm-3">
+        {feature1widget}
+      </div>
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Feature2</label>
+      <div class="col-sm-3">
+        {feature2widget}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Feature3</label>
+      <div class="col-sm-3">
+        {feature3widget}
+      </div>
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Feature4</label>
+      <div class="col-sm-3">
+        {feature4widget}
       </div>
     </div>
     {savebuttonwidget}

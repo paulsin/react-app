@@ -1,6 +1,6 @@
  const Url = 'http://localhost:3000/backend/' ;// For localhost
 //const Url = 'https://haberoceanstock.com/backend/' // For website
-const Noimage="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+const NoImage="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
 const propertyTypes = [
     { value: '', label: 'Property type' },
     { value: 'House', label: 'House' },
@@ -25,7 +25,8 @@ const facingPolarity = [
     { value: 'South', label: 'South' },
   ];
 
-export {Url}        
+export {Url}   
+export {NoImage}     
 export {propertyTypes}
 export {transactionType}
 export {facingPolarity}
