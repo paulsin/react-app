@@ -832,13 +832,13 @@ useEffect(() => {
                 </div>
             </div>
             <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Cost</label>
 
                 <div class="col-sm-3">
                   {costwidget}
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                   {costradio1}&nbsp;Default
                 </div>
 

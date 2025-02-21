@@ -24,9 +24,16 @@ const facingPolarity = [
     { value: 'West', label: 'West' },
     { value: 'South', label: 'South' },
   ];
+  const OwnerorBuilderorDeveloper=[
+    { value: '', label: 'Owner or Builder or Developer' },
+    { value: 'Owner', label: 'Owner' },
+    { value: 'Builder', label: 'Builder' },
+    { value: 'Developer', label: 'Developer' }
+  ]
 
 export {Url}   
 export {NoImage}     
 export {propertyTypes}
 export {transactionType}
 export {facingPolarity}
+export {OwnerorBuilderorDeveloper}

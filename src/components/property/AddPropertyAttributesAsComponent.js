@@ -4,7 +4,12 @@ import { facingPolarity } from "../../constants/global";
 import Select from 'react-select';
 import axios from "axios";
 import { Url } from "../../constants/global";
+import { OwnerorBuilderorDeveloper } from "../../constants/global";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 var addPropertyURL = Url + 'property/addProperty';
+var addOwnerURL = Url + 'property/addOwnerOrBuilder';
+ 
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected, operation,setAlertContent,setAlertClass,
   transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
   setFacingPolarity, setTotalNumberOfFloors,setPlotArea, setBuiltArea,setTotalVillas, setFloorNumber,setBedRooms, setBedRoomsWithToilet,
@@ -42,14 +47,28 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
    const [isOpenTerraceDisabled, setIsOpenTerraceDisabled] = useState(false);
    const [isWaterWellDisabled, setIsWaterWellDisabled] = useState(false);
    const [isWaterConnectionDisabled, setIsWaterConnectionDisabled] = useState(false);
-
+  
+   const [phonenumber1,setPhonenumber1]=useState("");
+   const [phonenumber2,setPhonenumber2]=useState("");
+   const [ownerorbuilderselection,setOwnerorBuilderselection]=useState("");
+   const [ownername,setOwnername]=useState("");
+   const [owneraddress,setOwneraddress]=useState("");
+   
 
 
     const handleFacingSelection = (e) => {
       // alert(e.value)
       setFacingPolarity(e.value);
+     
       
     }
+    
+    const handleorBuilderorDeveloperSelection = (e) => {
+     //alert(e.value)
+     setOwnerorBuilderselection(e.value); 
+      
+    }
+    
     
 
     useMemo(() => {
@@ -251,6 +270,34 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       }
     }, [propertyTypeSelected])
 
+    
+    const submitOwnerdata = async (e) => {
+      try {
+        // alert(bedRoomsWithToilet);
+     
+     
+           const response = await axios.post(
+            addOwnerURL,
+             {
+               "contactNumber": phonenumber1,    
+               "secondNumber": phonenumber2,
+               "ownerOrBuilder": ownerorbuilderselection,
+               "name": ownername,
+               "address": owneraddress,
+           
+         
+
+
+
+
+
+             }     
+           );  
+        
+         } catch(error) {
+           console.error("Error posting data:", error);
+         }
+    }
     const submitProperty = async (e) => {
       //alert("Paulsin");
       //alert(stateNameSelectedID);
@@ -1080,6 +1127,16 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var feature3widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature3(e.target.value)} />
         var feature4widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature4(e.target.value)} />
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
+        var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
+        var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
+        var phoneno2widget=<PhoneInput className="number"  value={phonenumber2} onChange={setPhonenumber2}/>
+        var ownerorbuilderordeveloperwidget=<Select
+          options={OwnerorBuilderorDeveloper}
+          onChange={handleorBuilderorDeveloperSelection}
+        />
+        var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
+        var addresswidget=<textarea class="form-control" onChange={(e) =>  setOwneraddress(e.target.value)} /> 
+        var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitOwnerdata}>Submit Owner Details</button>                                  
     }
     else if(operation==="edit"){
       // alert(carporchtrue)
@@ -1186,6 +1243,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       <div class="col-sm-2">
         {livingAreaWidget}
       </div>
+    
 
     </div>
 
@@ -1238,44 +1296,91 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     </div>
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Google Map</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {googlemapwidget}
       </div>
+    </div>
+    <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Video Link</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {videolinkwidget}
       </div>
     </div>
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Title</label>
-      <div class="col-sm-5">          
+      <div class="col-sm-10">          
         {titlewidget}
       </div>
     </div>
+ 
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature1</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {feature1widget}
       </div>
+    </div>
+    <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature2</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {feature2widget}
       </div>
     </div>
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature3</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {feature3widget}
       </div>
+    </div>
+    <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature4</label>
-      <div class="col-sm-3">
+      <div class="col-sm-10">
         {feature4widget}
       </div>
     </div>
     {savebuttonwidget}
-
-
     <br/><br/>
+    <div class="row mb-3"> 
+     <div class="col-4">  
+     </div>
+     <div class="col-4"> 
+      {contactheadingwidget} 
+     </div>
+     <div class="col-4">  
+     </div>
+   </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Phone Number1</label>
+      <div class="col-sm-5">
+        {phoneno1widget}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Phone Number2</label>
+      <div class="col-sm-5">
+        {phoneno2widget}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Owner or Builder or Developer</label>
+      <div class="col-sm-5">
+        {ownerorbuilderordeveloperwidget}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Name Of Owner or Builder or Developer</label>
+      <div class="col-sm-5">
+        {namewidget}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Address Of Owner or Builder or Developer</label>
+      <div class="col-sm-5">
+        {addresswidget}
+      </div>
+    </div>
+    {ownerdatasavebuttonwidget}
   </>
     
   )
