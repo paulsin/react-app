@@ -284,19 +284,15 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "ownerOrBuilder": ownerorbuilderselection,
                "name": ownername,
                "address": owneraddress,
-           
-         
-
-
-
-
-
              }     
            );  
         
+           alert(response.data);
+
          } catch(error) {
            console.error("Error posting data:", error);
          }
+
     }
     const submitProperty = async (e) => {
       //alert("Paulsin");
@@ -1381,6 +1377,9 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       </div>
     </div>
     {ownerdatasavebuttonwidget}
+
+    <br/>
+    <br/>
   </>
     
   )
