@@ -9,6 +9,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 var addPropertyURL = Url + 'property/addProperty';
 var addOwnerURL = Url + 'property/addOwnerOrBuilder';
+var getownerdetailsurl=Url+'property/ownersandbuilders';
  
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected, operation,setAlertContent,setAlertClass,
   transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
@@ -20,7 +21,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   setOpenterraceStatusChecked, setWaterwellStatusChecked,setWaterconnectionStatusChecked,carporchStatusChecked,sitoutStatusChecked,livingareaStatusChecked, dininghallStatusChecked,
   kitchenStatusChecked,workareaStatusChecked,upperlivingareaStatusChecked,balconyStatusChecked,openterraceStatusChecked,waterwellStatusChecked,waterconnectionStatusChecked,
   costtypeStatusChecked,setCosttypeStatusChecked,googlemap,videolink,propertyTitle, propertyfeature1,propertyfeature2,propertyfeature3,propertyfeature4,setGooglemap,setVideolink,setPropertyTitle,
-  setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4
+  setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4,owneroptions,ownerSelectedLabel,ownerSelectedValue,setOwnerSelectedLabel, setOwnerSelectedValue,setOwneroptions
 }) => {
  
 
@@ -53,23 +54,33 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
    const [ownerorbuilderselection,setOwnerorBuilderselection]=useState("");
    const [ownername,setOwnername]=useState("");
    const [owneraddress,setOwneraddress]=useState("");
+   const [alertownerclass, setAlertOwnerClass] = useState("alert alert-info");
+    const [alertOwnerContent, setAlertOwnerContent] = useState("Enter the owner details");
+
+  var owneroptionsarray=[];
+
    
 
-
+    // var owneroptionsarray=[];
     const handleFacingSelection = (e) => {
       // alert(e.value)
-      setFacingPolarity(e.value);
-     
+      setFacingPolarity(e.value); 
       
     }
+    const  handleOwnerorDeveloperSelection = (e) => {
+      setOwnerSelectedValue(e.value)
+      setOwnerSelectedLabel(e.label)
+   
+    }
     
-    const handleorBuilderorDeveloperSelection = (e) => {
+    const handleBuilderorDeveloperSelection = (e) => {
      //alert(e.value)
      setOwnerorBuilderselection(e.value); 
       
     }
     
-    
+
+
 
     useMemo(() => {
       // alert("haiii")
@@ -272,27 +283,77 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
 
     
     const submitOwnerdata = async (e) => {
-      try {
-        // alert(bedRoomsWithToilet);
-     
-     
-           const response = await axios.post(
-            addOwnerURL,
-             {
-               "contactNumber": phonenumber1,    
-               "secondNumber": phonenumber2,
-               "ownerOrBuilder": ownerorbuilderselection,
-               "name": ownername,
-               "address": owneraddress,
-             }     
-           );  
-        
-           alert(response.data);
+      var addressflag=true;
+      var ownerorbuilderflag=true;
+      var ownernameflag=true;
+      var contactnumberflag=true;
 
-         } catch(error) {
-           console.error("Error posting data:", error);
-         }
+      if(owneraddress===""){
+        setAlertOwnerClass("alert alert-danger");
+        setAlertOwnerContent("Enter Address Of Owner");
+        addressflag = false;
+      }
+      if(ownername===""){
+        setAlertOwnerClass("alert alert-danger");
+        setAlertOwnerContent("Enter Name Of Owner");
+        ownernameflag = false;
+      }
+      if(ownerorbuilderselection===""){
+        setAlertOwnerClass("alert alert-danger");
+        setAlertOwnerContent("Select Owner Or Builder Or Developer");
+        ownerorbuilderflag = false;
+      }
+      if(phonenumber1===""){
+        setAlertOwnerClass("alert alert-danger");
+        setAlertOwnerContent("Enter Contact Number Of Owner");
+        contactnumberflag= false;
+      }
+      if(addressflag &&ownernameflag && ownerorbuilderflag && contactnumberflag
+      )
+      {
+          // 
+        try {
+          // alert(bedRoomsWithToilet);
+      
+      
+            const response = await axios.post(
+              addOwnerURL,
+              {
+                "contactNumber": phonenumber1,    
+                "secondNumber": phonenumber2,
+                "ownerOrBuilder": ownerorbuilderselection,
+                "name": ownername,
+                "address": owneraddress,
+              }     
+            );  
+             if(response.data == "both_exists") {
+                setAlertOwnerContent("First Number and Second Number exists");
+                setAlertOwnerClass("alert alert-danger");
+              }
+            else if(response.data == "firstnumber_exists") {
+              setAlertOwnerContent("First Number exists");
+              setAlertOwnerClass("alert alert-danger");
+            }
+            else if(response.data == "secondnumber_exists") {
+              setAlertOwnerContent("Second Number exists");
+              setAlertOwnerClass("alert alert-danger");
+            }
+            else  {
+             
+              setAlertOwnerClass("alert alert-success");
+              setAlertOwnerContent("Data Submitted Successfully");
+             
+            }
+            
+            fetchOwnerdetails();
+            alert(response.data);
 
+        } catch(error) {
+            console.error("Error posting data:", error);
+        }
+        // setAlertOwnerClass("alert alert-success");
+        // setAlertOwnerContent("Data Submitted Successfully");
+      }
     }
     const submitProperty = async (e) => {
       //alert("Paulsin");
@@ -323,7 +384,13 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var floorNumberFlag=true;
       var propertytitleflag=true;
       var propertyfeature1flag=true;
+      var propertybuilderflag=true;
 
+      if(ownerSelectedValue===""){
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Buildername");
+        propertybuilderflag = false;
+      }
      if(propertyfeature1 === "") {
         //alert("Paulsin");
         setAlertClass("alert alert-danger");
@@ -624,7 +691,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     
   
    
-     if(propertyfeature1flag && propertytitleflag && propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
+     if(propertybuilderflag && propertyfeature1flag && propertytitleflag && propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameSelectedIDFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
       // alertarray=[];
@@ -678,7 +745,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "propertyFeature1":propertyfeature1,
                "propertyFeature2":propertyfeature2,
                "propertyFeature3":propertyfeature3,
-               "propertyFeature4":propertyfeature4
+               "propertyFeature4":propertyfeature4,
+               "ownerOrBuilderID":ownerSelectedValue
 
 
 
@@ -700,7 +768,21 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
 
 
     };
+    // function getownerdata(){
 
+    // }
+
+useEffect(() => {
+  //console.log('i fire once');
+  //setItems(data);
+
+  fetchOwnerdetails();
+
+
+
+  //test();
+
+}, []);
     const editProperty= async (e) => {
       // alert(uniqueID)
       // alert(propertyTypeSelected)
@@ -731,6 +813,14 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var floorNumberFlag=true;
       var propertytitleflag=true;
       var propertyfeature1flag=true;
+      var propertybuilderflag=true;
+
+      if(ownerSelectedValue===""){
+        alert("fgvfd")
+        setAlertClass("alert alert-danger");
+        setAlertContent("Enter Property Buildername");
+        propertybuilderflag = false;
+      }
 
      if(propertyfeature1 === "") {
         //alert("Paulsin");
@@ -1029,7 +1119,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       setAlertContent("Select property type");
       propertyTypeSelectedFlag = false;
     }
-    if(propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
+    if(propertybuilderflag && propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
       alert("haii")
@@ -1072,7 +1162,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "propertyFeature1":propertyfeature1,
                "propertyFeature2":propertyfeature2,
                "propertyFeature3":propertyfeature3,
-               "propertyFeature4":propertyfeature4
+               "propertyFeature4":propertyfeature4,
+               "ownerOrBuilderID":ownerSelectedValue
                
     
     
@@ -1085,6 +1176,33 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
        setAlertContent("Data Updated Successfully");
       }
     }
+    const fetchOwnerdetails =  async (e) => {
+      try {
+        const response = await axios.get(getownerdetailsurl,   
+            { withCredentials: true }
+          )
+          .then(function (response) {
+            //alert(response.data[1].districtName);
+
+            response.data.map(key => {
+              // alert(key._id)
+              owneroptionsarray.push({ value: key._id, label: key.contactNumber});           
+            });
+
+            // if(operation === "new") {
+              setOwneroptions(owneroptionsarray);
+            // }
+            
+            // setDistrictOptionsOriginal(owneroptionsarray);
+          })
+          .catch(function (error) {
+            console.log(error);
+          }); 
+        
+      } catch(error) {
+        console.error("Error posting data:", error);
+      }
+    };
 
     if(operation==="new"){
    
@@ -1122,13 +1240,20 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var feature2widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature2(e.target.value)} />
         var feature3widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature3(e.target.value)} />
         var feature4widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature4(e.target.value)} />
+        
+        var ownernameswidget=  <Select
+        
+                // value={{label:districtSelectedLabel, value:districtSelectedValue}}
+                onChange={handleOwnerorDeveloperSelection}
+                options={owneroptions}
+              />
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
         var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
         var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
         var phoneno2widget=<PhoneInput className="number"  value={phonenumber2} onChange={setPhonenumber2}/>
         var ownerorbuilderordeveloperwidget=<Select
           options={OwnerorBuilderorDeveloper}
-          onChange={handleorBuilderorDeveloperSelection}
+          onChange={handleBuilderorDeveloperSelection}
         />
         var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
         var addresswidget=<textarea class="form-control" onChange={(e) =>  setOwneraddress(e.target.value)} /> 
@@ -1170,6 +1295,22 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         var feature2widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature2(e.target.value)} value={propertyfeature2}/>
         var feature3widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature3(e.target.value)} value={propertyfeature3}/>
         var feature4widget=<textarea class="form-control" onChange={(e) =>  setPropertyFeature4(e.target.value)} value={propertyfeature4}/>
+        var ownernameswidget=  <Select
+        
+         value={{label:ownerSelectedLabel, value:ownerSelectedValue}}
+        onChange={handleOwnerorDeveloperSelection}
+        options={owneroptions}
+      />
+      var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
+      var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
+      var phoneno2widget=<PhoneInput className="number"  value={phonenumber2} onChange={setPhonenumber2}/>
+      var ownerorbuilderordeveloperwidget=<Select
+        options={OwnerorBuilderorDeveloper}
+        onChange={handleBuilderorDeveloperSelection}
+      />
+      var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
+      var addresswidget=<textarea class="form-control" onChange={(e) =>  setOwneraddress(e.target.value)} /> 
+      var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitOwnerdata}>Submit Owner Details</button> 
       var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={editProperty}>Edit property</button>
 
     }
@@ -1333,17 +1474,29 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         {feature4widget}
       </div>
     </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Select Owner,Builder or Developer</label>
+      <div class="col-sm-10">
+        {ownernameswidget}
+      </div>
+    </div>
+
     {savebuttonwidget}
     <br/><br/>
     <div class="row mb-3"> 
-     <div class="col-4">  
+     <div class="col-4"> 
+     {contactheadingwidget}  
      </div>
      <div class="col-4"> 
-      {contactheadingwidget} 
      </div>
      <div class="col-4">  
      </div>
    </div>
+ 
+
+    <div class={alertownerclass} role="alert">
+      {alertOwnerContent}
+    </div>
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Phone Number1</label>
       <div class="col-sm-5">
