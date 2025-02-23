@@ -346,7 +346,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
             }
             
             fetchOwnerdetails();
-            alert(response.data);
+            //alert(response.data);
 
         } catch(error) {
             console.error("Error posting data:", error);
