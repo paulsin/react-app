@@ -18,6 +18,7 @@ import AddPropertyStatesAsComponent from "./AddPropertyStatesAsComponent";
 import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
 import AddPropertyAttributesAsComponent from "./AddPropertyAttributesAsComponent";
+import { setSubmissionErrors } from "react-admin";
 
 
 var newUrl = Url + 'location/state';
@@ -30,6 +31,7 @@ var getTownUrl = Url + 'location/towns';
 
 var addPropertyURL = Url + 'property/addProperty';
 var addPropertyImagesURL = Url + 'addPropertyImages';
+var getownerdetailsurl=Url+'property/ownersandbuilders';
 
 const AddProperty = (props) => {
 
@@ -139,11 +141,15 @@ const AddProperty = (props) => {
            const[propertyfeature2,setPropertyFeature2]=useState("");
            const[propertyfeature3,setPropertyFeature3]=useState("");
            const[propertyfeature4,setPropertyFeature4]=useState("");
-     
+
+           const[owneroptions,setOwneroptions]=useState("");
+           const[ownerSelectedValue,setOwnerselectedValue]=useState("");
+           const[ownerSelectedLabel,setOwnerselectedLabel]=useState("");
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
     const townOptionsArray = [];
+    
     const {operation} =useParams();
     const {uniqueID} = useParams();
     const navigate = useNavigate();
@@ -424,8 +430,7 @@ const AddProperty = (props) => {
     //   setTransactionTypeSelected(e.value);
     // }
 
-   
-
+      
     function getPropertyData(){
       //  alert(uniqueID)
       let districtOptionsload=[];
@@ -475,6 +480,10 @@ const AddProperty = (props) => {
           setPropertyFeature2(res.data.propertyFeature2)
           setPropertyFeature3(res.data.propertyFeature3)
           setPropertyFeature4(res.data.propertyFeature4)
+
+          // setOwnerselectedID(res.data.ownerOrBuilderID)
+          
+          setSelectedOwnerFunction(res.data.ownerOrBuilderID)
 
           if(res.data.costType==="persquarefeet")
           {
@@ -540,6 +549,25 @@ const AddProperty = (props) => {
         })
         setTownOptions(townOptionsload);    
       })
+    }
+
+    function  setSelectedOwnerFunction(selectedOwnerFunParam){
+      // alert(selectedOwnerFunParam)
+        axios
+        .get(Url+"property/ownersandbuilders",
+        )
+        .then((res) => {
+          // let batchNumberOptionsInitial = "";
+          // alert("anu")
+          res.data.map(data => {
+              if(data._id === selectedOwnerFunParam) {
+                  // alert("hjjj")
+              setOwnerselectedLabel(data.contactNumber);
+              setOwnerselectedValue(data._id);
+              }
+        });
+    
+      });
     }
   function setSelectedStateFunction(selectedStateFunParam) {
     var districtOptionsArrayTemp=[];
@@ -614,6 +642,8 @@ useEffect(() => {
 
   fetchDistricts();
   fetchTowns(); 
+
+  // fetchOwnerdetails();
 
 
   if(operation=="edit"){
@@ -871,7 +901,8 @@ useEffect(() => {
             balconyStatusChecked={balconyStatusChecked} openterraceStatusChecked={openterraceStatusChecked} waterwellStatusChecked={waterwellStatusChecked} waterconnectionStatusChecked={waterconnectionStatusChecked}
             costtypeStatusChecked={costtypeStatusChecked} setCosttypeStatusChecked={setCosttypeStatusChecked} googlemap={googlemap} videolink={videolink} propertyTitle={propertyTitle} propertyfeature1={propertyfeature1} propertyfeature2={propertyfeature2}
             propertyfeature3={propertyfeature3} propertyfeature4={propertyfeature4} setGooglemap={setGooglemap} setVideolink={setVideolink} setPropertyTitle={setPropertyTitle} setPropertyFeature1={setPropertyFeature1}
-            setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4}
+            setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4} owneroptions={owneroptions}
+            ownerSelectedLabel={ownerSelectedLabel} ownerSelectedValue={ownerSelectedValue} setOwnerSelectedLabel={setOwnerselectedLabel} setOwnerSelectedValue={setOwnerselectedValue} setOwneroptions={setOwneroptions}
             />  
 
           
