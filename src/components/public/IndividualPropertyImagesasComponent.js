@@ -71,9 +71,9 @@ function fetchPropertyImages(){
           
            
                 <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="img-fluid" src={background}  alt="Second slide" id="individualpropertyimages"/>
-                </div>
+                  <div class="carousel-item active">
+                      <img class="img-fluid" src={background}  alt="Second slide" id="individualpropertyimages"/>
+                  </div>
                 {propertyimages.map((key,index) => 
                   //  {if (index!==0)
                     <div class="carousel-item">
