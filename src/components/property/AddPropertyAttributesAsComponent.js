@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { facingPolarity } from "../../constants/global";
+import { PropertyStatus } from "../../constants/global";
 import Select from 'react-select';
 import axios from "axios";
 import { Url } from "../../constants/global";
@@ -21,7 +22,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   setOpenterraceStatusChecked, setWaterwellStatusChecked,setWaterconnectionStatusChecked,carporchStatusChecked,sitoutStatusChecked,livingareaStatusChecked, dininghallStatusChecked,
   kitchenStatusChecked,workareaStatusChecked,upperlivingareaStatusChecked,balconyStatusChecked,openterraceStatusChecked,waterwellStatusChecked,waterconnectionStatusChecked,
   costtypeStatusChecked,setCosttypeStatusChecked,googlemap,videolink,propertyTitle, propertyfeature1,propertyfeature2,propertyfeature3,propertyfeature4,setGooglemap,setVideolink,setPropertyTitle,
-  setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4,owneroptions,ownerSelectedLabel,ownerSelectedValue,setOwnerSelectedLabel, setOwnerSelectedValue,setOwneroptions
+  setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4,owneroptions,ownerSelectedLabel,ownerSelectedValue,setOwnerSelectedLabel, setOwnerSelectedValue,setOwneroptions,
+  propertyStatus,setPropertystatus
 }) => {
  
 
@@ -67,6 +69,12 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       setFacingPolarity(e.value); 
       
     }
+    const handlePropertyStatusSelection = (e) => {
+      // alert(e.value)
+      setPropertystatus(e.value); 
+      
+    }
+    
     const  handleOwnerorDeveloperSelection = (e) => {
       setOwnerSelectedValue(e.value)
       setOwnerSelectedLabel(e.label)
@@ -746,7 +754,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "propertyFeature2":propertyfeature2,
                "propertyFeature3":propertyfeature3,
                "propertyFeature4":propertyfeature4,
-               "ownerOrBuilderID":ownerSelectedValue
+               "ownerOrBuilderID":ownerSelectedValue,
+               "propertyStatus":propertyStatus
 
 
 
@@ -1163,7 +1172,8 @@ useEffect(() => {
                "propertyFeature2":propertyfeature2,
                "propertyFeature3":propertyfeature3,
                "propertyFeature4":propertyfeature4,
-               "ownerOrBuilderID":ownerSelectedValue
+               "ownerOrBuilderID":ownerSelectedValue,
+               "propertyStatus":propertyStatus
                
     
     
@@ -1247,6 +1257,11 @@ useEffect(() => {
                 onChange={handleOwnerorDeveloperSelection}
                 options={owneroptions}
               />
+        var propertystatusWidget=<Select
+        options={PropertyStatus}
+        onChange={handlePropertyStatusSelection}
+        defaultValue={{ label: "Public", value: "Public" }}
+      />
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
         var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
         var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
@@ -1298,8 +1313,13 @@ useEffect(() => {
         var ownernameswidget=  <Select
         
          value={{label:ownerSelectedLabel, value:ownerSelectedValue}}
-        onChange={handleOwnerorDeveloperSelection}
-        options={owneroptions}
+          onChange={handleOwnerorDeveloperSelection}
+          options={owneroptions}
+        />
+      var propertystatusWidget=<Select
+        options={PropertyStatus}
+        onChange={handlePropertyStatusSelection}
+        value={{label:propertyStatus, value:propertyStatus}}
       />
       var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
       var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
@@ -1480,7 +1500,13 @@ useEffect(() => {
         {ownernameswidget}
       </div>
     </div>
-
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Property Status</label>
+      <div class="col-sm-10">
+        {propertystatusWidget}
+      </div>
+    </div>
+    
     {savebuttonwidget}
     <br/><br/>
     <div class="row mb-3"> 

@@ -18,31 +18,31 @@ import Pagination from "./Pagination";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import { NoImage } from "../../constants/global";
+import { json, useNavigate, useParams } from "react-router-dom";
+import IndividualPropertyImagesasComponent from "./IndividualPropertyImagesasComponent";
+import IndividualPropertyDetailsComponent from "./IndividualPropertyDetailsComponent";
+import IndividualPropertymessageComponent from "./IndividualPropertymessageComponent";
+var propertyImagesurl=Url+'propertyImages/'
 
 function IndividualProperty() {
+    
 
 
  
+  // const {operation} =useParams();
+  const {propertyID} = useParams();
 
 
-  useEffect(() => {
- 
-  }, []);
   
 
   return(
       <div>
         <NavbarPublic />
-
-            <br/>
-            <br/>
-            <br/>
-                I am individual property
-            <br/>
-            <br/>
-            <br/>
+        <IndividualPropertyImagesasComponent propertyID={propertyID}/>
+       <IndividualPropertyDetailsComponent propertyID={propertyID}/>
+        <IndividualPropertymessageComponent propertyID={propertyID}/>
+           
         <Footer/>
-    
       </div>
     )
 }

@@ -146,6 +146,8 @@ const AddProperty = (props) => {
            const[ownerSelectedValue,setOwnerselectedValue]=useState("");
            const[ownerSelectedLabel,setOwnerselectedLabel]=useState("");
 
+           const [propertyStatus,setPropertystatus]=useState("");
+
     const stateOptionsArray = [];
     const districtOptionsArray = [];
     const townOptionsArray = [];
@@ -480,6 +482,8 @@ const AddProperty = (props) => {
           setPropertyFeature2(res.data.propertyFeature2)
           setPropertyFeature3(res.data.propertyFeature3)
           setPropertyFeature4(res.data.propertyFeature4)
+
+          setPropertystatus(res.data.propertyStatus)
 
           // setOwnerselectedID(res.data.ownerOrBuilderID)
           
@@ -903,6 +907,7 @@ useEffect(() => {
             propertyfeature3={propertyfeature3} propertyfeature4={propertyfeature4} setGooglemap={setGooglemap} setVideolink={setVideolink} setPropertyTitle={setPropertyTitle} setPropertyFeature1={setPropertyFeature1}
             setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4} owneroptions={owneroptions}
             ownerSelectedLabel={ownerSelectedLabel} ownerSelectedValue={ownerSelectedValue} setOwnerSelectedLabel={setOwnerselectedLabel} setOwnerSelectedValue={setOwnerselectedValue} setOwneroptions={setOwneroptions}
+            propertyStatus={propertyStatus} setPropertystatus={setPropertystatus}
             />  
 
           
