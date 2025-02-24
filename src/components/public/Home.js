@@ -263,7 +263,8 @@ function Home() {
           if(proptemp['_id']===row.townID){
             temparrayfornames.push({
               'index':index++,
-
+              'propertyID' : row._id,
+              'individualPropertyUrl' : "/individualProperty/"+row._id,
               'propertyType':row.propertyType,
               'transactiontype':row.transactionType,
               'town':proptemp['townName'],
@@ -530,7 +531,7 @@ function Home() {
                       </div>
                     </div>
                     <div class ="pt-2">
-                      <button className='btn' id="searchbuttoninhome">More Details</button>
+                      <a role="button" href={currentposts[index2].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>
                     </div>
                   </div> 
 
@@ -549,7 +550,7 @@ function Home() {
                       </div>
                     </div>
                     <div class ="pt-2">
-                      <button className='btn' id="searchbuttoninhome">More Details</button>
+                    <a role="button" href={currentposts[index2+1].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>
                     </div>
                   </div> 
 
@@ -567,11 +568,10 @@ function Home() {
                       </div>
                     </div>
                     <div class ="pt-2">
-                      <button className='btn' id="searchbuttoninhome">More Details</button>
-                    </div>
-                  </div> 
+                      <a role="button" href={currentposts[index2+2].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>                    </div>
+                    </div> 
 
-                </div> 
+                  </div> 
                 </> :                
                 
                   <>
@@ -591,7 +591,7 @@ function Home() {
                               </div>
                             </div>
                             <div class ="pt-2">
-                              <button className='btn' id="searchbuttoninhome">More Details</button>
+                              <a role="button" href={currentposts[index2].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>
                             </div>
                           </div> 
         
@@ -621,7 +621,7 @@ function Home() {
                                                           </div>
                                                         </div>
                                                         <div class ="pt-2">
-                                                          <button className='btn' id="searchbuttoninhome">More Details</button>
+                                                          <a role="button" href={currentposts[index2].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>
                                                         </div>
                                                       </div> 
                                     
@@ -640,7 +640,7 @@ function Home() {
                                                             </div>
                                                           </div>
                                                           <div class ="pt-2">
-                                                            <button className='btn' id="searchbuttoninhome">More Details</button>
+                                                          <a role="button" href={currentposts[index2+1].individualPropertyUrl} className='btn' id="searchbuttoninhome">More Details</a>
                                                           </div>
                                                       </div> 
                             
