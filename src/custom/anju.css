@@ -107,8 +107,14 @@
   background-color:  rgb(206, 195, 195);
   /* border: 1px solid rgb(54, 7, 7); */
   color:rgb(5, 2, 2);
-  padding: 8px;
+  padding: 8px; 
   font-size: 15px;
   text-align: left;
 
+}
+#sendmessagecontainer{
+  background-color: rgb(53, 45, 45);
+  padding: 10px;
+  border-radius: 10px;
+  color:aliceblue
 }

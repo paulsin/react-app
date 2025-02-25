@@ -23,7 +23,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
   kitchenStatusChecked,workareaStatusChecked,upperlivingareaStatusChecked,balconyStatusChecked,openterraceStatusChecked,waterwellStatusChecked,waterconnectionStatusChecked,
   costtypeStatusChecked,setCosttypeStatusChecked,googlemap,videolink,propertyTitle, propertyfeature1,propertyfeature2,propertyfeature3,propertyfeature4,setGooglemap,setVideolink,setPropertyTitle,
   setPropertyFeature1,setPropertyFeature2,setPropertyFeature3,setPropertyFeature4,owneroptions,ownerSelectedLabel,ownerSelectedValue,setOwnerSelectedLabel, setOwnerSelectedValue,setOwneroptions,
-  propertyStatus,setPropertystatus
+  propertyStatus,setPropertystatus,numbercount,setNumberCount
 }) => {
  
 
@@ -59,6 +59,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
    const [alertownerclass, setAlertOwnerClass] = useState("alert alert-info");
     const [alertOwnerContent, setAlertOwnerContent] = useState("Enter the owner details");
 
+    
+
   var owneroptionsarray=[];
 
    
@@ -75,9 +77,27 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       
     }
     
-    const  handleOwnerorDeveloperSelection = (e) => {
+    const handleOwnerorDeveloperSelection = (e) => {
+      //  alert(e.value)
+      var counter=0;
       setOwnerSelectedValue(e.value)
       setOwnerSelectedLabel(e.label)
+     
+      axios.get(Url+"property/properties")
+      .then((res)=>{
+        
+        // alert(res.data)
+        // alert(res.data[0].ownerOrBuilderID)
+        res.data.map(row=>{
+          // alert(row.ownerOrBuilderID)
+          if(row.ownerOrBuilderID===e.value){
+            // alert("123")
+            counter=counter+1
+         
+          }
+        })
+        setNumberCount(counter)
+      })
    
     }
     
@@ -780,12 +800,15 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
     // function getownerdata(){
 
     // }
+  
 
 useEffect(() => {
   //console.log('i fire once');
   //setItems(data);
 
   fetchOwnerdetails();
+  
+
 
 
 
@@ -1186,6 +1209,8 @@ useEffect(() => {
        setAlertContent("Data Updated Successfully");
       }
     }
+ 
+    
     const fetchOwnerdetails =  async (e) => {
       try {
         const response = await axios.get(getownerdetailsurl,   
@@ -1262,6 +1287,8 @@ useEffect(() => {
         onChange={handlePropertyStatusSelection}
         defaultValue={{ label: "Public", value: "Public" }}
       />
+      var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
+      var propertycountwidget=<input type="text" value={numbercount} disabled={true}/>
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
         var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
         var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
@@ -1316,6 +1343,8 @@ useEffect(() => {
           onChange={handleOwnerorDeveloperSelection}
           options={owneroptions}
         />
+        var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
+      var propertycountwidget=<input type="text" value={numbercount} disabled={true}/>
       var propertystatusWidget=<Select
         options={PropertyStatus}
         onChange={handlePropertyStatusSelection}
@@ -1496,8 +1525,12 @@ useEffect(() => {
     </div>
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Select Owner,Builder or Developer</label>
-      <div class="col-sm-10">
+      <div class="col-sm-5">
         {ownernameswidget}
+      </div>
+     {propertycountlabelwidget}
+      <div class="col-sm-3">
+        {propertycountwidget}
       </div>
     </div>
     <div class="row mb-3">
@@ -1528,6 +1561,7 @@ useEffect(() => {
       <div class="col-sm-5">
         {phoneno1widget}
       </div>
+   
     </div>
 
     <div class="row mb-3">
