@@ -147,6 +147,7 @@ const AddProperty = (props) => {
            const[ownerSelectedLabel,setOwnerselectedLabel]=useState("");
 
            const [propertyStatus,setPropertystatus]=useState("");
+           const[numbercount,setNumberCount]=useState("")
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
@@ -434,6 +435,7 @@ const AddProperty = (props) => {
 
       
     function getPropertyData(){
+   
       //  alert(uniqueID)
       let districtOptionsload=[];
       let townOptionsload=[];
@@ -486,8 +488,10 @@ const AddProperty = (props) => {
           setPropertystatus(res.data.propertyStatus)
 
           // setOwnerselectedID(res.data.ownerOrBuilderID)
-          
+          // alert(res.data.ownerOrBuilderID)
           setSelectedOwnerFunction(res.data.ownerOrBuilderID)
+          setPropertycount(res.data.ownerOrBuilderID)
+          
 
           if(res.data.costType==="persquarefeet")
           {
@@ -552,6 +556,26 @@ const AddProperty = (props) => {
           });
         })
         setTownOptions(townOptionsload);    
+      })
+    }
+
+    function  setPropertycount(selectedOwnerFuncount){
+      var count=0;
+      // alert(selectedOwnerFunParam)
+      axios.get(Url+"property/properties")
+      .then((res)=>{
+        
+        // alert(res.data)
+      //  alert(res.data[0].ownerOrBuilderID)
+        res.data.map(row=>{
+        //  alert(row.ownerOrBuilderID)
+          if(row.ownerOrBuilderID===selectedOwnerFuncount){
+            // alert("123")
+            count=count+1
+        
+          }
+        })
+        setNumberCount(count)
       })
     }
 
@@ -907,7 +931,7 @@ useEffect(() => {
             propertyfeature3={propertyfeature3} propertyfeature4={propertyfeature4} setGooglemap={setGooglemap} setVideolink={setVideolink} setPropertyTitle={setPropertyTitle} setPropertyFeature1={setPropertyFeature1}
             setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4} owneroptions={owneroptions}
             ownerSelectedLabel={ownerSelectedLabel} ownerSelectedValue={ownerSelectedValue} setOwnerSelectedLabel={setOwnerselectedLabel} setOwnerSelectedValue={setOwnerselectedValue} setOwneroptions={setOwneroptions}
-            propertyStatus={propertyStatus} setPropertystatus={setPropertystatus}
+            propertyStatus={propertyStatus} setPropertystatus={setPropertystatus} numbercount={numbercount} setNumberCount={setNumberCount}
             />  
 
           

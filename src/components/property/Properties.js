@@ -14,6 +14,7 @@ import { useConfirm } from "material-ui-confirm";
 import StatesList from "./StatesList";
 import DistrictsList from "./DistrictsList";
 import PaginationforProperties from "./PaginationforProperties";
+import { NoImage } from "../../constants/global";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -58,6 +59,7 @@ const Properties = (props) => {
                       'slno':slno++,
                       '_id':row._id,
                       'propertyType':row.propertyType,
+                      'imageUrl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage,
                       'state':statetemp['stateName'],
                       'district':districttemp['districtName'],
                       'town':towntemp['townName']
@@ -177,7 +179,8 @@ const Properties = (props) => {
                       {key.slno}
                     </td>
                     <td>
-                      {key._id}
+                      <img src={key.imageUrl} width="120px" height="80px" />
+                       {/* {key._id} */}
                     </td>
                     <td>
                       {key.propertyType}

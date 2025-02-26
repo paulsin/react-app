@@ -22,35 +22,37 @@ const IndividualPropertymessageComponent = (props) => {
 
 
     var propertyID=props.propertyID
-           
+    var headingwidget=<h3><b>Send Message</b></h3>       
     var ownercontactwidget=  <PhoneInput className="number"  value={phonenumber} onChange={setPhonenumber}/>
     var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
     var messagewidget=<textarea class="form-control" onChange={(e) =>  setMessage(e.target.value)} /> 
-    var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitOwnerdata}>Send Owner Details</button>  
+    var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-danger" onClick={submitOwnerdata}>Send Owner Details</button>  
   return (
     <>
-   <div class="container  p-3" id="properties_container">
+   
+   <div class="container pt-3 pb-4 col-sm-8" id="sendmessagecontainer">
+   {headingwidget}
     <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Owner or Builder or Developer</label>
-        <div class="col-sm-5">
+        <label for="inputPassword3" class="col-sm-2 col-form-label ">Owner or Builder or Developer</label>
+        <div class="col-sm-6">
         {ownercontactwidget}
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputPassword3" class="col-sm-2 col-form-label">Name Of Owner or Builder or Developer</label>
-        <div class="col-sm-5">
+        <div class="col-sm-6">
         {namewidget}
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputPassword3" class="col-sm-2 col-form-label">Message</label>
-        <div class="col-sm-5">
+        <div class="col-sm-6">
         {messagewidget}
         </div>
     </div>
     {ownerdatasavebuttonwidget}
     </div>
-   
+   <br/><br/>
    
   </>
   )

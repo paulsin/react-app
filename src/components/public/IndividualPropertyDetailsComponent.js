@@ -80,48 +80,56 @@ const IndividualPropertyDetailsComponent = (props) => {
   
   return (
 
-    <div class="container  text-center" id="properties_container">
-        
-     {propertydetails.map(key=>   
-    <div class="row row-cols-4 pt-1" >
-  
-        <div class="col" id="propertydetails">PropertyID</div>
-        <div class="col"  id="propertydetails">{propertyID}</div>
-        <div class="col"  id="propertydetails">Total Page Views</div>
-        <div class="col"  id="propertydetails">Column4</div>
-        <div class="col" id="propertydetailscomponents">Property Type</div>
-        <div class="col" id="propertydetailscomponents" >{key.propertyType}</div>
-        <div class="col" id="propertydetailscomponents">Plot Area</div>
-        <div class="col" id="propertydetailscomponents">{key.plotarea}</div>
-        <div class="col" id="propertydetailscomponents">State</div>
-        <div class="col" id="propertydetailscomponents">{key.state}</div>
-        <div class="col" id="propertydetailscomponents">Coverage Area</div>
-        <div class="col" id="propertydetailscomponents">{key.builtArea}</div>
-        <div class="col" id="propertydetailscomponents">Sale/Rent</div>
-        <div class="col" id="propertydetailscomponents">{key.transactionType}</div>
-        <div class="col" id="propertydetailscomponents">Price</div>
-        <div class="col" id="propertydetailscomponents">{key.price}</div>
-        <div class="col" id="propertydetailscomponents">District</div>
-        <div class="col" id="propertydetailscomponents">{key.district}</div>
-        <div class="col" id="propertydetailscomponents">BedRooms</div>
-        <div class="col" id="propertydetailscomponents">{key.bedrooms}</div>
-        <div class="col" id="propertydetailscomponents">Location</div>
-        <div class="col" id="propertydetailscomponents">{key.location}</div>
-        <div class="col" id="propertydetailscomponents">Town</div>
-        <div class="col" id="propertydetailscomponents">{key.town}</div>
-        
-      
-    </div>
-    )}
-        <div class="row p-3">
-            <div calss="col-12">
-                <button class="btn btn-success"><FaHeart size={25}/>&nbsp;&nbsp;Add to Favourites</button>
-            </div>
-         
+    <div class="container  text-center p-3" id="properties_container ">
+      {propertydetails.map(key=>  
+        <div class="table-responsive">
+          <table class="table">
+          
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">PropertyID</th>
+                <th scope="col">{propertyID}</th>
+                <th scope="col">Total Page Views</th>
+                <th scope="col">Haiii</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Property Type</th>
+                <td>{key.propertyType}</td>
+                <th>Plot Area</th>
+                <td>{key.plotarea}</td>
+              </tr>
+              <tr class="table-secondary">
+                <th scope="row">State</th>
+                <td>{key.state}</td>
+                <th>Coverage Area</th>
+                <td>{key.builtArea}</td>
+              </tr>
+              <tr>
+                <th scope="row">Sale/Rent</th>
+                <td>{key.transactionType}</td>
+                <th>Price</th>
+                <td>{key.price}</td>
+              </tr>
+              <tr class="table-secondary">
+                <th scope="row">District</th>
+                <td>{key.district}</td>
+                <th>BedRooms</th>
+                <td>{key.bedrooms}</td>
+              </tr>
+              <tr>
+                <th scope="row">Location</th>
+                <td>{key.location}</td>
+                <th>Town</th>
+                <td>{key.town}</td>
+              </tr>
+            </tbody>
+            <button class="btn btn-success"><FaHeart size={25}/>&nbsp;&nbsp;Add to Favourites</button>
+          </table>
         </div>
-       
-    
-  </div>
+      )}  
+    </div>
   )
 }
 
