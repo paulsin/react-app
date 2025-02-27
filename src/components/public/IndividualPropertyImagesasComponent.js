@@ -11,6 +11,7 @@ import { MultiSelect } from "react-multi-select-component";
 // import Multiselect from 'multiselect-react-dropdown';
 import axios from "axios";
 import { Url } from "../../constants/global";
+import { baseUrl} from "../../constants/global";
 import Select from 'react-select';
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -27,7 +28,7 @@ import QRCode from 'react-qr-code';
 var propertyImagesurl=Url+'propertyImages/'
   
 const IndividualPropertyImagesasComponent = (props) => {
-    var individualurl=Url+"individualProperty/"+props.propertyID
+    var individualurl=baseUrl+"individualProperty/"+props.propertyID
   let temparrayfornames=[]
    
   const [propertyimages, setPropertyImages] = useState([]);
