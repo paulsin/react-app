@@ -125,7 +125,7 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <td>{key.town}</td>
               </tr>
             </tbody>
-            <button class="btn btn-success"><FaHeart size={25}/>&nbsp;&nbsp;Add to Favourites</button>
+
           </table>
         </div>
       )}  

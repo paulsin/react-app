@@ -1,5 +1,8 @@
- const Url = 'http://localhost:3000/backend/' ;// For localhost
-//const Url = 'https://agentfreedeal.com/backend/' // For website
+const baseUrl = 'http://localhost:3000/'; // For localhost
+//const baseUrl = 'https://agentfreedeal.com/'    // For website
+
+const Url = baseUrl + 'backend/' ;// For localhost
+
 const NoImage="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
 
 const propertyTypes = [
@@ -41,6 +44,7 @@ const facingPolarity = [
   ]
 
 export {Url}   
+export {baseUrl}
 export {NoImage}     
 export {propertyTypes}
 export {transactionType}
