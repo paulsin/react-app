@@ -16,12 +16,12 @@ function Footer() {
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
                   <h4>Mapsite</h4><br/>
                   <a id="linktagsinfooter" href="/">Home</a><br/>
-                  <a id="linktagsinfooter" href="/aboutas">About us</a><br/>
+                  <a id="linktagsinfooter" href="/frontend/aboutas">About us</a><br/>
                   <a id="linktagsinfooter" href="">Ernakulam</a><br/>
                   <a id="linktagsinfooter" href="">Thrissur</a><br/>
                   <a id="linktagsinfooter" href="">Advertise</a><br/>
                   <a id="linktagsinfooter" href="">Become Our Franchisee</a><br/>
-                  <a id="linktagsinfooter" href="/contactas">Contact us</a>
+                  <a id="linktagsinfooter" href="/frontend/contactas">Contact us</a>
               </div> 
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
                   <h4>Contact</h4><br/>
