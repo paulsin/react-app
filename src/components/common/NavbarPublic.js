@@ -5,6 +5,7 @@ import axios from "axios";
 import { Url } from "../../constants/global";
 import { json, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import logo_agentfree from '../../images/logo_agentfree.jpeg';
 
 var newUrl = Url + 'accounts/logInFunction';
 var logoutUrl = Url + 'accounts/logoutUser';
@@ -76,7 +77,7 @@ function NavbarPublic(props) {
 
     <>
       <nav class="navbar navbar-expand-md" id="navbarPublic">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="#"><img src={logo_agentfree} width="80px" height="50px"/></a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -30,6 +30,8 @@ import PropertiesCheck from './components/property/PropertiesCheck';
 import AddImages from './components/property/AddImages';
 import AddImagesCheck from './components/property/AddImagesCheck';
 import IndividualProperty from './components/public/IndividualProperty';
+import AboutAs from './components/public/AboutAs';
+import ContactAs from './components/public/ContactAs';
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
           <Route path='/frontend/properties' element={<PropertiesCheck />} />
           <Route path='/frontend/addimages/:propertyID' element={<AddImagesCheck />} />
           <Route path="/individualProperty/:propertyID" element={<IndividualProperty />} />
+          <Route path="/aboutas" element={<AboutAs />} />
+          <Route path="/contactas" element={<ContactAs />} />
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>

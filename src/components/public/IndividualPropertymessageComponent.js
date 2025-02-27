@@ -6,7 +6,9 @@ import axios from "axios";
 import PhoneInput from 'react-phone-number-input'
 
 
+
 const IndividualPropertymessageComponent = (props) => {
+  
     const[owneroptions,setOwneroptions]=useState("");
     const[ownerSelectedValue,setOwnerselectedValue]=useState("");
     const[ownerSelectedLabel,setOwnerselectedLabel]=useState("");
@@ -27,6 +29,7 @@ const IndividualPropertymessageComponent = (props) => {
     var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
     var messagewidget=<textarea class="form-control" onChange={(e) =>  setMessage(e.target.value)} /> 
     var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-danger" onClick={submitOwnerdata}>Send Owner Details</button>  
+   
   return (
     <>
    
@@ -51,8 +54,10 @@ const IndividualPropertymessageComponent = (props) => {
         </div>
     </div>
     {ownerdatasavebuttonwidget}
+   
     </div>
    <br/><br/>
+
    
   </>
   )

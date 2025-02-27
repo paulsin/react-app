@@ -21,11 +21,13 @@ import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import { NoImage } from "../../constants/global";
 import { json, useNavigate, useParams } from "react-router-dom";
+import QRCode from 'react-qr-code';
 
 
 var propertyImagesurl=Url+'propertyImages/'
   
 const IndividualPropertyImagesasComponent = (props) => {
+    var individualurl=Url+"individualProperty/"+props.propertyID
   let temparrayfornames=[]
    
   const [propertyimages, setPropertyImages] = useState([]);
@@ -62,18 +64,22 @@ function fetchPropertyImages(){
   useEffect(() => {
     fetchPropertyImages();
   }, []);
+  var qrcodewidget= <QRCode
+  title="GeeksForGeeks"
+  value={individualurl}
+  size={150}
+  />
 
   return (
     <div>
-      {/* {temparray.map(row=> */}
-      <div class="container  text-center p-3" >
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          
-           
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                      <img class="img-fluid" src={background}  alt="Second slide" id="individualpropertyimages"/>
-                  </div>
+      <div class="container p-3">
+        <div class="row mb-3">
+          <div class="col-10 p-2">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">  
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="img-fluid" src={background}  alt="Second slide" id="individualpropertyimages"/>
+                </div>
                 {propertyimages.map((key,index) => 
                   //  {if (index!==0)
                     <div class="carousel-item">
@@ -81,23 +87,22 @@ function fetchPropertyImages(){
                     </div>
                     // }
                 )} 
-              
-          
-                </div>
-          
-              
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          
-          </div> 
-         
-    </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>  
+            </div> 
+          </div>
+          <div class="col-2 p-5">
+            {qrcodewidget}
+          </div>
+        </div>
+      </div>   
     </div>
   )
 }

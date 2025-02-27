@@ -80,7 +80,7 @@ const IndividualPropertyDetailsComponent = (props) => {
   
   return (
 
-    <div class="container  text-center p-3" id="properties_container ">
+    <div class="container  text-center p-2" id="properties_container ">
       {propertydetails.map(key=>  
         <div class="table-responsive">
           <table class="table">
