@@ -1288,7 +1288,7 @@ useEffect(() => {
         defaultValue={{ label: "Public", value: "Public" }}
       />
       var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
-      var propertycountwidget=<input type="text" value={numbercount} disabled={true}/>
+      var propertycountwidget=<span>{numbercount} </span>
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
         var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
         var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
@@ -1344,7 +1344,7 @@ useEffect(() => {
           options={owneroptions}
         />
         var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
-      var propertycountwidget=<input type="text" value={numbercount} disabled={true}/>
+      var propertycountwidget=<span>{numbercount} </span>
       var propertystatusWidget=<Select
         options={PropertyStatus}
         onChange={handlePropertyStatusSelection}

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import background from "../../images/background.jpg";
 
 import Navbar from "../common/NavbarPublic";
-import Footer from "../common/Footer"
-import NavbarPublic from "../common/NavbarPublic";
+import Footer from "../common/Footer";
+
 import { FaSearch } from "react-icons/fa";
 import { MultiSelect } from "react-multi-select-component";
 // import Multiselect from 'multiselect-react-dropdown';
@@ -37,7 +37,7 @@ function IndividualProperty() {
 
   return(
       <div>
-        <NavbarPublic />
+        <Navbar/>
         <IndividualPropertyImagesasComponent propertyID={propertyID}/>
        <IndividualPropertyDetailsComponent propertyID={propertyID}/>
         <IndividualPropertymessageComponent propertyID={propertyID}/>
