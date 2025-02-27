@@ -104,6 +104,10 @@ function Navbar(props) {
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/frontend/propertyCustomerRequestForOwner">Requests</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/frontend/location/statesList/india">Location</a>
             </li>
             

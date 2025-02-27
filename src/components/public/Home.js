@@ -264,7 +264,7 @@ function Home() {
             temparrayfornames.push({
               'index':index++,
               'propertyID' : row._id,
-              'individualPropertyUrl' : "/individualProperty/"+row._id,
+              'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
               'propertyType':row.propertyType,
               'transactiontype':row.transactionType,
               'town':proptemp['townName'],

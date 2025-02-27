@@ -32,6 +32,7 @@ import AddImagesCheck from './components/property/AddImagesCheck';
 import IndividualProperty from './components/public/IndividualProperty';
 import AboutAs from './components/public/AboutAs';
 import ContactAs from './components/public/ContactAs';
+import PropertyCustomerRequestForOwnerCheck from './components/property/PropertyCustomerRequestForOwnerCheck';
 
 function App() {
   return (
@@ -55,9 +56,11 @@ function App() {
           <Route path='/frontend/location/:locationType/:countryName/:stateID/:districtID' element={<LocationCheck />} />
           <Route path='/frontend/properties' element={<PropertiesCheck />} />
           <Route path='/frontend/addimages/:propertyID' element={<AddImagesCheck />} />
-          <Route path="/individualProperty/:propertyID" element={<IndividualProperty />} />
-          <Route path="/aboutas" element={<AboutAs />} />
-          <Route path="/contactas" element={<ContactAs />} />
+          <Route path="/frontend/individualProperty/:propertyID" element={<IndividualProperty />} />
+          <Route path="/frontend/aboutas" element={<AboutAs />} />
+          <Route path="/frontend/contactas" element={<ContactAs />} />
+          <Route path='/frontend/propertyCustomerRequestForOwner' element={<PropertyCustomerRequestForOwnerCheck />} />
+
         </Routes>
       </BrowserRouter>
     </ConfirmProvider>
