@@ -32,6 +32,7 @@ const IndividualPropertyImagesasComponent = (props) => {
   let temparrayfornames=[]
    
   const [propertyimages, setPropertyImages] = useState([]);
+ 
   var propertyID=props.propertyID
 
 
@@ -72,10 +73,13 @@ function fetchPropertyImages(){
   />
 
   return (
+
+    
     <div>
+
       <div class="container p-3">
         <div class="row mb-3">
-          <div class="col-10 p-2">
+          <div class="col-8 p-2">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">  
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -99,8 +103,11 @@ function fetchPropertyImages(){
               </a>  
             </div> 
           </div>
-          <div class="col-2 p-5">
+          <div class="col-4 p-0 pl-2" style={{margin: "auto"}}>
+            
             {qrcodewidget}
+            <br/><br/>
+            <h6 class="qrcodelabel">Scan this QRCode for further details</h6>
           </div>
         </div>
       </div>   

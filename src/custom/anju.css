@@ -121,3 +121,9 @@
 #linktagsincontactas{
   color:black;
 }
+.qrcodelabel{
+  /* border: rgb(65, 18, 18) 4px solid; */
+ 
+ color:rgb(65, 18, 18) 
+  /* width:6px; */
+}
