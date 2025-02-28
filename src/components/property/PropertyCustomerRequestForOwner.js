@@ -29,10 +29,35 @@ var updateStateUrl = Url + 'location/updateState/';
 var  deletePropertyUrl = Url + 'property/deleteProperty/';
 
 const PropertyCustomerRequestForOwner = (props) => {
+ const [requestsTable, setRequestsTable] = useState([]);
 
- 
+  function createdata(data){
+    var slno=1;
+    let temparrayfornames=[]
+    data.map((data1)=>{
+      temparrayfornames.push({
+        'slno':slno++,
+        'propertyID':data1.propertyID,
+        'requestTime':data1.requestTime,
+        'requesterMobile':data1.requesterMobile,
+        'requesterName':data1.requesterName,
+        'requesterMessage':data1.requesterMessage,
+      })
+      
+    })
+    setRequestsTable(temparrayfornames);
+  }
+
+  function fetchRequests(){
+    axios
+    .get(Url+"property/propertyCustomerRequestForOwnerAllRequests",
+    )
+    .then((res) => {
+      createdata(res.data)
+    })
+  }
     useEffect(() => {
-        //fetchProperties();
+      fetchRequests();
     }, []);
     
     return(
@@ -42,7 +67,71 @@ const PropertyCustomerRequestForOwner = (props) => {
           <div>
             <h2>Requests</h2>
             <br/>
+            <table className="table table-striped" id="selectedTable">
+              <thead>
+                <tr>
+                  <th>
+                  Index
+                  </th>
+                  <th>
+                  Property Id
+                  </th>
+                  <th>
+                 Request Time
+                  </th>
+                  <th>
+                   Requester Mobile
+                  </th>
+
+                  <th>
+                    Requester Name
+                  </th>
+
+                  <th>
+                   Requester Message
+                  </th>
  
+                   {/* <th>
+                  Actions
+                  </th> */}
+            
+                  
+                </tr>
+              </thead>
+              <tbody>
+              
+                {requestsTable.map(key =>  (
+                  <tr>
+                    <td>
+                      {key.slno}
+                    </td>
+                    <td>
+                      {key.propertyID}
+                    </td>
+                    <td>
+                      {key.requestTime}
+                    </td>
+                    <td>
+                      {key.requesterMobile}
+                    </td>
+                    <td>
+                      {key.requesterName}
+                    </td>
+                    <td>
+                      {key.requesterMessage}
+                    </td>
+                    {/* <td>
+                      <button className="btn btn-danger" >Actions</button> 
+                    </td> */}
+                 
+                   
+                  </tr>
+                ))} 
+                <td>
+                </td>
+              </tbody>
+            </table>  
+
           </div>
       </div>
     )
