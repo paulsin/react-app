@@ -16,6 +16,7 @@ var loggedCheckUrl = Url + 'accounts/loggedInUser';
 function Navbar(props) {
   const [loggedUserMenu, setLoggedUserMenu] = useState();
   const [loggedUserRole, setLoggedUserRole] = useState();
+  const [loggedUserID, setLoggedUserID] = useState();
 
   ///   For navigate function
   const navigate = useNavigate();
@@ -54,8 +55,12 @@ function Navbar(props) {
         //alert("Logged In");
         //navigate('/frontend/profile');
         //setSelectedDIV(loginDIV);
+
+        alert(response.data.userID);
+
         setLoggedUserMenu(response.data.username);
         setLoggedUserRole(response.data.userRole);
+        setLoggedUserID(response.data.userID);
       }
       else {
         //setSelectedDIV(<LoginDIV />);
@@ -135,6 +140,7 @@ function Navbar(props) {
                 <Dropdown>
                   <Dropdown.Toggle variant="primary" id="dropdown-basic">
                     {loggedUserMenu}
+                    {loggedUserID}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
