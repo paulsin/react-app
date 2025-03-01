@@ -104,7 +104,7 @@ function Navbar(props) {
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/frontend/propertyCustomerRequestForOwner">Requests</a>
+              <a class="nav-link" href="/frontend/propertyCustomerRequestForOwner/table/table">Requests</a>
             </li>
 
             <li class="nav-item">

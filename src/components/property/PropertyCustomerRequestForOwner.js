@@ -5,7 +5,7 @@ import Navbar from "../common/Navbar";
 import { Url } from "../../constants/global";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { json, useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams,Link } from "react-router-dom";
 import Select from "react-select";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
@@ -15,6 +15,10 @@ import StatesList from "./StatesList";
 import DistrictsList from "./DistrictsList";
 import PaginationforProperties from "./PaginationforProperties";
 import { NoImage } from "../../constants/global";
+import Loading from "../common/Loading";
+import PropertyCustomerRequestForOwnerMobilenumberRequestHistory from "./PropertyCustomerRequestForOwnerMobilenumberRequestHistory";
+import PropertyCustomerRequestForOwnerPropertyIDRequestHistory from "./PropertyCustomerRequestForOwnerPropertyIDRequestHistory";
+
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -30,7 +34,11 @@ var  deletePropertyUrl = Url + 'property/deleteProperty/';
 
 const PropertyCustomerRequestForOwner = (props) => {
  const [requestsTable, setRequestsTable] = useState([]);
-
+ const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
+  var param1=props.param1;
+  var param2=props.param2;
+  // alert(param1)
+  // alert(param2)
   function createdata(data){
     var slno=1;
     let temparrayfornames=[]
@@ -57,6 +65,17 @@ const PropertyCustomerRequestForOwner = (props) => {
     })
   }
     useEffect(() => {
+        // if(param1==="table" && param2==="table"){
+                  //setSelectedDIV(<PropertyCustomerRequestForOwner param1={param1} param2={param2}/>);
+                // }
+                
+                if(param1==="propertyID"){
+                  // alert("jjjj")
+                  setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2}/>);
+                }
+                else if(param1==="phonenumber"){
+                  setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
+                }
       fetchRequests();
     }, []);
     
@@ -106,13 +125,16 @@ const PropertyCustomerRequestForOwner = (props) => {
                       {key.slno}
                     </td>
                     <td>
-                      {key.propertyID}
+                    
+                      {/* {key.propertyID} */}
+                      <Link to={`/frontend/propertyCustomerRequestForOwner/propertyID/${key.propertyID}`}>{key.propertyID}</Link>
                     </td>
                     <td>
                       {key.requestTime}
                     </td>
                     <td>
-                      {key.requesterMobile}
+                      {/* {key.requesterMobile} */}
+                      <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link>
                     </td>
                     <td>
                       {key.requesterName}

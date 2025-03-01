@@ -1221,7 +1221,8 @@ useEffect(() => {
 
             response.data.map(key => {
               // alert(key._id)
-              owneroptionsarray.push({ value: key._id, label: key.contactNumber});           
+              var testLabel = <div>{key.contactNumber}<br></br>{key.name}</div>;
+              owneroptionsarray.push({ value: key._id, label: testLabel});           
             });
 
             // if(operation === "new") {
