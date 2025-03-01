@@ -255,30 +255,37 @@ function Home() {
       setSelectedTownType(town_options);
     })
   }
-  function createdata(data,data1){
+  function createdata(data,data1,data2){
     let index=0
     let temparrayfornames=[]
       data.map(row => {
-        data1.map(proptemp=>{
-          if(proptemp['_id']===row.townID){
-            temparrayfornames.push({
-              'index':index++,
-              'propertyID' : row._id,
-              'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
-              'propertyType':row.propertyType,
-              'transactiontype':row.transactionType,
-              'town':proptemp['townName'],
-              'thumbnailimage':row.thumbnailImage,
-              'thumbnailimagename':row.thumbnailImageName,
-              // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
-              // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
-              'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
+        data1.map(districttemp => {
+          if(districttemp['_id']===row.districtID){
+            data2.map(proptemp=>{
+              if(proptemp['_id']===row.townID){
+                temparrayfornames.push({
+                      'index':index++,
+                      'propertyID' : row._id,
+                      'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
+                      'propertyType':row.propertyType,
+                      'transactiontype':row.transactionType,
+                      'town':proptemp['townName'],
+                      'district':districttemp['districtName'],
+                      'thumbnailimage':row.thumbnailImage,
+                      'thumbnailimagename':row.thumbnailImageName,
+                      'builtArea':row.builtArea,
+                      'locality':row.locality,
+                      'transactionType':row.transactionType,
+                      // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
+                      // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
+                      'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
+                })
+            
+              }
             })
-      
           }
-          })
-   
-         
+        })
+      
       })
       setPropertydetails(temparrayfornames)
   }
@@ -289,14 +296,21 @@ function Home() {
     )
     .then((res) => {
       axios
+      .get(Url+"location/districts",
+      )
+      .then((res1)=>{
+        
+      axios
       .get(Url+"location/towns",
       )
-      .then((res1) => { 
-        createdata(res.data,res1.data)
+      .then((res2) => { 
+        createdata(res.data,res1.data,res2.data)
       })
 
     })
 
+  })
+ 
   }
 
 
@@ -522,12 +536,12 @@ function Home() {
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
-                          <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
+                          <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2].district}</div>
                           <div class="col" id="properties2">{currentposts[index2].town}</div>
-                          <div class="col" id="properties1">Column4</div>
-                          <div class="col" id="properties1">Column5</div>
-                          <div class="col" id="properties2">Column6</div>
+                          <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
+                          <div class="col" id="properties2">{currentposts[index2].locality}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -541,12 +555,12 @@ function Home() {
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
-                          <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 1].propertyType}</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
-                          <div class="col" id="properties1">Column4</div>
-                          <div class="col" id="properties1">Column5</div>
-                          <div class="col" id="properties2">Column6</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 1].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -559,12 +573,12 @@ function Home() {
                     <div class="container  text-center" id="properties_container">
                       <div class="row row-cols-2 pt-2" >
                     
-                          <div class="col" id="properties1">column2</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 2].propertyType}</div>
+                      <div class="col" id="properties1">{currentposts[index2 + 2].propertyType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].district}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
-                          <div class="col" id="properties1">Column4</div>
-                          <div class="col" id="properties1">Column5</div>
-                          <div class="col" id="properties2">Column6</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 2].transactionType}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].locality}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -582,12 +596,12 @@ function Home() {
                             <div class="container  text-center" id="properties_container">
                               <div class="row row-cols-2 pt-2" >
                             
-                                  <div class="col" id="properties1">column2</div>
-                                  <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
-                                  <div class="col" id="properties2">{currentposts[index2].town}</div>
-                                  <div class="col" id="properties1">Column4</div>
-                                  <div class="col" id="properties1">Column5</div>
-                                  <div class="col" id="properties2">Column6</div>
+                              <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
+                              <div class="col" id="properties2">{currentposts[index2].district}</div>
+                              <div class="col" id="properties2">{currentposts[index2].town}</div>
+                              <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                              <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
+                              <div class="col" id="properties2">{currentposts[index2].locality}</div>
                               </div>
                             </div>
                             <div class ="pt-2">
@@ -612,12 +626,12 @@ function Home() {
                                                         <div class="container  text-center" id="properties_container">
                                                           <div class="row row-cols-2 pt-2" >
                                                         
-                                                              <div class="col" id="properties1">column2</div>
-                                                              <div class="col" id="properties2">{currentposts[index2].propertyType}</div>
-                                                              <div class="col" id="properties2">{currentposts[index2].town}</div>
-                                                              <div class="col" id="properties1">Column4</div>
-                                                              <div class="col" id="properties1">Column5</div>
-                                                              <div class="col" id="properties2">Column6</div>
+                                                            <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
+                                                            <div class="col" id="properties2">{currentposts[index2].district}</div>
+                                                            <div class="col" id="properties2">{currentposts[index2].town}</div>
+                                                            <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                                                            <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
+                                                            <div class="col" id="properties2">{currentposts[index2].locality}</div>
                                                           </div>
                                                         </div>
                                                         <div class ="pt-2">
@@ -631,12 +645,12 @@ function Home() {
                                                           <div class="container  text-center" id="properties_container">
                                                             <div class="row row-cols-2 pt-2" >
                                                           
-                                                                <div class="col" id="properties1">column2</div>
-                                                                <div class="col" id="properties2">{currentposts[index2+1].propertyType}</div>
-                                                                <div class="col" id="properties2">{currentposts[index2+1].town}</div>
-                                                                <div class="col" id="properties1">Column4</div>
-                                                                <div class="col" id="properties1">Column5</div>
-                                                                <div class="col" id="properties2">Column6</div>
+                                                              <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
+                                                              <div class="col" id="properties1">{currentposts[index2 + 1].builtArea}</div>
+                                                              <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
                                                             </div>
                                                           </div>
                                                           <div class ="pt-2">

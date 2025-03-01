@@ -590,7 +590,7 @@ const AddProperty = (props) => {
           res.data.map(data => {
               if(data._id === selectedOwnerFunParam) {
                   // alert("hjjj")
-              setOwnerselectedLabel(data.contactNumber);
+              setOwnerselectedLabel(<div>{data.contactNumber}<br></br>{data.name}</div>);
               setOwnerselectedValue(data._id);
               }
         });

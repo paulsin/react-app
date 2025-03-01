@@ -59,7 +59,7 @@ function App() {
           <Route path="/frontend/individualProperty/:propertyID" element={<IndividualProperty />} />
           <Route path="/frontend/aboutas" element={<AboutAs />} />
           <Route path="/frontend/contactas" element={<ContactAs />} />
-          <Route path='/frontend/propertyCustomerRequestForOwner' element={<PropertyCustomerRequestForOwnerCheck />} />
+          <Route path='/frontend/propertyCustomerRequestForOwner/:param1/:param2' element={<PropertyCustomerRequestForOwnerCheck />} />
 
         </Routes>
       </BrowserRouter>

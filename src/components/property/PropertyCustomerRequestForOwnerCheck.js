@@ -35,8 +35,8 @@ const PropertyCustomerRequestForOwnerCheck = () => {
     ///   For navigate function
     const navigate = useNavigate();
 
-    const {uniqueID} = useParams();
-    const {operation} =useParams();
+    const {param1} = useParams();
+    const {param2} =useParams();
     //const functionObj = Functions();
 
     //alert(newID);
@@ -59,8 +59,17 @@ const PropertyCustomerRequestForOwnerCheck = () => {
           // alert("Logged In");
           //navigate('/frontend/profile');
           //  alert(operation)
-         
-              setSelectedDIV(<PropertyCustomerRequestForOwner/>);
+          // if(param1==="table" && param2==="table"){
+            setSelectedDIV(<PropertyCustomerRequestForOwner param1={param1} param2={param2}/>);
+          // }
+          // else if(param1==="propertyID"){
+          //   alert("jjjj")
+          //   setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2}/>);
+          // }
+          // else if(param1==="phonenumber"){
+          //   setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
+          // }
+              
      
          
               
