@@ -10,7 +10,9 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 var addPropertyURL = Url + 'property/addProperty';
 var addOwnerURL = Url + 'property/addOwnerOrBuilder';
-var getownerdetailsurl=Url+'property/ownersandbuilders';
+var getownerdetailsurl=Url + 'property/ownersandbuilders';
+
+var loggedCheckUrl = Url + 'accounts/loggedInUser';
  
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected, operation,setAlertContent,setAlertClass,
   transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
@@ -57,7 +59,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
    const [ownername,setOwnername]=useState("");
    const [owneraddress,setOwneraddress]=useState("");
    const [alertownerclass, setAlertOwnerClass] = useState("alert alert-info");
-    const [alertOwnerContent, setAlertOwnerContent] = useState("Enter the owner details");
+  const [alertOwnerContent, setAlertOwnerContent] = useState("Enter the owner details");
+  const [loggedUserIDforPropertySubmission, setLoggedUserIDforPropertySubmission] = useState("");
 
     
 
@@ -775,8 +778,9 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
                "propertyFeature3":propertyfeature3,
                "propertyFeature4":propertyfeature4,
                "ownerOrBuilderID":ownerSelectedValue,
-               "propertyStatus":propertyStatus
-
+               "propertyStatus":propertyStatus,
+               "savedBy" : loggedUserIDforPropertySubmission
+               
 
 
 
@@ -801,6 +805,37 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
 
     // }
   
+    const fetchLoggedDataForPropertySubmission = (e) => {
+
+      //Functions();
+  
+      //alert("Paulsin");
+
+      const response = axios.get(loggedCheckUrl,
+        {withCredentials:true }
+      )
+      .then(function (response) {
+        //console.log(response);
+        //alert(response.data);
+        if(response.data.username && response.data.password) {
+          //alert("Logged In");
+          //navigate('/frontend/profile');
+          //setSelectedDIV(loginDIV);
+  
+          //alert(response.data.userID);
+  
+          //setLoggedUserMenu(response.data.username);
+          //setLoggedUserRole(response.data.userRole);
+          setLoggedUserIDforPropertySubmission(response.data.userID);
+        }
+        //setUsername(response.data.username);
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+  
+    }
+
 
 useEffect(() => {
   //console.log('i fire once');
@@ -808,7 +843,7 @@ useEffect(() => {
 
   fetchOwnerdetails();
   
-
+  fetchLoggedDataForPropertySubmission();
 
 
 
@@ -1213,16 +1248,15 @@ useEffect(() => {
     
     const fetchOwnerdetails =  async (e) => {
       try {
-        const response = await axios.get(getownerdetailsurl,   
-            { withCredentials: true }
-          )
+        const response = await axios.get(getownerdetailsurl)
           .then(function (response) {
             //alert(response.data[1].districtName);
 
             response.data.map(key => {
               // alert(key._id)
-              var testLabel = <div>{key.contactNumber}<br></br>{key.name}</div>;
-              owneroptionsarray.push({ value: key._id, label: testLabel});           
+              //var testLabel = <div>{key.contactNumber}<br></br>{key.name}</div>;
+              var testLabel = <div>{key.contactNumber}</div>
+              owneroptionsarray.push({ value: key._id, label: key.contactNumber + "   " + key.name});           
             });
 
             // if(operation === "new") {
@@ -1529,7 +1563,7 @@ useEffect(() => {
       <div class="col-sm-5">
         {ownernameswidget}
       </div>
-     {propertycountlabelwidget}
+     {propertycountlabelwidget} 
       <div class="col-sm-3">
         {propertycountwidget}
       </div>
