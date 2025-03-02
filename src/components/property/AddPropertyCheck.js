@@ -58,7 +58,7 @@ const AddPropertyCheck = () => {
         if(response.data.username && response.data.password) {
           // alert("Logged In");
           //navigate('/frontend/profile');
-          //  alert(operation)
+           //alert("pAUL")
          
               setSelectedDIV(<AddProperty/>);
      

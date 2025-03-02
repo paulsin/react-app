@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useMemo } from "react";
 import background from "../../images/background.jpg";
 import Navbar from "../common/Navbar";
 import { Url } from "../../constants/global";
@@ -18,6 +18,7 @@ import { NoImage } from "../../constants/global";
 import Loading from "../common/Loading";
 import PropertyCustomerRequestForOwnerMobilenumberRequestHistory from "./PropertyCustomerRequestForOwnerMobilenumberRequestHistory";
 import PropertyCustomerRequestForOwnerPropertyIDRequestHistory from "./PropertyCustomerRequestForOwnerPropertyIDRequestHistory";
+import PropertyCustomerRequestForOwnerTable from "./PropertyCustomerRequestForOwnerTable";
 
 
 var newUrl = Url + 'location/state';
@@ -33,128 +34,41 @@ var updateStateUrl = Url + 'location/updateState/';
 var  deletePropertyUrl = Url + 'property/deleteProperty/';
 
 const PropertyCustomerRequestForOwner = (props) => {
- const [requestsTable, setRequestsTable] = useState([]);
- const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
+  const [requestsTable, setRequestsTable] = useState([]);
+  const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
+  const [param1State, setParam1State] = useState("table");
+
   var param1=props.param1;
   var param2=props.param2;
-  // alert(param1)
-  // alert(param2)
-  function createdata(data){
-    var slno=1;
-    let temparrayfornames=[]
-    data.map((data1)=>{
-      temparrayfornames.push({
-        'slno':slno++,
-        'propertyID':data1.propertyID,
-        'requestTime':data1.requestTime,
-        'requesterMobile':data1.requesterMobile,
-        'requesterName':data1.requesterName,
-        'requesterMessage':data1.requesterMessage,
-      })
-      
-    })
-    setRequestsTable(temparrayfornames);
-  }
+  //alert(param1)
+  //alert(param2)
 
-  function fetchRequests(){
-    axios
-    .get(Url+"property/propertyCustomerRequestForOwnerAllRequests",
-    )
-    .then((res) => {
-      createdata(res.data)
-    })
-  }
-    useEffect(() => {
-        // if(param1==="table" && param2==="table"){
-                  //setSelectedDIV(<PropertyCustomerRequestForOwner param1={param1} param2={param2}/>);
-                // }
-                
-                if(param1==="propertyID"){
-                  // alert("jjjj")
-                  setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2}/>);
-                }
-                else if(param1==="phonenumber"){
-                  setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
-                }
-      fetchRequests();
-    }, []);
+  useMemo(() => {
+    if(param1State === "table"){
+      setSelectedDIV(<PropertyCustomerRequestForOwnerTable param1State = {param1State} setParam1State = {setParam1State}/>);
+    }
+              
+    if(param1State==="propertyID"){
+      // alert("jjjj")
+      setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2} param1State = {param1State} setParam1State = {setParam1State}/>);
+    }
+    else if(param1State==="phonenumber"){
+      setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
+    }
+  }, [param1State]);
+
+    //useEffect(() => {
+
+
+      //fetchRequests();
+    //}, []);
     
     return(
       <div>
 
         <Navbar />
-          <div>
-            <h2>Requests</h2>
-            <br/>
-            <table className="table table-striped" id="selectedTable">
-              <thead>
-                <tr>
-                  <th>
-                  Index
-                  </th>
-                  <th>
-                  Property Id
-                  </th>
-                  <th>
-                 Request Time
-                  </th>
-                  <th>
-                   Requester Mobile
-                  </th>
+        {selectedDIV}
 
-                  <th>
-                    Requester Name
-                  </th>
-
-                  <th>
-                   Requester Message
-                  </th>
- 
-                   {/* <th>
-                  Actions
-                  </th> */}
-            
-                  
-                </tr>
-              </thead>
-              <tbody>
-              
-                {requestsTable.map(key =>  (
-                  <tr>
-                    <td>
-                      {key.slno}
-                    </td>
-                    <td>
-                    
-                      {/* {key.propertyID} */}
-                      <Link to={`/frontend/propertyCustomerRequestForOwner/propertyID/${key.propertyID}`}>{key.propertyID}</Link>
-                    </td>
-                    <td>
-                      {key.requestTime}
-                    </td>
-                    <td>
-                      {/* {key.requesterMobile} */}
-                      <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link>
-                    </td>
-                    <td>
-                      {key.requesterName}
-                    </td>
-                    <td>
-                      {key.requesterMessage}
-                    </td>
-                    {/* <td>
-                      <button className="btn btn-danger" >Actions</button> 
-                    </td> */}
-                 
-                   
-                  </tr>
-                ))} 
-                <td>
-                </td>
-              </tbody>
-            </table>  
-
-          </div>
       </div>
     )
 };
