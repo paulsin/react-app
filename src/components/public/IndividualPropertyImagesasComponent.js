@@ -40,16 +40,28 @@ const IndividualPropertyImagesasComponent = (props) => {
     // alert(data)
  
      
-          data.map(row=>{
+          data.map((row, index)=>{
           //  alert(row.propertyID)
+            if(index == 0) {
               temparrayfornames.push({
                 'propertyID':row.propertyID,
                 'imageName':row.imageName,
+                'slideShowClass' : "carousel-item active",
                 'imageurl':Url+"assets/"+ propertyID + "/" + row.imageName
               })
+            } else {
+              temparrayfornames.push({
+                'propertyID':row.propertyID,
+                'imageName':row.imageName,
+                'slideShowClass' : "carousel-item",
+                'imageurl':Url+"assets/"+ propertyID + "/" + row.imageName
+              })
+            }
        
             })
         setPropertyImages(temparrayfornames)
+
+        //alert(propertyimages[0].imageName)
   }
 
 function fetchPropertyImages(){
@@ -69,7 +81,7 @@ function fetchPropertyImages(){
   var qrcodewidget= <QRCode
   title="GeeksForGeeks"
   value={individualurl}
-  size={150}
+  size={170}
   />
 
   return (
@@ -82,16 +94,15 @@ function fetchPropertyImages(){
           <div class="col-8 p-2">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">  
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="img-fluid" src={background}  alt="Second slide" id="individualpropertyimages"/>
-                </div>
-                {propertyimages.map((key,index) => 
-                  //  {if (index!==0)
-                    <div class="carousel-item">
-                      <img class="d-block img-fluid w-100" src={key.imageurl} alt="First slide" id="individualpropertyimages" />
-                    </div>
-                    // }
+                
+                {propertyimages.map((key, index) => 
+
+                      <div class= {key.slideShowClass}>
+                        <img class="d-block img-fluid w-100" src={key.imageurl} alt="First slide" id="individualpropertyimages" />
+                      </div> 
                 )} 
+
+
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,11 +114,12 @@ function fetchPropertyImages(){
               </a>  
             </div> 
           </div>
-          <div class="col-4 p-0 pl-2" style={{margin: "auto"}}>
+          <div class="col-4 p-0 pl-2 text-center" style={{margin: "auto"}}>
             
             {qrcodewidget}
             <br/><br/>
-            <h6 class="qrcodelabel">Scan this QRCode for further details</h6>
+            <h6 class="qrcodelabel">Save this QR Code to refer this property later</h6>
+            <h6 class="qrcodelabel">instead of remembering the property ID</h6>
           </div>
         </div>
       </div>   

@@ -539,7 +539,7 @@ function Home() {
                           <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
                           <div class="col" id="properties2">{currentposts[index2].district}</div>
                           <div class="col" id="properties2">{currentposts[index2].town}</div>
-                          <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
                           <div class="col" id="properties2">{currentposts[index2].locality}</div>
                       </div>
@@ -558,7 +558,7 @@ function Home() {
                           <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
-                          <div class="col" id="properties1">{currentposts[index2 + 1].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
                       </div>
@@ -576,7 +576,7 @@ function Home() {
                       <div class="col" id="properties1">{currentposts[index2 + 2].propertyType}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 2].district}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
-                          <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}</div>
+                          <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}  sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 2].transactionType}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 2].locality}</div>
                       </div>
@@ -599,7 +599,7 @@ function Home() {
                               <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
                               <div class="col" id="properties2">{currentposts[index2].district}</div>
                               <div class="col" id="properties2">{currentposts[index2].town}</div>
-                              <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                              <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                               <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
                               <div class="col" id="properties2">{currentposts[index2].locality}</div>
                               </div>
@@ -629,7 +629,7 @@ function Home() {
                                                             <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
                                                             <div class="col" id="properties2">{currentposts[index2].district}</div>
                                                             <div class="col" id="properties2">{currentposts[index2].town}</div>
-                                                            <div class="col" id="properties1">{currentposts[index2].builtArea}</div>
+                                                            <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                                                             <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
                                                             <div class="col" id="properties2">{currentposts[index2].locality}</div>
                                                           </div>
@@ -648,7 +648,7 @@ function Home() {
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
                                                               <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
                                                               <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
-                                                              <div class="col" id="properties1">{currentposts[index2 + 1].builtArea}</div>
+                                                              <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
                                                               <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
                                                             </div>

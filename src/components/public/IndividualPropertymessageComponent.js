@@ -16,10 +16,8 @@ const IndividualPropertymessageComponent = (props) => {
     const[phonenumber,setPhonenumber]=useState("");
     const[message,setMessage]=useState("");
     const [alertrequestclass, setAlertRequestClass] = useState("alert alert-info");
-    const [alertrequestContent, setAlertRequestContent] = useState("For sending message you should enter the contact of owner,builder or developer");
+    const [alertrequestContent, setAlertRequestContent] = useState("Enter the Whatsapp number and name to get contact details of owner");
     
-    
-
     const submitOwnerdata = async (e) => {
         var phoneFlag=true;
         if(phonenumber === "") {
@@ -67,13 +65,13 @@ const IndividualPropertymessageComponent = (props) => {
     </div>
 
     <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label ">Contact of Owner or Builder or Developer</label>
+        <label for="inputPassword3" class="col-sm-2 col-form-label ">Enter Whatsapp number</label>
         <div class="col-sm-6">
         {ownercontactwidget}
         </div>
     </div>
     <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Name Of Owner or Builder or Developer</label>
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-6">
         {namewidget}
         </div>
