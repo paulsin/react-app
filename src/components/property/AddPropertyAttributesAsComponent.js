@@ -1323,7 +1323,7 @@ useEffect(() => {
         defaultValue={{ label: "Public", value: "Public" }}
       />
       var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
-      var propertycountwidget=<span>{numbercount} </span>
+      var propertycountwidget=<h6>{numbercount} </h6>
         var savebuttonwidget=<button type="submit" class="btn btn-primary" onClick={submitProperty}>Submit property</button>
         var contactheadingwidget=<h3 class="form-label">Owner Details</h3>
         var phoneno1widget=<PhoneInput className="number"  value={phonenumber1} onChange={setPhonenumber1}/>
@@ -1379,7 +1379,7 @@ useEffect(() => {
           options={owneroptions}
         />
         var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
-      var propertycountwidget=<span>{numbercount} </span>
+      var propertycountwidget=<h6>{numbercount} </h6>
       var propertystatusWidget=<Select
         options={PropertyStatus}
         onChange={handlePropertyStatusSelection}
@@ -1410,6 +1410,7 @@ useEffect(() => {
         {totalNumberOfFloorsWidget}
       </div>
     </div>
+    
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Built Area</label>
       <div class="col-sm-3">
@@ -1420,6 +1421,7 @@ useEffect(() => {
         {plotAreaWidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Total Villas</label>
       <div class="col-sm-3">
@@ -1430,6 +1432,7 @@ useEffect(() => {
         {floorNumberWidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Bedrooms</label>
       <div class="col-sm-3">
@@ -1440,6 +1443,7 @@ useEffect(() => {
         {bedRoomsWithToiletWidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Toilets</label>
       <div class="col-sm-3">
@@ -1464,12 +1468,9 @@ useEffect(() => {
       <div class="col-sm-2">
         {livingAreaWidget}
       </div>
-    
-
     </div>
 
-    <div class="row mb-3">
-      
+    <div class="row mb-3"> 
       <label for="inputPassword3" class="col-sm-2 col-form-label">Dining Hall</label>
       <div class="col-sm-2">
         {diningHallWidget}
@@ -1482,7 +1483,6 @@ useEffect(() => {
       <div class="col-sm-2">
         {workAreaWidget}
       </div>
-
     </div>
 
     <div class="row mb-3">
@@ -1501,7 +1501,6 @@ useEffect(() => {
     </div>
 
     <div class="row mb-3">
-     
       <label for="inputPassword3" class="col-sm-2 col-form-label">Water Well</label>
       <div class="col-sm-2">
         {waterWellWidget}
@@ -1510,23 +1509,24 @@ useEffect(() => {
       <div class="col-sm-2">
         {waterConnectionWidget}
       </div>
-    
       <div class="col-sm-2">
-    
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Google Map</label>
       <div class="col-sm-10">
         {googlemapwidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Video Link</label>
       <div class="col-sm-10">
         {videolinkwidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Title</label>
       <div class="col-sm-10">          
@@ -1540,34 +1540,39 @@ useEffect(() => {
         {feature1widget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature2</label>
       <div class="col-sm-10">
         {feature2widget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature3</label>
       <div class="col-sm-10">
         {feature3widget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Feature4</label>
       <div class="col-sm-10">
         {feature4widget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Select Owner,Builder or Developer</label>
       <div class="col-sm-5">
         {ownernameswidget}
       </div>
-     {propertycountlabelwidget} 
+      {propertycountlabelwidget}
       <div class="col-sm-3">
         {propertycountwidget}
       </div>
     </div>
+    
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Property Status</label>
       <div class="col-sm-10">
@@ -1577,17 +1582,17 @@ useEffect(() => {
     
     {savebuttonwidget}
     <br/><br/>
+
     <div class="row mb-3"> 
-     <div class="col-4"> 
-     {contactheadingwidget}  
-     </div>
+      <div class="col-4"> 
+        {contactheadingwidget}  
+      </div>
      <div class="col-4"> 
      </div>
      <div class="col-4">  
      </div>
    </div>
  
-
     <div class={alertownerclass} role="alert">
       {alertOwnerContent}
     </div>
@@ -1596,7 +1601,6 @@ useEffect(() => {
       <div class="col-sm-5">
         {phoneno1widget}
       </div>
-   
     </div>
 
     <div class="row mb-3">
@@ -1612,20 +1616,22 @@ useEffect(() => {
         {ownerorbuilderordeveloperwidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Name Of Owner or Builder or Developer</label>
       <div class="col-sm-5">
         {namewidget}
       </div>
     </div>
+
     <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Address Of Owner or Builder or Developer</label>
       <div class="col-sm-5">
         {addresswidget}
       </div>
     </div>
-    {ownerdatasavebuttonwidget}
 
+    {ownerdatasavebuttonwidget}
     <br/>
     <br/>
   </>

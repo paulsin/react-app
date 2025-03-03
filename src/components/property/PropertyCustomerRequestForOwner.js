@@ -37,23 +37,25 @@ const PropertyCustomerRequestForOwner = (props) => {
   const [requestsTable, setRequestsTable] = useState([]);
   const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
   const [param1State, setParam1State] = useState("table");
+  const [propertyIdorMobileno, setPropertyidorMobileno] = useState("");
 
   var param1=props.param1;
   var param2=props.param2;
-  //alert(param1)
-  //alert(param2)
+ // alert(param1)
+  // alert(param2)
 
   useMemo(() => {
     if(param1State === "table"){
-      setSelectedDIV(<PropertyCustomerRequestForOwnerTable param1State = {param1State} setParam1State = {setParam1State}/>);
+     // alert("hjjj")
+      setSelectedDIV(<PropertyCustomerRequestForOwnerTable param2={param2} param1={param1} param1State = {param1State} setParam1State = {setParam1State} propertyIdorMobileno={propertyIdorMobileno} setPropertyidorMobileno ={setPropertyidorMobileno}/>);
     }
               
     if(param1State==="propertyID"){
       // alert("jjjj")
-      setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2} param1State = {param1State} setParam1State = {setParam1State}/>);
+      setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory  param1={param1} param1State = {param1State} setParam1State = {setParam1State} propertyIdorMobileno={propertyIdorMobileno} setPropertyidorMobileno ={setPropertyidorMobileno}/>);
     }
     else if(param1State==="phonenumber"){
-      setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
+      setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory  param1={param1} param1State = {param1State} setParam1State = {setParam1State} propertyIdorMobileno={propertyIdorMobileno} setPropertyidorMobileno ={setPropertyidorMobileno}/>);
     }
   }, [param1State]);
 
