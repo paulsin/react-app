@@ -33,16 +33,18 @@ var updateStateUrl = Url + 'location/updateState/';
 var  deletePropertyUrl = Url + 'property/deleteProperty/';
 
 const PropertyCustomerRequestForOwnerTable = (props) => {
- const [requestsTable, setRequestsTable] = useState([]);
- const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
-  var param1=props.param1;
-  var param2=props.param2;
+  const [requestsTable, setRequestsTable] = useState([]);
+  const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
+   var param1=props.param1;
+   var param2=props.param2;
 
   var param1State = props.param1State;
   var setParam1State = props.setParam1State;
+  var propertyIdorMobileno=props.propertyIdorMobileno
+  var setPropertyidorMobileno=props.setPropertyidorMobileno
   //alert(param1State);
 
-  //alert(param1)
+ // alert(param1)
   //alert(param2)
   function createdata(data){
     var slno=1;
@@ -76,18 +78,27 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                 
                 if(param1==="propertyID"){
                   // alert("jjjj")
-                  setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2}/>);
+                  setSelectedDIV(<PropertyCustomerRequestForOwnerPropertyIDRequestHistory param2={param2} />);
                 }
                 else if(param1==="phonenumber"){
-                  setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2}/>);
+                  setSelectedDIV(<PropertyCustomerRequestForOwnerMobilenumberRequestHistory param2={param2} />);
                 }
       fetchRequests();
     }, []);
     
 
-    function test() {
+    const sendRequestedPropertyID = (propertyID) => {
+      //alert(propertyID)
         setParam1State("propertyID");
+        //  alert(pid)
+        setPropertyidorMobileno(propertyID)
+        
     }
+    const sendRequestedMobilenumber = (phonenumber) => {
+      setParam1State("phonenumber");
+      setPropertyidorMobileno(phonenumber)
+
+  }
 
 
     return(
@@ -141,7 +152,7 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                       <Link to={`/frontend/propertyCustomerRequestForOwner/propertyID/${key.propertyID}`}>{key.propertyID}</Link>
                       */}
 
-                      <button class = "btn btn-primary" onClick={test}> {key.propertyID}</button>
+                      <button class = "btn btn-primary" onClick={()=>sendRequestedPropertyID(key.propertyID)}> {key.propertyID}</button>
 
                     </td>
                     <td>
@@ -149,7 +160,8 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                     </td>
                     <td>
                       {/* {key.requesterMobile} */}
-                      <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link>
+                    <button class = "btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}> {key.requesterMobile}</button>
+                      {/* <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link> */}
                     </td>
                     <td>
                       {key.requesterName}
