@@ -41,7 +41,7 @@ const IndividualPropertymessageComponent = (props) => {
                 // alert('haiiii')
             })
             setAlertRequestClass("alert alert-success");
-            setAlertRequestContent("Data Submitted Successfully");
+            setAlertRequestContent("Request sent successfully");
         }
     }
 
