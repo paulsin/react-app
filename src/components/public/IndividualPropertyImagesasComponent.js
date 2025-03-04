@@ -81,7 +81,7 @@ function fetchPropertyImages(){
   var qrcodewidget= <QRCode
   title="GeeksForGeeks"
   value={individualurl}
-  size={170}
+  size={180}
   />
 
   return (
@@ -115,11 +115,11 @@ function fetchPropertyImages(){
             </div> 
           </div>
           <div class="col-4 p-0 pl-2 text-center" style={{margin: "auto"}}>
-            
+            <h3 class="qrcodelabel">Not easy to remember property ID?</h3>
+            <br/>
             {qrcodewidget}
             <br/><br/>
-            <h6 class="qrcodelabel">Save this QR Code to refer this property later</h6>
-            <h6 class="qrcodelabel">instead of remembering the property ID</h6>
+            <h6 class="qrcodelabel">Save or take a photo of this QR Code to refer this property later, instead of remembering the property ID</h6>
           </div>
         </div>
       </div>   
