@@ -127,3 +127,11 @@
  color:rgb(65, 18, 18) 
   /* width:6px; */
 }
+#textareainrequestpage{
+  height: 80px;
+  width:200px;
+}
+#textareainrequestermobile{
+  height: 60px;
+  width:200px;
+}

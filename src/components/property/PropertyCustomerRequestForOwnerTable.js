@@ -30,10 +30,12 @@ var getDistrictUrl = Url + 'location/districts';
 var deleteStateUrl = Url + 'location/deleteState/';
 var updateStateUrl = Url + 'location/updateState/';
 
-var  deletePropertyUrl = Url + 'property/deleteProperty/';
+var  deleteRequestUrl = Url + 'property/deletePropertyCustomerRequestForOwner/';
 
 const PropertyCustomerRequestForOwnerTable = (props) => {
   const [requestsTable, setRequestsTable] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
+
   const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
    var param1=props.param1;
    var param2=props.param2;
@@ -46,21 +48,43 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
 
  // alert(param1)
   //alert(param2)
-  function createdata(data){
+  function createdata(requestdatas,propertydatas,ownerdatas){
+  //  alert(data)
     var slno=1;
     let temparrayfornames=[]
-    data.map((data1)=>{
-      temparrayfornames.push({
-        'slno':slno++,
-        'propertyID':data1.propertyID,
-        'requestTime':data1.requestTime,
-        'requesterMobile':data1.requesterMobile,
-        'requesterName':data1.requesterName,
-        'requesterMessage':data1.requesterMessage,
-      })
+    requestdatas.map((data1)=>{
+     
+      propertydatas.map((data2)=>{
+      //   // alert(data2._id)
+        if(data1.propertyID===data2._id){
+          ownerdatas.map((data3)=>{
+            if(data3._id===data2.ownerOrBuilderID){
+               //alert("haii")
+              temparrayfornames.push({
+                'slno':slno++,
+                '_id':data1._id,
+                'propertyID':data1.propertyID,
+                'requestTime':data1.requestTime,
+                'requesterMobile':data1.requesterMobile,
+                'requesterName':data1.requesterName,
+                'requesterMessage':data1.requesterMessage,
+                'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
+                'ownerContact':data3.contactNumber
+
+              })
+            }
+
+           
+          })
+      //     // alert("haiii")
+        
+        }
+       
+      })  
       
     })
     setRequestsTable(temparrayfornames);
+    setOriginalData(temparrayfornames);
   }
 
   function fetchRequests(){
@@ -68,8 +92,39 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
     .get(Url+"property/propertyCustomerRequestForOwnerAllRequests",
     )
     .then((res) => {
-      createdata(res.data)
+      axios
+        .get(Url+"property/properties",
+      )
+      .then((res1) => {
+        axios
+        .get(Url+"property/ownersandbuilders",
+        )
+        .then((res2) => {
+          createdata(res.data,res1.data,res2.data)
+        })
+      })
     })
+  }
+
+  const handleDelete =(_id)=>{
+    //alert(_id)
+    var dataafterdeletetemp=[];
+    if (window.confirm('Do you want to delete this Request?')) {
+    var deletetempurl=deleteRequestUrl+_id; 
+    // alert(deletetempurl)
+    const response=axios.get(deletetempurl);
+    originalData.map(key=>{
+       //alert(key._id)
+      // alert("id",_id)
+      if(key._id!=_id){
+        // alert("hhjj")
+        dataafterdeletetemp.push(key);
+      }
+    });
+    setOriginalData(dataafterdeletetemp)
+    setRequestsTable(dataafterdeletetemp)
+    fetchRequests();
+    }
   }
     useEffect(() => {
         // if(param1==="table" && param2==="table"){
@@ -114,11 +169,18 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                   <th>
                   Index
                   </th>
+                 
                   <th>
-                  Property Id
+                  Property Image & ID
                   </th>
                   <th>
-                 Request Time
+                    Builder Number
+                  </th>
+                  <th>
+                    Message To Owner
+                  </th>
+                  <th>
+                      Request Time
                   </th>
                   <th>
                    Requester Mobile
@@ -132,9 +194,13 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                    Requester Message
                   </th>
  
-                   {/* <th>
-                  Actions
-                  </th> */}
+                   <th>
+                      Message To Buyer
+                  </th>
+                  <th>
+                      Delete
+                  </th>
+                 
             
                   
                 </tr>
@@ -146,14 +212,22 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                     <td>
                       {key.slno}
                     </td>
+                    
                     <td>
                     
                       {/* {key.propertyID} 
                       <Link to={`/frontend/propertyCustomerRequestForOwner/propertyID/${key.propertyID}`}>{key.propertyID}</Link>
                       */}
+                      {key.propertyID} 
+                       <button class = "btn btn-outline" onClick={()=>sendRequestedPropertyID(key.propertyID)}><img src={key.imageUrl} width="120px" height="80px" />
+                      </button>
 
-                      <button class = "btn btn-primary" onClick={()=>sendRequestedPropertyID(key.propertyID)}> {key.propertyID}</button>
-
+                    </td>
+                    <td>
+                      {key.ownerContact}
+                    </td>
+                    <td>
+                      <textarea id="textareainrequestermobile">{`Request from this number - ${key.requesterMobile}`}</textarea>
                     </td>
                     <td>
                       {key.requestTime}
@@ -169,9 +243,13 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                     <td>
                       {key.requesterMessage}
                     </td>
-                    {/* <td>
-                      <button className="btn btn-danger" >Actions</button> 
-                    </td> */}
+                    <td>
+                      <textarea id="textareainrequestpage">{`The contact number of the owner that you requested is - ${key.ownerContact}`}</textarea>
+  
+                    </td> 
+                    <td>
+                        <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
+                    </td>
                  
                    
                   </tr>

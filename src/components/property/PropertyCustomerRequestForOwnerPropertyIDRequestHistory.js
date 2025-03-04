@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import { Url } from "../../constants/global";
 import axios from "axios";
+import { NoImage } from "../../constants/global";
 
 const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
   const [requestsTable, setRequestsTable] = useState([]);
@@ -12,19 +13,25 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
   var setPropertyidorMobileno=props.setPropertyidorMobileno;
   // alert(param1State)
   // alert(propertyIdormobileno)
-  function createdata(data){
+  function createdata(data,propertydatas){
     var slno=1;
     let temparrayfornames=[]
     data.map((data1)=>{
       // alert(data1.propertyID)
       if(data1.propertyID===propertyIdorMobileno){
-        temparrayfornames.push({
-          'slno':slno++,
-          'propertyID':data1.propertyID,
-          'requestTime':data1.requestTime,
-          'requesterMobile':data1.requesterMobile,
-          'requesterName':data1.requesterName,
-          'requesterMessage':data1.requesterMessage,
+        propertydatas.map((data2)=>{
+          // alert(data2.thumbnailImageName)
+          if(data1.propertyID===data2._id){
+            temparrayfornames.push({
+              'slno':slno++,
+              'propertyID':data1.propertyID,
+              'requestTime':data1.requestTime,
+              'requesterMobile':data1.requesterMobile,
+              'requesterName':data1.requesterName,
+              'requesterMessage':data1.requesterMessage,
+              'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
+            })
+          }
         })
       }
       
@@ -38,7 +45,12 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
     .get(Url+"property/propertyCustomerRequestForOwnerAllRequests",
     )
     .then((res) => {
-      createdata(res.data)
+      axios
+      .get(Url+"property/properties",
+      )
+      .then((res1) => {
+        createdata(res.data,res1.data)
+      })
     })
   }
 
@@ -62,6 +74,9 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
                   </th>
                   <th>
                   Property Id
+                  </th>
+                  <th>
+                  Property Image
                   </th>
                   <th>
                  Request Time
@@ -91,6 +106,10 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
                     </td>
                     <td> 
                       {key.propertyID}
+                  
+                    </td>
+                    <td> 
+                      <img src={key.imageUrl} width="120px" height="80px" />
                     </td>
                     <td>
                       {key.requestTime}
