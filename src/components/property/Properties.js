@@ -129,6 +129,7 @@ const Properties = (props) => {
       navigate("/frontend/addProperty/edit/"+uniqueID);
     };
     
+    
     return(
       <div>
 
