@@ -90,7 +90,7 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th scope="col">PropertyID</th>
                 <th scope="col">{propertyID}</th>
                 <th scope="col">Total Page Views</th>
-                <th scope="col">Haiii</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -98,13 +98,13 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th scope="row">Property Type</th>
                 <td>{key.propertyType}</td>
                 <th>Plot Area</th>
-                <td>{key.plotarea}</td>
+                <td>{key.plotarea} cents</td>
               </tr>
               <tr class="table-secondary">
                 <th scope="row">State</th>
                 <td>{key.state}</td>
                 <th>Coverage Area</th>
-                <td>{key.builtArea}</td>
+                <td>{key.builtArea} sq ft</td>
               </tr>
               <tr>
                 <th scope="row">Sale/Rent</th>
