@@ -28,8 +28,8 @@ import QRCode from 'react-qr-code';
 var propertyImagesurl=Url+'propertyImages/'
   
 const IndividualPropertyImagesasComponent = (props) => {
-    var individualurl=baseUrl+"individualProperty/"+props.propertyID
-  let temparrayfornames=[]
+    var individualurl=baseUrl+"frontend/individualProperty/"+props.propertyID;
+  let temparrayfornames=[];
    
   const [propertyimages, setPropertyImages] = useState([]);
  
