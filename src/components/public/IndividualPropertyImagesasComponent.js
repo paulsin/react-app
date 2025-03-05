@@ -89,14 +89,13 @@ function fetchPropertyImages(){
     
     <div>
 
-      <div class="container p-3">
-        <div class="row mb-3">
-          <div class="col-8 p-2">
+      <div class="container p-2 ">
+        <div class="row mb-1">
+          <div class="col-sm-8 p-2">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">  
               <div class="carousel-inner">
                 
                 {propertyimages.map((key, index) => 
-
                       <div class= {key.slideShowClass}>
                         <img class="d-block img-fluid w-100" src={key.imageurl} alt="First slide" id="individualpropertyimages" />
                       </div> 
@@ -114,7 +113,8 @@ function fetchPropertyImages(){
               </a>  
             </div> 
           </div>
-          <div class="col-4 p-0 pl-2 text-center" style={{margin: "auto"}}>
+
+          <div class="col-sm-4 p-0 pl-2 text-center" style={{margin: "auto"}}>
             <h3 class="qrcodelabel">Not easy to remember property ID?</h3>
             <br/>
             {qrcodewidget}
