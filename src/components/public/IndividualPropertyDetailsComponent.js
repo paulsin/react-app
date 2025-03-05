@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { Url } from "../../constants/global";
 import axios from "axios";
 import { FaHeart } from "react-icons/fa";
+import { ToWords } from 'to-words';
 
 const IndividualPropertyDetailsComponent = (props) => {
     const[propertydetails,setPropertydetails]=useState([]);
@@ -12,8 +13,11 @@ const IndividualPropertyDetailsComponent = (props) => {
     
     function createrows(row,statedata,districtdata,towndata){
    
-        //  alert(row.location)
+        //  alert(row.cost)
         let temparrayfornames=[]
+         const toWords = new ToWords();
+        //  var cost=row.cost;
+        // var costinwords = toWords.convert(cost);
       
           statedata.map(statetemp=>{
             if(statetemp['_id']===row.stateID){
@@ -21,6 +25,7 @@ const IndividualPropertyDetailsComponent = (props) => {
                 if(districttemp['_id']===row.districtID){
                   towndata.map(towntemp=>{
                     if(towntemp['_id']===row.townID){
+                     
                       temparrayfornames.push({
                        
                         'propertyType':row.propertyType,
@@ -31,8 +36,11 @@ const IndividualPropertyDetailsComponent = (props) => {
                         'location':row.locality,
                         'plotarea':row.plotArea,
                         'builtArea':row.builtArea,
-                        'price':row.cost,
-                        'bedrooms':row.bedrooms
+                        'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
+                        'bedrooms':row.bedrooms,
+                        'feature1':row.propertyFeature1,
+                        'feature2':row.propertyFeature2,
+
                       })
                     }
                   })
@@ -79,7 +87,6 @@ const IndividualPropertyDetailsComponent = (props) => {
     }, []);
   
   return (
-
     <div class="container  text-center p-1" id="properties_container ">
       {propertydetails.map(key=>  
         <div class="table-responsive">
@@ -124,12 +131,78 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th>Town</th>
                 <td>{key.town}</td>
               </tr>
+              <tr class="table-secondary">
+                <th scope="row">Feature</th>
+                <td>{key.feature1}</td>
+                <th>Feature2</th>
+                <td>{key.feature2}</td>
+              </tr>
             </tbody>
 
           </table>
         </div>
       )}  
     </div>
+
+
+
+
+    // <div class="container  text-center p-1" id="properties_container ">
+    //   {propertydetails.map(key=>  
+    //     <div class="table-responsive">
+    //       <table class="table">
+          
+    //         <thead class="thead-dark">
+    //           <tr>
+    //             <th scope="col">Property ID</th>
+    //             <th scope="col">{propertyID}</th>
+    //             <th scope="col">Date</th>
+    //             <th scope="col"></th>
+    //           </tr>
+    //         </thead>
+    //         <tbody>
+    //           <tr>
+    //             <th scope="row">Property Type</th>
+    //             <td>{key.propertyType}</td>
+    //             <th>Plot Area</th>
+    //             <td>{key.plotarea} cents</td>
+    //           </tr>
+    //           <tr class="table-secondary">
+    //             <th scope="row">State</th>
+    //             <td>{key.state}</td>
+    //             <th>Coverage Area</th>
+    //             <td>{key.builtArea} sq ft</td>
+    //           </tr>
+    //           <tr>
+    //             <th scope="row">Sale/Rent</th>
+    //             <td>{key.transactionType}</td>
+    //             <th>Price</th>
+    //             <td>{key.price}</td>
+    //           </tr>
+    //           <tr class="table-secondary">
+    //             <th scope="row">District</th>
+    //             <td>{key.district}</td>
+    //             <th>BedRooms</th>
+    //             <td>{key.bedrooms}</td>
+    //           </tr>
+    //           <tr>
+    //             <th scope="row">Location</th>
+    //             <td>{key.location}</td>
+    //             <th>Town</th>
+    //             <td>{key.town}</td>
+    //           </tr>
+    //           <tr class="table-secondary">
+    //             <th scope="row">Feature</th>
+    //             <td>{key.feature1}</td>
+    //             <th>Feature2</th>
+    //             <td>{key.feature2}</td>
+    //           </tr>
+    //         </tbody>
+
+    //       </table>
+    //     </div>
+    //   )}  
+    // </div>
   )
 }
 

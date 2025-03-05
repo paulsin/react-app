@@ -58,6 +58,7 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
       //   // alert(data2._id)
         if(data1.propertyID===data2._id){
           ownerdatas.map((data3)=>{
+            //alert(data3)
             if(data3._id===data2.ownerOrBuilderID){
                //alert("haii")
               temparrayfornames.push({
@@ -233,8 +234,9 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                       {key.requestTime}
                     </td>
                     <td>
-                      {/* {key.requesterMobile} */}
-                    <button class = "btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}> {key.requesterMobile}</button>
+                      {key.requesterMobile}
+                      
+                    <button class = "btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}>Mobile History</button>
                       {/* <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link> */}
                     </td>
                     <td>

@@ -18,6 +18,7 @@ import Pagination from "./Pagination";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import { NoImage } from "../../constants/global";
+import { ToWords } from 'to-words';
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -256,6 +257,7 @@ function Home() {
     })
   }
   function createdata(data,data1,data2){
+    const toWords = new ToWords();
     let index=0
     let temparrayfornames=[]
       data.map(row => {
@@ -274,7 +276,7 @@ function Home() {
                       'thumbnailimage':row.thumbnailImage,
                       'thumbnailimagename':row.thumbnailImageName,
                       'builtArea':row.builtArea,
-                      'locality':row.locality,
+                      'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
                       'transactionType':row.transactionType,
                       // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
                       // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
@@ -541,7 +543,7 @@ function Home() {
                           <div class="col" id="properties2">{currentposts[index2].town}</div>
                           <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
-                          <div class="col" id="properties2">{currentposts[index2].locality}</div>
+                          <div class="col" id="properties2">{currentposts[index2].price}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -560,7 +562,7 @@ function Home() {
                           <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                           <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].price}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -578,7 +580,7 @@ function Home() {
                           <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
                           <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}  sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 2].transactionType}</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 2].locality}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].price}</div>
                       </div>
                     </div>
                     <div class ="pt-2">
@@ -601,7 +603,7 @@ function Home() {
                               <div class="col" id="properties2">{currentposts[index2].town}</div>
                               <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                               <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
-                              <div class="col" id="properties2">{currentposts[index2].locality}</div>
+                              <div class="col" id="properties2">{currentposts[index2].price}</div>
                               </div>
                             </div>
                             <div class ="pt-2">
@@ -631,7 +633,7 @@ function Home() {
                                                             <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                             <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                                                             <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
-                                                            <div class="col" id="properties2">{currentposts[index2].locality}</div>
+                                                            <div class="col" id="properties2">{currentposts[index2].price}</div>
                                                           </div>
                                                         </div>
                                                         <div class ="pt-2">
@@ -650,7 +652,7 @@ function Home() {
                                                               <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
-                                                              <div class="col" id="properties2">{currentposts[index2 + 1].locality}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2 + 1].price}</div>
                                                             </div>
                                                           </div>
                                                           <div class ="pt-2">
