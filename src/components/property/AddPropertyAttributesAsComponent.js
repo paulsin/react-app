@@ -1189,7 +1189,7 @@ useEffect(() => {
     if(propertybuilderflag && propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
-      alert("haii")
+      //alert("haii")
    
        axios.post(Url+"property/editproperty",
            {
@@ -1231,7 +1231,8 @@ useEffect(() => {
                "propertyFeature3":propertyfeature3,
                "propertyFeature4":propertyfeature4,
                "ownerOrBuilderID":ownerSelectedValue,
-               "propertyStatus":propertyStatus
+               "propertyStatus":propertyStatus,
+               "savedBy" : loggedUserIDforPropertySubmission
                
     
     

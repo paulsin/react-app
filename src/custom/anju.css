@@ -91,7 +91,7 @@
   object-fit: contain;
 }
 #individualpropertyimages{
-  height:550.5px;
+  /*height:550.5px;*/
   width:100%;
 }
 #propertydetails{

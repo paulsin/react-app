@@ -80,16 +80,16 @@ const IndividualPropertyDetailsComponent = (props) => {
   
   return (
 
-    <div class="container  text-center p-2" id="properties_container ">
+    <div class="container  text-center p-1" id="properties_container ">
       {propertydetails.map(key=>  
         <div class="table-responsive">
           <table class="table">
           
             <thead class="thead-dark">
               <tr>
-                <th scope="col">PropertyID</th>
+                <th scope="col">Property ID</th>
                 <th scope="col">{propertyID}</th>
-                <th scope="col">Total Page Views</th>
+                <th scope="col">Date</th>
                 <th scope="col"></th>
               </tr>
             </thead>
