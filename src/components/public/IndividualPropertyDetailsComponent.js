@@ -38,8 +38,24 @@ const IndividualPropertyDetailsComponent = (props) => {
                         'builtArea':row.builtArea,
                         'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
                         'bedrooms':row.bedrooms,
-                        'feature1':row.propertyFeature1,
-                        'feature2':row.propertyFeature2,
+                        'carporch':row.carPorch ===false ?"No":"Yes",
+                        'carParking':row.carParking ==="" ?"":row.carParking,
+                        'sitout':row.sitout ===false ?"No":"Yes",
+                        'livingArea':row.livingArea ===false?"No":"Yes",
+                        'diningHall':row.diningHall ===false ?"No":"Yes",
+                        'kitchen':row.kitchen ===false ?"No":"Yes",
+                        'workArea':row.workArea ===false ?"No":"Yes",
+                        'upperLivingArea':row.upperLivingArea ===true ?"No":"Yes",
+                        'balcony':row.balcony===true ?"No":"Yes",
+                        'openTerrace':row.openTerrace ===true ?"No":"Yes",
+                        'waterWell':row.waterWell ===true ?"No":"Yes",
+                        'waterConnection':row.waterConnection ===true ?"No":"Yes",
+                        'feature1': row.propertyFeature1==="" ?"":row.propertyFeature1,
+                        'feature2':row.propertyFeature2==="" ?"":row.propertyFeature2,
+                        'feature3':row.propertyFeature3==="" ?"":row.propertyFeature3,
+                        'feature4':row.propertyFeature4==="" ?"":row.propertyFeature4,
+                    
+
 
                       })
                     }
@@ -131,12 +147,57 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th>Town</th>
                 <td>{key.town}</td>
               </tr>
+             
               <tr class="table-secondary">
-                <th scope="row">Feature</th>
-                <td>{key.feature1}</td>
-                <th>Feature2</th>
-                <td>{key.feature2}</td>
+                <th scope="row">Carporch</th>
+                <td>{key.carporch}</td>
+                <th>Car Parking</th>
+                <td>{key.carParking}</td>
               </tr>
+              <tr>
+                <th scope="row">Sitout</th>
+                <td>{key.sitout}</td>
+                <th>LivingArea</th>
+                <td>{key.livingArea}</td>
+              </tr>
+              <tr class="table-secondary">
+                <th scope="row">DiningHall</th>
+                <td>{key.diningHall}</td>
+                <th>kitchen</th>
+                <td>{key.kitchen}</td>
+              </tr>
+              <tr>
+                <th scope="row">workArea</th>
+                <td>{key.workArea}</td>
+                <th>upperLivingArea</th>
+                <td>{key.upperLivingArea}</td>
+              </tr>
+              <tr class="table-secondary">
+                <th scope="row">balcony</th>
+                <td>{key.balcony}</td>
+                <th>openTerrace</th>
+                <td>{key.openTerrace}</td>
+              </tr>
+              <tr>
+                <th scope="row">waterWell</th>
+                <td>{key.waterWell}</td>
+                <th>waterConnection</th>
+                <td>{key.waterConnection}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Features</th>
+                <td><textarea disabled={true} class="textareainindividualpage">{key.feature1}</textarea></td>
+              
+                <td><textarea disabled={true} class="textareainindividualpage">{key.feature2}</textarea></td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td><textarea disabled={true} class="textareainindividualpage">{key.feature3}</textarea></td>
+                
+                <td><textarea disabled={true} class="textareainindividualpage">{key.feature4}</textarea></td>
+              </tr>
+             
             </tbody>
 
           </table>
