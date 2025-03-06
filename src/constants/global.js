@@ -1,5 +1,5 @@
 const baseUrl = 'http://localhost:3000/'; // For localhost
-//const baseUrl = 'https://agentfreedeal.com/'    // For website
+//const baseUrl = 'https://www.agentfreedeal.com/'    // For website
 
 const Url = baseUrl + 'backend/' ;// For localhost
 
