@@ -33,8 +33,17 @@ var updateStateUrl = Url + 'location/updateState/';
 var  deleteRequestUrl = Url + 'property/deletePropertyCustomerRequestForOwner/';
 
 const PropertyCustomerRequestForOwnerTable = (props) => {
+  
+const statusoptions = [
+    { value: '', label: 'Status' },
+    { value: 'Pending', label: 'Pending' },
+    { value: 'Completed', label: 'Completed' },
+  
+  ];
   const [requestsTable, setRequestsTable] = useState([]);
   const [originalData, setOriginalData] = useState([]);
+  const [requestedStatusChange, setRequestedStatusChange] = useState("");
+  const [requestedStatusID, setRequestedStatusID] = useState("");
 
   const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
    var param1=props.param1;
@@ -51,6 +60,7 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
   function createdata(requestdatas,propertydatas,ownerdatas){
   //  alert(data)
     var slno=1;
+    var classname;
     let temparrayfornames=[]
     requestdatas.map((data1)=>{
      
@@ -69,6 +79,9 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                 'requesterMobile':data1.requesterMobile,
                 'requesterName':data1.requesterName,
                 'requesterMessage':data1.requesterMessage,
+                'requestAssessmentStatus':data1.requestAssessmentStatus,
+                'classnameofbutton':data1.requestAssessmentStatus==="Pending"? "btn btn-danger":"btn btn-success",
+              
                 'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
                 'ownerContact':data3.contactNumber
 
@@ -155,7 +168,35 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
       setPropertyidorMobileno(phonenumber)
 
   }
+  // const handleStatusChange =(_id)=>{
+  //    alert(_id)
+  //   setRequestedStatusID(_id)
+  // }
+  const statusChange = (e) => {
+     //alert(e.value)
+    setRequestedStatusChange(e.value); 
+    
+  }
+  const handleSubmit = (_id) => {
+    // alert(_id)
+   //setRequestedStatusChange(e.value); 
+   axios.post(Url+"property/editPropertyCustomerRequestForOwner",
+    {
+        "id":_id,
+        "requestAssessmentStatus":requestedStatusChange,
+        
+        
 
+
+    }
+)
+.then((res)=>{
+  fetchRequests();
+})
+   
+ }
+  
+  // /editPropertyCustomerRequestForOwner
 
     return(
       <div>
@@ -194,16 +235,15 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                   <th>
                    Requester Message
                   </th>
- 
+                  <th>
+                      Status
+                  </th>
                    <th>
                       Message To Buyer
                   </th>
                   <th>
                       Delete
-                  </th>
-                 
-            
-                  
+                  </th> 
                 </tr>
               </thead>
               <tbody>
@@ -246,12 +286,51 @@ const PropertyCustomerRequestForOwnerTable = (props) => {
                       {key.requesterMessage}
                     </td>
                     <td>
+                      <button class={key.classnameofbutton} data-toggle="modal" data-target="#myModal"> {key.requestAssessmentStatus}</button> <br/>
+                     
+                      {/* <button type="button" class="btn btn-primary" onClick={()=>handleStatusChange(key._id)}>
+                      Change Status
+                      </button> */}
+                    
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change Status</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                            <div class="modal-body">
+                              <p><Select onChange={statusChange} options={statusoptions}>
+                                </Select></p>
+                                <button type="submit" class="btn btn-success" onClick={()=>handleSubmit(key._id)}>Submit</button>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+      
+                        </div>
+                      </div>
+
+                    </td>
+                    <td>
                       <textarea id="textareainrequestpage">{`The contact number of the owner that you requested is - ${key.ownerContact}`}</textarea>
   
                     </td> 
                     <td>
                         <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
                     </td>
+                    <td>
+              
+                    {/* <Select onChange={()=>handleStatusChange(key._id)} options={statusoptions}>
+                     
+                    </Select>
+                 */}
+                        {/* <button className="btn btn-danger" onClick={()=>handleStatusChange(key._id)}>Pending</button> */}
+                    </td>
+                 
                  
                    
                   </tr>
