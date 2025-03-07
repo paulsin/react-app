@@ -51,7 +51,7 @@ const IndividualPropertymessageComponent = (props) => {
     var ownercontactwidget=  <PhoneInput className="number"  value={phonenumber} onChange={setPhonenumber}/>
     var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
     var messagewidget=<textarea class="form-control" onChange={(e) =>  setMessage(e.target.value)} /> 
-    var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-danger" onClick={submitOwnerdata}>Send Owner Details</button>  
+    var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-danger" onClick={submitOwnerdata}>Request Owner Details</button>  
    
   return (
     <>

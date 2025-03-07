@@ -81,7 +81,7 @@ const statusoptions = [
                 'requesterMessage':data1.requesterMessage,
                 'requestAssessmentStatus':data1.requestAssessmentStatus,
                 'classnameofbutton':data1.requestAssessmentStatus==="Pending"? "btn btn-danger":"btn btn-success",
-                'disablingofbutton':data1.requestAssessmentStatus==="Completed"? true:false,
+                'disablingofbutton':data1.requestAssessmentStatus==="Completed"? false:false,
                 'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
                 'ownerContact':data3.contactNumber
 
@@ -267,7 +267,7 @@ const statusoptions = [
                       {key.ownerContact}
                     </td>
                     <td>
-                      <textarea id="textareainrequestermobile">{`Request from this number - ${key.requesterMobile}`}</textarea>
+                      <textarea id="textareainrequestermobile">{`Enquiry about your property from this number : ${key.requesterMobile}`}</textarea>
                     </td>
                     <td>
                       {key.requestTime}
@@ -275,7 +275,7 @@ const statusoptions = [
                     <td>
                       {key.requesterMobile}
                     
-                    <button class="btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}>Mobile History</button>
+                    <button class="btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}>Log</button>
                       {/* <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link> */}
                     </td>
                     <td>
@@ -315,7 +315,7 @@ const statusoptions = [
 
                     </td>
                     <td>
-                      <textarea id="textareainrequestpage">{`The contact number of the owner that you requested is - ${key.ownerContact}`}</textarea>
+                      <textarea id="textareainrequestpage">{`The contact number of the owner, that you requested is : ${key.ownerContact}`}</textarea>
   
                     </td> 
                     <td>
