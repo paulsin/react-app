@@ -81,7 +81,7 @@ const statusoptions = [
                 'requesterMessage':data1.requesterMessage,
                 'requestAssessmentStatus':data1.requestAssessmentStatus,
                 'classnameofbutton':data1.requestAssessmentStatus==="Pending"? "btn btn-danger":"btn btn-success",
-              
+                'disablingofbutton':data1.requestAssessmentStatus==="Completed"? true:false,
                 'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
                 'ownerContact':data3.contactNumber
 
@@ -168,21 +168,21 @@ const statusoptions = [
       setPropertyidorMobileno(phonenumber)
 
   }
-  // const handleStatusChange =(_id)=>{
-  //    alert(_id)
-  //   setRequestedStatusID(_id)
-  // }
+  const handleStatusChange =(_id)=>{
+    //  alert(_id)
+    setRequestedStatusID(_id)
+  }
   const statusChange = (e) => {
      //alert(e.value)
     setRequestedStatusChange(e.value); 
     
   }
-  const handleSubmit = (_id) => {
-     alert(_id)
+  const handleSubmit = () => {
+    //  alert(_id)
    //setRequestedStatusChange(e.value); 
    axios.post(Url+"property/editPropertyCustomerRequestForOwner",
     {
-        "id":_id,
+        "id":requestedStatusID,
         "requestAssessmentStatus":requestedStatusChange,
         
         
@@ -195,8 +195,7 @@ const statusoptions = [
 })
    
  }
-  
-  // /editPropertyCustomerRequestForOwner
+ 
 
     return(
       <div>
@@ -275,8 +274,8 @@ const statusoptions = [
                     </td>
                     <td>
                       {key.requesterMobile}
-                      
-                    <button class = "btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}>Mobile History</button>
+                    
+                    <button class="btn btn-primary" onClick={()=>sendRequestedMobilenumber(key.requesterMobile)}>Mobile History</button>
                       {/* <Link to={`/frontend/propertyCustomerRequestForOwner/phonenumber/${key.requesterMobile}`}>{key.requesterMobile} </Link> */}
                     </td>
                     <td>
@@ -286,7 +285,7 @@ const statusoptions = [
                       {key.requesterMessage}
                     </td>
                     <td>
-                      <button class={key.classnameofbutton} data-toggle="modal" data-target="#myModal"> {key.requestAssessmentStatus}</button> <br/>
+                      <button class={key.classnameofbutton} data-toggle="modal" data-target="#myModal" onClick={()=>handleStatusChange(key._id)} disabled={key.disablingofbutton}> {key.requestAssessmentStatus}</button> <br/>
                      
                       {/* <button type="button" class="btn btn-primary" onClick={()=>handleStatusChange(key._id)}>
                       Change Status
@@ -304,7 +303,7 @@ const statusoptions = [
                             <div class="modal-body">
                               <p><Select onChange={statusChange} options={statusoptions}>
                                 </Select></p>
-                                <button type="submit" class="btn btn-success" onClick={()=>handleSubmit(key._id)}>Submit</button>
+                                <button type="submit" class="btn btn-success" onClick={handleSubmit}>Submit</button>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

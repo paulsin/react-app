@@ -38,6 +38,8 @@ const IndividualPropertyDetailsComponent = (props) => {
                         'builtArea':row.builtArea,
                         'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
                         'bedrooms':row.bedrooms,
+                        "bedroomsWithToilet":row.bedroomsWithToilet,
+                        "toilets":row.toilets,
                         'carporch':row.carPorch ===false ?"No":"Yes",
                         'carParking':row.carParking ==="" ?"":row.carParking,
                         'sitout':row.sitout ===false ?"No":"Yes",
@@ -147,59 +149,66 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th>Town</th>
                 <td>{key.town}</td>
               </tr>
-             
               <tr class="table-secondary">
+                <th scope="row">Bedrooms With Toilet</th>
+                <td>{key.bedroomsWithToilet}</td>
+                <th>Toilets</th>
+                <td>{key.toilets}</td>
+              </tr>
+              <tr>
                 <th scope="row">Carporch</th>
                 <td>{key.carporch}</td>
                 <th>Car Parking</th>
                 <td>{key.carParking}</td>
               </tr>
-              <tr>
+              <tr class="table-secondary">
                 <th scope="row">Sitout</th>
                 <td>{key.sitout}</td>
                 <th>LivingArea</th>
                 <td>{key.livingArea}</td>
               </tr>
-              <tr class="table-secondary">
+              <tr >
                 <th scope="row">DiningHall</th>
                 <td>{key.diningHall}</td>
                 <th>kitchen</th>
                 <td>{key.kitchen}</td>
               </tr>
-              <tr>
+              <tr class="table-secondary">
                 <th scope="row">workArea</th>
                 <td>{key.workArea}</td>
                 <th>upperLivingArea</th>
                 <td>{key.upperLivingArea}</td>
               </tr>
-              <tr class="table-secondary">
+              <tr >
                 <th scope="row">balcony</th>
                 <td>{key.balcony}</td>
                 <th>openTerrace</th>
                 <td>{key.openTerrace}</td>
               </tr>
-              <tr>
+              <tr class="table-secondary">
                 <th scope="row">waterWell</th>
                 <td>{key.waterWell}</td>
                 <th>waterConnection</th>
                 <td>{key.waterConnection}</td>
               </tr>
-
               <tr>
-                <th scope="row">Features</th>
-                <td><textarea disabled={true} class="textareainindividualpage">{key.feature1}</textarea></td>
-              
-                <td><textarea disabled={true} class="textareainindividualpage">{key.feature2}</textarea></td>
-              </tr>
-              <tr>
-                <th scope="row"></th>
-                <td><textarea disabled={true} class="textareainindividualpage">{key.feature3}</textarea></td>
-                
-                <td><textarea disabled={true} class="textareainindividualpage">{key.feature4}</textarea></td>
-              </tr>
-             
+                <th>
+                  Features
+                </th>
+                <td>
+                <ul>
+                    <li>{key.feature1}</li>
+                    <li>{key.feature2}</li>
+                    <li>{key.feature3}</li>
+                    <li>{key.feature4}</li>
+                  </ul>
+                </td>
+                <td>
+                </td>
+                <td> 
+                </td>  
+              </tr>  
             </tbody>
-
           </table>
         </div>
       )}  
