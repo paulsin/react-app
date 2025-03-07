@@ -309,12 +309,12 @@ const AddProperty = (props) => {
     };
 
     const addTown = async (e) => {
-      alert(districtNameSelectedID);
+      //alert(districtNameSelectedID);
       
       if(stateNameSelectedID && districtNameSelectedID) {
         if(townName && townCode) {
           try {
-            alert("Paulsin");
+            //alert("Paulsin");
             const response = await axios.post(
               addTownUrl,
               {
