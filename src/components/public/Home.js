@@ -99,6 +99,11 @@ function Home() {
 //   }
 
 //alert(rowlength)
+const handleTransactionTypeSelection = (e) => {
+  // alert(e.value)
+  setSaleorrent(e.value); 
+  
+}
   
   const StateType = (event) => {
     // alert(event)
@@ -317,6 +322,77 @@ function Home() {
 
 
 
+  function searchdataout(data,data1,data2,transdata,pricefromdata,pricetodata){
+    // alert(pricefromdata)
+    const toWords = new ToWords();
+    let index=0
+    let temparrayfornames=[]
+      data.map(row => {
+        // alert(row.cost)
+        
+        if(row.transactionType===transdata || row.cost > pricefromdata && row.cost < pricetodata)
+        {
+       
+          data1.map(districttemp => {
+            if(districttemp['_id']===row.districtID){
+              data2.map(proptemp=>{
+                if(proptemp['_id']===row.townID){
+                  temparrayfornames.push({
+                        'index':index++,
+                        'propertyID' : row._id,
+                        'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
+                        'propertyType':row.propertyType,
+                        'transactiontype':row.transactionType,
+                        'town':proptemp['townName'],
+                        'district':districttemp['districtName'],
+                        'thumbnailimage':row.thumbnailImage,
+                        'thumbnailimagename':row.thumbnailImageName,
+                        'builtArea':row.builtArea,
+                        'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
+                        'transactionType':row.transactionType,
+                        // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
+                        // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
+                        'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
+                  })
+              
+                }
+              })
+            }
+          })
+        }
+      
+      })
+      setPropertydetails(temparrayfornames)
+  }
+  
+
+  function getSearchdata(transdata,pricefromdata,pricetodata) {
+    axios
+    .get(Url+"property/properties",
+    )
+    .then((res) => {
+      axios
+      .get(Url+"location/districts",
+      )
+      .then((res1)=>{
+        
+      axios
+      .get(Url+"location/towns",
+      )
+      .then((res2) => { 
+        searchdataout(res.data,res1.data,res2.data,transdata,pricefromdata,pricetodata)
+      })
+
+    })
+
+  })
+ 
+  }
+
+
+
+
+
   useEffect(() => {
     getStates();
     getDistricts();
@@ -341,11 +417,13 @@ function Home() {
   const searchfunction = (e) => {
     e.preventDefault();
     // alert(saleorrent)
+    getSearchdata(saleorrent,pricefrom,priceto);
+
     // alert(pricerange)
-    // alert(pricefrom)
-    // alert(priceto)
+    //  alert(pricefrom)
+    //  alert(priceto)
     // alert(newold)
-    // alert(selectedStatesDisplayed)
+    //alert(selectedStatesDisplayed)
     // alert(selectedpropertytype)
     // alert(selectedDistrictsDisplayed)
     //  alert(selectedTownsDisplayed)
@@ -387,7 +465,7 @@ function Home() {
                   <label htmlFor=""><b>Sale/rent</b></label>
                 </div>
                 <div className="col-md-3">
-                  <Select  onChange={setSaleorrent} id="selectboxcolor" options={transactionType}>
+                  <Select  onChange={handleTransactionTypeSelection} id="selectboxcolor" options={transactionType}>
                     
                   </Select> 
                 </div>
