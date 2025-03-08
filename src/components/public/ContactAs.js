@@ -17,10 +17,9 @@ const ContactAs = () => {
     <div class="container  p-3">
     <h3>Contact us</h3><br/>
 
-        <a id="linktagsincontactas" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9497 811 259</a><br/><br/>
-        <a id="linktagsincontactas" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9048 224 630</a><br/><br/>
-        <a id="linktagsincontactas" href=""><IoLogoWhatsapp />&nbsp;&nbsp;&nbsp;+91 - 8289 844 344</a><br/><br/>
-        <a id="linktagsincontactas" href=""><CgMail />&nbsp;&nbsp;&nbsp;virtunerealtors@gmail.com</a><br/><br/>
+        <a id="linktagsincontactas" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9188 338 732</a><br/><br/>
+        <a id="linktagsincontactas" href=""><IoLogoWhatsapp />&nbsp;&nbsp;&nbsp;+91 - 9188 338 732</a><br/><br/>
+        <a id="linktagsincontactas" href=""><CgMail />&nbsp;&nbsp;&nbsp;agentfreedeal@gmail.com</a><br/><br/>
         <a id="linktagsincontactas" href=""><IoLocation />&nbsp;&nbsp;&nbsp;Kochi, Kerala, India</a><br/> <br/>
  
     </div> 
