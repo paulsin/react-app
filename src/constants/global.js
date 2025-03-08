@@ -20,7 +20,11 @@ const propertyTypes = [
     { value: 'Rent', label: 'Rent' },
     { value: 'Sale', label: 'Sale' },
   ];
-
+  const neworOldType = [
+    { value: '', label: 'New/Old' },
+    { value: 'New', label: 'New' },
+    { value: 'Old', label: 'Old' },
+  ];
 const facingPolarity = [
   { value: '', label: 'Facing Polarity' },
     { value: 'North', label: 'North' },
@@ -48,6 +52,7 @@ export {baseUrl}
 export {NoImage}     
 export {propertyTypes}
 export {transactionType}
+export {neworOldType}
 export {facingPolarity}
 export {OwnerorBuilderorDeveloper}
 export {PropertyStatus}
