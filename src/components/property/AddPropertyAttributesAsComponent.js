@@ -15,7 +15,7 @@ var getownerdetailsurl=Url + 'property/ownersandbuilders';
 var loggedCheckUrl = Url + 'accounts/loggedInUser';
  
 const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeSelected, operation,setAlertContent,setAlertClass,
-  transactionTypeSelected,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
+  transactionTypeSelected,newOrOld,setNeworOld,stateNameSelectedID,districtNameSelectedID,townNameSelectedID,localityName,cost,stateSelectedValue,districtSelectedValue,townSelectedValue,uniqueID,
   setFacingPolarity, setTotalNumberOfFloors,setPlotArea, setBuiltArea,setTotalVillas, setFloorNumber,setBedRooms, setBedRoomsWithToilet,
   setToilets,setCarPorch,setCarParking,setSitOut,setLivingArea,setDiningHall,setKitchen,setWorkArea,setUpperLivingArea,setBalcony,setOpenTerrace,setWaterWell,
   setWaterConnection,facing,totalNumberOfFloors,plotarea,builtArea,totalVillas,floorNumber,bedRooms,bedRoomsWithToilet,toilets,carPorch,carParking,
@@ -400,6 +400,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       var districtNameSelectedIDFlag = true;
       var townNameSelectedIDFlag = true;
       var transactionTypeSelectedFlag = true;
+      var neworoldSelectedFlag =true;
       var localityFlag =true;
       var costFlag=true;
       var facingPolarityFlag=true;
@@ -705,7 +706,11 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Select state");
         stateNameSelectedIDFlag = false;
     }
-
+  //   if(newOrOld === "") {
+  //     setAlertClass("alert alert-danger");
+  //     setAlertContent("Select Wheather Property Is New Or Old");
+  //     neworoldSelectedFlag = false;
+  // }
     if(transactionTypeSelected === "") {
         setAlertClass("alert alert-danger");
         setAlertContent("Select transaction type");
@@ -743,6 +748,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
              {
                "propertyType": propertyTypeSelected,    
                "transactionType": transactionTypeSelected,
+               "newOrOld":newOrOld,
                "stateID": stateNameSelectedID,
                "districtID": districtNameSelectedID,
                "townID": townNameSelectedID,
@@ -1196,6 +1202,7 @@ useEffect(() => {
                "propertyID":uniqueID,
                "propertyType":propertyTypeSelected,
                "transactionType":transactionTypeSelected,
+               "newOrOld":newOrOld,
                "stateID":stateSelectedValue,
                "districtID":districtSelectedValue,
                "townID":townSelectedValue,

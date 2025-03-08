@@ -18,6 +18,7 @@ import AddPropertyStatesAsComponent from "./AddPropertyStatesAsComponent";
 import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
 import AddPropertyAttributesAsComponent from "./AddPropertyAttributesAsComponent";
+import AddPropertyNeworOldasComponent from "./AddPropertyNeworOldasComponent";
 import { setSubmissionErrors } from "react-admin";
 
 
@@ -40,7 +41,8 @@ const AddProperty = (props) => {
 
      const [propertyTypeSelected, setPropertyTypeSelected] = useState("");
     const [transactionTypeSelected, setTransactionTypeSelected] = useState("");
-
+    // setNeworOld,newOrOld,
+    const [newOrOld,setNeworOld]=useState("");
     const [stateNameSelectedID, setStateNameSelectedID] = useState("");
     const [districtNameSelectedID, setDistrictNameSelectedID] = useState("");
     const [townNameSelectedID, setTownNameSelectedID] = useState("");
@@ -797,6 +799,14 @@ useEffect(() => {
                   <AddPropertyTransactionTypeAsComponent setTransactionTypeSelected={setTransactionTypeSelected} transactionTypeSelected={transactionTypeSelected} operation={operation}/>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">New/Old</label>
+
+                <div class="col-sm-5">
+                 
+                  <AddPropertyNeworOldasComponent setNeworOld={setNeworOld} newOrOld={newOrOld} operation={operation}/>
+                </div>
+            </div>
 
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">State</label>
@@ -911,7 +921,7 @@ useEffect(() => {
       
 
             <AddPropertyAttributesAsComponent setPropertyTypeSelected={setPropertyTypeSelected} propertyTypeSelected={propertyTypeSelected} operation={operation} 
-            setAlertContent={setAlertContent } setAlertClass={setAlertClass} transactionTypeSelected={transactionTypeSelected} stateNameSelectedID={stateNameSelectedID} districtNameSelectedID={districtNameSelectedID} 
+            setAlertContent={setAlertContent } setAlertClass={setAlertClass} transactionTypeSelected={transactionTypeSelected} newOrOld={newOrOld} setNeworOld={setNeworOld} stateNameSelectedID={stateNameSelectedID} districtNameSelectedID={districtNameSelectedID} 
             townNameSelectedID={townNameSelectedID} localityName={localityName} cost={cost} stateSelectedValue={stateSelectedValue} districtSelectedValue={districtSelectedValue} townSelectedValue={townSelectedValue} uniqueID={uniqueID}
             setFacingPolarity={setFacingPolarity} setTotalNumberOfFloors={setTotalNumberOfFloors} setPlotArea={setPlotArea} setBuiltArea={setBuiltArea}
             setTotalVillas={setTotalVillas} setFloorNumber={setFloorNumber} setBedRooms={setBedRooms} setBedRoomsWithToilet={setBedRoomsWithToilet}
