@@ -10,7 +10,7 @@ function Footer() {
           <div class="container">
             <div class="row">
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
-                <h4>VirtuneRealtors</h4> <br/>
+                <h4>AgentFreeDeal</h4> <br/>
                 <p>A realestate company with more than 10 years of experience and satisfied customers from all over the world, which will help you to find your dream home in an easy way</p>
               </div> 
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
@@ -25,10 +25,9 @@ function Footer() {
               </div> 
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
                   <h4>Contact</h4><br/>
-                  <a id="linktagsinfooter" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9497 811 259</a><br/>
-                  <a id="linktagsinfooter" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9048 224 630</a><br/>
-                  <a id="linktagsinfooter" href=""><IoLogoWhatsapp />&nbsp;&nbsp;&nbsp;+91 - 8289 844 344</a><br/>
-                  <a id="linktagsinfooter" href=""><CgMail />&nbsp;&nbsp;&nbsp;virtunerealtors@gmail.com</a><br/>
+                  <a id="linktagsinfooter" href=""><FaPhoneAlt />&nbsp;&nbsp;&nbsp;+91 - 9188 338 732</a><br/>
+                  <a id="linktagsinfooter" href=""><IoLogoWhatsapp />&nbsp;&nbsp;&nbsp;+91 - 9188 338 732</a><br/>
+                  <a id="linktagsinfooter" href=""><CgMail />&nbsp;&nbsp;&nbsp;agentfreedeal@gmail.com</a><br/>
                   <a id="linktagsinfooter" href=""><IoLocation />&nbsp;&nbsp;&nbsp;Kochi, Kerala, India</a><br/> 
               </div> 
               <div class="col-lg-3 col-md-3 col-sm-12 mx-auto p-3">
@@ -46,7 +45,7 @@ function Footer() {
             <div className="col-md"> 
             </div>
             <div className="col-md"> 
-              <h6 id="copyrightid">© Copyright 2025 VirtuneRealtors - All rights reserved.</h6>   
+              <h6 id="copyrightid">© Copyright 2025 AgentFreeDeal - All rights reserved.</h6>   
             </div>
             <div className="col-md"> 
             </div>
