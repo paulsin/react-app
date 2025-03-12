@@ -18,8 +18,9 @@ import AddPropertyStatesAsComponent from "./AddPropertyStatesAsComponent";
 import AddPropertyDistrictsAsComponent from "./AddPropertyDistrictsAsComponent";
 import AddPropertyTownsAsComponent from "./AddPropertyTownsAsComponent";
 import AddPropertyAttributesAsComponent from "./AddPropertyAttributesAsComponent";
-import AddPropertyNeworOldasComponent from "./AddPropertyNeworOldasComponent";
+
 import { setSubmissionErrors } from "react-admin";
+import { neworOldType } from "../../constants/global";
 
 
 var newUrl = Url + 'location/state';
@@ -443,11 +444,11 @@ const AddProperty = (props) => {
       let townOptionsload=[];
       axios.get(Url+"property/individualProperty/"+uniqueID)
       .then((res)=>{
-        // alert(res.data.districtID)
+        // alert(res.data.newOrOld)
           setTransactionTypeSelected(res.data.transactionType)
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
-          // setStateid(res.data.stateID);
+          setNeworOld(res.data.newOrOld);
           setStateNameSelectedID(res.data.stateID);
           setDistrictNameSelectedID(res.data.districtID);
           setSelectedDistrictFunction(res.data.districtID)
@@ -799,15 +800,7 @@ useEffect(() => {
                   <AddPropertyTransactionTypeAsComponent setTransactionTypeSelected={setTransactionTypeSelected} transactionTypeSelected={transactionTypeSelected} operation={operation}/>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">New/Old</label>
-
-                <div class="col-sm-5">
-                 
-                  <AddPropertyNeworOldasComponent setNeworOld={setNeworOld} newOrOld={newOrOld} operation={operation}/>
-                </div>
-            </div>
-
+       
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">State</label>
 
