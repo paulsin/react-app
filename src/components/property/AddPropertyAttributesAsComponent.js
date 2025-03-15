@@ -1206,7 +1206,7 @@ useEffect(() => {
       setAlertContent("Enter Cost");
       costFlag = false;
     }
-     alert(localityName)
+     //alert(localityName)
     if(localityName === "") {
       // alert("Paulsi");
       setAlertClass("alert alert-danger");
