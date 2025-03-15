@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { facingPolarity } from "../../constants/global";
 import { PropertyStatus } from "../../constants/global";
+import { neworOldType } from "../../constants/global";
 import Select from 'react-select';
 import axios from "axios";
 import { Url } from "../../constants/global";
@@ -29,7 +30,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
 }) => {
  
 
-   
+   const [isNeworOldDisabled, setIsNeworOldDisabled] = useState(false);
    const [isFacingPolarityDisabled, setIsFacingPolarityDisabled] = useState(false);
    const [isTotalNumberOfFloorsDisabled, setIsTotalNumberOfFloorsDisabled] = useState(false);
    const [isBuiltAreaDisabled, setIsBuiltAreaDisabled] = useState(false);
@@ -119,6 +120,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       if(propertyTypeSelected === "Villa") {
         setFloorNumber("");
         setIsFloorNumberDisabled(true);
+        setIsNeworOldDisabled(false);
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(false);
         setIsBuiltAreaDisabled(false);
@@ -145,6 +147,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setFloorNumber("");
         setTotalVillas("");
         setIsFloorNumberDisabled(true);
+        setIsNeworOldDisabled(false);
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(false);
         setIsBuiltAreaDisabled(false);
@@ -174,6 +177,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setWaterwellStatusChecked(false);
 
         setIsFloorNumberDisabled(false);
+        setIsNeworOldDisabled(false);
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(false);
         setIsBuiltAreaDisabled(false);
@@ -204,6 +208,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setWaterwellStatusChecked(false);
 
         setIsFloorNumberDisabled(false);
+        setIsNeworOldDisabled(false);
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(false);
         setIsBuiltAreaDisabled(false);
@@ -235,6 +240,8 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setToilets("");
         setCarporchStatusChecked(false)
         setCarParking("");
+        setNeworOld("");
+       
         setSitoutStatusChecked(false);
         setLivingareaStatusChecked(false);
         setDininghallStatusChecked(false);
@@ -243,9 +250,11 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setUpperlivingareaStatusChecked(false);
         setBalconyStatusChecked(false);
         setOpenterraceStatusChecked(false);
-        
+
+       
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(true);
+        setIsNeworOldDisabled(true);
         setIsBuiltAreaDisabled(true);
         setIsTotalVillasDisabled(true);
         setIsPlotAreaDisabled(false);
@@ -277,6 +286,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setToilets("");
         setCarporchStatusChecked(false);
         setCarParking("");
+        setNeworOld("");
         setSitoutStatusChecked(false);
         setLivingareaStatusChecked(false);
         setDininghallStatusChecked(false);
@@ -286,6 +296,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setBalconyStatusChecked(false);
         setOpenterraceStatusChecked(false);
         
+        setIsNeworOldDisabled(true);
         setIsFacingPolarityDisabled(false);
         setIsTotalNumberOfFloorsDisabled(true);
         setIsBuiltAreaDisabled(true);
@@ -481,8 +492,14 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+          if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag) {
+
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag) {
         propertyAttrbutesFlag = false;
       }
 
@@ -537,10 +554,15 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
       
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag ||!totalVillasFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag ||!totalVillasFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag ) {
         propertyAttrbutesFlag = false;
       }
     }
@@ -590,12 +612,19 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag ) {
         propertyAttrbutesFlag = false;
       }
     }
     else if(propertyTypeSelected === "Flat") {
+ 
+
       if(carParking === "") {
         setAlertClass("alert alert-danger");
         setAlertContent("Enter CarParking");
@@ -641,8 +670,13 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ||!neworoldSelectedFlag ) {
         propertyAttrbutesFlag = false;
       }
     }
@@ -742,7 +776,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       // propertyFeature3 : String,
       // propertyFeature4 : String
           try {
-        // alert(bedRoomsWithToilet);
+            alert(newOrOld)
            const response = await axios.post(
              addPropertyURL,
              {
@@ -887,6 +921,7 @@ useEffect(() => {
       var propertytitleflag=true;
       var propertyfeature1flag=true;
       var propertybuilderflag=true;
+      var neworoldSelectedFlag=true;
 
       if(ownerSelectedValue===""){
         alert("fgvfd")
@@ -953,8 +988,13 @@ useEffect(() => {
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag) {
         propertyAttrbutesFlag = false;
       }
 
@@ -1009,10 +1049,14 @@ useEffect(() => {
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
-
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
       
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag ||!totalVillasFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag ||!totalVillasFlag || !plotareaFlag || !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag) {
         propertyAttrbutesFlag = false;
       }
     }
@@ -1062,8 +1106,13 @@ useEffect(() => {
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag) {
         propertyAttrbutesFlag = false;
       }
     }
@@ -1113,8 +1162,13 @@ useEffect(() => {
         setAlertContent("Enter number of floors");
         totalNumberOfFloorsFlag = false;
       }
+      if(newOrOld === "") {
+        setAlertClass("alert alert-danger");
+        setAlertContent("Select Wheather It Is Old Or Not");
+        neworoldSelectedFlag= false;
+      }
 
-      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag ) {
+      if(!carParkingFlag || !toiletsFlag || !bedroomwithToiletFlag || !bedroomFlag || !floorNumberFlag ||  !builtAreaFlag || !totalNumberOfFloorsFlag || !neworoldSelectedFlag) {
         propertyAttrbutesFlag = false;
       }
     }
@@ -1195,7 +1249,7 @@ useEffect(() => {
     if(propertybuilderflag && propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
-      //alert("haii")
+      alert(newOrOld)
    
        axios.post(Url+"property/editproperty",
            {
@@ -1282,8 +1336,24 @@ useEffect(() => {
       }
     };
 
+    // const handleNeworoldSelection = (e) => {
+    //   // alert(e.target.value)
+    //   setNeworOld(e.target.value);
+    // }
+
     if(operation==="new"){
-   
+        //   var neworoldwidget= <Select
+        //   options={neworOldType}
+        //   onChange={handleNeworoldSelection}
+        //   disabled={isNeworOldDisabled}
+        // />
+        var neworoldwidget= <select disabled={isNeworOldDisabled} className="form-control" onChange={(e) => setNeworOld(e.target.value)}>
+          <option value="">New/Old</option>
+          <option value="New">New</option>
+          <option value="Old">Old</option>
+         
+        </select>
+ 
         var facingPolarityWidget=<Select
           options={facingPolarity}
           onChange={handleFacingSelection}
@@ -1346,6 +1416,18 @@ useEffect(() => {
     }
     else if(operation==="edit"){
       // alert(carporchtrue)
+      //   var neworoldwidget= <Select
+      //   options={neworOldType}
+      //   onChange={handleNeworoldSelection}
+      //   disabled={isNeworOldDisabled}
+      //   value={{ value: newOrOld, label: newOrOld }}
+      // /> 
+      var neworoldwidget= <select value={newOrOld} disabled={isNeworOldDisabled} className="form-control" onChange={(e) => setNeworOld(e.target.value)}>
+          <option value="">New/Old</option>
+          <option value="New">New</option>
+          <option value="Old">Old</option>
+    </select>
+
         var facingPolarityWidget=<Select
         options={facingPolarity}
         onChange={handleFacingSelection}
@@ -1408,10 +1490,19 @@ useEffect(() => {
     }
   return (
   <>
-    <div class="row mb-3">
+   <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Facing</label>
-      <div class="col-sm-3">
+
+      <div class="col-sm-5">
         {facingPolarityWidget}
+                  
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">New/Old</label>
+      <div class="col-sm-3">
+        {neworoldwidget}
       </div>
       <label for="inputPassword3" class="col-sm-2 col-form-label">Number of floors</label>
       <div class="col-sm-3">
