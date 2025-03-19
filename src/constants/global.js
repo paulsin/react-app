@@ -25,6 +25,22 @@ const propertyTypes = [
     { value: 'New', label: 'New' },
     { value: 'Old', label: 'Old' },
   ];
+  const priceRangeSelect = [
+    { value: '', label: 'Pricerange' },
+    { value: 'Latest', label: 'Latest' },
+    { value: 'Price Low to High', label: 'Price Low to High' },
+    { value: 'Price High to Low', label: 'Price High to Low' },
+  ];
+  const pricetoSelect = [
+    { value: '', label: 'Priceto' },
+    { value: '10000000', label: '1 Crore' },
+    { value: '11000000', label: '1 Crore 10 lakhs' },
+  ];
+  const pricefromSelect = [
+    { value: '', label: 'Pricefrom' },
+    { value: '4000000', label: '40 lakhs' },
+    { value: '2000000', label: '20 lakhs' },
+  ];
 const facingPolarity = [
   { value: '', label: 'Facing Polarity' },
     { value: 'North', label: 'North' },
@@ -53,6 +69,9 @@ export {NoImage}
 export {propertyTypes}
 export {transactionType}
 export {neworOldType}
+export {priceRangeSelect}
+export {pricefromSelect}
+export {pricetoSelect}
 export {facingPolarity}
 export {OwnerorBuilderorDeveloper}
 export {PropertyStatus}

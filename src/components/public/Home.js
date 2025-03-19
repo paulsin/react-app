@@ -19,6 +19,10 @@ import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
 import { NoImage } from "../../constants/global";
 import { ToWords } from 'to-words';
+import { neworOldType } from "../../constants/global";
+import { pricefromSelect } from "../../constants/global";
+import { pricetoSelect } from "../../constants/global";
+import { priceRangeSelect } from "../../constants/global";
 
 function Home() {
   const [selectedpropertytype, setSelectedPropertyType] = useState([]);
@@ -104,6 +108,17 @@ const handleTransactionTypeSelection = (e) => {
   setSaleorrent(e.value); 
   
 }
+const handleSelectedPropertyType = (e) => {
+  //  alert(e.target.value)
+  let propertytypevalue=[];
+  e.map(key=>{
+    // alert(key.value)
+    propertytypevalue.push({ value: key.value, label: key.label })
+  })
+  setSelectedPropertyType(propertytypevalue)
+  
+}
+
   
   const StateType = (event) => {
     // alert(event)
@@ -321,52 +336,323 @@ const handleTransactionTypeSelection = (e) => {
   }
 
 
-
-  function searchdataout(data,data1,data2,transdata,pricefromdata,pricetodata){
-    // alert(pricefromdata)
+  function searchdataout(data,data1,data2,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata){
+    //alert(propertytypedata)
     const toWords = new ToWords();
     let index=0
-    let temparrayfornames=[]
-      data.map(row => {
-        // alert(row.cost)
-        
-        if(row.transactionType===transdata || row.cost > pricefromdata && row.cost < pricetodata)
-        {
-       
-          data1.map(districttemp => {
-            if(districttemp['_id']===row.districtID){
-              data2.map(proptemp=>{
-                if(proptemp['_id']===row.townID){
-                  temparrayfornames.push({
-                        'index':index++,
+    let operatearray=[]
+    let temparray=[]
+    data.map(row => {
+      operatearray.push({
                         'propertyID' : row._id,
-                        'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
+                        'stateID':row.stateID,
+                        'districtID':row.districtID,
+                        'townID':row.townID,
+                        'individualPropertyUrl': "/frontend/individualProperty/"+row._id,
                         'propertyType':row.propertyType,
-                        'transactiontype':row.transactionType,
-                        'town':proptemp['townName'],
-                        'district':districttemp['districtName'],
+                        'transactionType':row.transactionType,
                         'thumbnailimage':row.thumbnailImage,
                         'thumbnailimagename':row.thumbnailImageName,
                         'builtArea':row.builtArea,
+                        'cost':row.cost===undefined?row.cost:row.cost,
                         'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
-                        'transactionType':row.transactionType,
-                        // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
-                        // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
+                        'newOrOld':row.newOrOld,
+                        'propertyEditDate':row.propertyEditDate,
                         'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
+      })     
+    })
+    if(transdata!=""){
+      // alert("gb")
+      operatearray.map(row1 => {
+        //alert(row1.propertyID)
+        if(row1.transactionType===transdata){
+                  temparray.push({
+                         'propertyID':row1.propertyID,
+                          'individualPropertyUrl':row1.individualPropertyUrl,
+                          'propertyType':row1.propertyType,
+                          'transactionType':row1.transactionType,
+                          'stateID':row1.stateID,
+                          'districtID':row1.districtID,
+                          'townID':row1.townID,
+                          'thumbnailimage':row1.thumbnailimage,
+                          'thumbnailimagename':row1.thumbnailimagename,
+                          'builtArea':row1.builtArea,
+                          'price':row1.price,
+                          'cost':row1.cost===undefined?row1.cost:row1.cost,
+                          'newOrOld':row1.newOrOld,
+                          'propertyEditDate':row1.propertyEditDate,
+                          'imageurl':row1.imageurl
                   })
-              
-                }
+       
+        }
+          
+      })
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    }
+    if(neworolddata!=""){
+      operatearray.map(row2 => {
+        if(row2.newOrOld === neworolddata){
+                  temparray.push({
+                          'propertyID':row2.propertyID,
+                          'individualPropertyUrl':row2.individualPropertyUrl,
+                          'propertyType':row2.propertyType,
+                          'transactionType':row2.transactionType,
+                          'stateID':row2.stateID,
+                          'districtID':row2.districtID,
+                          'townID':row2.townID,
+                          'thumbnailimage':row2.thumbnailimage,
+                          'thumbnailimagename':row2.humbnailimagename,
+                          'builtArea':row2.builtArea,
+                          'price':row2.price,
+                          'cost':row2.cost===undefined?row2.cost:row2.cost,
+                          'newOrOld':row2.newOrOld,
+                          'propertyEditDate':row2.propertyEditDate,
+                          'imageurl':row2.imageurl
+                  })
+        }   
+      })
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    } 
+    
+    if(pricefromdata!="" && pricetodata!=""){
+      //alert("gb")
+      operatearray.map(row3 => {
+        //alert(row3.price)
+        if(row3.cost > pricefromdata && row3.cost < pricetodata){
+                  temparray.push({
+                         'propertyID':row3.propertyID,
+                          'individualPropertyUrl':row3.individualPropertyUrl,
+                          'propertyType':row3.propertyType,
+                          'transactionType':row3.transactionType,
+                          'stateID':row3.stateID,
+                          'districtID':row3.districtID,
+                          'townID':row3.townID,
+                          'thumbnailimage':row3.thumbnailimage,
+                          'thumbnailimagename':row3.thumbnailimagename,
+                          'builtArea':row3.builtArea,
+                          'price':row3.price,
+                          'cost':row3.cost===undefined?row3.cost:row3.cost,
+                          'newOrOld':row3.newOrOld,
+                          'propertyEditDate':row3.propertyEditDate,
+                          'imageurl':row3.imageurl
+                  })
+       
+        }    
+      })
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    }
+
+    if(propertytypedata!=""){
+      // alert("sdfsfzz")
+      operatearray.map(row4 => {
+        propertytypedata.map(key=>{
+            //alert(key.value)
+          if(key.value === row4.propertyType){
+                        temparray.push({
+                                'propertyID':row4.propertyID,
+                                'individualPropertyUrl':row4.individualPropertyUrl,
+                                'propertyType':row4.propertyType,
+                                'transactionType':row4.transactionType,
+                                'stateID':row4.stateID,
+                                'districtID':row4.districtID,
+                                'townID':row4.townID,
+                                'thumbnailimage':row4.thumbnailimage,
+                                'thumbnailimagename':row4.humbnailimagename,
+                                'builtArea':row4.builtArea,
+                                'price':row4.price,
+                                'cost':row4.cost===undefined?row4.cost:row4.cost,
+                                'newOrOld':row4.newOrOld,
+                                'propertyEditDate':row4.propertyEditDate,
+                                'imageurl':row4.imageurl
+                        })
+          }   
+        })
+      })
+        
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    }
+    if(statedata!=""){
+      // alert("sdfsfzz")
+      operatearray.map(row5 => {
+       // alert(row5.stateID)
+        statedata.map(key1=>{
+            //alert(key1.value)
+          if(key1.value === row5.stateID){
+                        temparray.push({
+                                'propertyID':row5.propertyID,
+                                'individualPropertyUrl':row5.individualPropertyUrl,
+                                'propertyType':row5.propertyType,
+                                'transactionType':row5.transactionType,
+                                'stateID':row5.stateID,
+                                'districtID':row5.districtID,
+                                'townID':row5.townID,
+                                'thumbnailimage':row5.thumbnailimage,
+                                'thumbnailimagename':row5.humbnailimagename,
+                                'builtArea':row5.builtArea,
+                                'price':row5.price,
+                                'cost':row5.cost===undefined?row5.cost:row5.cost,
+                                'newOrOld':row5.newOrOld,
+                                'propertyEditDate':row5.propertyEditDate,
+                                'imageurl':row5.imageurl
+                        })
+          }   
+        })
+      })
+        
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    }  
+    if(districtdata!=""){
+      // alert("sdfsfzz")
+      operatearray.map(row6 => {
+        // alert(row6.districtID)
+        districtdata.map(key2=>{
+            //alert(key1.value)
+          if(key2.value === row6.districtID){
+                        temparray.push({
+                                'propertyID':row6.propertyID,
+                                'individualPropertyUrl':row6.individualPropertyUrl,
+                                'propertyType':row6.propertyType,
+                                'transactionType':row6.transactionType,
+                                'stateID':row6.stateID,
+                                'districtID':row6.districtID,
+                                'townID':row6.townID,
+                                'thumbnailimage':row6.thumbnailimage,
+                                'thumbnailimagename':row6.humbnailimagename,
+                                'builtArea':row6.builtArea,
+                                'price':row6.price,
+                                'cost':row6.cost===undefined?row6.cost:row6.cost,
+                                'newOrOld':row6.newOrOld,
+                                'propertyEditDate':row6.propertyEditDate,
+                                'imageurl':row6.imageurl
+                        })
+          }   
+        })
+      })  
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    }  
+
+    if(towndata!=""){
+      // alert("sdfsfzz")
+      operatearray.map(row7 => {
+       // alert(row5.stateID)
+        towndata.map(key3=>{
+            //alert(key1.value)
+          if(key3.value === row7.townID){
+                        temparray.push({
+                                'propertyID':row7.propertyID,
+                                'individualPropertyUrl':row7.individualPropertyUrl,
+                                'propertyType':row7.propertyType,
+                                'transactionType':row7.transactionType,
+                                'stateID':row7.stateID,
+                                'districtID':row7.districtID,
+                                'townID':row7.townID,
+                                'thumbnailimage':row7.thumbnailimage,
+                                'thumbnailimagename':row7.humbnailimagename,
+                                'builtArea':row7.builtArea,
+                                'price':row7.price,
+                                'cost':row7.cost===undefined?row7.cost:row7.cost,
+                                'propertyEditDate':row7.propertyEditDate,
+                                'newOrOld':row7.newOrOld,
+                                'imageurl':row7.imageurl
+                        })
+          }   
+        })
+      })   
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    } 
+    if(pricerangedata!=""){
+      //alert("gb")
+      operatearray.map(row8 => {
+                  temparray.push({  
+                    'propertyID':row8.propertyID,
+                    'individualPropertyUrl':row8.individualPropertyUrl,
+                    'propertyType':row8.propertyType,
+                    'transactionType':row8.transactionType,
+                    'stateID':row8.stateID,
+                    'districtID':row8.districtID,
+                    'townID':row8.townID,
+                    'thumbnailimage':row8.thumbnailimage,
+                    'thumbnailimagename':row8.humbnailimagename,
+                    'builtArea':row8.builtArea,
+                    'price':row8.price,
+                    'cost':row8.cost===undefined?row8.cost:row8.cost,
+                    'newOrOld':row8.newOrOld,
+                    'propertyEditDate':row8.propertyEditDate,
+                    'imageurl':row8.imageurl
+                  })
+     
+          
+      })
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+      if(pricerangedata=="Price Low to High"){
+       // alert("jjj")
+        operatearray.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+
+      }
+      else if(pricerangedata=="Price High to Low")
+      {
+        operatearray.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+      }
+      else if(pricerangedata=="Latest")
+      {
+          operatearray.sort((a, b) => (a.propertyEditDate < b.propertyEditDate) ? 1 : -1)
+      }
+       
+    }
+
+    operatearray.map(row9 => {
+      data1.map(districttemp => {
+        if(districttemp['_id']===row9.districtID){
+          data2.map(proptemp=>{
+            if(proptemp['_id']===row9.townID){
+              temparray.push({  
+                'propertyID':row9.propertyID,
+                'individualPropertyUrl':row9.individualPropertyUrl,
+                'propertyType':row9.propertyType,
+                'transactionType':row9.transactionType,
+                'town':proptemp['townName'],
+                'district':districttemp['districtName'],
+                'stateID':row9.stateID,
+                'districtID':row9.districtID,
+                'townID':row9.townID,
+                'thumbnailimage':row9.thumbnailimage,
+                'thumbnailimagename':row9.humbnailimagename,
+                'builtArea':row9.builtArea,
+                'price':row9.price,
+                'cost':row9.cost===undefined?row9.cost:row9.cost,
+                'newOrOld':row9.newOrOld,
+                'propertyEditDate':row9.propertyEditDate,
+                'imageurl':row9.imageurl
               })
             }
           })
         }
-      
-      })
-      setPropertydetails(temparrayfornames)
+      })  
+    })
+    operatearray=[];
+    operatearray=temparray;
+    temparray=[];
+    setPropertydetails(operatearray)
   }
   
 
-  function getSearchdata(transdata,pricefromdata,pricetodata) {
+  function getSearchdata(transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata) {
     axios
     .get(Url+"property/properties",
     )
@@ -380,7 +666,7 @@ const handleTransactionTypeSelection = (e) => {
       .get(Url+"location/towns",
       )
       .then((res2) => { 
-        searchdataout(res.data,res1.data,res2.data,transdata,pricefromdata,pricetodata)
+        searchdataout(res.data,res1.data,res2.data,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata)
       })
 
     })
@@ -388,10 +674,6 @@ const handleTransactionTypeSelection = (e) => {
   })
  
   }
-
-
-
-
 
   useEffect(() => {
     getStates();
@@ -417,14 +699,15 @@ const handleTransactionTypeSelection = (e) => {
   const searchfunction = (e) => {
     e.preventDefault();
     // alert(saleorrent)
-    getSearchdata(saleorrent,pricefrom,priceto);
+    getSearchdata(saleorrent,pricefrom,priceto,newold,pricerange,selectedpropertytype,selectedStatesDisplayed,selectedDistrictsDisplayed,selectedTownsDisplayed);
 
     // alert(pricerange)
     //  alert(pricefrom)
     //  alert(priceto)
     // alert(newold)
+
     //alert(selectedStatesDisplayed)
-    // alert(selectedpropertytype)
+     //alert(selectedpropertytype)
     // alert(selectedDistrictsDisplayed)
     //  alert(selectedTownsDisplayed)
    
@@ -458,7 +741,7 @@ const handleTransactionTypeSelection = (e) => {
                     onChange={setSelectedPropertyType}
                     labelledBy="Select"
                   />  */}
-                    <Select  id="selectboxcolor" isMulti={true} options={propertyTypes} onChange={setSelectedPropertyType}  value={selectedpropertytype}> 
+                    <Select  id="selectboxcolor" isMulti={true} options={propertyTypes} onChange={handleSelectedPropertyType} > 
                     </Select>
                 </div>
                 <div className="col-md-3">
@@ -489,12 +772,14 @@ const handleTransactionTypeSelection = (e) => {
                   <label htmlFor=""><b>Sort By</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control" onChange={(e) => setPricerange(e.target.value)} id="selectboxcolor">
+                  {/* <select className="form-control" onChange={(e) => setPricerange(e.target.value)} id="selectboxcolor">
                     <option value="">Select</option>
                     <option value="latest">Latest</option>
                     <option value="price_lowtohigh">Price Low to High</option>
                     <option value="price_hightolow">Price High to Low</option>
-                  </select> 
+                  </select>  */}
+                   <Select onChange={(e) => setPricerange(e.value)} options={priceRangeSelect}></Select>
+
                 </div>
               </div> 
               <br/>
@@ -548,21 +833,23 @@ const handleTransactionTypeSelection = (e) => {
                   <label htmlFor=""> <b>Price From</b></label>
                 </div>
                 <div className="col-md">
-                  <select className="form-control" onChange={(e) => setPricefrom(e.target.value)} id="selectboxcolor">
+                  {/* <select className="form-control" onChange={(e) => setPricefrom(e.target.value)} id="selectboxcolor">
                     <option value="">Select</option>
                     <option value="40lakhs">40 lakhs</option>
                     <option value="20lakhs">20 lakhs</option>
-                  </select> 
+                  </select>  */}
+                    <Select onChange={(e) => setPricefrom(e.value)} options={pricefromSelect}></Select>
                 </div>
                 <div className="col-md">
                   <label htmlFor=""><b>Price To</b></label>
                 </div>
                 <div className="col-md">
-                  <select className="form-control" onChange={(e) => setPriceto(e.target.value)} id="selectboxcolor">
+                  {/* <select className="form-control" onChange={(e) => setPriceto(e.target.value)} id="selectboxcolor">
                     <option value="">Select</option>
                     <option value="1crore">1 crore</option>
                     <option value="1crore_10lakhs">1 crore 10 lakhs</option>
-                  </select> 
+                  </select>  */}
+                  <Select onChange={(e) => setPriceto(e.value)} options={pricetoSelect}></Select>
                 </div>
               </div>
               <br/>
@@ -571,11 +858,12 @@ const handleTransactionTypeSelection = (e) => {
                   <label htmlFor=""><b>New/Old</b></label>
                 </div>
                 <div className="col-md-3">
-                  <select className="form-control" onChange={(e) => setNewold(e.target.value)} id="selectboxcolor">
+                  <Select onChange={(e) => setNewold(e.value)} options={neworOldType}></Select>
+                  {/* <select className="form-control" onChange={(e) => setNewold(e.target.value)} id="selectboxcolor">
                     <option value="">Select</option>
                     <option value="new">New</option>
                     <option value="old">Old</option>
-                  </select> 
+                  </select>  */}
                 </div>
                 <div className="col-md-3">    
                 </div>
