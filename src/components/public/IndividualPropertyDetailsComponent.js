@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 import { ToWords } from 'to-words';
 
 const IndividualPropertyDetailsComponent = (props) => {
+
     const[propertydetails,setPropertydetails]=useState([]);
     var propertyID=props.propertyID
     // alert(propertyID)
@@ -16,6 +17,7 @@ const IndividualPropertyDetailsComponent = (props) => {
         //  alert(row.cost)
         let temparrayfornames=[]
          const toWords = new ToWords();
+         const date = new Date(row.propertyEditDate);
         //  var cost=row.cost;
         // var costinwords = toWords.convert(cost);
       
@@ -29,6 +31,8 @@ const IndividualPropertyDetailsComponent = (props) => {
                       temparrayfornames.push({
                        
                         'propertyType':row.propertyType,
+                        // 'propertyeditdate':date.toLocaleString(),
+                        'propertyeditdate':date.toLocaleDateString(),
                         'transactionType':row.transactionType,
                         'state':statetemp['stateName'],
                         'district':districttemp['districtName'],
@@ -115,7 +119,7 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th scope="col">Property ID</th>
                 <th scope="col">{propertyID}</th>
                 <th scope="col">Date</th>
-                <th scope="col"></th>
+                <th scope="col">{key.propertyeditdate}</th>
               </tr>
             </thead>
             <tbody>
