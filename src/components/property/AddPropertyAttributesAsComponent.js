@@ -776,7 +776,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       // propertyFeature3 : String,
       // propertyFeature4 : String
           try {
-            alert(newOrOld)
+            //alert(newOrOld)
            const response = await axios.post(
              addPropertyURL,
              {
@@ -1249,7 +1249,7 @@ useEffect(() => {
     if(propertybuilderflag && propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
-      alert(newOrOld)
+      //alert(newOrOld)
    
        axios.post(Url+"property/editproperty",
            {
