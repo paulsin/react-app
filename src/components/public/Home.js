@@ -748,7 +748,7 @@ const handleSelectedPropertyType = (e) => {
                   <label htmlFor=""><b>Sale/rent</b></label>
                 </div>
                 <div className="col-md-3">
-                  <Select  onChange={handleTransactionTypeSelection} id="selectboxcolor" options={transactionType}>
+                  <Select onChange={handleTransactionTypeSelection} id="selectboxcolor" options={transactionType}>
                     
                   </Select> 
                 </div>
@@ -778,7 +778,7 @@ const handleSelectedPropertyType = (e) => {
                     <option value="price_lowtohigh">Price Low to High</option>
                     <option value="price_hightolow">Price High to Low</option>
                   </select>  */}
-                   <Select onChange={(e) => setPricerange(e.value)} options={priceRangeSelect}></Select>
+                   <Select onChange={(e) => setPricerange(e.value)} options={priceRangeSelect} id="selectboxcolor"></Select>
 
                 </div>
               </div> 
@@ -838,7 +838,7 @@ const handleSelectedPropertyType = (e) => {
                     <option value="40lakhs">40 lakhs</option>
                     <option value="20lakhs">20 lakhs</option>
                   </select>  */}
-                    <Select onChange={(e) => setPricefrom(e.value)} options={pricefromSelect}></Select>
+                    <Select onChange={(e) => setPricefrom(e.value)} options={pricefromSelect} id="selectboxcolor"></Select>
                 </div>
                 <div className="col-md">
                   <label htmlFor=""><b>Price To</b></label>
@@ -849,7 +849,7 @@ const handleSelectedPropertyType = (e) => {
                     <option value="1crore">1 crore</option>
                     <option value="1crore_10lakhs">1 crore 10 lakhs</option>
                   </select>  */}
-                  <Select onChange={(e) => setPriceto(e.value)} options={pricetoSelect}></Select>
+                  <Select onChange={(e) => setPriceto(e.value)} options={pricetoSelect} id="selectboxcolor"></Select>
                 </div>
               </div>
               <br/>
@@ -858,7 +858,7 @@ const handleSelectedPropertyType = (e) => {
                   <label htmlFor=""><b>New/Old</b></label>
                 </div>
                 <div className="col-md-3">
-                  <Select onChange={(e) => setNewold(e.value)} options={neworOldType}></Select>
+                  <Select onChange={(e) => setNewold(e.value)} options={neworOldType} id="selectboxcolor"></Select>
                   {/* <select className="form-control" onChange={(e) => setNewold(e.target.value)} id="selectboxcolor">
                     <option value="">Select</option>
                     <option value="new">New</option>
