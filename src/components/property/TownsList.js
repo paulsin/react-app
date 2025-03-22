@@ -44,6 +44,7 @@ const TownsList= (props) => {
 
     const [stateNameInTable, setStateNameInTable] = useState();
     const [districtNameInTable, setDistrictNameInTable] = useState();
+     const [searchTerm, setSearchTerm] = useState("");
 
     const districtOptionsArray = [];
     const townOptionsArray = [];
@@ -256,12 +257,39 @@ const TownsList= (props) => {
     }, []);
 
     var slno =1;
+    const filteredData =  townOptions.filter(
+      (item) =>
+        
+        (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.townName && item.townName.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.townName && item.townName.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.townCode && item.townCode.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.townCode && item.townCode.toUpperCase().includes(searchTerm.toUpperCase()))
+);
 
     return(
 
     <div>
 
+      <div class="row mb-3 p-4">
+    
+        <div class="col-sm-4">
+        </div>
 
+        <div class="col-sm-4">
+          <h2>Towns</h2>
+        </div>
+        <div class="col-sm-4">   
+          <input
+            type="text"
+            placeholder="Search..."
+            className="p-2 border border-gray-300 rounded w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
       <table className="table table-striped" id="selectedTable">
         <thead>
           <tr>
@@ -297,7 +325,7 @@ const TownsList= (props) => {
           </tr>
         </thead>
         <tbody>
-          {townOptions.map(key =>  (
+          {filteredData.map(key =>  (
             <tr>
               <td>
                 {slno++}

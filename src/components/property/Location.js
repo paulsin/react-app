@@ -53,7 +53,7 @@ const Location = (props) => {
 
 
         <div class="container mt-3">
-            <h2>Location</h2>
+            {/* <h2>Location</h2> */}
             <br/>
 
             {selectedLocation}

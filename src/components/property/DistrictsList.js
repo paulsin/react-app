@@ -44,6 +44,7 @@ const DistrictsList= (props) => {
     const [updateButtonLabel, setUpdateButtonLabel] = useState("Update");
 
     const [stateNameInTable, setStateNameInTable] = useState();
+    const [searchTerm, setSearchTerm] = useState("");
 
     const districtOptionsArray = [];
 
@@ -223,6 +224,17 @@ const DistrictsList= (props) => {
       fetchStatesToGetStateNameFromID();
 
     }, []);
+    const filteredData =  districtOptions.filter(
+      (item) =>
+        
+        (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.districtName && item.districtName.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.districtName && item.districtName.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.districtCode && item.districtCode.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.districtCode && item.districtCode.toUpperCase().includes(searchTerm.toUpperCase()))
+);
+
 
     var slno =1;
 
@@ -230,7 +242,24 @@ const DistrictsList= (props) => {
 
     <div>
 
+      <div class="row mb-3 p-4">
+    
+        <div class="col-sm-4">
+        </div>
 
+        <div class="col-sm-4">
+          <h2>Districts</h2>
+        </div>
+        <div class="col-sm-4">   
+          <input
+            type="text"
+            placeholder="Search..."
+            className="p-2 border border-gray-300 rounded w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
       <table className="table table-striped" id="selectedTable">
         <thead>
           <tr>
@@ -263,7 +292,7 @@ const DistrictsList= (props) => {
           </tr>
         </thead>
         <tbody>
-          {districtOptions.map(key =>  (
+          {filteredData.map(key =>  (
             <tr>
               <td>
                 {slno++}

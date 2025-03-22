@@ -18,7 +18,7 @@ import { NoImage } from "../../constants/global";
 import Loading from "../common/Loading";
 import PropertyCustomerRequestForOwnerMobilenumberRequestHistory from "./PropertyCustomerRequestForOwnerMobilenumberRequestHistory";
 import PropertyCustomerRequestForOwnerPropertyIDRequestHistory from "./PropertyCustomerRequestForOwnerPropertyIDRequestHistory";
-
+import PaginationforPropertyCustomerRequest from "./PaginationforPropertyCustomerRequest";
 
 var newUrl = Url + 'location/state';
 var addDistrictUrl = Url + 'location/district';
@@ -44,6 +44,17 @@ const statusoptions = [
   const [originalData, setOriginalData] = useState([]);
   const [requestedStatusChange, setRequestedStatusChange] = useState("");
   const [requestedStatusID, setRequestedStatusID] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  let currentpageno=1;
+  let recordsperpageno=20;
+  const [currentPage, setCurrentPage] = useState(currentpageno);
+  const [recordsPerPage,setRecordsperpage]=useState(recordsperpageno);
+  const lastpostIndex=currentPage*recordsPerPage; 
+  //const lastpostIndex=currentPage * recordsPerPage > propertydetails.length ? propertydetails.length + 1 : currentPage * recordsPerPage; 
+    const firstpostIndex=lastpostIndex-recordsPerPage;
+  //alert(firstpostIndex);
+  //alert(lastpostIndex);
+    const currentposts=requestsTable.slice(firstpostIndex,lastpostIndex);
 
   const [selectedDIV, setSelectedDIV] = useState(<Loading/>);
    var param1=props.param1;
@@ -63,7 +74,8 @@ const statusoptions = [
     var classname;
     let temparrayfornames=[]
     requestdatas.map((data1)=>{
-     
+      //alert(data1.requestTime)
+      //const date = new Date(data1.requestTime);
       propertydatas.map((data2)=>{
       //   // alert(data2._id)
         if(data1.propertyID===data2._id){
@@ -75,6 +87,7 @@ const statusoptions = [
                 'slno':slno++,
                 '_id':data1._id,
                 'propertyID':data1.propertyID,
+                // 'requestDate':date.toLocaleDateString(),
                 'requestTime':data1.requestTime,
                 'requesterMobile':data1.requesterMobile,
                 'requesterName':data1.requesterName,
@@ -119,7 +132,38 @@ const statusoptions = [
       })
     })
   }
+  const formatDate = (timestamp) => {
+    const date = new Date(Number(timestamp)); // Ensure it's a number
+    return isNaN(date.getTime()) ? "Invalid Date" : 
+    date.toLocaleDateString();
+    //date.toISOString().split("T")[0]; 
+  };
+  const formatTime = (timestamp) => {
+    const date = new Date(Number(timestamp)); // Ensure it's a number
+    return isNaN(date.getTime()) ? "Invalid Time" : date.toLocaleTimeString();
+    //date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }); 
+  };
+  const filteredData =  currentposts.filter(
+    (item) =>
+      
+      (item.propertyID && item.propertyID.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.propertyID && item.propertyID.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.ownerContact && item.ownerContact.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.ownerContact && item.ownerContact.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.requesterMobile && item.requesterMobile.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requesterMobile && item.requesterMobile.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.requesterName && item.requesterName.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requesterName && item.requesterName.toUpperCase().includes(searchTerm.toUpperCase()))||
+      (item.requestAssessmentStatus && item.requestAssessmentStatus.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requestAssessmentStatus && item.requestAssessmentStatus.toUpperCase().includes(searchTerm.toUpperCase()))||
+      
+      formatDate(item.requestTime).includes(searchTerm) ||
+      formatTime(item.requestTime).toLowerCase().includes(searchTerm)||
+      formatTime(item.requestTime).toUpperCase().includes(searchTerm)
 
+        
+  
+  );
   const handleDelete =(_id)=>{
     //alert(_id)
     var dataafterdeletetemp=[];
@@ -195,16 +239,35 @@ const statusoptions = [
 })
    
  }
+
+
  
 
     return(
       <div>
 
 
-          <div>
-            <h2>Requests</h2>
-            <br/>
-            <table className="table table-striped" id="selectedTable">
+        <div>
+          <div class="row mb-3 p-4">
+    
+            <div class="col-sm-4">
+            </div>
+
+            <div class="col-sm-4">
+              <h2>Requests</h2>
+          
+            </div>
+            <div class="col-sm-4">   
+              <input
+                type="text"
+                placeholder="Search..."
+                className="p-2 border border-gray-300 rounded w-full"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+          <table className="table table-striped" id="selectedTable">
               <thead>
                 <tr>
                   <th>
@@ -221,7 +284,10 @@ const statusoptions = [
                     Message To Owner
                   </th>
                   <th>
-                      Request Time
+                    Request Date
+                  </th>
+                  <th>
+                    Request Time
                   </th>
                   <th>
                    Requester Mobile
@@ -247,7 +313,7 @@ const statusoptions = [
               </thead>
               <tbody>
               
-                {requestsTable.map(key =>  (
+                {filteredData.map(key =>  (
                   <tr>
                     <td>
                       {key.slno}
@@ -270,7 +336,10 @@ const statusoptions = [
                       <textarea id="textareainrequestermobile">{`Enquiry about your property from this number : ${key.requesterMobile}`}</textarea>
                     </td>
                     <td>
-                      {key.requestTime}
+                     {formatDate(key.requestTime)}
+                    </td>
+                    <td>
+                     {formatTime(key.requestTime)}
                     </td>
                     <td>
                       {key.requesterMobile}
@@ -337,9 +406,10 @@ const statusoptions = [
                 <td>
                 </td>
               </tbody>
-            </table>  
-
-          </div>
+          </table>  
+          <PaginationforPropertyCustomerRequest totalPosts={requestsTable.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
+            currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>
+        </div>
       </div>
     )
 };
