@@ -891,7 +891,7 @@ const handleSelectedPropertyType = (e) => {
           currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>
         
            
-            <div>
+          <div>
   
            {currentposts.map((key, index2) =>  (
             <>
@@ -1038,14 +1038,14 @@ const handleSelectedPropertyType = (e) => {
                     
                   </> }
 
-              </>
-              ))}
+            </>
+            ))}
 
             
-            </div> 
-            <div class ="pt-3 p-0">
+          </div> 
+          <div class ="pt-3 p-0">
             <Pagination totalPosts={propertydetails.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
-          currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>  </div>
+            currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/>  </div>
         </div>
    
         <Footer/>

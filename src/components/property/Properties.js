@@ -32,6 +32,7 @@ const Properties = (props) => {
 
     const [propertiesTable, setPropertiesTable] = useState([]);
     const [originalData, setOriginalData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     let currentpageno=1;
     let recordsperpageno=20;
     const [currentPage, setCurrentPage] = useState(currentpageno);
@@ -100,6 +101,18 @@ const Properties = (props) => {
       })
     }
 
+    const filteredData = currentposts.filter(
+      (item) =>
+        (item.propertyType && item.propertyType.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.propertyType && item.propertyType.toUpperCase().includes(searchTerm.toUpperCase())) ||
+        (item.state && item.state.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.state && item.state.toUpperCase().includes(searchTerm.toUpperCase())) ||
+        (item.district && item.district.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.district && item.district.toUpperCase().includes(searchTerm.toUpperCase())) ||
+        (item.town && item.town.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.town && item.town.toUpperCase().includes(searchTerm.toUpperCase())) 
+    
+    );
     function addImagesFunction(propertyID) {
       navigate('/frontend/addimages/'+propertyID);
     }
@@ -135,8 +148,25 @@ const Properties = (props) => {
 
         <Navbar />
           <div>
-            <h2>Properties</h2>
-            <br/>
+            <div class="row mb-3 p-4">
+    
+              <div class="col-sm-4">
+              </div>
+      
+              <div class="col-sm-4">
+              <h2>Properties</h2>
+            
+              </div>
+              <div class="col-sm-4">   
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="p-2 border border-gray-300 rounded w-full"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            </div>
             <table className="table table-striped" id="selectedTable">
               <thead>
                 <tr>
@@ -144,7 +174,7 @@ const Properties = (props) => {
                   Index
                   </th>
                   <th>
-                  ID
+                  Image
                   </th>
                   <th>
                   Property type
@@ -174,12 +204,13 @@ const Properties = (props) => {
               </thead>
               <tbody>
               
-                {currentposts.map(key =>  (
+                {filteredData.map(key =>  (
                   <tr>
                     <td>
                       {key.slno}
                     </td>
                     <td>
+                  
                       <img src={key.imageUrl} width="120px" height="80px" />
                        {/* {key._id} */}
                     </td>
@@ -211,7 +242,7 @@ const Properties = (props) => {
               </tbody>
             </table>  
             <PaginationforProperties totalPosts={propertiesTable.length} recordsPerPage={recordsPerPage} setCurrentPage={setCurrentPage} 
-          currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/> 
+            currentPage={currentPage} firstpostIndex={firstpostIndex} lastpostIndex={lastpostIndex}/> 
           </div>
       </div>
     )

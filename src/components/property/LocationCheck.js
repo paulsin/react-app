@@ -96,7 +96,7 @@ const LocationCheck = (props) => {
 
 
       <div>
-          <h2>Location</h2>
+          {/* <h2>Location</h2> */}
           <br/>
 
           {selectedDIV}

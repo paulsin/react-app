@@ -38,6 +38,7 @@ const StatesList= (props) => {
     const [modalAlertClass, setModalAlertClass] = useState("alert alert-info");
 
     const [updateButtonLabel, setUpdateButtonLabel] = useState("Update");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const stateOptionsArray = [];
 
@@ -184,12 +185,39 @@ const StatesList= (props) => {
     }, []);
 
     var slno =1;
+    const filteredData =  stateOptions.filter(
+      (item) =>
+        
+        (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.stateName && item.stateName.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.stateName && item.stateName.toUpperCase().includes(searchTerm.toUpperCase()))|| 
+        (item.stateCode && item.stateCode.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.stateCode && item.stateCode.toUpperCase().includes(searchTerm.toUpperCase()))
+);
 
     return(
 
     <div>
 
+      <div class="row mb-3 p-4">
+    
+        <div class="col-sm-4">
+        </div>
 
+        <div class="col-sm-4">
+          <h2>Location</h2>
+        </div>
+        <div class="col-sm-4">   
+          <input
+            type="text"
+            placeholder="Search..."
+            className="p-2 border border-gray-300 rounded w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
       <table className="table table-striped" id="selectedTable">
         <thead>
           <tr>
@@ -218,7 +246,7 @@ const StatesList= (props) => {
           </tr>
         </thead>
         <tbody>
-          {stateOptions.map(key =>  (
+          {filteredData.map(key =>  (
             <tr>
               <td>
                 {slno++}

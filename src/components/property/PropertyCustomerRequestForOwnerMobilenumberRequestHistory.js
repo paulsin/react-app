@@ -7,6 +7,7 @@ import axios from "axios";
 import { NoImage } from "../../constants/global";
 const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
   const [requestsTable, setRequestsTable] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
   var param2=props.param2;
   // alert(param2)
   var param1State = props.param1State;
@@ -60,7 +61,38 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
   useEffect(() => {
     fetchRequests();
   }, []);
+  const formatDate = (timestamp) => {
+    const date = new Date(Number(timestamp)); // Ensure it's a number
+    return isNaN(date.getTime()) ? "Invalid Date" : 
+    date.toLocaleDateString();
+    //date.toISOString().split("T")[0]; 
+  };
+  const formatTime = (timestamp) => {
+    const date = new Date(Number(timestamp)); // Ensure it's a number
+    return isNaN(date.getTime()) ? "Invalid Time" : date.toLocaleTimeString();
+    //date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }); 
+  };
+  const filteredData =  requestsTable.filter(
+    (item) =>
+      
+      (item.propertyID && item.propertyID.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.propertyID && item.propertyID.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.ownerContact && item.ownerContact.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.ownerContact && item.ownerContact.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.requesterMobile && item.requesterMobile.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requesterMobile && item.requesterMobile.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.requesterName && item.requesterName.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requesterName && item.requesterName.toUpperCase().includes(searchTerm.toUpperCase()))||
+      (item.requestAssessmentStatus && item.requestAssessmentStatus.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.requestAssessmentStatus && item.requestAssessmentStatus.toUpperCase().includes(searchTerm.toUpperCase()))||
+      
+      formatDate(item.requestTime).includes(searchTerm) ||
+      formatTime(item.requestTime).toLowerCase().includes(searchTerm)||
+      formatTime(item.requestTime).toUpperCase().includes(searchTerm)
 
+        
+  
+  );
   function backtoTable() {
     setParam1State("table");
   }
@@ -69,8 +101,26 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
   return (
    
     <div>
-      <h2>History of {propertyIdorMobileno}</h2>
-      <br/>
+      <div class="row mb-3 p-4">
+    
+        <div class="col-sm-4">
+        <h2>History of {propertyIdorMobileno}</h2>
+        </div>
+
+        <div class="col-sm-4">
+        
+      
+        </div>
+        <div class="col-sm-4">   
+          <input
+            type="text"
+            placeholder="Search..."
+            className="p-2 border border-gray-300 rounded w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
       <table className="table table-striped" id="selectedTable">
         <thead>
           <tr>
@@ -82,6 +132,9 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
             </th>
             <th>
               Property Image
+            </th>
+            <th>
+              Request Date
             </th>
             <th>
               Request Time
@@ -102,7 +155,7 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
         </thead>
         <tbody>
         
-          {requestsTable.map(key =>  (
+          {filteredData.map(key =>  (
             <tr>
               <td>
                 {key.slno}
@@ -114,10 +167,13 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
                 <td> 
                   <img src={key.imageUrl} width="120px" height="80px" />
                 </td>
-              <td>
-                {key.requestTime}
-              </td>
-              <td>
+                <td>
+                  {formatDate(key.requestTime)}
+                </td>
+                <td>
+                  {formatTime(key.requestTime)}
+                </td>
+                <td>
                 {key.requesterMobile}
      
               </td>
