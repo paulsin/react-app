@@ -51,11 +51,11 @@ const IndividualPropertyDetailsComponent = (props) => {
                         'diningHall':row.diningHall ===false ?"No":"Yes",
                         'kitchen':row.kitchen ===false ?"No":"Yes",
                         'workArea':row.workArea ===false ?"No":"Yes",
-                        'upperLivingArea':row.upperLivingArea ===true ?"No":"Yes",
-                        'balcony':row.balcony===true ?"No":"Yes",
-                        'openTerrace':row.openTerrace ===true ?"No":"Yes",
-                        'waterWell':row.waterWell ===true ?"No":"Yes",
-                        'waterConnection':row.waterConnection ===true ?"No":"Yes",
+                        'upperLivingArea':row.upperLivingArea ===false ?"No":"Yes",
+                        'balcony':row.balcony===false ?"No":"Yes",
+                        'openTerrace':row.openTerrace ===false ?"No":"Yes",
+                        'waterWell':row.waterWell ===false ?"No":"Yes",
+                        'waterConnection':row.waterConnection ===false ?"No":"Yes",
                         'feature1': row.propertyFeature1==="" ?"":row.propertyFeature1,
                         'feature2':row.propertyFeature2==="" ?"":row.propertyFeature2,
                         'feature3':row.propertyFeature3==="" ?"":row.propertyFeature3,
@@ -200,13 +200,18 @@ const IndividualPropertyDetailsComponent = (props) => {
                   Features
                 </th>
                 <td>
-                <ul>
+                  <h6>{key.feature1}</h6>
+                  <h6>{key.feature2}</h6>
+                  <h6>{key.feature3}</h6>
+                  <h6>{key.feature4}</h6>
+                {/* <ul>
                     <li>{key.feature1}</li>
                     <li>{key.feature2}</li>
                     <li>{key.feature3}</li>
                     <li>{key.feature4}</li>
-                  </ul>
+                  </ul> */}
                 </td>
+            
                 <td>
                 </td>
                 <td> 
