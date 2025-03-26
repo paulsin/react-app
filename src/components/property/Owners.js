@@ -146,7 +146,7 @@ const Owners = () => {
                     "id":ownerid,
                     "name":name,
                     "address":address,
-                    "ownerStatus":"Public"
+                   // "ownerStatus":"Public"
                 }
             )
             .then((res)=>{
@@ -329,14 +329,7 @@ const Owners = () => {
                                             
                                 </div>
                             </div>
-                            {/* <div class="row mb-3">
-                                <label for="inputPassword3" class="col-sm-2 col-form-label">Owner Status</label>
-
-                                <div class="col-sm-5">
-                                    <input type="text" className="form-control" value="Public" onChange={(e) =>  setOwnerstatus(e.target.value)}/>
-                                            
-                                </div>
-                            </div> */}
+                       
 
                                 <button type="submit" class="btn btn-success" onClick={handleSubmit}>Submit</button>
                             </div>
