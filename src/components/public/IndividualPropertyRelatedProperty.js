@@ -33,7 +33,7 @@ const IndividualPropertyRelatedProperty = (props) => {
             // alert(row._id)
             // data1.map(individualdata=>{
             
-            if(propertyID!==row._id && data1['propertyType']===row.propertyType && row.cost > lowcost && row.cost < highcost && data1['townID']===row.townID){
+            if(propertyID!==row._id && data1['propertyType']===row.propertyType && row.cost > lowcost && row.cost < highcost && data1['townID']===row.townID && row.propertyStatus!="Draft"){
                     data2.map(districttemp => {
                         if(districttemp['_id']===row.districtID){
                         data3.map(proptemp=>{
