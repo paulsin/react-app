@@ -25,6 +25,7 @@ const Owners = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [ownerid,setOwnerId]=useState("");
     const [name,setName]=useState("");
+    const [ownerStatus,setOwnerstatus]=useState("");
     const [address,setAddress]=useState("");
     const [alertClass, setAlertClass] = useState("alert alert-info");
     const [alertContent, setAlertContent] = useState("Enter the data for editing");
@@ -133,6 +134,7 @@ const Owners = () => {
               .then((res)=>{
                 setAddress(res.data.address);
                 setName(res.data.name);
+                setOwnerstatus(res.data.ownerStatus)
               })
       }
 
@@ -143,7 +145,8 @@ const Owners = () => {
                 {
                     "id":ownerid,
                     "name":name,
-                    "address":address
+                    "address":address,
+                    "ownerStatus":"Public"
                 }
             )
             .then((res)=>{
@@ -326,6 +329,14 @@ const Owners = () => {
                                             
                                 </div>
                             </div>
+                            {/* <div class="row mb-3">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Owner Status</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" className="form-control" value="Public" onChange={(e) =>  setOwnerstatus(e.target.value)}/>
+                                            
+                                </div>
+                            </div> */}
 
                                 <button type="submit" class="btn btn-success" onClick={handleSubmit}>Submit</button>
                             </div>
