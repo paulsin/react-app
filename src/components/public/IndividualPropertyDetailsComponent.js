@@ -199,11 +199,14 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th>
                   Features
                 </th>
-                <td>
+                <td id="individualpropertyfeatures">
+                 
                   <h6>{key.feature1}</h6>
                   <h6>{key.feature2}</h6>
                   <h6>{key.feature3}</h6>
                   <h6>{key.feature4}</h6>
+                 
+                 
                 {/* <ul>
                     <li>{key.feature1}</li>
                     <li>{key.feature2}</li>
