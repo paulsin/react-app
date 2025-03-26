@@ -281,32 +281,36 @@ const handleSelectedPropertyType = (e) => {
     let index=0
     let temparrayfornames=[]
       data.map(row => {
-        data1.map(districttemp => {
-          if(districttemp['_id']===row.districtID){
-            data2.map(proptemp=>{
-              if(proptemp['_id']===row.townID){
-                temparrayfornames.push({
-                      'index':index++,
-                      'propertyID' : row._id,
-                      'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
-                      'propertyType':row.propertyType,
-                      'transactiontype':row.transactionType,
-                      'town':proptemp['townName'],
-                      'district':districttemp['districtName'],
-                      'thumbnailimage':row.thumbnailImage,
-                      'thumbnailimagename':row.thumbnailImageName,
-                      'builtArea':row.builtArea,
-                      'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
-                      'transactionType':row.transactionType,
-                      // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
-                      // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
-                      'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
-                })
-            
-              }
-            })
-          }
-        })
+        if(row.propertyStatus!="Draft"){
+          data1.map(districttemp => {
+            if(districttemp['_id']===row.districtID){
+              data2.map(proptemp=>{
+                if(proptemp['_id']===row.townID){
+                  temparrayfornames.push({
+                        'index':index++,
+                        'propertyID' : row._id,
+                        'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
+                        'propertyType':row.propertyType,
+                        'transactiontype':row.transactionType,
+                        'town':proptemp['townName'],
+                        'district':districttemp['districtName'],
+                        'thumbnailimage':row.thumbnailImage,
+                        'thumbnailimagename':row.thumbnailImageName,
+                        'builtArea':row.builtArea,
+                        'price':row.cost===undefined?row.cost:toWords.convert(row.cost),
+                        'transactionType':row.transactionType,
+                        // 'status':rowData.status===true?"confirmed":"notconfirmed"}),
+                        // 'imageurl':Url+"assets/"+ row._id + "/" + row.thumbnailImageName,
+                        'imageurl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage
+                  })
+              
+                }
+              })
+            }
+          })
+
+        }
+        
       
       })
       setPropertydetails(temparrayfornames)

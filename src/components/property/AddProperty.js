@@ -591,7 +591,8 @@ const AddProperty = (props) => {
           // let batchNumberOptionsInitial = "";
           // alert("anu")
           res.data.map(data => {
-              if(data._id === selectedOwnerFunParam) {
+            //alert(data.ownerStatus)
+              if(data._id === selectedOwnerFunParam && data.ownerStatus!="Draft") {
                   // alert("hjjj")
               setOwnerselectedLabel(data.contactNumber + "   " + data.name);
               setOwnerselectedValue(data._id);

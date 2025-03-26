@@ -1315,10 +1315,14 @@ useEffect(() => {
             //alert(response.data[1].districtName);
 
             response.data.map(key => {
+              if(key.ownerStatus!="Draft"){
+                var testLabel = <div>{key.contactNumber}</div>
+                owneroptionsarray.push({ value: key._id, label: key.contactNumber + "   " + key.name});  
+
+              }
               // alert(key._id)
               //var testLabel = <div>{key.contactNumber}<br></br>{key.name}</div>;
-              var testLabel = <div>{key.contactNumber}</div>
-              owneroptionsarray.push({ value: key._id, label: key.contactNumber + "   " + key.name});           
+                  
             });
 
             // if(operation === "new") {

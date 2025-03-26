@@ -33,6 +33,7 @@ import IndividualProperty from './components/public/IndividualProperty';
 import AboutAs from './components/public/AboutAs';
 import ContactAs from './components/public/ContactAs';
 import PropertyCustomerRequestForOwnerCheck from './components/property/PropertyCustomerRequestForOwnerCheck';
+import OwnerCheck from './components/property/OwnerCheck';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/frontend/aboutas" element={<AboutAs />} />
           <Route path="/frontend/contactas" element={<ContactAs />} />
           <Route path='/frontend/propertyCustomerRequestForOwner/:param1/:param2' element={<PropertyCustomerRequestForOwnerCheck />} />
+          <Route path='/frontend/listOwners' element={<OwnerCheck/>} />
 
         </Routes>
       </BrowserRouter>

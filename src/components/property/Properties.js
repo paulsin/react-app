@@ -50,6 +50,14 @@ const Properties = (props) => {
       var slno =1;
       let temparrayfornames=[]
       row.map(row => {
+        if(row.propertyStatus==="Draft"){
+      
+          var setPropertyClass="btn btn-danger mr-2"
+         }
+         else{
+        
+           var setPropertyClass="btn btn-success mr-2"
+         }
         statedata.map(statetemp=>{
           if(statetemp['_id']===row.stateID){
             districtdata.map(districttemp=>{
@@ -63,7 +71,10 @@ const Properties = (props) => {
                       'imageUrl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage,
                       'state':statetemp['stateName'],
                       'district':districttemp['districtName'],
-                      'town':towntemp['townName']
+                      'town':towntemp['townName'],
+                      'propertyStatus':row.propertyStatus,
+                      'propertystatusclass':setPropertyClass
+                      
                     })
                   }
                 })
@@ -110,7 +121,9 @@ const Properties = (props) => {
         (item.district && item.district.toLowerCase().includes(searchTerm.toLowerCase())) || 
         (item.district && item.district.toUpperCase().includes(searchTerm.toUpperCase())) ||
         (item.town && item.town.toLowerCase().includes(searchTerm.toLowerCase())) || 
-        (item.town && item.town.toUpperCase().includes(searchTerm.toUpperCase())) 
+        (item.town && item.town.toUpperCase().includes(searchTerm.toUpperCase())) ||
+        (item.propertyStatus && item.propertyStatus.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.propertyStatus && item.propertyStatus.toUpperCase().includes(searchTerm.toUpperCase())) 
     
     );
     function addImagesFunction(propertyID) {
@@ -190,7 +203,9 @@ const Properties = (props) => {
                   <th>
                     Town
                   </th>
-
+                  <th>
+                   Property Status
+                  </th>
                   <th>
                     Delete
                   </th>
@@ -225,6 +240,9 @@ const Properties = (props) => {
                     </td>
                     <td>
                       {key.town}
+                    </td>
+                    <td>
+                     <button className={key.propertystatusclass}>{key.propertyStatus}</button> 
                     </td>
                     <td>
                     <button className="btn btn-danger" onClick={()=>handleDelete(key._id)}>Delete</button>
