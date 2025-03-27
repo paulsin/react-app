@@ -1,13 +1,13 @@
 #searchpropclass{
     /* background-color:		rgba(216, 197, 197, 0.904); */
-    background-color:		rgba(225, 236, 233, 0.904);
+    background-color:		rgba(224, 235, 238, 0.904);
     /* color:rgb(45, 3, 49); */
-    color:#1e7169;
+    color:#26617c;
   
   }
 #searchbuttoninhome{
    /* background-color: rgb(77, 4, 4); */
-   background-color: #1e7169;
+   background-color: #246583;
     color:rgb(238, 233, 233);
     font-weight: bold;
     
@@ -25,19 +25,19 @@
   
 }
 #addimagecaption{
-  color:#1e7169;
+  color:#26617c;
 }
 #propertiescontainer{
   display: grid;
   grid-template-columns: auto auto;
-  background-color:#1e7169;
+  background-color:#26617c;
   padding: 10px;
   border-radius: 10px;
 }
 #properties1{
   /* background-color:  rgb(87, 116, 94); */
-  background-color:  rgb(129, 194, 178);
-  border: 1px solid #1e7169;
+  background-color:  #a3c4d3;
+  border: 1px solid #26617c;
   color:rgb(0, 0, 0);
   padding: 8px;
   font-size: 15px;
@@ -46,13 +46,13 @@
 #properties2{
   background-color:white;
   color:black;
-  border: 1px solid #1e7169;
+  border: 1px solid #26617c;
   padding: 8px;
   font-size: 15px;
   text-align: center;
 }
 .footer{
-  background-color:#1e7169;
+  background-color:#26617c;
   color:white;
 
 }
@@ -71,7 +71,7 @@
  
 }
 #palink{
-  color:#1e7169;
+  color:#26617c;
   background-color:white;
   font-weight: bold;
   border-radius: 20px; 
@@ -79,15 +79,15 @@
 /* .active .page-link{ background: rgb(77, 4, 4) !important } */
 
 #pagination-link{
-  color:#1e7169;
+  color:#26617c;
   background-color:white;
   font-weight: bold;
 } 
-.active .page-link{ background: #1e7169 !important }  
+.active .page-link{ background: #26617c !important }  
 .active .page-link{ color:white  !important }  
 
 #borderimage{
-  border: 1px solid #1e7169;; /* Gray border */
+  border: 1px solid #26617c;/* Gray border */
   border-radius: 4px;
   height:273.5px;
   width:100%;
@@ -128,7 +128,7 @@
 .qrcodelabel{
   /* border: rgb(65, 18, 18) 4px solid; */
  
- color:#1e7169;;
+ color:#26617c;
   /* width:6px; */
 }
 #textareainrequestpage{
@@ -145,4 +145,10 @@
 }
 #individualpropertyfeatures{
   text-align:left;
+}
+.center-container{
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  /* height: 100vh;  */
 }

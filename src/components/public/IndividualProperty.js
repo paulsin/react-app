@@ -22,7 +22,7 @@ import { json, useNavigate, useParams } from "react-router-dom";
 import IndividualPropertyImagesasComponent from "./IndividualPropertyImagesasComponent";
 import IndividualPropertyDetailsComponent from "./IndividualPropertyDetailsComponent";
 import IndividualPropertymessageComponent from "./IndividualPropertymessageComponent";
-
+import IndividualPropertyGoogleMap from "./IndividualPropertyGoogleMap";
 import IndividualPropertyRelatedProperty from "./IndividualPropertyRelatedProperty";
 var propertyImagesurl=Url+'propertyImages/';
 
@@ -44,7 +44,7 @@ function IndividualProperty() {
         <IndividualPropertyImagesasComponent propertyID={propertyID}/>
        <IndividualPropertyDetailsComponent propertyID={propertyID}/>
         <IndividualPropertymessageComponent propertyID={propertyID}/>
-        
+        {/* <IndividualPropertyGoogleMap propertyID={propertyID}/> */}
         <IndividualPropertyRelatedProperty propertyID={propertyID}/>
            
         <Footer/>

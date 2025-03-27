@@ -17,7 +17,7 @@ const IndividualPropertymessageComponent = (props) => {
     const[message,setMessage]=useState("");
     const [alertrequestclass, setAlertRequestClass] = useState("alert alert-info");
     const [alertrequestContent, setAlertRequestContent] = useState("Enter the Whatsapp number and name to get contact details of owner");
-     const[mapUrl,setMapUrl]=useState([]);
+
 
     const submitOwnerdata = async (e) => {
         var phoneFlag=true;
@@ -46,40 +46,20 @@ const IndividualPropertymessageComponent = (props) => {
         }
     }
 
-    function fetchProperties(){
-        axios
-        .get(Url+"property/individualProperty/"+propertyID,
-        )
-        .then((res)=>{
-        //alert(res.data.googleMap)
-          setMapUrl(res.data.googleMap);
-        })
-    } 
-    useEffect(() => {
-        fetchProperties(); 
-    }, []);
+
     var propertyID=props.propertyID
     var headingwidget=<h3><b>Send Message</b></h3>       
     var ownercontactwidget=  <PhoneInput className="number"  value={phonenumber} onChange={setPhonenumber}/>
     var namewidget=<input type="text" class="form-control" required onChange={(e) =>  setOwnername(e.target.value)}/> 
     var messagewidget=<textarea class="form-control" onChange={(e) =>  setMessage(e.target.value)} /> 
     var ownerdatasavebuttonwidget=<button type="submit" class="btn btn-danger" onClick={submitOwnerdata}>Request Owner Details</button>  
-    var googlemapwidget=
-  
-    <iframe
-        src={mapUrl}
-        width="600"
-        height="400"
-        style={{ border: 1 }}
-        allowFullScreen
-        loading="lazy"
-    ></iframe>
+
   return (
     <>
 
-        <div class="container p-2 ">
-            <div class="row mb-1">
-                <div class="col-sm-5 p-2" id="sendmessagecontainer">
+        <div class="center-container p-2">
+            {/* <div class="row mb-1"> */}
+                <div class="col-sm-8 p-2" id="sendmessagecontainer">
                     {headingwidget}
                     <br/>
 
@@ -108,10 +88,10 @@ const IndividualPropertymessageComponent = (props) => {
                     {ownerdatasavebuttonwidget}
                 </div>
 
-                <div class="col-sm-5 offset-1 p-0 pl-1 text-center" style={{margin: "auto"}}>
+                {/* <div class="col-sm-5 offset-1 p-0 pl-1 text-center" style={{margin: "auto"}}>
                     {googlemapwidget} 
-                </div>
-            </div>
+                </div> */}
+            {/* </div> */}
         </div>   
   
 

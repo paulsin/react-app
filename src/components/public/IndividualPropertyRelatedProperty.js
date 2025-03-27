@@ -40,6 +40,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                             if(proptemp['_id']===row.townID){
                             temparrayfornames.push({
                                     'index':index++,
+                                    'id':row.id,
                                     'propertyID' : row._id,
                                     'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
                                     'propertyType':row.propertyType,
@@ -119,7 +120,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                          <div class="row row-cols-2 pt-2" >
                        
                              <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                             <div class="col" id="properties2">{currentposts[index2].district}</div>
+                             <div class="col" id="properties2">{currentposts[index2].id}</div>
                              <div class="col" id="properties2">{currentposts[index2].town}</div>
                              <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                              <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -138,7 +139,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                          <div class="row row-cols-2 pt-2" >
                        
                              <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
-                             <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
+                             <div class="col" id="properties2">{currentposts[index2 + 1].id}</div>
                              <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                              <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                              <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
@@ -156,7 +157,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                          <div class="row row-cols-2 pt-2" >
                        
                          <div class="col" id="properties1">{currentposts[index2 + 2].propertyType}</div>
-                             <div class="col" id="properties2">{currentposts[index2 + 2].district}</div>
+                             <div class="col" id="properties2">{currentposts[index2 + 2].id}</div>
                              <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
                              <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}  sq ft</div>
                              <div class="col" id="properties1">{currentposts[index2 + 2].transactionType}</div>
@@ -179,7 +180,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                                  <div class="row row-cols-2 pt-2" >
                                
                                  <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                                 <div class="col" id="properties2">{currentposts[index2].district}</div>
+                                 <div class="col" id="properties2">{currentposts[index2].id}</div>
                                  <div class="col" id="properties2">{currentposts[index2].town}</div>
                                  <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                                  <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -209,7 +210,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                                                              <div class="row row-cols-2 pt-2" >
                                                            
                                                                <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                                                               <div class="col" id="properties2">{currentposts[index2].district}</div>
+                                                               <div class="col" id="properties2">{currentposts[index2].id}</div>
                                                                <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                                <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                                                                <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -228,7 +229,7 @@ const IndividualPropertyRelatedProperty = (props) => {
                                                                <div class="row row-cols-2 pt-2" >
                                                              
                                                                  <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
-                                                                 <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
+                                                                 <div class="col" id="properties2">{currentposts[index2 + 1].id}</div>
                                                                  <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                                                                  <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                                                                  <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>

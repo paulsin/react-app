@@ -62,7 +62,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
    const [alertownerclass, setAlertOwnerClass] = useState("alert alert-info");
   const [alertOwnerContent, setAlertOwnerContent] = useState("Enter the owner details");
   const [loggedUserIDforPropertySubmission, setLoggedUserIDforPropertySubmission] = useState("");
-
+  //const [selectedOption, setSelectedOption] = useState(propertyStatus[1]); 
     
 
   var owneroptionsarray=[];
@@ -76,7 +76,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       
     }
     const handlePropertyStatusSelection = (e) => {
-      // alert(e.value)
+      //alert(e.value)
       setPropertystatus(e.value); 
       
     }
@@ -776,7 +776,7 @@ const AddPropertyAttributesAsComponent = ({setPropertyTypeSelected,propertyTypeS
       // propertyFeature3 : String,
       // propertyFeature4 : String
           try {
-            //alert(newOrOld)
+            // alert(propertyStatus)
            const response = await axios.post(
              addPropertyURL,
              {
@@ -1249,10 +1249,11 @@ useEffect(() => {
     if(propertybuilderflag && propertyfeature1flag && propertytitleflag &&propertyAttrbutesFlag && townNameSelectedIDFlag && districtNameFlag && stateNameSelectedIDFlag && transactionTypeSelectedFlag && propertyTypeSelectedFlag
       && costFlag && localityFlag && facingPolarityFlag
      ){
-      //alert(newOrOld)
+  
    
        axios.post(Url+"property/editproperty",
            {
+             
                "propertyID":uniqueID,
                "propertyType":propertyTypeSelected,
                "transactionType":transactionTypeSelected,
@@ -1351,6 +1352,7 @@ useEffect(() => {
         //   onChange={handleNeworoldSelection}
         //   disabled={isNeworOldDisabled}
         // />
+        
         var neworoldwidget= <select disabled={isNeworOldDisabled} className="form-control" onChange={(e) => setNeworOld(e.target.value)}>
           <option value="">New/Old</option>
           <option value="New">New</option>
@@ -1402,7 +1404,7 @@ useEffect(() => {
         var propertystatusWidget=<Select
         options={PropertyStatus}
         onChange={handlePropertyStatusSelection}
-        defaultValue={{ label: "Public", value: "Public" }}
+        value={propertyStatus}
       />
       var propertycountlabelwidget= <label for="inputPassword3" class="col-sm-2 col-form-label">Number of Properties </label>
       var propertycountwidget=<h6>{numbercount} </h6>
@@ -1426,6 +1428,7 @@ useEffect(() => {
       //   disabled={isNeworOldDisabled}
       //   value={{ value: newOrOld, label: newOrOld }}
       // /> 
+     
       var neworoldwidget= <select value={newOrOld} disabled={isNeworOldDisabled} className="form-control" onChange={(e) => setNeworOld(e.target.value)}>
           <option value="">New/Old</option>
           <option value="New">New</option>
@@ -1494,6 +1497,8 @@ useEffect(() => {
     }
   return (
   <>
+     
+
    <div class="row mb-3">
       <label for="inputPassword3" class="col-sm-2 col-form-label">Facing</label>
 
