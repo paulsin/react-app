@@ -44,7 +44,7 @@ function IndividualProperty() {
         <IndividualPropertyImagesasComponent propertyID={propertyID}/>
        <IndividualPropertyDetailsComponent propertyID={propertyID}/>
         <IndividualPropertymessageComponent propertyID={propertyID}/>
-        {/* <IndividualPropertyGoogleMap propertyID={propertyID}/> */}
+        <IndividualPropertyGoogleMap propertyID={propertyID}/>
         <IndividualPropertyRelatedProperty propertyID={propertyID}/>
            
         <Footer/>
