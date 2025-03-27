@@ -67,6 +67,7 @@ const Properties = (props) => {
                     temparrayfornames.push({
                       'slno':slno++,
                       '_id':row._id,
+                      'id':row.id,
                       'propertyType':row.propertyType,
                       'imageUrl':row.thumbnailImageName ? Url+"assets/"+ row._id + "/" + row.thumbnailImageName : NoImage,
                       'state':statetemp['stateName'],
@@ -184,7 +185,7 @@ const Properties = (props) => {
               <thead>
                 <tr>
                   <th>
-                  Index
+                  ID
                   </th>
                   <th>
                   Image
@@ -220,9 +221,9 @@ const Properties = (props) => {
               <tbody>
               
                 {filteredData.map(key =>  (
-                  <tr>
+                  <tr >
                     <td>
-                      {key.slno}
+                      {key.id}
                     </td>
                     <td>
                   

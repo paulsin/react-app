@@ -9,6 +9,7 @@ import { json, useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import { propertyTypes } from "../../constants/global";
 import { transactionType } from "../../constants/global";
+import { PropertyStatus } from "../../constants/global";
 import data from "../../json/places.json"
 import { ProgressBar } from "react-bootstrap";
 import Compressor from 'compressorjs';
@@ -77,6 +78,7 @@ const AddProperty = (props) => {
     const [progressBar, setProgressBar] = useState(0);
     const presetKey = "";
     const [files, setFiles] = useState([]);
+
    
 
      const [stateOptionsNew,setStateoptionsnew]=useState("");   
@@ -149,8 +151,9 @@ const AddProperty = (props) => {
            const[ownerSelectedValue,setOwnerselectedValue]=useState("");
            const[ownerSelectedLabel,setOwnerselectedLabel]=useState("");
 
-           const [propertyStatus,setPropertystatus]=useState("");
+           const [propertyStatus,setPropertystatus]=useState("Public");
            const[numbercount,setNumberCount]=useState("")
+     
 
     const stateOptionsArray = [];
     const districtOptionsArray = [];
@@ -445,6 +448,7 @@ const AddProperty = (props) => {
       axios.get(Url+"property/individualProperty/"+uniqueID)
       .then((res)=>{
         // alert(res.data.newOrOld)
+          
           setTransactionTypeSelected(res.data.transactionType)
           setPropertyTypeSelected(res.data.propertyType)
           setSelectedStateFunction(res.data.stateID)
@@ -935,7 +939,7 @@ useEffect(() => {
             propertyfeature3={propertyfeature3} propertyfeature4={propertyfeature4} setGooglemap={setGooglemap} setVideolink={setVideolink} setPropertyTitle={setPropertyTitle} setPropertyFeature1={setPropertyFeature1}
             setPropertyFeature2={setPropertyFeature2} setPropertyFeature3={setPropertyFeature3} setPropertyFeature4={setPropertyFeature4} owneroptions={owneroptions}
             ownerSelectedLabel={ownerSelectedLabel} ownerSelectedValue={ownerSelectedValue} setOwnerSelectedLabel={setOwnerselectedLabel} setOwnerSelectedValue={setOwnerselectedValue} setOwneroptions={setOwneroptions}
-            propertyStatus={propertyStatus} setPropertystatus={setPropertystatus} numbercount={numbercount} setNumberCount={setNumberCount}
+            propertyStatus={propertyStatus} setPropertystatus={setPropertystatus} numbercount={numbercount} setNumberCount={setNumberCount} 
             />  
 
           

@@ -288,6 +288,7 @@ const handleSelectedPropertyType = (e) => {
                 if(proptemp['_id']===row.townID){
                   temparrayfornames.push({
                         'index':index++,
+                        'id':row.id,
                         'propertyID' : row._id,
                         'individualPropertyUrl' : "/frontend/individualProperty/"+row._id,
                         'propertyType':row.propertyType,
@@ -349,6 +350,7 @@ const handleSelectedPropertyType = (e) => {
     data.map(row => {
       operatearray.push({
                         'propertyID' : row._id,
+                        'id':row.id,
                         'stateID':row.stateID,
                         'districtID':row.districtID,
                         'townID':row.townID,
@@ -372,6 +374,7 @@ const handleSelectedPropertyType = (e) => {
         if(row1.transactionType===transdata){
                   temparray.push({
                          'propertyID':row1.propertyID,
+                         'id':row1.id,
                           'individualPropertyUrl':row1.individualPropertyUrl,
                           'propertyType':row1.propertyType,
                           'transactionType':row1.transactionType,
@@ -400,6 +403,7 @@ const handleSelectedPropertyType = (e) => {
         if(row2.newOrOld === neworolddata){
                   temparray.push({
                           'propertyID':row2.propertyID,
+                          'id':row2.id,
                           'individualPropertyUrl':row2.individualPropertyUrl,
                           'propertyType':row2.propertyType,
                           'transactionType':row2.transactionType,
@@ -429,6 +433,7 @@ const handleSelectedPropertyType = (e) => {
         if(row3.cost > pricefromdata && row3.cost < pricetodata){
                   temparray.push({
                          'propertyID':row3.propertyID,
+                         'id':row3.id,
                           'individualPropertyUrl':row3.individualPropertyUrl,
                           'propertyType':row3.propertyType,
                           'transactionType':row3.transactionType,
@@ -460,6 +465,7 @@ const handleSelectedPropertyType = (e) => {
           if(key.value === row4.propertyType){
                         temparray.push({
                                 'propertyID':row4.propertyID,
+                                'id':row4.id,
                                 'individualPropertyUrl':row4.individualPropertyUrl,
                                 'propertyType':row4.propertyType,
                                 'transactionType':row4.transactionType,
@@ -492,6 +498,7 @@ const handleSelectedPropertyType = (e) => {
           if(key1.value === row5.stateID){
                         temparray.push({
                                 'propertyID':row5.propertyID,
+                                'id':row5.id,
                                 'individualPropertyUrl':row5.individualPropertyUrl,
                                 'propertyType':row5.propertyType,
                                 'transactionType':row5.transactionType,
@@ -524,6 +531,7 @@ const handleSelectedPropertyType = (e) => {
           if(key2.value === row6.districtID){
                         temparray.push({
                                 'propertyID':row6.propertyID,
+                                'id':row6.id,
                                 'individualPropertyUrl':row6.individualPropertyUrl,
                                 'propertyType':row6.propertyType,
                                 'transactionType':row6.transactionType,
@@ -556,6 +564,7 @@ const handleSelectedPropertyType = (e) => {
           if(key3.value === row7.townID){
                         temparray.push({
                                 'propertyID':row7.propertyID,
+                                'id':row7.id,
                                 'individualPropertyUrl':row7.individualPropertyUrl,
                                 'propertyType':row7.propertyType,
                                 'transactionType':row7.transactionType,
@@ -583,6 +592,7 @@ const handleSelectedPropertyType = (e) => {
       operatearray.map(row8 => {
                   temparray.push({  
                     'propertyID':row8.propertyID,
+                    'id':row8.id,
                     'individualPropertyUrl':row8.individualPropertyUrl,
                     'propertyType':row8.propertyType,
                     'transactionType':row8.transactionType,
@@ -627,6 +637,7 @@ const handleSelectedPropertyType = (e) => {
             if(proptemp['_id']===row9.townID){
               temparray.push({  
                 'propertyID':row9.propertyID,
+                'id':row9.id,
                 'individualPropertyUrl':row9.individualPropertyUrl,
                 'propertyType':row9.propertyType,
                 'transactionType':row9.transactionType,
@@ -909,7 +920,7 @@ const handleSelectedPropertyType = (e) => {
                       <div class="row row-cols-2 pt-2" >
                     
                           <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                          <div class="col" id="properties2">{currentposts[index2].district}</div>
+                          <div class="col" id="properties2">{currentposts[index2].id}</div>
                           <div class="col" id="properties2">{currentposts[index2].town}</div>
                           <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -928,7 +939,7 @@ const handleSelectedPropertyType = (e) => {
                       <div class="row row-cols-2 pt-2" >
                     
                           <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 1].id}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                           <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
@@ -946,7 +957,7 @@ const handleSelectedPropertyType = (e) => {
                       <div class="row row-cols-2 pt-2" >
                     
                       <div class="col" id="properties1">{currentposts[index2 + 2].propertyType}</div>
-                          <div class="col" id="properties2">{currentposts[index2 + 2].district}</div>
+                          <div class="col" id="properties2">{currentposts[index2 + 2].id}</div>
                           <div class="col" id="properties2">{currentposts[index2 + 2].town}</div>
                           <div class="col" id="properties1">{currentposts[index2 + 2].builtArea}  sq ft</div>
                           <div class="col" id="properties1">{currentposts[index2 + 2].transactionType}</div>
@@ -969,7 +980,7 @@ const handleSelectedPropertyType = (e) => {
                               <div class="row row-cols-2 pt-2" >
                             
                               <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                              <div class="col" id="properties2">{currentposts[index2].district}</div>
+                              <div class="col" id="properties2">{currentposts[index2].id}</div>
                               <div class="col" id="properties2">{currentposts[index2].town}</div>
                               <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                               <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -999,7 +1010,7 @@ const handleSelectedPropertyType = (e) => {
                                                           <div class="row row-cols-2 pt-2" >
                                                         
                                                             <div class="col" id="properties1">{currentposts[index2].propertyType}</div>
-                                                            <div class="col" id="properties2">{currentposts[index2].district}</div>
+                                                            <div class="col" id="properties2">{currentposts[index2].id}</div>
                                                             <div class="col" id="properties2">{currentposts[index2].town}</div>
                                                             <div class="col" id="properties1">{currentposts[index2].builtArea} sq ft</div>
                                                             <div class="col" id="properties1">{currentposts[index2].transactionType}</div>
@@ -1018,7 +1029,7 @@ const handleSelectedPropertyType = (e) => {
                                                             <div class="row row-cols-2 pt-2" >
                                                           
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].propertyType}</div>
-                                                              <div class="col" id="properties2">{currentposts[index2 + 1].district}</div>
+                                                              <div class="col" id="properties2">{currentposts[index2 + 1].id}</div>
                                                               <div class="col" id="properties2">{currentposts[index2 + 1].town}</div>
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].builtArea} sq ft</div>
                                                               <div class="col" id="properties1">{currentposts[index2 + 1].transactionType}</div>
