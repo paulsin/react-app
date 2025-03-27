@@ -184,6 +184,9 @@ const Properties = (props) => {
             <table className="table table-striped" id="selectedTable">
               <thead>
                 <tr>
+                <th>
+                  Index
+                  </th>
                   <th>
                   ID
                   </th>
@@ -222,6 +225,9 @@ const Properties = (props) => {
               
                 {filteredData.map(key =>  (
                   <tr >
+                    <td>
+                      {key.slno}
+                    </td>
                     <td>
                       {key.id}
                     </td>
