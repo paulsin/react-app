@@ -152,3 +152,29 @@
   align-items: center; /* Centers vertically */
   /* height: 100vh;  */
 }
+ /* .features-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+
+  text-align: center;
+} */
+.features {
+  /* background: #f5f5f5; */
+  /* font-size: 2vw; */
+  font-size: 14px;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1;
+  word-wrap: break-word;
+
+
+}
+.textarea-features {
+  width: 850px; /* Increase width */
+  height: 50px; /* Increase height */
+  font-size: 16px; /* Increase text size */
+  padding: 10px;
+  border-radius: 8px;
+}

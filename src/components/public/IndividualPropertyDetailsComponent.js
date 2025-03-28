@@ -31,6 +31,7 @@ const IndividualPropertyDetailsComponent = (props) => {
                       temparrayfornames.push({
                        
                         'propertyType':row.propertyType,
+                        'id':row.id,
                         // 'propertyeditdate':date.toLocaleString(),
                         'propertyeditdate':date.toLocaleDateString(),
                         'transactionType':row.transactionType,
@@ -109,6 +110,7 @@ const IndividualPropertyDetailsComponent = (props) => {
     }, []);
   
   return (
+    <>
     <div class="container  text-center p-1" id="properties_container ">
       {propertydetails.map(key=>  
         <div class="table-responsive">
@@ -116,8 +118,8 @@ const IndividualPropertyDetailsComponent = (props) => {
           
             <thead class="thead-dark">
               <tr>
-                <th scope="col">Property ID</th>
-                <th scope="col">{propertyID}</th>
+                <th scope="col">ID</th>
+                <th scope="col">{key.id}</th>
                 <th scope="col">Date</th>
                 <th scope="col">{key.propertyeditdate}</th>
               </tr>
@@ -195,36 +197,75 @@ const IndividualPropertyDetailsComponent = (props) => {
                 <th>waterConnection</th>
                 <td>{key.waterConnection}</td>
               </tr>
-              <tr>
-                <th>
-                  Features
-                </th>
-                <td id="individualpropertyfeatures">
-                 
-                  <h6>{key.feature1}</h6>
-                  <h6>{key.feature2}</h6>
-                  <h6>{key.feature3}</h6>
-                  <h6>{key.feature4}</h6>
-                 
-                 
-                {/* <ul>
-                    <li>{key.feature1}</li>
-                    <li>{key.feature2}</li>
-                    <li>{key.feature3}</li>
-                    <li>{key.feature4}</li>
-                  </ul> */}
-                </td>
-            
-                <td>
-                </td>
-                <td> 
-                </td>  
-              </tr>  
+           
+              
             </tbody>
-          </table>
+          </table> 
+       
         </div>
+
       )}  
+
     </div>
+    
+      <div class="features-container p-0" >
+      
+      {propertydetails.map(key=> 
+      <div>
+        <h6 className="features">{key.feature1}</h6>
+        <h6 className="features">{key.feature2}</h6>
+        <h6  className="features">{key.feature3}</h6>
+        <h6  className="features">{key.feature4}</h6>
+         {/* <div class="row mb-3">
+         <h6 for="inputPassword3" class="col-sm-2 col-form-label">Features</h6>
+   
+         <div class="col-sm-8">
+          <textarea className="textarea-features" value={key.feature1} disabled={true}> </textarea>
+        
+                    
+         </div>
+       </div>
+        <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label"></label>
+  
+        <div class="col-sm-5">
+        <textarea className="textarea-features" value={key.feature2} disabled={true}> </textarea>
+                   
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label"></label>
+  
+        <div class="col-sm-5">
+        <textarea className="textarea-features" value={key.feature3} disabled={true}> </textarea>
+                   
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="inputPassword3" class="col-sm-2 col-form-label"></label>
+  
+        <div class="col-sm-5">
+        <textarea className="textarea-features" value={key.feature4} disabled={true}> </textarea>
+                   
+        </div>
+      </div> */}
+      </div>
+       
+
+      // <p>
+      // <h6 className="features">{key.feature1}</h6>
+      //  <h6 className="features">{key.feature2}</h6>
+      //  <p className="features">{key.feature3}</p>
+      //  <p className="features">{key.feature4}</p>
+      // </p>
+   
+      
+   
+  
+       
+)}
+</div>
+</>
 
 
 
@@ -285,6 +326,7 @@ const IndividualPropertyDetailsComponent = (props) => {
     //     </div>
     //   )}  
     // </div>
+    
   )
 }
 

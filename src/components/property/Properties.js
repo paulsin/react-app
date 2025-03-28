@@ -115,6 +115,8 @@ const Properties = (props) => {
 
     const filteredData = currentposts.filter(
       (item) =>
+        (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+        (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase())) ||
         (item.propertyType && item.propertyType.toLowerCase().includes(searchTerm.toLowerCase())) || 
         (item.propertyType && item.propertyType.toUpperCase().includes(searchTerm.toUpperCase())) ||
         (item.state && item.state.toLowerCase().includes(searchTerm.toLowerCase())) ||

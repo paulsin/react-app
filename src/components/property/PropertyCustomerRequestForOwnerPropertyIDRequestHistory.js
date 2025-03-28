@@ -7,6 +7,8 @@ import { NoImage } from "../../constants/global";
 const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
   const [requestsTable, setRequestsTable] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [id, setId] = useState("");
+ 
   var param2=props.param2;
   var param1State = props.param1State;
   var setParam1State = props.setParam1State;
@@ -25,6 +27,7 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
           if(data1.propertyID===data2._id){
             temparrayfornames.push({
               'slno':slno++,
+              'id':data2.id,
               'propertyID':data1.propertyID,
               'requestTime':data1.requestTime,
               'requesterMobile':data1.requesterMobile,
@@ -32,6 +35,8 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
               'requesterMessage':data1.requesterMessage,
               'imageUrl':data2.thumbnailImageName ? Url+"assets/"+ data2._id + "/" + data2.thumbnailImageName : NoImage,
             })
+            setId(data2.id)
+
           }
         })
       }
@@ -72,8 +77,8 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
   const filteredData =  requestsTable.filter(
     (item) =>
       
-      (item.propertyID && item.propertyID.toLowerCase().includes(searchTerm.toLowerCase())) || 
-      (item.propertyID && item.propertyID.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.ownerContact && item.ownerContact.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.ownerContact && item.ownerContact.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.requesterMobile && item.requesterMobile.toLowerCase().includes(searchTerm.toLowerCase())) || 
@@ -98,11 +103,11 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
 
           <div>
             <div class="row mb-3 p-4">
-    
+        
               <div class="col-sm-4">
-              <h2>History of {propertyIdorMobileno}</h2>
+              <h2>History of {id}</h2>
               </div>
-
+        
               <div class="col-sm-4">
                
             
@@ -160,7 +165,7 @@ const PropertyCustomerRequestForOwnerPropertyIDRequestHistory = (props) => {
                       {key.slno}
                     </td>
                     <td> 
-                      {key.propertyID}
+                      {key.id}
                   
                     </td>
                     <td> 
