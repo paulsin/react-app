@@ -39,6 +39,7 @@ function Home() {
   const [newold, setNewold] = useState("");
   const [pricefrom, setPricefrom] = useState("");
   const [priceto, setPriceto] = useState("");
+  const[searchbyId,setSearchById]=useState("")
   let currentpageno=1;
   let recordperpageno=9;
   const [currentPage, setCurrentPage] = useState(currentpageno);
@@ -341,7 +342,7 @@ const handleSelectedPropertyType = (e) => {
   }
 
 
-  function searchdataout(data,data1,data2,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata){
+  function searchdataout(data,data1,data2,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata,Iddata){
     //alert(propertytypedata)
     const toWords = new ToWords();
     let index=0
@@ -629,6 +630,35 @@ const handleSelectedPropertyType = (e) => {
       }
        
     }
+    if(Iddata!=""){   
+      //alert("HAIII")
+      operatearray.map(row10 => {
+        //alert(Iddata)
+        if(row10.id === Iddata){
+                  temparray.push({
+                          'propertyID':row10.propertyID,
+                          'id':row10.id,
+                          'individualPropertyUrl':row10.individualPropertyUrl,
+                          'propertyType':row10.propertyType,
+                          'transactionType':row10.transactionType,
+                          'stateID':row10.stateID,
+                          'districtID':row10.districtID,
+                          'townID':row10.townID,
+                          'thumbnailimage':row10.thumbnailimage,
+                          'thumbnailimagename':row10.humbnailimagename,
+                          'builtArea':row10.builtArea,
+                          'price':row10.price,
+                          'cost':row10.cost===undefined?row10.cost:row10.cost,
+                          'newOrOld':row10.newOrOld,
+                          'propertyEditDate':row10.propertyEditDate,
+                          'imageurl':row10.imageurl
+                  })
+        }   
+      })
+      operatearray=[];
+      operatearray=temparray;
+      temparray=[];
+    } 
 
     operatearray.map(row9 => {
       data1.map(districttemp => {
@@ -667,7 +697,7 @@ const handleSelectedPropertyType = (e) => {
   }
   
 
-  function getSearchdata(transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata) {
+  function getSearchdata(transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata,Iddata) {
     axios
     .get(Url+"property/properties",
     )
@@ -681,7 +711,7 @@ const handleSelectedPropertyType = (e) => {
       .get(Url+"location/towns",
       )
       .then((res2) => { 
-        searchdataout(res.data,res1.data,res2.data,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata)
+        searchdataout(res.data,res1.data,res2.data,transdata,pricefromdata,pricetodata,neworolddata,pricerangedata,propertytypedata,statedata,districtdata,towndata,Iddata)
       })
 
     })
@@ -713,8 +743,8 @@ const handleSelectedPropertyType = (e) => {
 
   const searchfunction = (e) => {
     e.preventDefault();
-    // alert(saleorrent)
-    getSearchdata(saleorrent,pricefrom,priceto,newold,pricerange,selectedpropertytype,selectedStatesDisplayed,selectedDistrictsDisplayed,selectedTownsDisplayed);
+    //alert(searchbyId)
+    getSearchdata(saleorrent,pricefrom,priceto,newold,pricerange,selectedpropertytype,selectedStatesDisplayed,selectedDistrictsDisplayed,selectedTownsDisplayed,searchbyId);
 
     // alert(pricerange)
     //  alert(pricefrom)
@@ -739,7 +769,7 @@ const handleSelectedPropertyType = (e) => {
                   <h5><b>Search Property By ID</b></h5>
                 </div>
                 <div className="col-sm-4"> 
-                  <input type="text" placeholder="Search.." className="form-control" id="selectboxcolor"/>
+                  <input type="text" placeholder="Search.." className="form-control" id="selectboxcolor" onChange={(e) => setSearchById(e.target.value)}/>
                 </div>
                 <div className="col-sm-4"></div>
               </div>

@@ -28,6 +28,7 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
           if(data1.propertyID===data2._id){
             temparrayfornames.push({
               'slno':slno++,
+              'id':data2.id,
               'propertyID':data1.propertyID,
               'requestTime':data1.requestTime,
               'requesterMobile':data1.requesterMobile,
@@ -75,8 +76,8 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
   const filteredData =  requestsTable.filter(
     (item) =>
       
-      (item.propertyID && item.propertyID.toLowerCase().includes(searchTerm.toLowerCase())) || 
-      (item.propertyID && item.propertyID.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.ownerContact && item.ownerContact.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.ownerContact && item.ownerContact.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.requesterMobile && item.requesterMobile.toLowerCase().includes(searchTerm.toLowerCase())) || 
@@ -104,7 +105,8 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
       <div class="row mb-3 p-4">
     
         <div class="col-sm-4">
-        <h2>History of {propertyIdorMobileno}</h2>
+          
+          <h2>History of {propertyIdorMobileno}</h2>
         </div>
 
         <div class="col-sm-4">
@@ -161,7 +163,7 @@ const PropertyCustomerRequestForOwnerMobilenumberRequestHistory = (props) => {
                 {key.slno}
               </td>
               <td> 
-                {key.propertyID}
+                {key.id}
                   
                 </td>
                 <td> 

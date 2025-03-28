@@ -45,6 +45,7 @@ const IndividualPropertyImagesasComponent = (props) => {
             if(index == 0) {
               temparrayfornames.push({
                 'propertyID':row.propertyID,
+                'id':row.id,
                 'imageName':row.imageName,
                 'slideShowClass' : "carousel-item active",
                 'imageurl':Url+"assets/"+ propertyID + "/" + row.imageName
@@ -52,6 +53,7 @@ const IndividualPropertyImagesasComponent = (props) => {
             } else {
               temparrayfornames.push({
                 'propertyID':row.propertyID,
+                'id':row.id,
                 'imageName':row.imageName,
                 'slideShowClass' : "carousel-item",
                 'imageurl':Url+"assets/"+ propertyID + "/" + row.imageName

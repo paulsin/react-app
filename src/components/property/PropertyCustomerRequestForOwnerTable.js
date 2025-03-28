@@ -86,6 +86,7 @@ const statusoptions = [
               temparrayfornames.push({
                 'slno':slno++,
                 '_id':data1._id,
+                'id':data2.id,
                 'propertyID':data1.propertyID,
                 // 'requestDate':date.toLocaleDateString(),
                 'requestTime':data1.requestTime,
@@ -146,8 +147,8 @@ const statusoptions = [
   const filteredData =  currentposts.filter(
     (item) =>
       
-      (item.propertyID && item.propertyID.toLowerCase().includes(searchTerm.toLowerCase())) || 
-      (item.propertyID && item.propertyID.toUpperCase().includes(searchTerm.toUpperCase())) ||
+      (item.id && item.id.toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (item.id && item.id.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.ownerContact && item.ownerContact.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.ownerContact && item.ownerContact.toUpperCase().includes(searchTerm.toUpperCase())) ||
       (item.requesterMobile && item.requesterMobile.toLowerCase().includes(searchTerm.toLowerCase())) || 
@@ -324,7 +325,7 @@ const statusoptions = [
                       {/* {key.propertyID} 
                       <Link to={`/frontend/propertyCustomerRequestForOwner/propertyID/${key.propertyID}`}>{key.propertyID}</Link>
                       */}
-                      {key.propertyID} 
+                      {key.id} 
                        <button class = "btn btn-outline" onClick={()=>sendRequestedPropertyID(key.propertyID)}><img src={key.imageUrl} width="120px" height="80px" />
                       </button>
 
